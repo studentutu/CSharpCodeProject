@@ -19,10 +19,7 @@
 - Converter for array, byte and structure.
 - MD5 crypto.
 - Generic event.
-- Utility for File and Directory.
 -  Reflector.
-- Thread utility.
-
 - [Learn more](./Attachment/Common.md)
 
 ### Compress

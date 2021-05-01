@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacUtilityTests.cs" />
+    <Compile Include="Collection\EnumeratorUtilityTests.cs" />
     <Compile Include="Crypto\MD5CryptoUtilityTests.cs" />
     <Compile Include="InternationalizerTests.cs" />
     <Compile Include="LogUtilityTests.cs" />

@@ -37,6 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection\EnumeratorUtility.cs" />
     <Compile Include="Converter\ArrayConverter.cs" />
     <Compile Include="Converter\ByteConverter.cs" />
     <Compile Include="Converter\StructureConverter.cs" />

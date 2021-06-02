@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Threading;
 using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
@@ -26,19 +25,23 @@ namespace MGS.Compress
         /// <summary>
         /// Compressor for manager.
         /// </summary>
-        public ICompressor Compressor { set; get; } = IonicCompressor.Instance;
+        public ICompressor Compressor { set; get; }
 
         /// <summary>
         /// Max run count of async operate.
         /// </summary>
-        public int MaxRunCount { set; get; } = 3;
+        public int MaxRunCount { set; get; }
         #endregion
 
         #region Private Method
         /// <summary>
         /// Constructor.
         /// </summary>
-        private CompressManager() { }
+        private CompressManager()
+        {
+            Compressor = IonicCompressor.Instance;
+            MaxRunCount = 3;
+        }
         #endregion
 
         #region Public Method
@@ -93,10 +96,7 @@ namespace MGS.Compress
             Action<string> completeCallback = null,
             Action<string> errorCallback = null)
         {
-            return ThreadUtility.RunAsync(() =>
-            {
-
-            }, string.Empty);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace MGS.Compress
         /// <param name="guid">Guid of async thread.</param>
         public void AbortAsync(string guid)
         {
-            ThreadUtility.AbortAsync(guid);
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Threading;
 using MGS.Logger;
 using System;
 using System.Collections.Generic;
@@ -37,14 +36,14 @@ namespace MGS.Common.IO
                 return false;
             }
 
-            var dir = Path.GetDirectoryName(path);
-            if (Directory.Exists(dir))
-            {
-                return true;
-            }
-
             try
             {
+                var dir = Path.GetDirectoryName(path);
+                if (Directory.Exists(dir))
+                {
+                    return true;
+                }
+
                 Directory.CreateDirectory(dir);
                 return true;
             }
@@ -173,12 +172,7 @@ namespace MGS.Common.IO
         public static string CopyChildrenEntriesAsync(string sourceDir, string destDir, IEnumerable<string> ignores = null, string guid = null,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            guid = ThreadUtility.RunAsync(() =>
-            {
-                CopyChildrenEntries(sourceDir, destDir, ignores, progressCallback, completeCallback);
-            }, guid);
-
-            return guid;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -261,21 +255,7 @@ namespace MGS.Common.IO
         public static string DeleteChildrenEntriesAsync(string destDir, IEnumerable<string> ignores = null, string guid = null,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            guid = ThreadUtility.RunAsync(() =>
-            {
-                DeleteChildrenEntries(destDir, ignores, progressCallback, completeCallback);
-            }, guid);
-
-            return guid;
-        }
-
-        /// <summary>
-        /// Abort Async thread.
-        /// </summary>
-        /// <param name="guid">Guid of async thread.</param>
-        public static void AbortAsync(string guid)
-        {
-            ThreadUtility.AbortAsync(guid);
+            throw new NotImplementedException();
         }
         #endregion
     }

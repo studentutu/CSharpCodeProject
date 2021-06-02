@@ -82,11 +82,6 @@ namespace Autofac
         /// <param name="infos">Register infos(assemblyName, typeNames).</param>
         private static IEnumerable<Type> ResolveTypes(IDictionary<string, ICollection<string>> infos)
         {
-            if (infos == null || infos.Count <= 0)
-            {
-                return null;
-            }
-
             var types = new List<Type>();
             foreach (var assemblyName in infos.Keys)
             {
@@ -140,11 +135,6 @@ namespace Autofac
         /// <returns>IContainer.</returns>
         public static IContainer Register(IEnumerable<Assembly> assemblies)
         {
-            if (assemblies == null)
-            {
-                return null;
-            }
-
             var types = new List<Type>();
             foreach (var assembly in assemblies)
             {
@@ -160,11 +150,6 @@ namespace Autofac
         /// <returns>IContainer.</returns>
         public static IContainer Register(IEnumerable<Type> types)
         {
-            if (types == null)
-            {
-                return null;
-            }
-
             return BuildContainer(types);
         }
 

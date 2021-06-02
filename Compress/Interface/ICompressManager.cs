@@ -34,32 +34,15 @@ namespace MGS.Compress
 
         #region Method
         /// <summary>
-        /// Compress entrie[File or Directory] to dest file async.
-        /// </summary>
-        /// <param name="entrie">Target entrie[File or Directory].</param>
-        /// <param name="destFile">The dest file.</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
-        /// <returns>Guid of async thread.</returns>
-        string CompressAsync(string entrie, string destFile,
-               Action<float> progressCallback = null,
-               Action<string> completeCallback = null,
-               Action<string> errorCallback = null);
-
-        /// <summary>
         /// Compress entrie[Files or Directories] to dest file async.
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
-        /// <returns>Guid of async thread.</returns>
-        string CompressAsync(IEnumerable<string> entries, string destFile,
+        void CompressAsync(IEnumerable<string> entries, string destFile,
                Action<float> progressCallback = null,
-               Action<string> completeCallback = null,
-               Action<string> errorCallback = null);
+               Action<bool, string> completeCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir async.
@@ -67,22 +50,11 @@ namespace MGS.Compress
         /// <param name="filePath">Target file.</param>
         /// <param name="destDir">The dest decompress directory.</param>
         /// <param name="clear">Clear the dest dir before decompress.</param>
-        /// <param name="guid">Guid of async thread [System will automatically assign if it is null or empty].</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
-        /// <returns>Guid of async thread.</returns>
-        string DecompressAsync(string filePath, string destDir,
-            bool clear = false, string guid = null,
+        void DecompressAsync(string filePath, string destDir, bool clear = false,
             Action<float> progressCallback = null,
-            Action<string> completeCallback = null,
-            Action<string> errorCallback = null);
-
-        /// <summary>
-        /// Abort Async thread.
-        /// </summary>
-        /// <param name="guid">Guid of async thread.</param>
-        void AbortAsync(string guid);
+            Action<bool, string> completeCallback = null);
         #endregion
     }
 }

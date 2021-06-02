@@ -32,33 +32,15 @@ namespace MGS.Compress
 
         #region Public Method
         /// <summary>
-        /// Compress entrie[File or Directory] to dest file.
-        /// </summary>
-        /// <param name="entrie">Target entrie[File or Directory].</param>
-        /// <param name="destFile">The dest file.</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
-        public void Compress(string entrie, string destFile,
-            Action<float> progressCallback = null,
-            Action<string> completeCallback = null,
-            Action<string> errorCallback = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Compress entrie[Files or Directories] to dest file.
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
         public void Compress(IEnumerable<string> entries, string destFile,
             Action<float> progressCallback = null,
-            Action<string> completeCallback = null,
-            Action<string> errorCallback = null)
+           Action<bool, string> completeCallback = null)
         {
             throw new NotImplementedException();
         }
@@ -71,26 +53,10 @@ namespace MGS.Compress
         /// <param name="clear">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
         public void Decompress(string filePath, string destDir, bool clear = false,
             Action<float> progressCallback = null,
-            Action<string> completeCallback = null,
-            Action<string> errorCallback = null)
+            Action<bool, string> completeCallback = null)
         {
-            if (!File.Exists(filePath))
-            {
-                var error = string.Format("Decompress file error: Can not find the file in the path {0}", filePath);
-                errorCallback?.Invoke(error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(destDir))
-            {
-                var error = "Decompress file error: The dest directory can not be null or empty.";
-                errorCallback?.Invoke(error);
-                return;
-            }
-
             try
             {
                 if (clear)
@@ -116,12 +82,12 @@ namespace MGS.Compress
                     zipFile.ExtractAll(destDir, ExtractExistingFileAction.OverwriteSilently);
                 }
 
-                completeCallback?.Invoke(destDir);
+                completeCallback?.Invoke(true, destDir);
             }
             catch (Exception ex)
             {
                 var error = string.Format("Decompress file exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
-                errorCallback?.Invoke(error);
+                completeCallback?.Invoke(false, error);
             }
         }
         #endregion

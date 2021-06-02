@@ -22,30 +22,15 @@ namespace MGS.Compress
     {
         #region Method
         /// <summary>
-        /// Compress entrie[File or Directory] to dest file.
-        /// </summary>
-        /// <param name="entrie">Target entrie[File or Directory].</param>
-        /// <param name="destFile">The dest file.</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
-        void Compress(string entrie, string destFile,
-               Action<float> progressCallback = null,
-               Action<string> completeCallback = null,
-               Action<string> errorCallback = null);
-
-        /// <summary>
         /// Compress entrie[Files or Directories] to dest file.
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
         void Compress(IEnumerable<string> entries, string destFile,
                Action<float> progressCallback = null,
-               Action<string> completeCallback = null,
-               Action<string> errorCallback = null);
+               Action<bool, string> completeCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir.
@@ -55,11 +40,9 @@ namespace MGS.Compress
         /// <param name="clear">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        /// <param name="errorCallback">Error callback.</param>
         void Decompress(string filePath, string destDir, bool clear = false,
             Action<float> progressCallback = null,
-            Action<string> completeCallback = null,
-            Action<string> errorCallback = null);
+            Action<bool, string> completeCallback = null);
         #endregion
     }
 }

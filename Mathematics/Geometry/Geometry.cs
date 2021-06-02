@@ -251,6 +251,47 @@ namespace MGS.Mathematics
 
         #region Intersection
         /// <summary>
+        /// Get intersection of two lines.
+        /// </summary>
+        /// <param name="L1">Line L1.</param>
+        /// <param name="L2">Line L2.</param>
+        /// <returns>Intersection of two lines.</returns>
+        public static List<Vector> GetIntersection(Line L1, Line L2)
+        {
+            /*
+             *  y1 = k1x + b1, y2 = k2x + b2
+             *
+             *              b1 - b2
+             *  get: x = -------------
+             *              k2 - k1
+             */
+
+            if (L1.k == L2.k)
+            {
+                return null;
+            }
+
+            var x = 0d;
+            var y = 0d;
+            if (L1.k == double.PositiveInfinity)
+            {
+                x = L1.b;
+                y = L2.k * x + L2.b;
+            }
+            else if (L2.k == double.PositiveInfinity)
+            {
+                x = L2.b;
+                y = L1.k * x + L1.b;
+            }
+            else
+            {
+                x = (L1.b - L2.b) / (L2.k - L1.k);
+                y = L1.k * x + L1.b;
+            }
+            return new List<Vector> { new Vector(x, y) };
+        }
+
+        /// <summary>
         /// Get intersections of two circles.
         /// </summary>
         /// <param name="c1">Circle c1.</param>
@@ -368,47 +409,6 @@ namespace MGS.Mathematics
                 return points;
             }
             return null;
-        }
-
-        /// <summary>
-        /// Get intersection of two lines.
-        /// </summary>
-        /// <param name="L1">Line L1.</param>
-        /// <param name="L2">Line L2.</param>
-        /// <returns>Intersection of two lines.</returns>
-        public static List<Vector> GetIntersections(Line L1, Line L2)
-        {
-            /*
-             *  y1 = k1x + b1, y2 = k2x + b2
-             *
-             *              b1 - b2
-             *  get: x = -------------
-             *              k2 - k1
-             */
-
-            if (L1.k == L2.k)
-            {
-                return null;
-            }
-
-            var x = 0d;
-            var y = 0d;
-            if (L1.k == double.PositiveInfinity)
-            {
-                x = L1.b;
-                y = L2.k * x + L2.b;
-            }
-            else if (L2.k == double.PositiveInfinity)
-            {
-                x = L2.b;
-                y = L1.k * x + L1.b;
-            }
-            else
-            {
-                x = (L1.b - L2.b) / (L2.k - L1.k);
-                y = L1.k * x + L1.b;
-            }
-            return new List<Vector> { new Vector(x, y) };
         }
         #endregion
     }

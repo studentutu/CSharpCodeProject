@@ -52,9 +52,9 @@ namespace MGS.Common.Collection.Tests
         }
 
         [TestMethod()]
-        public void QueueAsyncTest()
+        public void RunAsyncTest()
         {
-            var testAsync = EnumeratorUtility.QueueAsync(DoTest_2());
+            var testAsync = EnumeratorUtility.RunAsync(DoTest_2());
             Assert.IsNotNull(testAsync);
 
             var testEnum = EnumeratorUtility.Collect(testAsync,

@@ -23,21 +23,18 @@ namespace MGS.Common.Crypto
     public sealed class MD5CryptoUtility
     {
         /// <summary>
+        /// MD5CryptoServiceProvider for utility.
+        /// </summary>
+        private static MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+
+        /// <summary>
         /// Compute hash of byte array.
         /// </summary>
         /// <param name="buffer">Source byte array.</param>
         /// <returns>Hash code.</returns>
         public static string ComputeHash(byte[] buffer)
         {
-            if (buffer == null)
-            {
-                LogUtility.LogError("Compute hash error: The buffer array is null.");
-                return null;
-            }
-
-            var md5 = new MD5CryptoServiceProvider();
             var hashBytes = md5.ComputeHash(buffer);
-
             return BitConverter.ToString(hashBytes);
         }
 
@@ -48,12 +45,6 @@ namespace MGS.Common.Crypto
         /// <returns>Hash code.</returns>
         public static string ComputeHash(string source)
         {
-            if (source == null)
-            {
-                LogUtility.LogError("Compute hash error: The source string is null.");
-                return null;
-            }
-
             var sourceBytes = System.Text.Encoding.Default.GetBytes(source);
             return ComputeHash(sourceBytes);
         }
@@ -65,12 +56,6 @@ namespace MGS.Common.Crypto
         /// <returns>Hash code.</returns>
         public static string ComputeFileHash(string filePath)
         {
-            if (!File.Exists(filePath))
-            {
-                LogUtility.LogError("Compute hash error: The source file {0} does not exist.");
-                return null;
-            }
-
             try
             {
                 using (var stream = new FileStream(filePath, FileMode.Open))

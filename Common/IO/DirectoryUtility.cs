@@ -10,8 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using MGS.Common.Threading;
+using MGS.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;

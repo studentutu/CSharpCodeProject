@@ -59,8 +59,9 @@ namespace MGS.Common.Threading
         }
 
         /// <summary>
-        /// Wait mutex for the name.
-        /// This method will block thread until hold mutex or timeout.
+        /// Wait mutex for the name;
+        /// This method will block thread until hold mutex or timeout;
+        /// You should release the mutex as soon as possible after does not need it.
         /// </summary>
         /// <param name="mutexName">Name of the target mutex.</param>
         /// <param name="millisecondsTimeout">Timeout of wait mutex.</param>
@@ -104,7 +105,7 @@ namespace MGS.Common.Threading
         }
 
         /// <summary>
-        /// Wait mutex for the name to do custom work.
+        /// Wait mutex for the name to do custom work;
         /// This method will block thread until hold mutex or timeout.
         /// </summary>
         /// <param name="mutexName">Name of the target mutex.</param>

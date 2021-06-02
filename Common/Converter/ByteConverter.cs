@@ -28,10 +28,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Boolean count.</param>
         /// <returns>Boolean array.</returns>
-        public static bool[] ToBoolean(byte[] bytes, int start = 0, int count = 1)
+        public static bool[] ToBooleanArray(byte[] bytes, int start = 0, int count = 1)
         {
             //1(1 byte to a Boolean)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 1)
+            if (start > bytes.Length - 1)
             {
                 LogUtility.LogError("Convert byte array to boolean array error: The param is invalid.");
                 return null;
@@ -53,10 +53,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Int16 count.</param>
         /// <returns>Int16 array.</returns>
-        public static short[] ToInt16(byte[] bytes, int start = 0, int count = 1)
+        public static short[] ToInt16Array(byte[] bytes, int start = 0, int count = 1)
         {
             //2(2 bytes to a Int16)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 2)
+            if (start > bytes.Length - 2)
             {
                 LogUtility.LogError("Convert byte array to Int16 array error: The param is invalid.");
                 return null;
@@ -78,10 +78,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Int32 count.</param>
         /// <returns>Int32 array.</returns>
-        public static int[] ToInt32(byte[] bytes, int start = 0, int count = 1)
+        public static int[] ToInt32Array(byte[] bytes, int start = 0, int count = 1)
         {
             //4(4 bytes to a Int32)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 4)
+            if (start > bytes.Length - 4)
             {
                 LogUtility.LogError("Convert byte array to Int32 array error: The param is invalid.");
                 return null;
@@ -103,10 +103,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Int64 count.</param>
         /// <returns>Int64 array.</returns>
-        public static long[] ToInt64(byte[] bytes, int start = 0, int count = 1)
+        public static long[] ToInt64Array(byte[] bytes, int start = 0, int count = 1)
         {
             //8(8 bytes to a Int64)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 8)
+            if (start > bytes.Length - 8)
             {
                 LogUtility.LogError("Convert byte array to Int64 array error: The param is invalid.");
                 return null;
@@ -128,10 +128,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Char count.</param>
         /// <returns>Char array.</returns>
-        public static char[] ToChar(byte[] bytes, int start = 0, int count = 1)
+        public static char[] ToCharArray(byte[] bytes, int start = 0, int count = 1)
         {
             //2(2 bytes to a Char)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 2)
+            if (start > bytes.Length - 2)
             {
                 LogUtility.LogError("Convert byte array to char array error: The param is invalid.");
                 return null;
@@ -153,10 +153,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Single count.</param>
         /// <returns>Single array.</returns>
-        public static float[] ToSingle(byte[] bytes, int start = 0, int count = 1)
+        public static float[] ToSingleArray(byte[] bytes, int start = 0, int count = 1)
         {
             //4(4 bytes to a Single)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 4)
+            if (start > bytes.Length - 4)
             {
                 LogUtility.LogError("Convert byte array to single array error: The param is invalid.");
                 return null;
@@ -178,10 +178,10 @@ namespace MGS.Common.Converter
         /// <param name="start">Start index.</param>
         /// <param name="count">Convert Double count.</param>
         /// <returns>Double array.</returns>
-        public static double[] ToDouble(byte[] bytes, int start = 0, int count = 1)
+        public static double[] ToDoubleArray(byte[] bytes, int start = 0, int count = 1)
         {
             //8(8 bytes to a Double)
-            if (bytes == null || bytes.Length == 0 || count == 0 || start > bytes.Length - 8)
+            if (start > bytes.Length - 8)
             {
                 LogUtility.LogError("Convert byte array to double array error: The param is invalid.");
                 return null;

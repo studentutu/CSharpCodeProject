@@ -29,12 +29,6 @@ namespace MGS.Common.Converter
         /// <returns>Structure.</returns>
         public static T FromByteArray<T>(byte[] byteArray) where T : struct
         {
-            if (byteArray == null || byteArray.Length == 0)
-            {
-                LogUtility.LogError("Convert byte array to structure error: The byte array is null or empty.");
-                return default(T);
-            }
-
             var size = Marshal.SizeOf(default(T));
             if (size > byteArray.Length)
             {
@@ -58,12 +52,6 @@ namespace MGS.Common.Converter
         public static byte[] ToByteArray<T>(T structure) where T : struct
         {
             var size = Marshal.SizeOf(structure);
-            if (size == 0)
-            {
-                LogUtility.LogError("Convert structure to byte array error: The size of type {0} is zero.", typeof(T).Name);
-                return null;
-            }
-
             var intPtr = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(structure, intPtr, true);
             var byteArray = new byte[size];

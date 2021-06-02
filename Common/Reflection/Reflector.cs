@@ -30,18 +30,6 @@ namespace MGS.Common.Reflection
         public static void SetField(object obj, string name, object value,
             BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.NonPublic)
         {
-            if (obj == null)
-            {
-                LogUtility.LogError("Set field error: The object can not be null.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                LogUtility.LogError("Set field error: The name of field can not be null or empty.");
-                return;
-            }
-
             var fieldInfo = obj.GetType().GetField(name, bindingAttr);
             if (fieldInfo == null)
             {
@@ -63,18 +51,6 @@ namespace MGS.Common.Reflection
         public static void SetProperty(object obj, string name, object value,
             BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.NonPublic, object[] index = null)
         {
-            if (obj == null)
-            {
-                LogUtility.LogError("Set property error: The object can not be null.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                LogUtility.LogError("Set property error: The name of property can not be null or empty.");
-                return;
-            }
-
             var propertyInfo = obj.GetType().GetProperty(name, bindingAttr);
             if (propertyInfo == null)
             {
@@ -96,18 +72,6 @@ namespace MGS.Common.Reflection
         public static object InvokeMethod(object obj, string name,
             BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.NonPublic, object[] parameters = null)
         {
-            if (obj == null)
-            {
-                LogUtility.LogError("Invoke method error: The object can not be null.");
-                return null;
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                LogUtility.LogError("Invoke method error: The name of method can not be null or empty.");
-                return null;
-            }
-
             var methodInfo = obj.GetType().GetMethod(name, bindingAttr);
             if (methodInfo == null)
             {

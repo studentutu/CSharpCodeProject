@@ -28,11 +28,6 @@ namespace MGS.Common.Threading
         /// <returns>Thread instance.</returns>
         public static Thread RunAsync(Action action)
         {
-            if (action == null)
-            {
-                return null;
-            }
-
             var thread = new Thread(new ThreadStart(action)) { IsBackground = true };
             thread.Start();
 

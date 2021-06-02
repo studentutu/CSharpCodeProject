@@ -30,12 +30,6 @@ namespace MGS.Common.IO
         /// <returns>Succeed?</returns>
         public static bool RequireDirectory(string path)
         {
-            if (string.IsNullOrEmpty(path))
-            {
-                LogUtility.LogError("Require directory error: The path is null or empty.");
-                return false;
-            }
-
             try
             {
                 var dir = Path.GetDirectoryName(path);
@@ -65,13 +59,6 @@ namespace MGS.Common.IO
         public static void CopyChildrenEntries(string sourceDir, string destDir, IEnumerable<string> ignores = null,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            if (!Directory.Exists(sourceDir))
-            {
-                var error = string.Format("Copy children entries error: The source directory {0} does not exist.", sourceDir);
-                completeCallback?.Invoke(false, error);
-                return;
-            }
-
             var entries = Directory.GetFileSystemEntries(sourceDir);
             if (entries == null || entries.Length == 0)
             {
@@ -160,22 +147,6 @@ namespace MGS.Common.IO
         }
 
         /// <summary>
-        /// Copy the children entries of source to dest directory async.
-        /// </summary>
-        /// <param name="sourceDir">Source dir.</param>
-        /// <param name="destDir">Dest dir.</param>
-        /// <param name="ignores">Ignore files or directories.</param>
-        /// <param name="guid">Guid of async threadGuid of async thread [System will automatically assign if it is null or empty].</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        /// <returns>Guid of async thread.</returns>
-        public static string CopyChildrenEntriesAsync(string sourceDir, string destDir, IEnumerable<string> ignores = null, string guid = null,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Delete the children entries of the directory.
         /// </summary>
         /// <param name="destDir">Dest dir.</param>
@@ -185,13 +156,6 @@ namespace MGS.Common.IO
         public static void DeleteChildrenEntries(string destDir, IEnumerable<string> ignores = null,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            if (!Directory.Exists(destDir))
-            {
-                var error = string.Format("Delete children entries error: The target dir {0} does not exist.", destDir);
-                completeCallback?.Invoke(false, error);
-                return;
-            }
-
             var entries = Directory.GetFileSystemEntries(destDir);
             if (entries == null || entries.Length == 0)
             {
@@ -241,21 +205,6 @@ namespace MGS.Common.IO
             }
 
             completeCallback?.Invoke(true, destDir);
-        }
-
-        /// <summary>
-        /// Delete the children entries of the directory async.
-        /// </summary>
-        /// <param name="destDir">Dest dir.</param>
-        /// <param name="ignores">Ignore files or directories.</param>
-        /// <param name="guid">Guid of async threadGuid of async thread [System will automatically assign if it is null or empty].</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        /// <returns>Guid of async thread.</returns>
-        public static string DeleteChildrenEntriesAsync(string destDir, IEnumerable<string> ignores = null, string guid = null,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

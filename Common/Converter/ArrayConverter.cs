@@ -30,7 +30,7 @@ namespace MGS.Common.Converter
         /// <returns>Two dimentions array.</returns>
         public static T[,] ToTwoDimention<T>(T[] array, int row, int column)
         {
-            if (array == null || array.Length == 0 || row * column != array.Length)
+            if (array.Length != row * column)
             {
                 LogUtility.LogError("Convert one dimention array to two dimentions array error: The param is invalid.");
                 return null;
@@ -60,7 +60,7 @@ namespace MGS.Common.Converter
         /// <returns>Three dimentions array.</returns>
         public static T[,,] ToThreeDimention<T>(T[] array, int layer, int row, int column)
         {
-            if (array == null || array.Length == 0 || row * column * layer != array.Length)
+            if (array.Length != row * column * layer)
             {
                 LogUtility.LogError("Convert one dimention array to three dimentions array error: The param is invalid.");
                 return null;
@@ -90,12 +90,6 @@ namespace MGS.Common.Converter
         /// <returns>One dimentions array.</returns>
         public static T[] ToOneDimention<T>(T[,] array)
         {
-            if (array == null || array.Length == 0)
-            {
-                LogUtility.LogError("Convert two dimention array to one dimentions array error: The param is invalid.");
-                return null;
-            }
-
             var oneDArray = new T[array.Length];
             var index = 0;
             for (var r = 0; r < array.GetLength(0); r++)
@@ -117,12 +111,6 @@ namespace MGS.Common.Converter
         /// <returns>One dimentions array.</returns>
         public static T[] ToOneDimention<T>(T[,,] array)
         {
-            if (array == null || array.Length == 0)
-            {
-                LogUtility.LogError("Convert three dimention array to one dimentions array error: The param is invalid.");
-                return null;
-            }
-
             var oneDArray = new T[array.Length];
             var index = 0;
             for (var l = 0; l < array.GetLength(0); l++)

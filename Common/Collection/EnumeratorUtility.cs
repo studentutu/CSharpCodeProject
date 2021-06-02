@@ -10,10 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Common.Threading;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace MGS.Common.Collection
 {
@@ -32,11 +32,6 @@ namespace MGS.Common.Collection
         public static IEnumerator Collect(IEnumerator enumerator,
             Action<object> progress = null, Action complete = null)
         {
-            if (enumerator == null)
-            {
-                yield break;
-            }
-
             while (enumerator.MoveNext())
             {
                 progress?.Invoke(enumerator.Current);
@@ -56,11 +51,6 @@ namespace MGS.Common.Collection
         public static IEnumerator Collect(IEnumerable<IEnumerator> enumerators,
             Action<object> progress = null, Action complete = null)
         {
-            if (enumerators == null)
-            {
-                yield break;
-            }
-
             foreach (var enumerator in enumerators)
             {
                 while (enumerator.MoveNext())
@@ -74,20 +64,15 @@ namespace MGS.Common.Collection
         }
 
         /// <summary>
-        /// Queue enumerator to thread pool.
+        /// Run the enumerator in a background thread.
         /// </summary>
-        /// <param name="enumerator">Source enumerator will run in thread pool,</param>
+        /// <param name="enumerator">Source enumerator will run in a background thread.</param>
         /// <returns>IEnumerator.</returns>
-        public static IEnumerator QueueAsync(IEnumerator enumerator)
+        public static IEnumerator RunAsync(IEnumerator enumerator)
         {
-            if (enumerator == null)
-            {
-                yield break;
-            }
-
             var isDone = false;
             var results = new Queue<object>();
-            ThreadPool.QueueUserWorkItem(state =>
+            ThreadUtility.RunAsync(() =>
             {
                 while (enumerator.MoveNext())
                 {

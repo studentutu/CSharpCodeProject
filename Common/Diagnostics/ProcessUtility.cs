@@ -30,12 +30,6 @@ namespace MGS.Common.Diagnostics
         /// <returns>Succeed?</returns>
         public static bool StartProcess(string fileName)
         {
-            if (!File.Exists(fileName))
-            {
-                LogUtility.LogError("Start process error: The file {0} does not exist.", fileName);
-                return false;
-            }
-
             try
             {
                 Process.Start(fileName);
@@ -55,12 +49,6 @@ namespace MGS.Common.Diagnostics
         /// <returns>Succeed?</returns>
         public static bool KillProcess(string processName)
         {
-            if (string.IsNullOrEmpty(processName))
-            {
-                LogUtility.LogError("Kill process error: The process name is null or empty.");
-                return false;
-            }
-
             var processes = Process.GetProcessesByName(processName);
             if (processes == null || processes.Length == 0)
             {
@@ -96,12 +84,6 @@ namespace MGS.Common.Diagnostics
         /// <returns>Succeed?</returns>
         public static bool KillProcess(IEnumerable<string> processNames)
         {
-            if (processNames == null)
-            {
-                LogUtility.LogError("Kill processes error: The names of processes is null.");
-                return false;
-            }
-
             foreach (var processName in processNames)
             {
                 if (!KillProcess(processName))

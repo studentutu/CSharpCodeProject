@@ -31,18 +31,6 @@ namespace MGS.Common.IO
         /// <returns>Page count of file.</returns>
         public static int CalPageCount(string filePath, int pageSize = 65536)
         {
-            if (!File.Exists(filePath))
-            {
-                LogUtility.LogError("Calculate page count error: Can not find the file {0}.", filePath);
-                return 0;
-            }
-
-            if (pageSize <= 0)
-            {
-                LogUtility.LogError("Calculate page count error: The value {0} of pageSize param is invalid.", pageSize);
-                return 0;
-            }
-
             try
             {
                 using (var sm = new FileStream(filePath, FileMode.Open))
@@ -66,18 +54,6 @@ namespace MGS.Common.IO
         /// <returns>Index page bytes.</returns>
         public static byte[] ReadPage(string filePath, int pageSize = 65536, int pageIndex = 0)
         {
-            if (!File.Exists(filePath))
-            {
-                LogUtility.LogError("Read the index page of file error: Can not find the file {0}.", filePath);
-                return null;
-            }
-
-            if (pageSize <= 0 || pageIndex < 0)
-            {
-                LogUtility.LogError("Read the index page of file error: The params value is invalid.");
-                return null;
-            }
-
             try
             {
                 using (var sm = new FileStream(filePath, FileMode.Open))
@@ -119,12 +95,6 @@ namespace MGS.Common.IO
         /// <returns>All lines from file.</returns>
         public static string[] ReadAllLines(string filePath, Encoding encoding)
         {
-            if (!File.Exists(filePath))
-            {
-                LogUtility.LogError("Read all lines of file error: Can not find the file {0}.", filePath);
-                return null;
-            }
-
             try
             {
                 return File.ReadAllLines(filePath, encoding);

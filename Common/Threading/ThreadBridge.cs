@@ -34,11 +34,6 @@ namespace MGS.Common.Threading
         /// <param name="action">Register action.</param>
         public static void Enqueue(Action action)
         {
-            if (action == null)
-            {
-                return;
-            }
-
             lock (queue.SyncRoot)
             {
                 queue.Enqueue(action);

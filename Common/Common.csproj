@@ -46,6 +46,7 @@
     <Compile Include="IO\Directory\DirectoryUtility.cs" />
     <Compile Include="IO\File\FileUtility.cs" />
     <Compile Include="Crypto\MD5CryptoUtility.cs" />
+    <Compile Include="Threading\MutexUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\Reflector.cs" />
     <Compile Include="Threading\ThreadBridge.cs" />

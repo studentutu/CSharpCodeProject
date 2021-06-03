@@ -28,7 +28,7 @@ namespace MGS.DesignPattern.Tests
             Thread.Sleep(1000);
         }
 
-        public class TestSingleTimer : SingleTimer<TestSingleTimer>
+        public sealed class TestSingleTimer : SingleTimer<TestSingleTimer>
         {
             private TestSingleTimer() { }
 

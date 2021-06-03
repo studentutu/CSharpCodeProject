@@ -16,7 +16,8 @@ namespace MGS.DesignPattern
 {
     /// <summary>
     /// Provide a single instance with a timer to tick update for the specified type T;
-    /// Inheritance class should with a private and parameterless constructor to ensure singleton.
+    /// Inheritance class should with the sealed access modifier
+    /// and a private parameterless constructor to ensure singleton.
     /// </summary>
     /// <typeparam name="T">Specified type.</typeparam>
     public abstract class SingleTimer<T> : Singleton<T> where T : class

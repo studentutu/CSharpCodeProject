@@ -17,7 +17,7 @@ namespace MGS.DesignPattern.Tests
             Console.WriteLine("TestSingleton.Instance.testField is {0}", TestSingleton.Instance.testField);
         }
 
-        public class TestSingleton : Singleton<TestSingleton>
+        public sealed class TestSingleton : Singleton<TestSingleton>
         {
             public string testField = "Test Field";
 

@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.DesignPattern;
 using SharpCompress.Archives;
 using SharpCompress.Common;
 using System;
@@ -22,15 +21,8 @@ namespace MGS.Compress
     /// <summary>
     /// Sharp compressor.
     /// </summary>
-    public class SharpCompressor : Singleton<SharpCompressor>, ICompressor
+    public class SharpCompressor : ICompressor
     {
-        #region Private Method
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        private SharpCompressor() { }
-        #endregion
-
         #region Public Method
         /// <summary>
         /// Compress entrie[Files or Directories] to dest file.
@@ -39,13 +31,13 @@ namespace MGS.Compress
         /// <param name="destFile">The dest file.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void Compress(IEnumerable<string> entries, string destFile,
+        public virtual void Compress(IEnumerable<string> entries, string destFile,
             Action<float> progressCallback = null,
             Action<bool, string> completeCallback = null)
         {
             throw new NotImplementedException();
         }
-        
+
         /// <summary>
         /// Decompress file to dest dir [Support zip, rar, tar, gzip, 7z].
         /// </summary>
@@ -54,7 +46,7 @@ namespace MGS.Compress
         /// <param name="clear">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void Decompress(string filePath, string destDir, bool clear = false,
+        public virtual void Decompress(string filePath, string destDir, bool clear = false,
               Action<float> progressCallback = null,
               Action<bool, string> completeCallback = null)
         {

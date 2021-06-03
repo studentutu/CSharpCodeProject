@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using Ionic.Zip;
-using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,15 +20,8 @@ namespace MGS.Compress
     /// <summary>
     /// Ionic compressor.
     /// </summary>
-    public class IonicCompressor : Singleton<IonicCompressor>, ICompressor
+    public class IonicCompressor : ICompressor
     {
-        #region Private Method
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        private IonicCompressor() { }
-        #endregion
-
         #region Public Method
         /// <summary>
         /// Compress entrie[Files or Directories] to dest file.
@@ -38,7 +30,7 @@ namespace MGS.Compress
         /// <param name="destFile">The dest file.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void Compress(IEnumerable<string> entries, string destFile,
+        public virtual void Compress(IEnumerable<string> entries, string destFile,
             Action<float> progressCallback = null,
            Action<bool, string> completeCallback = null)
         {
@@ -53,7 +45,7 @@ namespace MGS.Compress
         /// <param name="clear">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void Decompress(string filePath, string destDir, bool clear = false,
+        public virtual void Decompress(string filePath, string destDir, bool clear = false,
             Action<float> progressCallback = null,
             Action<bool, string> completeCallback = null)
         {

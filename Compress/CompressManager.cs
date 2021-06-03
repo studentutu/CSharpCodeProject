@@ -13,13 +13,14 @@
 using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace MGS.Compress
 {
     /// <summary>
     /// Compress manager.
     /// </summary>
-    public class CompressManager : Singleton<CompressManager>, ICompressManager
+    public sealed class CompressManager : SingleTimer<CompressManager>, ICompressManager
     {
         #region Field and Property
         /// <summary>
@@ -39,7 +40,19 @@ namespace MGS.Compress
         /// </summary>
         private CompressManager()
         {
-            Compressor = IonicCompressor.Instance;
+            Compressor = new IonicCompressor();
+        }
+        #endregion
+
+        #region Protected Method
+        /// <summary>
+        /// Timer tick update.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event args.</param>
+        protected override void TickUpdate(object sender, ElapsedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

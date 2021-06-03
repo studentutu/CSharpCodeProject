@@ -64,11 +64,11 @@ namespace MGS.Common.Collection
         }
 
         /// <summary>
-        /// Run the enumerator in a background thread.
+        /// Collect results of the enumerator that run in a background thread.
         /// </summary>
         /// <param name="enumerator">Source enumerator will run in a background thread.</param>
         /// <returns>IEnumerator.</returns>
-        public static IEnumerator RunAsync(IEnumerator enumerator)
+        public static IEnumerator CollectAsync(IEnumerator enumerator)
         {
             var isDone = false;
             var results = new Queue<object>();

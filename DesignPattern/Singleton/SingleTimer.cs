@@ -15,7 +15,8 @@ using System.Timers;
 namespace MGS.DesignPattern
 {
     /// <summary>
-    /// Provide a single instance with a timer to tick update for the specified type T.
+    /// Provide a single instance with a timer to tick update for the specified type T;
+    /// Inheritance class should with a private and parameterless constructor to ensure singleton.
     /// </summary>
     /// <typeparam name="T">Specified type.</typeparam>
     public abstract class SingleTimer<T> : Singleton<T> where T : class

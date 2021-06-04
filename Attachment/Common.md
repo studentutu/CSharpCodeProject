@@ -8,6 +8,7 @@
 
 ## Dependence
 - System.dll
+- MGS.Logger.dll
 
 ## Demand
 - 

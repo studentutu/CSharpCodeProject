@@ -143,8 +143,14 @@ namespace MGS.Compress
             }
 
             var task = new CompressTask(Compressor, entries, destFile, clearBefor,
-                progress => { DelegateUtility.Invoke(progressCallback, progress); },
-                (isSucceed, info) => { DelegateUtility.Invoke(completeCallback, isSucceed, info); });
+                progress =>
+                {
+                    DelegateUtility.Invoke(progressCallback, progress);
+                },
+                (isSucceed, info) =>
+                {
+                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                });
 
             AddTask(task);
         }
@@ -173,8 +179,14 @@ namespace MGS.Compress
             }
 
             var task = new DecompressTask(Compressor, filePath, destDir, clearBefor,
-                 progress => { DelegateUtility.Invoke(progressCallback, progress); },
-                (isSucceed, info) => { DelegateUtility.Invoke(completeCallback, isSucceed, info); });
+                 progress =>
+                 {
+                     DelegateUtility.Invoke(progressCallback, progress);
+                 },
+                (isSucceed, info) =>
+                {
+                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                });
 
             AddTask(task);
         }

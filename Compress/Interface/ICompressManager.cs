@@ -38,23 +38,22 @@ namespace MGS.Compress
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        void CompressAsync(IEnumerable<string> entries, string destFile,
-               Action<float> progressCallback = null,
-               Action<bool, string> completeCallback = null);
+        void CompressAsync(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+               Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir async.
         /// </summary>
         /// <param name="filePath">Target file.</param>
         /// <param name="destDir">The dest decompress directory.</param>
-        /// <param name="clear">Clear the dest dir before decompress.</param>
+        /// <param name="clearBefor">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        void DecompressAsync(string filePath, string destDir, bool clear = false,
-            Action<float> progressCallback = null,
-            Action<bool, string> completeCallback = null);
+        void DecompressAsync(string filePath, string destDir, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
         #endregion
     }
 }

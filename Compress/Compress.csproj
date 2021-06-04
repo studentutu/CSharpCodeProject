@@ -34,9 +34,6 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\lib\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="SharpCompress">
-      <HintPath>..\lib\SharpCompress.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -45,12 +42,18 @@
     <Compile Include="Compressor\SharpCompressor.cs" />
     <Compile Include="Interface\ICompressManager.cs" />
     <Compile Include="Interface\ICompressor.cs" />
+    <Compile Include="Interface\ICompressTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Task\Task.cs" />
+    <Compile Include="Task\CompressTask.cs" />
+    <Compile Include="Task\DecompressTask.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Task\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{55E27C1E-ECFB-4E6F-B5E0-508C882DDDAB}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DesignPattern\DesignPattern.csproj">
       <Project>{1AC97D40-2405-4FB6-91F3-225E2F036FB6}</Project>
       <Name>DesignPattern</Name>

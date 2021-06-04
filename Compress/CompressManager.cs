@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Common.Generic;
 using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace MGS.Compress
         /// Max run count of async operate.
         /// </summary>
         public int MaxRunCount { set; get; }
+
+        /// <summary>
+        /// List to cache tasks.
+        /// </summary>
+        private List<ICompressTask> tasks = new List<ICompressTask>();
         #endregion
 
         #region Private Method
@@ -41,6 +47,7 @@ namespace MGS.Compress
         private CompressManager()
         {
             Compressor = new IonicCompressor();
+            MaxRunCount = 10;
         }
         #endregion
 
@@ -52,7 +59,62 @@ namespace MGS.Compress
         /// <param name="e">Event args.</param>
         protected override void TickUpdate(object sender, ElapsedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (tasks.Count == 0)
+            {
+                return;
+            }
+
+            var runner = 0;
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                var task = tasks[i];
+                switch (task.State)
+                {
+                    case TaskState.Idle:
+                        if (runner < MaxRunCount)
+                        {
+                            task.Start();
+                        }
+                        break;
+
+                    case TaskState.Working:
+                        runner++;
+                        break;
+
+                    case TaskState.Complete:
+                    case TaskState.Error:
+                        tasks.Remove(task);
+                        i--;
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add task to cache list.
+        /// </summary>
+        /// <param name="task"></param>
+        private void AddTask(ICompressTask task)
+        {
+            tasks.Add(task);
+        }
+
+        /// <summary>
+        /// Check compressor is valid?
+        /// </summary>
+        /// <param name="compressor"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        private bool CheckCompressor(ICompressor compressor, out string error)
+        {
+            error = null;
+            if (compressor == null)
+            {
+                error = "The compressor for manager does not set an instance.";
+                return false;
+            }
+
+            return true;
         }
         #endregion
 
@@ -62,13 +124,35 @@ namespace MGS.Compress
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void CompressAsync(IEnumerable<string> entries, string destFile,
-            Action<float> progressCallback = null,
-            Action<bool, string> completeCallback = null)
+        public void CompressAsync(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            throw new NotImplementedException();
+            if (entries == null || string.IsNullOrEmpty(destFile))
+            {
+                DelegateUtility.Invoke(completeCallback, false, "The params is invalid.");
+                return;
+            }
+
+            if (!CheckCompressor(Compressor, out string error))
+            {
+                DelegateUtility.Invoke(completeCallback, false, error);
+                return;
+            }
+
+            var task = new CompressTask(Compressor, entries, destFile, clearBefor,
+                progress =>
+                {
+                    DelegateUtility.Invoke(progressCallback, progress);
+                },
+                (isSucceed, info) =>
+                {
+                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                });
+
+            AddTask(task);
         }
 
         /// <summary>
@@ -76,14 +160,35 @@ namespace MGS.Compress
         /// </summary>
         /// <param name="filePath">Target file.</param>
         /// <param name="destDir">The dest decompress directory.</param>
-        /// <param name="clear">Clear the dest dir before decompress.</param>
+        /// <param name="clearBefor">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void DecompressAsync(string filePath, string destDir, bool clear = false,
-            Action<float> progressCallback = null,
-            Action<bool, string> completeCallback = null)
+        public void DecompressAsync(string filePath, string destDir, bool clearBefor = false,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(destDir))
+            {
+                DelegateUtility.Invoke(completeCallback, false, "The params is invalid.");
+                return;
+            }
+
+            if (!CheckCompressor(Compressor, out string error))
+            {
+                DelegateUtility.Invoke(completeCallback, false, error);
+                return;
+            }
+
+            var task = new DecompressTask(Compressor, filePath, destDir, clearBefor,
+                 progress =>
+                 {
+                     DelegateUtility.Invoke(progressCallback, progress);
+                 },
+                (isSucceed, info) =>
+                {
+                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                });
+
+            AddTask(task);
         }
         #endregion
     }

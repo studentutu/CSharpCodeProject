@@ -10,7 +10,9 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+#if USE_SHARPCOMPRESS
 using SharpCompress.Archives;
+using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
@@ -23,36 +25,68 @@ namespace MGS.Compress
     /// </summary>
     public class SharpCompressor : ICompressor
     {
-        #region Public Method
+#region Public Method
         /// <summary>
-        /// Compress entrie[Files or Directories] to dest file.
+        /// Compress entrie[file or directorie] to dest file.
         /// </summary>
         /// <param name="entries">Target entrie[Files or Directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public virtual void Compress(IEnumerable<string> entries, string destFile,
-            Action<float> progressCallback = null,
-            Action<bool, string> completeCallback = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Decompress file to dest dir [Support zip, rar, tar, gzip, 7z].
-        /// </summary>
-        /// <param name="filePath">Target file.</param>
-        /// <param name="destDir">The dest decompress directory.</param>
-        /// <param name="clear">Clear the dest dir before decompress.</param>
-        /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        public virtual void Decompress(string filePath, string destDir, bool clear = false,
-              Action<float> progressCallback = null,
-              Action<bool, string> completeCallback = null)
+        public virtual void Compress(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
             try
             {
-                if (clear)
+                if (clearBefor && File.Exists(destFile))
+                {
+                    File.Delete(destFile);
+                }
+
+                using (var archive = ZipArchive.Create())
+                {
+                    var index = 0f;
+                    var count = new List<string>(entries).Count;
+                    foreach (var entry in entries)
+                    {
+                        archive.AddAllFromDirectory(entry);
+                        index++;
+
+                        var progress = (index / count) * 0.75f;
+                        progressCallback?.Invoke(progress);
+                    }
+
+                    using (var stream = File.OpenWrite(destFile))
+                    {
+                        archive.SaveTo(stream);
+                    }
+                }
+
+                progressCallback?.Invoke(1.0f);
+                completeCallback?.Invoke(true, destFile);
+            }
+            catch (Exception ex)
+            {
+                var error = string.Format("Compress file exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                completeCallback?.Invoke(false, error);
+            }
+        }
+
+        /// <summary>
+        /// Decompress file to dest dir [Support .zip].
+        /// </summary>
+        /// <param name="filePath">Target file.</param>
+        /// <param name="destDir">The dest decompress directory.</param>
+        /// <param name="clearBefor">Clear the dest dir before decompress.</param>
+        /// <param name="progressCallback">Progress callback.</param>
+        /// <param name="completeCallback">Complete callback.</param>
+        public virtual void Decompress(string filePath, string destDir, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
+        {
+            try
+            {
+                if (clearBefor)
                 {
                     if (Directory.Exists(destDir))
                     {
@@ -96,6 +130,7 @@ namespace MGS.Compress
                 completeCallback?.Invoke(false, error);
             }
         }
-        #endregion
+#endregion
     }
 }
+#endif

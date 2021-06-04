@@ -42,6 +42,7 @@
     <Compile Include="Converter\ByteConverter.cs" />
     <Compile Include="Converter\StructureConverter.cs" />
     <Compile Include="Diagnostics\ProcessUtility.cs" />
+    <Compile Include="Generic\Delegate\DelegateUtility.cs" />
     <Compile Include="Generic\Event\GenericEvent.cs" />
     <Compile Include="IO\DirectoryUtility.cs" />
     <Compile Include="IO\FileUtility.cs" />

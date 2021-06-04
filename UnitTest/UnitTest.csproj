@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="AutofacUtilityTests.cs" />
     <Compile Include="Collection\EnumeratorUtilityTests.cs" />
+    <Compile Include="CompressManagerTests.cs" />
     <Compile Include="Compressor\IonicCompressorTests.cs" />
     <Compile Include="Compressor\SharpCompressorTests.cs" />
     <Compile Include="Crypto\MD5CryptoUtilityTests.cs" />

@@ -47,6 +47,7 @@ namespace MGS.Compress
         private CompressManager()
         {
             Compressor = new IonicCompressor();
+            MaxRunCount = 10;
         }
         #endregion
 

@@ -61,10 +61,10 @@ namespace MGS.Compress
                     {
                         archive.SaveTo(stream);
                     }
-
-                    progressCallback?.Invoke(1.0f);
-                    completeCallback?.Invoke(true, destFile);
                 }
+
+                progressCallback?.Invoke(1.0f);
+                completeCallback?.Invoke(true, destFile);
             }
             catch (Exception ex)
             {

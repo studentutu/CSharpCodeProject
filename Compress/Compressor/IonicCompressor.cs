@@ -60,6 +60,8 @@ namespace MGS.Compress
                     }
                     zipFile.Save();
                 }
+
+                completeCallback?.Invoke(true, destFile);
             }
             catch (Exception ex)
             {

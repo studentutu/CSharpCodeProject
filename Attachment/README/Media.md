@@ -1,4 +1,4 @@
-﻿# MGS.WinCommon.dll
+﻿# MGS.Media.dll
 
 ## Summary
 
@@ -24,7 +24,7 @@
 
 ------
 
-[Previous](../README.md)
+[Previous](../../README.md)
 
 ------
 

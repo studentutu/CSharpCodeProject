@@ -1,19 +1,16 @@
-﻿# MGS.Media.dll
+﻿# MGS.Common.dll
 
 ## Summary
-
 - 
 
 ## Environment
-
 - .Net Framework 3.5 or above.
 
 ## Dependence
-
 - System.dll
+- MGS.Logger.dll
 
 ## Demand
-
 - 
 
 ## Implemented
@@ -24,7 +21,7 @@
 
 ------
 
-[Previous](../README.md)
+[Previous](../../README.md)
 
 ------
 

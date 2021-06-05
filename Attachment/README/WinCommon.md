@@ -1,4 +1,4 @@
-﻿# MGS.Compress.dll
+﻿# MGS.WinCommon.dll
 
 ## Summary
 
@@ -24,7 +24,7 @@
 
 ------
 
-[Previous](../README.md)
+[Previous](../../README.md)
 
 ------
 

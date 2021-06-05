@@ -14,9 +14,11 @@
 using SharpCompress.Archives;
 using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
+using SharpCompress.Writers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace MGS.Compress
 {
@@ -27,14 +29,17 @@ namespace MGS.Compress
     {
 #region Public Method
         /// <summary>
-        /// Compress entrie[file or directorie] to dest file.
+        /// Compress entrie[file or directorie] to dest zip file.
         /// </summary>
-        /// <param name="entries">Target entrie[Files or Directories].</param>
+        /// <param name="entries">Target entrie[files or directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="encoding">Encoding for zip file.</param>
+        /// <param name="directoryPathInArchive">Directory path in archive of zip file [Not supported this version].</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public virtual void Compress(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+        public virtual void Compress(IEnumerable<string> entries, string destFile,
+            Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
             try
@@ -59,7 +64,9 @@ namespace MGS.Compress
 
                     using (var stream = File.OpenWrite(destFile))
                     {
-                        archive.SaveTo(stream);
+                        var archiveEncoding = new ArchiveEncoding { Default = encoding };
+                        var options = new WriterOptions(CompressionType.Deflate) { ArchiveEncoding = archiveEncoding };
+                        archive.SaveTo(stream, options);
                     }
                 }
 
@@ -74,7 +81,7 @@ namespace MGS.Compress
         }
 
         /// <summary>
-        /// Decompress file to dest dir [Support .zip].
+        /// Decompress zip file to dest dir.
         /// </summary>
         /// <param name="filePath">Target file.</param>
         /// <param name="destDir">The dest decompress directory.</param>

@@ -14,6 +14,7 @@ using MGS.Common.Generic;
 using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Timers;
 
 namespace MGS.Compress
@@ -120,14 +121,17 @@ namespace MGS.Compress
 
         #region Public Method
         /// <summary>
-        /// Compress entrie[Files or Directories] to dest file async.
+        /// Compress entrie[files or directories] to dest file async.
         /// </summary>
-        /// <param name="entries">Target entrie[Files or Directories].</param>
+        /// <param name="entries">Target entrie[files or directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="encoding">Encoding for zip file.</param>
+        /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public void CompressAsync(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+        public void CompressAsync(IEnumerable<string> entries, string destFile,
+            Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
             if (entries == null || string.IsNullOrEmpty(destFile))
@@ -142,7 +146,7 @@ namespace MGS.Compress
                 return;
             }
 
-            var task = new CompressTask(Compressor, entries, destFile, clearBefor,
+            var task = new CompressTask(Compressor, entries, destFile, encoding, directoryPathInArchive, clearBefor,
                 progress =>
                 {
                     DelegateUtility.Invoke(progressCallback, progress);

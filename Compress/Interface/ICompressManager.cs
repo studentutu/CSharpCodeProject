@@ -12,6 +12,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MGS.Compress
 {
@@ -34,15 +35,18 @@ namespace MGS.Compress
 
         #region Method
         /// <summary>
-        /// Compress entrie[Files or Directories] to dest file async.
+        /// Compress entrie[files or directories] to dest file async.
         /// </summary>
-        /// <param name="entries">Target entrie[Files or Directories].</param>
+        /// <param name="entries">Target entrie[files or directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="encoding">Encoding for zip file.</param>
+        /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        void CompressAsync(IEnumerable<string> entries, string destFile, bool clearBefor = true,
-               Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
+        void CompressAsync(IEnumerable<string> entries, string destFile,
+            Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir async.

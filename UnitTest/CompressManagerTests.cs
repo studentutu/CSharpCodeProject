@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 namespace MGS.Compress.Tests
@@ -15,7 +16,8 @@ namespace MGS.Compress.Tests
             var zipFile = string.Format("{0}/ZipFile.zip", Environment.CurrentDirectory);
 
             var waiting = true;
-            CompressManager.Instance.CompressAsync(new string[] { zipSource }, zipFile, true,
+            CompressManager.Instance.CompressAsync(new string[] { zipSource },
+                zipFile, Encoding.UTF8, "CustomDir", true,
                 progress =>
                 {
                     Console.WriteLine("progress {0}", progress);

@@ -14,6 +14,7 @@ using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace MGS.Compress
 {
@@ -24,14 +25,17 @@ namespace MGS.Compress
     {
         #region Public Method
         /// <summary>
-        /// Compress entrie[file or directorie] to dest file.
+        /// Compress entrie[file or directorie] to dest zip file.
         /// </summary>
-        /// <param name="entries">Target entrie[Files or Directories].</param>
+        /// <param name="entries">Target entrie[files or directories].</param>
         /// <param name="destFile">The dest file.</param>
+        /// <param name="encoding">Encoding for zip file.</param>
+        /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
-        public virtual void Compress(IEnumerable<string> entries, string destFile, bool clearBefor = true,
+        public virtual void Compress(IEnumerable<string> entries, string destFile,
+            Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
         {
             try
@@ -41,7 +45,7 @@ namespace MGS.Compress
                     File.Delete(destFile);
                 }
 
-                using (var zipFile = new ZipFile(destFile))
+                using (var zipFile = new ZipFile(destFile, encoding))
                 {
                     zipFile.SaveProgress += (s, e) =>
                     {
@@ -56,7 +60,7 @@ namespace MGS.Compress
 
                     foreach (var entry in entries)
                     {
-                        zipFile.AddItem(entry);
+                        zipFile.AddItem(entry, directoryPathInArchive);
                     }
                     zipFile.Save();
                 }
@@ -71,7 +75,7 @@ namespace MGS.Compress
         }
 
         /// <summary>
-        /// Decompress file to dest dir [Support .zip].
+        /// Decompress zip file to dest dir.
         /// </summary>
         /// <param name="filePath">Target file.</param>
         /// <param name="destDir">The dest decompress directory.</param>

@@ -12,6 +12,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MGS.Compress
 {
@@ -22,23 +23,31 @@ namespace MGS.Compress
     {
         protected IEnumerable<string> entries;
         protected string destFile;
+        protected Encoding encoding;
+        protected string directoryPathInArchive;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="compressor"></param>
-        /// <param name="entries"></param>
-        /// <param name="destFile"></param>
-        /// <param name="clearBefor"></param>
-        /// <param name="progressCallback"></param>
-        /// <param name="completeCallback"></param>
+        /// <param name="entries">Target entrie[files or directories].</param>
+        /// <param name="destFile">The dest file.</param>
+        /// <param name="encoding">Encoding for zip file.</param>
+        /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
+        /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
+        /// <param name="progressCallback">Progress callback.</param>
+        /// <param name="completeCallback">Complete callback.</param>
         public CompressTask(ICompressor compressor,
-            IEnumerable<string> entries, string destFile, bool clearBefor = true,
+            IEnumerable<string> entries, string destFile,
+            Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, string> completeCallback = null) :
             base(compressor, clearBefor, progressCallback, completeCallback)
         {
             this.entries = entries;
             this.destFile = destFile;
+
+            this.encoding = encoding;
+            this.directoryPathInArchive = directoryPathInArchive;
         }
 
         /// <summary>
@@ -47,7 +56,7 @@ namespace MGS.Compress
         public override void Start()
         {
             State = TaskState.Working;
-            compressor.Compress(entries, destFile, clearBefor,
+            compressor.Compress(entries, destFile, encoding, directoryPathInArchive, clearBefor,
                 progressCallback, (isSucceed, info) =>
                 {
                     State = isSucceed ? TaskState.Complete : TaskState.Error;

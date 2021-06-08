@@ -54,11 +54,11 @@ namespace MGS.Compress
 
         #region Protected Method
         /// <summary>
-        /// Timer tick update.
+        /// Timer tick.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
-        protected override void TickUpdate(object sender, ElapsedEventArgs e)
+        protected override void Tick(object sender, ElapsedEventArgs e)
         {
             if (tasks.Count == 0)
             {

@@ -32,9 +32,9 @@ namespace MGS.DesignPattern.Tests
         {
             private TestSingleTimer() { }
 
-            protected override void TickUpdate(object sender, ElapsedEventArgs e)
+            protected override void Tick(object sender, ElapsedEventArgs e)
             {
-                Console.WriteLine("TestSingleTimer TickUpdate");
+                Console.WriteLine("TestSingleTimer Tick");
             }
         }
     }

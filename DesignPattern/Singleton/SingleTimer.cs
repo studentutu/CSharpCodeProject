@@ -57,16 +57,16 @@ namespace MGS.DesignPattern
             {
                 AutoReset = true
             };
-            Timer.Elapsed += TickUpdate;
+            Timer.Elapsed += Tick;
             Timer.Start();
         }
 
         /// <summary>
-        /// Timer tick update.
+        /// Timer tick.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
-        protected abstract void TickUpdate(object sender, ElapsedEventArgs e);
+        protected abstract void Tick(object sender, ElapsedEventArgs e);
         #endregion
     }
 }

@@ -51,43 +51,53 @@ namespace MGS.Internation
         /// <summary>
         /// Current language name.
         /// </summary>
-        private string current;
+        private string current = null;
 
         /// <summary>
         /// Languages paragraphs dictionary.
         /// </summary>
-        private Dictionary<string, Dictionary<string, string>> languages = new Dictionary<string, Dictionary<string, string>>();
+        private Dictionary<string, Dictionary<string, string>> languages = null;
         #endregion
 
         #region Private Method
         /// <summary>
         /// Constructor.
         /// </summary>
-        private Internationalizer() { }
+        private Internationalizer()
+        {
+            languages = new Dictionary<string, Dictionary<string, string>>();
+        }
         #endregion
 
         #region Public Method
         /// <summary>
         /// Deserialize language paragraphs from local file.
         /// </summary>
+        /// <param name="language">Name of language.</param>
         /// <param name="languageFile">File path of language content.</param>
+        /// <param name="encoding">Encoding of file content.</param>
         /// <returns>Deserialize succeed?</returns>
-        public bool Deserialize(string languageFile)
+        public bool Deserialize(string language, string languageFile, Encoding encoding)
         {
+            if (string.IsNullOrEmpty(language))
+            {
+                LogUtility.LogError("Deserialize language error: The language name is null or empty.");
+                return false;
+            }
+
             if (!File.Exists(languageFile))
             {
                 LogUtility.LogError("Deserialize language error: Can not find the language file at path {0}", languageFile);
                 return false;
             }
 
-            var fileLines = File.ReadAllLines(languageFile, Encoding.Default);
+            var fileLines = File.ReadAllLines(languageFile, encoding);
             if (fileLines == null || fileLines.Length == 0)
             {
                 LogUtility.LogError("Deserialize language error: Can not read any content in the language file at path {0}", languageFile);
                 return false;
             }
 
-            var language = Path.GetFileNameWithoutExtension(languageFile);
             return Deserialize(language, fileLines);
         }
 
@@ -173,6 +183,12 @@ namespace MGS.Internation
         /// <returns>A paragraph text of key in current language.</returns>
         public string GetParagraph(string key)
         {
+            if (string.IsNullOrEmpty(current))
+            {
+                LogUtility.LogError("Get paragraph error: The current language name is not set.");
+                return null;
+            }
+
             return GetParagraph(current, key);
         }
 
@@ -187,13 +203,13 @@ namespace MGS.Internation
             if (!languages.ContainsKey(language))
             {
                 LogUtility.LogError("Get paragraph error: The language {0} is not Initialized.", language);
-                return string.Empty;
+                return null;
             }
 
             if (!languages[language].ContainsKey(key))
             {
                 LogUtility.LogError("Get paragraph error: The key {0} can not find in the content of language {1}.", key, language);
-                return string.Empty;
+                return null;
             }
 
             return languages[language][key];

@@ -44,7 +44,7 @@ namespace MGS.WinCommon.Utility
             {
                 return ofn.lpstrFile;
             }
-            return string.Empty;
+            return null;
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace MGS.WinCommon.Utility
             {
                 return ofn.lpstrFile;
             }
-            return string.Empty;
+            return null;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace MGS.WinCommon.Utility
                 var fdrPath = new string(pszPath);
                 return fdrPath.Substring(0, fdrPath.IndexOf('\0'));
             }
-            return string.Empty;
+            return null;
         }
         #endregion
     }

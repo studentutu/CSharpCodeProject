@@ -30,11 +30,6 @@ namespace MGS.Media.Subtitle
         public const int CLIP_LINES = 3;
 
         /// <summary>
-        /// Separator of new line.
-        /// </summary>
-        public static readonly string[] NEWLINE_SEPARATOR = new string[] { "\r", "\n", "\r\n" };
-
-        /// <summary>
         /// Separator of clip time range.
         /// </summary>
         public static readonly string[] TIMERANGE_SEPARATOR = new string[] { "-->" };
@@ -46,6 +41,50 @@ namespace MGS.Media.Subtitle
         #endregion
 
         #region Protected Method
+        /// <summary>
+        /// Set source of srt subtitle.
+        /// </summary>
+        /// <param name="source">Data lines of srt subtitle.</param>
+        /// <returns>Succeed?</returns>
+        protected void SetSource(IEnumerable<string> source)
+        {
+            ClearCache();
+
+            if (source == null)
+            {
+                LogUtility.LogError("Set source of srt subtitle error: The content of source is null.");
+                return;
+            }
+
+            var lines = new List<string>(source);
+            if (lines.Count < CLIP_LINES)
+            {
+                LogUtility.LogError("Set source of srt subtitle error: The content of source is invalid.");
+                return;
+            }
+
+            while (lines.Count >= CLIP_LINES)
+            {
+                if (string.IsNullOrEmpty(lines[0]))
+                {
+                    lines.RemoveAt(0);
+                    continue;
+                }
+
+                var newClip = ParseToClip(lines[0], lines[1], lines[2]);
+                if (newClip == null)
+                {
+                    lines.RemoveAt(0);
+                    continue;
+                }
+                else
+                {
+                    clips.Add(newClip);
+                    lines.RemoveRange(0, CLIP_LINES);
+                }
+            }
+        }
+
         /// <summary>
         /// Parse text to subtitle clip.
         /// </summary>
@@ -159,62 +198,23 @@ namespace MGS.Media.Subtitle
 
         #region Public Method
         /// <summary>
-        /// Set subtitle source.
+        /// Constructor.
         /// </summary>
-        /// <param name="source">The source data of subtitle.</param>
-        /// <param name="isFile">The source is a local file path?</param>
-        public override void SetSource(string source, bool isFile = true)
+        /// <param name="source">Data lines of srt subtitle.</param>
+        public SRTSubtitle(IEnumerable<string> source)
         {
-            ClearCache();
-
-            string[] lines = null;
-            if (isFile)
-            {
-                lines = FileUtility.ReadAllLines(source, Encoding.Default);
-            }
-            else
-            {
-                lines = source.Split(NEWLINE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
-            }
-            SetSource(lines);
+            SetSource(source);
         }
 
         /// <summary>
-        /// Set source of srt subtitle.
+        /// Constructor.
         /// </summary>
-        /// <param name="source">Data lines of srt subtitle.</param>
-        /// <returns>Succeed?</returns>
-        public void SetSource(string[] source)
+        /// <param name="file">The source data file of subtitle.</param>
+        /// <param name="encoding">The encoding of file content.</param>
+        public SRTSubtitle(string file, Encoding encoding)
         {
-            ClearCache();
-
-            if (source == null || source.Length < CLIP_LINES)
-            {
-                LogUtility.LogError("Set source of srt subtitle error: The content of source is null or invalid.");
-                return;
-            }
-
-            var lines = new List<string>(source);
-            while (lines.Count >= CLIP_LINES)
-            {
-                if (string.IsNullOrEmpty(lines[0]))
-                {
-                    lines.RemoveAt(0);
-                    continue;
-                }
-
-                var newClip = ParseToClip(lines[0], lines[1], lines[2]);
-                if (newClip == null)
-                {
-                    lines.RemoveAt(0);
-                    continue;
-                }
-                else
-                {
-                    clips.Add(newClip);
-                    lines.RemoveRange(0, CLIP_LINES);
-                }
-            }
+            var lines = FileUtility.ReadAllLines(file, encoding);
+            SetSource(lines);
         }
         #endregion
     }

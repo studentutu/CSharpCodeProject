@@ -41,8 +41,8 @@
     <Compile Include="Subtitle\Abstract\Subtitle.cs" />
     <Compile Include="Subtitle\Interface\ISubtitle.cs" />
     <Compile Include="Subtitle\SRTSubtitle.cs" />
-    <Compile Include="Subtitle\SubtitleClip.cs" />
-    <Compile Include="Subtitle\SubtitleClipState.cs" />
+    <Compile Include="Subtitle\Abstract\SubtitleClip.cs" />
+    <Compile Include="Subtitle\Abstract\SubtitleClipState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

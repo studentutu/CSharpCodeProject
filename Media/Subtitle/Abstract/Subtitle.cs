@@ -94,13 +94,6 @@ namespace MGS.Media.Subtitle
 
         #region Public Method
         /// <summary>
-        /// Set subtitle source.
-        /// </summary>
-        /// <param name="source">The source data of subtitle.</param>
-        /// <param name="isFile">The source is a local file path?</param>
-        public abstract void SetSource(string source, bool isFile = true);
-
-        /// <summary>
         /// Get subtitle clip content at play time.
         /// </summary>
         /// <param name="time">Play time(Milliseconds) of clip.</param>

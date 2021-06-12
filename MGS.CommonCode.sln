@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommon", "UCommon\UCommon.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommonEditor", "UCommonEditor\UCommonEditor.csproj", "{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerUEditor", "LoggerUEditor\LoggerUEditor.csproj", "{878363DA-58B8-4E0E-AFD1-049B14B8D819}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{878363DA-58B8-4E0E-AFD1-049B14B8D819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{878363DA-58B8-4E0E-AFD1-049B14B8D819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{878363DA-58B8-4E0E-AFD1-049B14B8D819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{878363DA-58B8-4E0E-AFD1-049B14B8D819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

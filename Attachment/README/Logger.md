@@ -41,4 +41,4 @@ LogUtility.LogWarning("Log warning is {0}", warning);
 
 ------
 
-Copyright © 2021 Mogoson. All rights reserved.	mogoson@outlook.com
+Copyright © 2021 Mogoson.	mogoson@outlook.com

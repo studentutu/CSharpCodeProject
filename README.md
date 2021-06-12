@@ -1,11 +1,13 @@
-# CSharpCodeProject
+# MGS.CommonCode
 
 ## Summary
 - Universal code for C# project develop.
+- Universal code for Unity project develop.
 
 ## Environment
 
 - .Net Framework 3.5 or above.
+- Unity 5.0 or above.
 
 ## Module
 ### Autofac
@@ -84,4 +86,4 @@
 
 ------
 
-Copyright © 2021 Mogoson. All rights reserved.	mogoson@outlook.com
+Copyright © 2021 Mogoson.	mogoson@outlook.com

@@ -28,7 +28,7 @@ namespace MGS.Logger
 #else
         [RuntimeInitializeOnLoadMethod]
 #endif
-        static void Awake()
+        private static void Awake()
         {
             LogUtility.Register(new UnityDebugger());
         }

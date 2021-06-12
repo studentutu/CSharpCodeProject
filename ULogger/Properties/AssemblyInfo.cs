@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MGS.LoggerUEditor")]
+[assembly: AssemblyTitle("MGS.ULogger")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MGS.LoggerUEditor")]
+[assembly: AssemblyProduct("MGS.ULogger")]
 [assembly: AssemblyCopyright("Copyright ©  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("878363da-58b8-4e0e-afd1-049b14b8d819")]
+[assembly: Guid("f5c3a7b7-9a4b-4a96-bd35-e9fb0e73a173")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

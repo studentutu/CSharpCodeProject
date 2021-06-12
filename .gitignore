@@ -18,3 +18,5 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /TestResults
 /.vs
+/UUnitTest/Library
+/UUnitTest/Temp

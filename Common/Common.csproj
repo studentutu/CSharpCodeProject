@@ -45,6 +45,7 @@
     <Compile Include="Generic\Delegate\DelegateUtility.cs" />
     <Compile Include="Generic\Event\GenericEvent.cs" />
     <Compile Include="IO\DirectoryUtility.cs" />
+    <Compile Include="IO\FileCache.cs" />
     <Compile Include="IO\FileUtility.cs" />
     <Compile Include="Crypto\MD5CryptoUtility.cs" />
     <Compile Include="Threading\MutexUtility.cs" />

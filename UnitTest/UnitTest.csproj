@@ -44,6 +44,9 @@
     <Compile Include="Compressor\SharpCompressorTests.cs" />
     <Compile Include="Crypto\MD5CryptoUtilityTests.cs" />
     <Compile Include="InternationalizerTests.cs" />
+    <Compile Include="IO\DirectoryUtilityTests.cs" />
+    <Compile Include="IO\FileCacheTests.cs" />
+    <Compile Include="IO\FileUtilityTests.cs" />
     <Compile Include="LogUtilityTests.cs" />
     <Compile Include="Network\NetworkUtilityTests.cs" />
     <Compile Include="ObjectPool\ObjectPoolTests.cs" />

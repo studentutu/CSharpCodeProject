@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ULoggerEditor", "ULoggerEdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ULogger", "ULogger\ULogger.csproj", "{F5C3A7B7-9A4B-4A96-BD35-E9FB0E73A173}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacEditor", "AutofacEditor\AutofacEditor.csproj", "{E770C1C5-DE34-4711-95D9-B333D053C951}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{F5C3A7B7-9A4B-4A96-BD35-E9FB0E73A173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5C3A7B7-9A4B-4A96-BD35-E9FB0E73A173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5C3A7B7-9A4B-4A96-BD35-E9FB0E73A173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E770C1C5-DE34-4711-95D9-B333D053C951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E770C1C5-DE34-4711-95D9-B333D053C951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E770C1C5-DE34-4711-95D9-B333D053C951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E770C1C5-DE34-4711-95D9-B333D053C951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

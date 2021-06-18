@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Autofac</RootNamespace>
-    <AssemblyName>AutofacEditor</AssemblyName>
+    <AssemblyName>MGS.AutofacEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutofacUtility">
-      <HintPath>..\UnitTest\Assets\Plugins\Autofac\AutofacUtility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEditor">
       <HintPath>..\lib\UnityEditor.dll</HintPath>
@@ -59,9 +56,15 @@
   <ItemGroup>
     <None Include="Resources\AutofacConfigurator.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutofacUtility\AutofacUtility.csproj">
+      <Project>{e25e38e5-1dd7-4341-ab1e-5bbbd75a4d62}</Project>
+      <Name>AutofacUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\AutofacToolkit\Editor"
+    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\Autofac\Editor"
 if exist %25targetDir%25\$(TargetFileName) (
     if $(ConfigurationName)==Debug (
         copy "$(TargetName).pdb" %25targetDir%25

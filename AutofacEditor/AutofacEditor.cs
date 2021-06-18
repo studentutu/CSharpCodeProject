@@ -20,7 +20,7 @@ namespace Autofac.Editor
 {
     public class AutofacEditor : AssetPostprocessor
     {
-        static readonly string CONFIGURATOR_FILE_PATH = string.Format("{0}/AutofacToolkit/Scripts/AutofacConfigurator.cs", Application.dataPath);
+        static readonly string CONFIGURATOR_FILE_PATH = string.Format("{0}/MGS.Packages/Autofac/Scripts/AutofacConfigurator.cs", Application.dataPath);
         const string INFO_CODES = "/*INFOCODES*/";
 
         [UnityEditor.Callbacks.DidReloadScripts]

@@ -47,7 +47,11 @@ namespace MGS.Compress
         /// </summary>
         private CompressManager()
         {
+#if USE_IONIC_ZIP
             Compressor = new IonicCompressor();
+#elif USE_SHARPCOMPRESS
+            Compressor = new SharpCompressor();
+#endif
             MaxRunCount = 10;
         }
         #endregion

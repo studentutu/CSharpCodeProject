@@ -27,7 +27,7 @@ namespace MGS.Compress
     /// </summary>
     public class SharpCompressor : ICompressor
     {
-#region Public Method
+        #region Public Method
         /// <summary>
         /// Compress entrie[file or directorie] to dest zip file.
         /// </summary>
@@ -137,7 +137,7 @@ namespace MGS.Compress
                 completeCallback?.Invoke(false, error);
             }
         }
-#endregion
+        #endregion
     }
 }
 #endif

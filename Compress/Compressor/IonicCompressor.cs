@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+#if USE_IONIC_ZIP
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
@@ -121,3 +122,4 @@ namespace MGS.Compress
         #endregion
     }
 }
+#endif

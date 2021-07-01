@@ -40,7 +40,7 @@ namespace MGS.Compress
         public CompressTask(ICompressor compressor,
             IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null) :
+            Action<float> progressCallback = null, Action<bool, object> completeCallback = null) :
             base(compressor, clearBefor, progressCallback, completeCallback)
         {
             this.entries = entries;

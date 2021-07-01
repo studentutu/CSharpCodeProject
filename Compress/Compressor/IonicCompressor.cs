@@ -37,7 +37,7 @@ namespace MGS.Compress
         /// <param name="completeCallback">Complete callback.</param>
         public virtual void Compress(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
+            Action<float> progressCallback = null, Action<bool, object> completeCallback = null)
         {
             try
             {
@@ -70,8 +70,7 @@ namespace MGS.Compress
             }
             catch (Exception ex)
             {
-                var error = string.Format("Compress file exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
-                completeCallback?.Invoke(false, error);
+                completeCallback?.Invoke(false, ex);
             }
         }
 
@@ -84,7 +83,7 @@ namespace MGS.Compress
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
         public virtual void Decompress(string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
+            Action<float> progressCallback = null, Action<bool, object> completeCallback = null)
         {
             try
             {
@@ -115,8 +114,7 @@ namespace MGS.Compress
             }
             catch (Exception ex)
             {
-                var error = string.Format("Decompress file exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
-                completeCallback?.Invoke(false, error);
+                completeCallback?.Invoke(false, ex);
             }
         }
         #endregion

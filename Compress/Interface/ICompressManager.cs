@@ -46,7 +46,7 @@ namespace MGS.Compress
         /// <param name="completeCallback">Complete callback.</param>
         void CompressAsync(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
+            Action<float> progressCallback = null, Action<bool, object> completeCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir async.
@@ -57,7 +57,7 @@ namespace MGS.Compress
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="completeCallback">Complete callback.</param>
         void DecompressAsync(string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, string> completeCallback = null);
+            Action<float> progressCallback = null, Action<bool, object> completeCallback = null);
         #endregion
     }
 }

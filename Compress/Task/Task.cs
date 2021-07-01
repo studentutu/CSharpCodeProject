@@ -27,7 +27,7 @@ namespace MGS.Compress
         protected ICompressor compressor = null;
         protected bool clearBefor = true;
         protected Action<float> progressCallback = null;
-        protected Action<bool, string> completeCallback = null;
+        protected Action<bool, object> completeCallback = null;
 
         /// <summary>
         /// Constructor.
@@ -37,7 +37,7 @@ namespace MGS.Compress
         /// <param name="progressCallback"></param>
         /// <param name="completeCallback"></param>
         public Task(ICompressor compressor, bool clearBefor = true,
-               Action<float> progressCallback = null, Action<bool, string> completeCallback = null)
+               Action<float> progressCallback = null, Action<bool, object> completeCallback = null)
         {
             this.compressor = compressor;
             this.clearBefor = clearBefor;

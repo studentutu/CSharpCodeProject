@@ -43,10 +43,11 @@ namespace MGS.Compress
         /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        void CompressAsync(IEnumerable<string> entries, string destFile,
+        /// <param name="finishedCallback">Finished callback.</param>
+        /// <returns>Guid of async operate.</returns>
+        string CompressAsync(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null);
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null);
 
         /// <summary>
         /// Decompress file to dest dir async.
@@ -55,9 +56,16 @@ namespace MGS.Compress
         /// <param name="destDir">The dest decompress directory.</param>
         /// <param name="clearBefor">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        void DecompressAsync(string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null);
+        /// <param name="finishedCallback">Finished callback.</param>
+        /// <returns>Guid of async operate.</returns>
+        string DecompressAsync(string filePath, string destDir, bool clearBefor = true,
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null);
+
+        /// <summary>
+        /// Abort async operate.
+        /// </summary>
+        /// <param name="guid">Guid of async operate.</param>
+        void AbortAsync(string guid);
         #endregion
     }
 }

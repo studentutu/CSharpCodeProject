@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2020 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  DecompressTask.cs
- *  Description  :  File decompress task.
+ *  File         :  AsyncDecompressTask.cs
+ *  Description  :  File decompress async task.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -15,9 +15,9 @@ using System;
 namespace MGS.Compress
 {
     /// <summary>
-    /// File decompress task.
+    /// File decompress async task.
     /// </summary>
-    internal class DecompressTask : Task
+    internal class AsyncDecompressTask : AsyncTask
     {
         protected string filePath;
         protected string destDir;
@@ -30,28 +30,22 @@ namespace MGS.Compress
         /// <param name="destDir"></param>
         /// <param name="clearBefor"></param>
         /// <param name="progressCallback"></param>
-        /// <param name="completeCallback"></param>
-        public DecompressTask(ICompressor compressor,
+        /// <param name="finishedCallback"></param>
+        public AsyncDecompressTask(ICompressor compressor,
             string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null) :
-            base(compressor, clearBefor, progressCallback, completeCallback)
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null) :
+            base(compressor, clearBefor, progressCallback, finishedCallback)
         {
             this.filePath = filePath;
             this.destDir = destDir;
         }
 
         /// <summary>
-        /// Start decompress task.
+        /// Execute decompress operate.
         /// </summary>
-        public override void Start()
+        protected override void Execute()
         {
-            State = TaskState.Working;
-            compressor.Decompress(filePath, destDir, clearBefor,
-                progressCallback, (isSucceed, info) =>
-                {
-                    State = isSucceed ? TaskState.Complete : TaskState.Error;
-                    completeCallback?.Invoke(isSucceed, info);
-                });
+            compressor.Decompress(filePath, destDir, clearBefor, progressCallback, finishedCallback);
         }
     }
 }

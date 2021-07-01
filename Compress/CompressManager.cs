@@ -38,8 +38,14 @@ namespace MGS.Compress
 
         /// <summary>
         /// List to cache tasks.
+        /// [Usually not too many tasks so do not use Dictionary to cache tasks]
         /// </summary>
-        private List<ICompressTask> tasks = new List<ICompressTask>();
+        private List<ITask> tasks = new List<ITask>();
+
+        /// <summary>
+        /// Locker for task cache list.
+        /// </summary>
+        private readonly object locker = new object();
         #endregion
 
         #region Private Method
@@ -70,28 +76,30 @@ namespace MGS.Compress
                 return;
             }
 
-            var runner = 0;
-            for (int i = 0; i < tasks.Count; i++)
+            lock (locker)
             {
-                var task = tasks[i];
-                switch (task.State)
+                var runner = 0;
+                for (int i = 0; i < tasks.Count; i++)
                 {
-                    case TaskState.Idle:
-                        if (runner < MaxRunCount)
-                        {
-                            task.Start();
-                        }
-                        break;
+                    var task = tasks[i];
+                    switch (task.State)
+                    {
+                        case TaskState.Idle:
+                            if (runner < MaxRunCount)
+                            {
+                                task.Start();
+                            }
+                            break;
 
-                    case TaskState.Working:
-                        runner++;
-                        break;
+                        case TaskState.Working:
+                            runner++;
+                            break;
 
-                    case TaskState.Complete:
-                    case TaskState.Error:
-                        tasks.Remove(task);
-                        i--;
-                        break;
+                        case TaskState.Finished:
+                            tasks.Remove(task);
+                            i--;
+                            break;
+                    }
                 }
             }
         }
@@ -100,9 +108,12 @@ namespace MGS.Compress
         /// Add task to cache list.
         /// </summary>
         /// <param name="task"></param>
-        private void AddTask(ICompressTask task)
+        private void AddTask(ITask task)
         {
-            tasks.Add(task);
+            lock (locker)
+            {
+                tasks.Add(task);
+            }
         }
 
         /// <summary>
@@ -134,42 +145,44 @@ namespace MGS.Compress
         /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        public void CompressAsync(IEnumerable<string> entries, string destFile,
+        /// <param name="finishedCallback">Finished callback.</param>
+        /// <returns>Guid of async operate.</returns>
+        public string CompressAsync(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null)
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
         {
             if (entries == null)
             {
                 var error = new ArgumentNullException("entries", "The params is invalid.");
-                DelegateUtility.Invoke(completeCallback, false, error);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, error);
+                return null;
             }
 
             if (string.IsNullOrEmpty(destFile))
             {
                 var error = new ArgumentNullException("destFile", "The params is invalid.");
-                DelegateUtility.Invoke(completeCallback, false, error);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, error);
+                return null;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                DelegateUtility.Invoke(completeCallback, false, ex);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, ex);
+                return null;
             }
 
-            var task = new CompressTask(Compressor, entries, destFile, encoding, directoryPathInArchive, clearBefor,
+            var task = new AsyncCompressTask(Compressor, entries, destFile, encoding, directoryPathInArchive, clearBefor,
                 progress =>
                 {
                     DelegateUtility.Invoke(progressCallback, progress);
                 },
                 (isSucceed, info) =>
                 {
-                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                    DelegateUtility.Invoke(finishedCallback, isSucceed, info);
                 });
 
             AddTask(task);
+            return task.GUID;
         }
 
         /// <summary>
@@ -179,41 +192,67 @@ namespace MGS.Compress
         /// <param name="destDir">The dest decompress directory.</param>
         /// <param name="clearBefor">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        public void DecompressAsync(string filePath, string destDir, bool clearBefor = false,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null)
+        /// <param name="finishedCallback">Finished callback.</param>
+        /// <returns>Guid of async operate.</returns>
+        public string DecompressAsync(string filePath, string destDir, bool clearBefor = false,
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
         {
             if (!File.Exists(filePath))
             {
                 var error = new FileNotFoundException("Can not find the file.", filePath);
-                DelegateUtility.Invoke(completeCallback, false, error);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, error);
+                return null;
             }
 
             if (string.IsNullOrEmpty(destDir))
             {
                 var error = new ArgumentNullException("destDir", "The params is invalid.");
-                DelegateUtility.Invoke(completeCallback, false, error);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, error);
+                return null;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                DelegateUtility.Invoke(completeCallback, false, ex);
-                return;
+                DelegateUtility.Invoke(finishedCallback, false, ex);
+                return null;
             }
 
-            var task = new DecompressTask(Compressor, filePath, destDir, clearBefor,
+            var task = new AsyncDecompressTask(Compressor, filePath, destDir, clearBefor,
                  progress =>
                  {
                      DelegateUtility.Invoke(progressCallback, progress);
                  },
                 (isSucceed, info) =>
                 {
-                    DelegateUtility.Invoke(completeCallback, isSucceed, info);
+                    DelegateUtility.Invoke(finishedCallback, isSucceed, info);
                 });
 
             AddTask(task);
+            return task.GUID;
+        }
+
+        /// <summary>
+        /// Abort async operate.
+        /// </summary>
+        /// <param name="guid">Guid of async operate.</param>
+        public void AbortAsync(string guid)
+        {
+            if (tasks.Count == 0)
+            {
+                return;
+            }
+
+            lock (locker)
+            {
+                foreach (var task in tasks)
+                {
+                    if (task.GUID == guid)
+                    {
+                        task.Abort();
+                        return;
+                    }
+                }
+            }
         }
         #endregion
     }

@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2020 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ICompressTask.cs
- *  Description  :  Interface for compressor task.
+ *  File         :  ITask.cs
+ *  Description  :  Interface for task.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -15,17 +15,27 @@ namespace MGS.Compress
     /// <summary>
     /// Interface for compressor task.
     /// </summary>
-    internal interface ICompressTask
+    internal interface ITask
     {
         /// <summary>
-        /// State of compressor task.
+        /// Guid of task.
+        /// </summary>
+        string GUID { get; }
+
+        /// <summary>
+        /// State of task.
         /// </summary>
         TaskState State { get; }
 
         /// <summary>
-        /// Start compressor task.
+        /// Start task.
         /// </summary>
         void Start();
+
+        /// <summary>
+        /// Abort task.
+        /// </summary>
+        void Abort();
     }
 
     /// <summary>
@@ -46,11 +56,6 @@ namespace MGS.Compress
         /// <summary>
         /// 
         /// </summary>
-        Complete,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Error
+        Finished
     }
 }

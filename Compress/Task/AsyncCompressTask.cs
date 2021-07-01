@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2020 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  CompressTask.cs
- *  Description  :  File compress task.
+ *  File         :  AsyncCompressTask.cs
+ *  Description  :  File compress async task.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -17,9 +17,9 @@ using System.Text;
 namespace MGS.Compress
 {
     /// <summary>
-    /// File compress task.
+    /// File compress async task.
     /// </summary>
-    internal class CompressTask : Task
+    internal class AsyncCompressTask : AsyncTask
     {
         protected IEnumerable<string> entries;
         protected string destFile;
@@ -36,12 +36,12 @@ namespace MGS.Compress
         /// <param name="directoryPathInArchive">Directory path in archive of zip file.</param>
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
-        /// <param name="completeCallback">Complete callback.</param>
-        public CompressTask(ICompressor compressor,
+        /// <param name="finishedCallback">Finished callback.</param>
+        public AsyncCompressTask(ICompressor compressor,
             IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> completeCallback = null) :
-            base(compressor, clearBefor, progressCallback, completeCallback)
+            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null) :
+            base(compressor, clearBefor, progressCallback, finishedCallback)
         {
             this.entries = entries;
             this.destFile = destFile;
@@ -51,17 +51,12 @@ namespace MGS.Compress
         }
 
         /// <summary>
-        /// Start compressor task.
+        /// Execute compress operate.
         /// </summary>
-        public override void Start()
+        protected override void Execute()
         {
-            State = TaskState.Working;
-            compressor.Compress(entries, destFile, encoding, directoryPathInArchive, clearBefor,
-                progressCallback, (isSucceed, info) =>
-                {
-                    State = isSucceed ? TaskState.Complete : TaskState.Error;
-                    completeCallback?.Invoke(isSucceed, info);
-                });
+            compressor.Compress(entries, destFile, encoding,
+                directoryPathInArchive, clearBefor, progressCallback, finishedCallback);
         }
     }
 }

@@ -20,11 +20,6 @@ namespace MGS.Compress
     internal interface ITask
     {
         /// <summary>
-        /// Guid of task.
-        /// </summary>
-        string GUID { get; }
-
-        /// <summary>
         /// State of task.
         /// </summary>
         TaskState State { get; }
@@ -38,11 +33,6 @@ namespace MGS.Compress
         /// Start task.
         /// </summary>
         void Start();
-
-        /// <summary>
-        /// Abort task.
-        /// </summary>
-        void Abort();
     }
 
     /// <summary>

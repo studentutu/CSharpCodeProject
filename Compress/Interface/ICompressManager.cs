@@ -44,8 +44,7 @@ namespace MGS.Compress
         /// <param name="clearBefor">Clear origin file(if exists) befor compress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">Finished callback.</param>
-        /// <returns>Guid of async operate.</returns>
-        string CompressAsync(IEnumerable<string> entries, string destFile,
+        void CompressAsync(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, object> finishedCallback = null);
 
@@ -57,15 +56,8 @@ namespace MGS.Compress
         /// <param name="clearBefor">Clear the dest dir before decompress.</param>
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">Finished callback.</param>
-        /// <returns>Guid of async operate.</returns>
-        string DecompressAsync(string filePath, string destDir, bool clearBefor = true,
+        void DecompressAsync(string filePath, string destDir, bool clearBefor = true,
             Action<float> progressCallback = null, Action<bool, object> finishedCallback = null);
-
-        /// <summary>
-        /// Abort async operate.
-        /// </summary>
-        /// <param name="guid">Guid of async operate.</param>
-        void AbortAsync(string guid);
         #endregion
     }
 }

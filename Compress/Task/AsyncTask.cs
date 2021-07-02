@@ -22,11 +22,6 @@ namespace MGS.Compress
     internal abstract class AsyncTask : ITask
     {
         /// <summary>
-        /// Guid of compressor task.
-        /// </summary>
-        public string GUID { get; }
-
-        /// <summary>
         /// State of compressor task.
         /// </summary>
         public TaskState State { protected set; get; }
@@ -52,8 +47,6 @@ namespace MGS.Compress
         public AsyncTask(ICompressor compressor, bool clearBefor = true,
                Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
         {
-            GUID = Guid.NewGuid().ToString();
-
             this.compressor = compressor;
             this.clearBefor = clearBefor;
             this.progressCallback = progressCallback;
@@ -79,20 +72,6 @@ namespace MGS.Compress
 
             thread.Start();
             State = TaskState.Working;
-        }
-
-        /// <summary>
-        /// Abort compressor task.
-        /// </summary>
-        public void Abort()
-        {
-            if (State != TaskState.Working)
-            {
-                return;
-            }
-
-            thread.Abort();
-            State = TaskState.Finished;
         }
 
         /// <summary>

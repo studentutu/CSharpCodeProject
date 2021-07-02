@@ -23,14 +23,14 @@ namespace MGS.Common.Collection
     public sealed class EnumeratorUtility
     {
         /// <summary>
-        /// Collect progress states and complete event.
+        /// Collect progress states and Finished event.
         /// </summary>
         /// <param name="enumerator">Source enumerator.</param>
         /// <param name="progress">Progress event.</param>
-        /// <param name="complete">Complete event.</param>
+        /// <param name="finished">Finished event.</param>
         /// <returns>IEnumerator.</returns>
         public static IEnumerator Collect(IEnumerator enumerator,
-            Action<object> progress = null, Action complete = null)
+            Action<object> progress = null, Action finished = null)
         {
             while (enumerator.MoveNext())
             {
@@ -38,18 +38,18 @@ namespace MGS.Common.Collection
                 yield return enumerator.Current;
             }
 
-            complete?.Invoke();
+            finished?.Invoke();
         }
 
         /// <summary>
-        /// Collect progress states and complete event.
+        /// Collect progress states and Finished event.
         /// </summary>
         /// <param name="enumerators">IEnumerable of source enumerator.</param>
         /// <param name="progress">Progress event.</param>
-        /// <param name="complete">Complete event.</param>
+        /// <param name="finished">Finished event.</param>
         /// <returns>IEnumerator.</returns>
         public static IEnumerator Collect(IEnumerable<IEnumerator> enumerators,
-            Action<object> progress = null, Action complete = null)
+            Action<object> progress = null, Action finished = null)
         {
             foreach (var enumerator in enumerators)
             {
@@ -60,7 +60,7 @@ namespace MGS.Common.Collection
                 }
             }
 
-            complete?.Invoke();
+            finished?.Invoke();
         }
 
         /// <summary>

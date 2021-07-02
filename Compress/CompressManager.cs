@@ -32,15 +32,20 @@ namespace MGS.Compress
         public ICompressor Compressor { set; get; }
 
         /// <summary>
-        /// Max run count of async operate.
+        /// Max count of async operate run in parallel.
         /// </summary>
-        public int MaxRunCount { set; get; }
+        public int MaxParallelCount { set; get; }
 
         /// <summary>
         /// List to cache tasks.
         /// [Usually not too many tasks so do not use Dictionary to cache tasks]
         /// </summary>
-        private List<ITask> tasks = new List<ITask>();
+        private List<ITask> taskCache = new List<ITask>();
+
+        /// <summary>
+        /// List to cache entries.
+        /// </summary>
+        private List<string> entryCache = new List<string>();
 
         /// <summary>
         /// Locker for task cache list.
@@ -59,7 +64,7 @@ namespace MGS.Compress
 #elif USE_SHARPCOMPRESS
             Compressor = new SharpCompressor();
 #endif
-            MaxRunCount = 10;
+            MaxParallelCount = 10;
         }
         #endregion
 
@@ -71,32 +76,39 @@ namespace MGS.Compress
         /// <param name="e">Event args.</param>
         protected override void Tick(object sender, ElapsedEventArgs e)
         {
-            if (tasks.Count == 0)
+            if (taskCache.Count == 0)
             {
                 return;
             }
 
             lock (locker)
             {
-                var runner = 0;
-                for (int i = 0; i < tasks.Count; i++)
+                var runCount = 0;
+                for (int i = 0; i < taskCache.Count; i++)
                 {
-                    var task = tasks[i];
+                    if (runCount >= MaxParallelCount)
+                    {
+                        //The rest of the tasks are waiting(Idle state).
+                        break;
+                    }
+
+                    var task = taskCache[i];
                     switch (task.State)
                     {
                         case TaskState.Idle:
-                            if (runner < MaxRunCount)
+                            if (CheckRunnable(task))
                             {
                                 task.Start();
+                                runCount++;
                             }
                             break;
 
                         case TaskState.Working:
-                            runner++;
+                            runCount++;
                             break;
 
                         case TaskState.Finished:
-                            tasks.Remove(task);
+                            RemoveTask(task);
                             i--;
                             break;
                     }
@@ -112,7 +124,37 @@ namespace MGS.Compress
         {
             lock (locker)
             {
-                tasks.Add(task);
+                if (task.Entries != null)
+                {
+                    foreach (var entry in task.Entries)
+                    {
+                        if (entryCache.Contains(entry))
+                        {
+                            continue;
+                        }
+                        entryCache.Add(entry);
+                    }
+                }
+                taskCache.Add(task);
+            }
+        }
+
+        /// <summary>
+        /// Remove task from cache list.
+        /// </summary>
+        /// <param name="task"></param>
+        private void RemoveTask(ITask task)
+        {
+            lock (locker)
+            {
+                if (task.Entries != null)
+                {
+                    foreach (var entry in task.Entries)
+                    {
+                        entryCache.Remove(entry);
+                    }
+                }
+                taskCache.Remove(task);
             }
         }
 
@@ -131,6 +173,28 @@ namespace MGS.Compress
                 return false;
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// Check the task is runnable.
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns>Task is runnable?</returns>
+        private bool CheckRunnable(ITask task)
+        {
+            if (task.Entries == null)
+            {
+                return true;
+            }
+
+            foreach (var entry in task.Entries)
+            {
+                if (entryCache.Contains(entry))
+                {
+                    return false;
+                }
+            }
             return true;
         }
         #endregion
@@ -237,18 +301,22 @@ namespace MGS.Compress
         /// <param name="guid">Guid of async operate.</param>
         public void AbortAsync(string guid)
         {
-            if (tasks.Count == 0)
+            if (taskCache.Count == 0)
             {
                 return;
             }
 
             lock (locker)
             {
-                foreach (var task in tasks)
+                foreach (var task in taskCache)
                 {
                     if (task.GUID == guid)
                     {
-                        task.Abort();
+                        if (task.State == TaskState.Working)
+                        {
+                            task.Abort();
+                        }
+                        RemoveTask(task);
                         return;
                     }
                 }

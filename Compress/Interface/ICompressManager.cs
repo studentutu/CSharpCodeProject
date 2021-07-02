@@ -28,9 +28,9 @@ namespace MGS.Compress
         ICompressor Compressor { set; get; }
 
         /// <summary>
-        /// Max run count of async operate.
+        /// Max count of async operate run in parallel.
         /// </summary>
-        int MaxRunCount { set; get; }
+        int MaxParallelCount { set; get; }
         #endregion
 
         #region Method

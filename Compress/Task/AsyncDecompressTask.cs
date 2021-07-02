@@ -11,6 +11,7 @@
  *************************************************************************/
 
 using System;
+using System.Collections.Generic;
 
 namespace MGS.Compress
 {
@@ -19,6 +20,14 @@ namespace MGS.Compress
     /// </summary>
     internal class AsyncDecompressTask : AsyncTask
     {
+        /// <summary>
+        /// Entries associated with the task.
+        /// </summary>
+        public override IEnumerable<string> Entries
+        {
+            get { return new string[] { filePath, destDir }; }
+        }
+
         protected string filePath;
         protected string destDir;
 

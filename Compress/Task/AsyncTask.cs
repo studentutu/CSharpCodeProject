@@ -11,6 +11,7 @@
  *************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace MGS.Compress
@@ -29,6 +30,11 @@ namespace MGS.Compress
         /// State of compressor task.
         /// </summary>
         public TaskState State { protected set; get; }
+
+        /// <summary>
+        /// Entries associated with the task.
+        /// </summary>
+        public abstract IEnumerable<string> Entries { get; }
 
         protected ICompressor compressor = null;
         protected bool clearBefor = true;

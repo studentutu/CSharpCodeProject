@@ -21,6 +21,14 @@ namespace MGS.Compress
     /// </summary>
     internal class AsyncCompressTask : AsyncTask
     {
+        /// <summary>
+        /// Entries associated with the task.
+        /// </summary>
+        public override IEnumerable<string> Entries
+        {
+            get { return new List<string>(entries) { destFile }; }
+        }
+
         protected IEnumerable<string> entries;
         protected string destFile;
         protected Encoding encoding;

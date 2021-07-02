@@ -10,6 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Collections.Generic;
+
 namespace MGS.Compress
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace MGS.Compress
         /// State of task.
         /// </summary>
         TaskState State { get; }
+
+        /// <summary>
+        /// Entries associated with the task.
+        /// </summary>
+        IEnumerable<string> Entries { get; }
 
         /// <summary>
         /// Start task.

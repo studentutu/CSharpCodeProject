@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacEditor", "AutofacEdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{C5AA355E-267D-4D1A-93C0-EB6932F10E79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDesignPattern", "UDesignPattern\UDesignPattern.csproj", "{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{C5AA355E-267D-4D1A-93C0-EB6932F10E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5AA355E-267D-4D1A-93C0-EB6932F10E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5AA355E-267D-4D1A-93C0-EB6932F10E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

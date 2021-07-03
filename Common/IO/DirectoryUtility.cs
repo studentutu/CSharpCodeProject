@@ -57,13 +57,13 @@ namespace MGS.Common.IO
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">finished callback.</param>
         public static void CopyChildrenEntries(string sourceDir, string destDir, IEnumerable<string> ignores = null,
-            Action<float> progressCallback = null, Action<bool, string> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, Exception> finishedCallback = null)
         {
             var entries = Directory.GetFileSystemEntries(sourceDir);
             if (entries == null || entries.Length == 0)
             {
                 progressCallback?.Invoke(1.0f);
-                finishedCallback?.Invoke(true, destDir);
+                finishedCallback?.Invoke(true, null);
                 return;
             }
 
@@ -75,8 +75,7 @@ namespace MGS.Common.IO
                 }
                 catch (Exception ex)
                 {
-                    var error = string.Format("Copy children entries exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
-                    finishedCallback?.Invoke(false, error);
+                    finishedCallback?.Invoke(false, ex);
                     return;
                 }
             }
@@ -110,11 +109,11 @@ namespace MGS.Common.IO
                                     var childProgress = (finishCount + progress) / entries.Length;
                                     progressCallback?.Invoke(childProgress);
                                 },
-                                (succeed, info) =>
+                                (succeed, error) =>
                                 {
                                     if (!succeed)
                                     {
-                                        finishedCallback?.Invoke(succeed, info);
+                                        finishedCallback?.Invoke(succeed, error);
                                         return;
                                     }
                                     finishCount++;
@@ -138,12 +137,11 @@ namespace MGS.Common.IO
                 }
                 catch (Exception ex)
                 {
-                    var error = string.Format("Copy children entries exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
-                    finishedCallback?.Invoke(false, error);
+                    finishedCallback?.Invoke(false, ex);
                 }
             }
 
-            finishedCallback?.Invoke(true, destDir);
+            finishedCallback?.Invoke(true, null);
         }
 
         /// <summary>
@@ -154,13 +152,13 @@ namespace MGS.Common.IO
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">finished callback.</param>
         public static void DeleteChildrenEntries(string destDir, IEnumerable<string> ignores = null,
-            Action<float> progressCallback = null, Action<bool, string> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, Exception> finishedCallback = null)
         {
             var entries = Directory.GetFileSystemEntries(destDir);
             if (entries == null || entries.Length == 0)
             {
                 progressCallback?.Invoke(1.0f);
-                finishedCallback?.Invoke(true, destDir);
+                finishedCallback?.Invoke(true, null);
                 return;
             }
 
@@ -199,12 +197,11 @@ namespace MGS.Common.IO
                 }
                 catch (Exception ex)
                 {
-                    var error = string.Format("Delete children entries error: {0}", ex.Message);
-                    finishedCallback?.Invoke(false, error);
+                    finishedCallback?.Invoke(false, ex);
                 }
             }
 
-            finishedCallback?.Invoke(true, destDir);
+            finishedCallback?.Invoke(true, null);
         }
         #endregion
     }

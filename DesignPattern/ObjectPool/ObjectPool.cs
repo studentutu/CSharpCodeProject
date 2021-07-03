@@ -10,27 +10,15 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using System;
 using System.Collections.Generic;
 
 namespace MGS.DesignPattern
 {
     /// <summary>
-    /// Interface for resettable object.
-    /// </summary>
-    public interface IResettable : IDisposable
-    {
-        /// <summary>
-        /// Reset object.
-        /// </summary>
-        void Reset();
-    }
-
-    /// <summary>
     /// Generic object pool.
     /// </summary>
     /// <typeparam name="T">Specified type of object.</typeparam>
-    public class ObjectPool<T> where T : IResettable, new()
+    public abstract class ObjectPool<T>
     {
         #region Field and Property
         /// <summary>
@@ -70,7 +58,7 @@ namespace MGS.DesignPattern
                 return objectStack.Pop();
             }
 
-            return new T();
+            return Create();
         }
 
         /// <summary>
@@ -93,12 +81,12 @@ namespace MGS.DesignPattern
 
             if (objectStack.Count < MaxCount)
             {
-                obj.Reset();
+                Reset(obj);
                 objectStack.Push(obj);
             }
             else
             {
-                obj.Dispose();
+                Dispose(obj);
             }
         }
 
@@ -109,10 +97,30 @@ namespace MGS.DesignPattern
         {
             foreach (var obj in objectStack)
             {
-                obj.Dispose();
+                Dispose(obj);
             }
             objectStack.Clear();
         }
+        #endregion
+
+        #region Protected Method
+        /// <summary>
+        /// Create a new object.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract T Create();
+
+        /// <summary>
+        /// Reset this object.
+        /// </summary>
+        /// <param name="obj"></param>
+        protected abstract void Reset(T obj);
+
+        /// <summary>
+        /// Dispose this object.
+        /// </summary>
+        /// <param name="obj"></param>
+        protected abstract void Dispose(T obj);
         #endregion
     }
 }

@@ -10,17 +10,27 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
 
 namespace MGS.DesignPattern
 {
     /// <summary>
+    /// Interface for resettable object.
+    /// </summary>
+    public interface IResettable : IDisposable
+    {
+        /// <summary>
+        /// Reset object.
+        /// </summary>
+        void Reset();
+    }
+
+    /// <summary>
     /// Generic object pool.
     /// </summary>
     /// <typeparam name="T">Specified type of object.</typeparam>
-    public class ObjectPool<T>
+    public class ObjectPool<T> where T : IResettable, new()
     {
         #region Field and Property
         /// <summary>
@@ -37,36 +47,15 @@ namespace MGS.DesignPattern
         /// Stack store objects.
         /// </summary>
         protected Stack<T> objectStack = new Stack<T>();
-
-        /// <summary>
-        /// Function of create new object.
-        /// </summary>
-        protected Func<T> createFunc;
-
-        /// <summary>
-        /// Action of reset object to default.
-        /// </summary>
-        protected Action<T> resetAction;
-
-        /// <summary>
-        /// Action of dispose object.
-        /// </summary>
-        protected Action<T> disposeAction;
         #endregion
 
         #region Public Method
         /// <summary>
         /// Constructor of ObjectPool.
         /// </summary>
-        /// <param name="create">Function of create new object.</param>
-        /// <param name="reset">Action of reset object to default.</param>
-        /// <param name="dispose">Action of dispose object.</param>
         /// <param name="maxCount">Max count limit of objects in pool.</param>
-        public ObjectPool(Func<T> create, Action<T> reset, Action<T> dispose, int maxCount = 100)
+        public ObjectPool(int maxCount = 100)
         {
-            createFunc = create;
-            resetAction = reset;
-            disposeAction = dispose;
             MaxCount = maxCount;
         }
 
@@ -80,11 +69,8 @@ namespace MGS.DesignPattern
             {
                 return objectStack.Pop();
             }
-            if (createFunc == null)
-            {
-                return default(T);
-            }
-            return createFunc.Invoke();
+
+            return new T();
         }
 
         /// <summary>
@@ -96,7 +82,6 @@ namespace MGS.DesignPattern
             //Null object do not need to recycle.
             if (obj == null)
             {
-                LogUtility.LogWarning("Recycle object to pool cancelled: Null object do not need to recycle.");
                 return;
             }
 
@@ -108,12 +93,12 @@ namespace MGS.DesignPattern
 
             if (objectStack.Count < MaxCount)
             {
-                resetAction?.Invoke(obj);
+                obj.Reset();
                 objectStack.Push(obj);
             }
             else
             {
-                disposeAction?.Invoke(obj);
+                obj.Dispose();
             }
         }
 
@@ -122,12 +107,9 @@ namespace MGS.DesignPattern
         /// </summary>
         public virtual void Clear()
         {
-            if (disposeAction != null)
+            foreach (var obj in objectStack)
             {
-                foreach (var obj in objectStack)
-                {
-                    disposeAction.Invoke(obj);
-                }
+                obj.Dispose();
             }
             objectStack.Clear();
         }

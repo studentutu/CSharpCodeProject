@@ -40,7 +40,7 @@ namespace MGS.DesignPattern
         private GOPoolManager()
         {
             //Create root for pools.
-            poolRoot = new GameObject("GameObjectPool").transform;
+            poolRoot = new GameObject(GetType().Name).transform;
             Object.DontDestroyOnLoad(poolRoot);
         }
         #endregion
@@ -74,11 +74,11 @@ namespace MGS.DesignPattern
             }
 
             //Create new gameobject for pool.
-            var poolTrans = new GameObject(name).transform;
-            poolTrans.parent = poolRoot;
+            var poolNode = new GameObject(name).transform;
+            poolNode.parent = poolRoot;
 
             //Create new pool.
-            var newPool = new GOPool(poolTrans, prefab, maxCount);
+            var newPool = new GOPool(poolNode, prefab, maxCount);
             poolsInfo.Add(name, newPool);
             return newPool;
         }
@@ -109,7 +109,10 @@ namespace MGS.DesignPattern
         {
             if (poolsInfo.ContainsKey(name))
             {
-                Object.Destroy(poolsInfo[name].Node.gameObject);
+                var pool = poolsInfo[name];
+                pool.Clear();
+
+                Object.Destroy(pool.Node.gameObject);
                 poolsInfo.Remove(name);
             }
             else

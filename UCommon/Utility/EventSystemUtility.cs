@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace MGS.UCommon.Utility
+namespace MGS.Common.Utility
 {
     /// <summary>
     /// Utility for EventSystem.

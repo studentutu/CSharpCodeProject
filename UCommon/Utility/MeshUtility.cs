@@ -13,7 +13,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGS.UCommon.Utility
+namespace MGS.Common.Utility
 {
     /// <summary>
     /// Utility for mesh.

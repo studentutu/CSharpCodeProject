@@ -10,10 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.UCommon.Generic;
+using MGS.Common.Generic;
 using UnityEngine;
 
-namespace MGS.UCommon.Utility
+namespace MGS.Common.Utility
 {
     /// <summary>
     /// Utility for RectTransform.

@@ -13,7 +13,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGS.UCommon.Serialization
+namespace MGS.Common.Serialization
 {
     /// <summary>
     /// Avatar for Dictionary serialize by JsonUtility.

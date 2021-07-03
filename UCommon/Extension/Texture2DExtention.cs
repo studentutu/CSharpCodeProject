@@ -14,7 +14,7 @@ using MGS.Common.Converter;
 using MGS.Logger;
 using UnityEngine;
 
-namespace MGS.UCommon.Extension
+namespace MGS.Common.Extension
 {
     /// <summary>
     /// Extention for UnityEngine.Texture2D.

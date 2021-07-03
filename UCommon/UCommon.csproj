@@ -7,7 +7,7 @@
     <ProjectGuid>{02F92370-D9A3-4A6B-8B7D-717315A01145}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.UCommon</RootNamespace>
+    <RootNamespace>MGS.Common</RootNamespace>
     <AssemblyName>MGS.UCommon</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

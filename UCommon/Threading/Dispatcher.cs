@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-namespace MGS.UCommon.Threading
+namespace MGS.Common.Threading
 {
     /// <summary>
     /// Dispatcher base main thread;

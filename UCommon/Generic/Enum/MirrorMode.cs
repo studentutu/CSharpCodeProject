@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.UCommon.Generic
+namespace MGS.Common.Generic
 {
     /// <summary>
     /// Mode of mirror.

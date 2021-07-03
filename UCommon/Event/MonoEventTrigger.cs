@@ -14,7 +14,7 @@ using MGS.Common.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace MGS.UCommon.Event
+namespace MGS.Common.Event
 {
     /// <summary>
     /// Event trigger for UI behaviour.

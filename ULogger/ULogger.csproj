@@ -7,7 +7,7 @@
     <ProjectGuid>{F5C3A7B7-9A4B-4A96-BD35-E9FB0E73A173}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.ULogger</RootNamespace>
+    <RootNamespace>MGS.Logger</RootNamespace>
     <AssemblyName>MGS.ULogger</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

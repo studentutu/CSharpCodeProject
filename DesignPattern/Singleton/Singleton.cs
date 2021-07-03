@@ -24,9 +24,9 @@ namespace MGS.DesignPattern
     {
         #region Nested Class
         /// <summary>
-        /// Inner singleton provide instance.
+        /// Agent provide the single instance.
         /// </summary>
-        private class InnerSingleton
+        private class Agent
         {
             #region Property
             /// <summary>
@@ -39,7 +39,7 @@ namespace MGS.DesignPattern
             /// <summary>
             /// Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
             /// </summary>
-            static InnerSingleton() { }
+            static Agent() { }
             #endregion
         }
         #endregion
@@ -48,7 +48,7 @@ namespace MGS.DesignPattern
         /// <summary>
         /// Single instance of the specified type T.
         /// </summary>
-        public static T Instance { get { return InnerSingleton.Instance; } }
+        public static T Instance { get { return Agent.Instance; } }
         #endregion
     }
 }

@@ -47,33 +47,42 @@ namespace MGS.DesignPattern
         /// <summary>
         /// Take a gameobject from pool.
         /// </summary>
-        /// <param name="position">Position of new gameobject.</param>
-        /// <param name="rotation">Rotation of new gameobject.</param>
         /// <returns>A gameobject.</returns>
-        public virtual GameObject Take(Vector3 position, Quaternion rotation)
+        public override GameObject Take()
         {
-            var obj = Take();
-            obj.transform.position = position;
-            obj.transform.rotation = rotation;
+            var obj = base.Take();
             obj.SetActive(true);
             return obj;
         }
 
         /// <summary>
-        /// Take a gameobject from pool.
+        /// Take a gameobject from pool and get the specified component.
         /// </summary>
-        /// <param name="parent">Parent of new gameobject.</param>
-        /// <param name="localPosition">Local position of new gameobject.</param>
-        /// <param name="localRotation">Local rotation of new gameobject.</param>
-        /// <returns>A gameobject.</returns>
-        public virtual GameObject Take(Transform parent, Vector3 localPosition, Quaternion localRotation)
+        /// <typeparam name="T">Specified type of component.</typeparam>
+        /// <returns></returns>
+        public virtual T Take<T>() where T : Component
         {
             var obj = Take();
-            obj.transform.parent = parent;
-            obj.transform.localPosition = localPosition;
-            obj.transform.localRotation = localRotation;
-            obj.SetActive(true);
-            return obj;
+            var cpnt = obj.GetComponent<T>();
+            if (cpnt == null)
+            {
+                cpnt = obj.AddComponent<T>();
+            }
+            return cpnt;
+        }
+
+        /// <summary>
+        /// Recycle the game object of component to pool.
+        /// </summary>
+        /// <param name="cpnt">Instance of component.</param>
+        public virtual void Recycle(Component cpnt)
+        {
+            if (cpnt == null)
+            {
+                return;
+            }
+
+            Recycle(cpnt.gameObject);
         }
         #endregion
 

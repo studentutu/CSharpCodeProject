@@ -37,7 +37,8 @@
   var rootDir = "TestRootDir";
   
   //CompressManager default with IonicCompressor to do compress and decompress tasks.
-  CompressManager.Instance.CompressAsync(new string[] { filePath }, zipFile, Encoding.UTF8, rootDir, true,
+  CompressManager.Instance.CompressAsync(new string[] { filePath }, 
+      zipFile, Encoding.UTF8, rootDir, true,
       progress =>
       {
           //Show progress.
@@ -82,17 +83,19 @@
           Encoding encoding, string directoryPathInArchive = null,
           bool clearBefor = true,
           Action<float> progressCallback = null,
-          Action<bool, string> completeCallback = null)
+          Action<bool, object> completeCallback = null)
       {
           //Implemente compress logic.
+          //Usually completeCallback.Invoke(false, new Exception(msg)) on error.
       }
   
       public void Decompress(string filePath, string destDir,
           bool clearBefor = true,
           Action<float> progressCallback = null,
-          Action<bool, string> completeCallback = null)
+          Action<bool, object> completeCallback = null)
       {
           //Implemente decompress logic.
+          //Usually completeCallback.Invoke(false, new Exception(msg)) on error.
       }
   }
   

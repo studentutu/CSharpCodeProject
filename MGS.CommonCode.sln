@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDesignPattern", "UDesignPattern\UDesignPattern.csproj", "{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqlite", "Sqlite\Sqlite.csproj", "{5BD275E7-085F-4D1A-9490-F63265191968}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB6AB83B-B3D1-4D0C-A86E-0AA6F4CD43F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD275E7-085F-4D1A-9490-F63265191968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD275E7-085F-4D1A-9490-F63265191968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD275E7-085F-4D1A-9490-F63265191968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD275E7-085F-4D1A-9490-F63265191968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

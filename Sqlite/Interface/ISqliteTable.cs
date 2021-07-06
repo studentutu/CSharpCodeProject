@@ -18,7 +18,7 @@ namespace MGS.Sqlite
     /// Interface for sqlite table.
     /// </summary>
     /// <typeparam name="T">Type of the table row.</typeparam>
-    public interface ISqliteTable<T> where T : class, new()
+    public interface ISqliteTable<T> where T : ISqliteRow, new()
     {
         /// <summary>
         /// Name of table.
@@ -29,40 +29,36 @@ namespace MGS.Sqlite
         /// Select rows from table.
         /// </summary>
         /// <param name="context">Context append to select command.</param>
-        /// <returns>Items.</returns>
+        /// <returns>Selected rows.</returns>
         ICollection<T> Select(string context);
 
         /// <summary>
         /// Insert row to table.
         /// </summary>
         /// <param name="row"></param>
-        /// <param name="commitImmediately">Commit modify to data base immediately?</param>
         /// <returns>Number of rows affected.</returns>
-        int Insert(T row, bool commitImmediately = false);
+        void Insert(T row);
 
         /// <summary>
         /// Update row to table.
         /// </summary>
         /// <param name="row"></param>
-        /// <param name="commitImmediately">Commit modify to data base immediately?</param>
         /// <returns>Number of rows affected.</returns>
-        int Update(T row, bool commitImmediately = false);
+        void Update(T row);
 
         /// <summary>
         /// Delete row from table.
         /// </summary>
         /// <param name="row"></param>
-        /// <param name="commitImmediately">Commit modify to data base immediately?</param>
         /// <returns>Number of rows affected.</returns>
-        int Delete(T row, bool commitImmediately = false);
+        void Delete(T row);
 
         /// <summary>
         /// Delete row from table.
         /// </summary>
         /// <param name="key">Value of the primary key.</param>
-        /// <param name="commitImmediately">Commit modify to data base immediately?</param>
         /// <returns>Number of rows affected.</returns>
-        int Delete(object key, bool commitImmediately = false);
+        void Delete(object key);
 
         /// <summary>
         /// Commit modifications to data base.

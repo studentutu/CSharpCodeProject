@@ -21,9 +21,9 @@ namespace MGS.Sqlite
     public class SqliteHandler : ISqliteHandler
     {
         /// <summary>
-        /// Connect string.
+        /// Connection string.
         /// </summary>
-        protected string connectString;
+        protected string connectionString;
 
         /// <summary>
         /// Constructor of SqliteHandler.
@@ -31,7 +31,7 @@ namespace MGS.Sqlite
         /// <param name="file">Data base file.</param>
         public SqliteHandler(string file)
         {
-            connectString = string.Format("version=3,uri=file:{0}", file);
+            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, file);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace MGS.Sqlite
         /// <returns></returns>
         public virtual DataTable ExecuteQuery(string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectString))
+            using (var conn = new SqliteConnection(connectionString))
             {
                 using (var cmd = conn.CreateCommand())
                 {
@@ -67,7 +67,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public virtual int ExecuteNonQuery(string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectString))
+            using (var conn = new SqliteConnection(connectionString))
             {
                 using (var cmd = conn.CreateCommand())
                 {
@@ -88,7 +88,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public virtual int ExecuteNonQuery(DataTable table, string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectString))
+            using (var conn = new SqliteConnection(connectionString))
             {
                 using (var cmd = conn.CreateCommand())
                 {

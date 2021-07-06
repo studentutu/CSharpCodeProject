@@ -18,11 +18,16 @@ namespace MGS.Sqlite
     public interface ISqliteDataBase
     {
         /// <summary>
+        /// Sqlite handler of this data base.
+        /// </summary>
+        ISqliteHandler Handler { get; }
+
+        /// <summary>
         /// Select or create a table for the T row from data base.
         /// </summary>
         /// <typeparam name="T">Type of the table row.</typeparam>
         /// <returns></returns>
-        ISqliteTable<T> SelectTable<T>() where T : class, new();
+        ISqliteTable<T> SelectTable<T>() where T : ISqliteRow, new();
 
         /// <summary>
         /// Delete the table from data base.

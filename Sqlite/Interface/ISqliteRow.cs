@@ -22,7 +22,7 @@ namespace MGS.Sqlite
         /// <summary>
         /// Statement of the row's columns.
         /// </summary>
-        string ColumnsStatement { get; }
+        string Statement { get; }
 
         /// <summary>
         /// Name of primary key.

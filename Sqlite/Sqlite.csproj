@@ -45,8 +45,11 @@
     <Compile Include="Interface\ISqliteRow.cs" />
     <Compile Include="Interface\ISqliteTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqliteConstant.cs" />
     <Compile Include="SqliteDataBase.cs" />
+    <Compile Include="SqliteFieldAttribute.cs" />
     <Compile Include="SqliteHandler.cs" />
+    <Compile Include="SqliteTable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

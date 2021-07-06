@@ -20,15 +20,15 @@ namespace MGS.Sqlite
         /// <summary>
         /// Sqlite handler of this data base.
         /// </summary>
-        protected ISqliteHandler handler;
+        public ISqliteHandler Handler { protected set; get; }
 
         /// <summary>
         /// Constructor of SqliteDataBase.
         /// </summary>
-        /// <param name="handler">Handler for sqlite data base.</param>
-        public SqliteDataBase(ISqliteHandler handler)
+        /// <param name="file">Data base file.</param>
+        public SqliteDataBase(string file)
         {
-            this.handler = handler;
+            Handler = new SqliteHandler(file);
         }
 
         /// <summary>
@@ -36,11 +36,11 @@ namespace MGS.Sqlite
         /// </summary>
         /// <typeparam name="T">Type of the table row.</typeparam>
         /// <returns></returns>
-        public virtual ISqliteTable<T> SelectTable<T>() where T : class, new()
+        public virtual ISqliteTable<T> SelectTable<T>() where T : ISqliteRow, new()
         {
-            return null;
+            return new SqliteTable<T>(Handler);
         }
-        
+
         /// <summary>
         /// Delete the table from data base.
         /// </summary>
@@ -48,8 +48,8 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public virtual int DeleteTable(string name)
         {
-            var cmd = string.Format("DELETE TABLE {0}", name);
-            return handler.ExecuteNonQuery(cmd);
+            var deleteCmd = string.Format(SqliteConstant.CMD_DELETE_FORMAT, name);
+            return Handler.ExecuteNonQuery(deleteCmd);
         }
     }
 }

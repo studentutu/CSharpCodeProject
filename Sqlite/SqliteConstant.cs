@@ -48,7 +48,7 @@ namespace MGS.Sqlite
         /// <summary>
         /// Format of create table if not exists command.
         /// </summary>
-        public const string CMD_CREATE_IF_FORMAT = "CREATE TABLE IF NOT EXISTS {0}{1}";
+        public const string CMD_CREATE_IF_FORMAT = "CREATE TABLE IF NOT EXISTS {0}";
 
         /// <summary>
         /// Format of select rows command.

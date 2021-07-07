@@ -22,6 +22,11 @@ namespace MGS.Sqlite
     {
         #region
         /// <summary>
+        /// Statement of table.
+        /// </summary>
+        public string Statement { protected set; get; }
+
+        /// <summary>
         /// Name of table.
         /// </summary>
         public string Name { protected set; get; }
@@ -48,33 +53,27 @@ namespace MGS.Sqlite
         /// </summary>
         /// <param name="handler">Instance of sqlite handler.</param>
         /// <param name="name">Name of table.</param>
-        public SqliteTable(ISqliteHandler handler, string name = null)
+        public SqliteTable(ISqliteHandler handler, string name)
         {
             this.handler = handler;
-            if (string.IsNullOrEmpty(name))
-            {
-                name = typeof(T).Name;
-            }
             Name = name;
-
-            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, name, avatar.Statement);
-            handler.ExecuteNonQuery(createCmd);
+            Statement = string.Format("{0}{1}", name, avatar.Statement);
         }
 
         /// <summary>
         /// Select rows from table.
         /// </summary>
-        /// <param name="context">Context append to select command.</param>
+        /// <param name="expression">Expression append to select command.</param>
         /// <returns>Selected rows.</returns>
-        public ICollection<T> Select(string context)
+        public ICollection<T> Select(string expression)
         {
-            var cmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
-            if (!string.IsNullOrEmpty(context))
+            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
+            if (!string.IsNullOrEmpty(expression))
             {
-                cmd += string.Format(" {0}", context);
+                selectCmd += string.Format(" {0}", expression);
             }
 
-            dataTable = handler.ExecuteQuery(cmd);
+            dataTable = handler.ExecuteQuery(selectCmd);
             dataTable.PrimaryKey = new DataColumn[] { dataTable.Columns[avatar.PrimaryKey] };
 
             var rows = new List<T>();

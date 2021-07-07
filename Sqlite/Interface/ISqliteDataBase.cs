@@ -23,11 +23,13 @@ namespace MGS.Sqlite
         ISqliteHandler Handler { get; }
 
         /// <summary>
-        /// Select or create a table for the T row from data base.
+        /// Connect to the table for the T type row from data base.
+        /// [Create file and table if not exist]
         /// </summary>
         /// <typeparam name="T">Type of the table row.</typeparam>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
-        ISqliteTable<T> SelectTable<T>() where T : ISqliteRow, new();
+        ISqliteTable<T> ConnectTable<T>(string name) where T : ISqliteRow, new();
 
         /// <summary>
         /// Delete the table from data base.

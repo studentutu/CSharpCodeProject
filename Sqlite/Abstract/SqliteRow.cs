@@ -24,7 +24,7 @@ namespace MGS.Sqlite
     {
         #region
         /// <summary>
-        /// Statement of the row's columns.
+        /// Statement of the columns.
         /// </summary>
         public string Statement { protected set; get; }
 

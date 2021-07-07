@@ -21,6 +21,11 @@ namespace MGS.Sqlite
     public interface ISqliteTable<T> where T : ISqliteRow, new()
     {
         /// <summary>
+        /// Statement of table.
+        /// </summary>
+        string Statement { get; }
+
+        /// <summary>
         /// Name of table.
         /// </summary>
         string Name { get; }
@@ -28,9 +33,9 @@ namespace MGS.Sqlite
         /// <summary>
         /// Select rows from table.
         /// </summary>
-        /// <param name="context">Context append to select command.</param>
+        /// <param name="expression">Expression append to select command.</param>
         /// <returns>Selected rows.</returns>
-        ICollection<T> Select(string context);
+        ICollection<T> Select(string expression);
 
         /// <summary>
         /// Insert row to table.

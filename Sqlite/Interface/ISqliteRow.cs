@@ -20,7 +20,7 @@ namespace MGS.Sqlite
     public interface ISqliteRow
     {
         /// <summary>
-        /// Statement of the row's columns.
+        /// Statement of the columns.
         /// </summary>
         string Statement { get; }
 

@@ -32,13 +32,18 @@ namespace MGS.Sqlite
         }
 
         /// <summary>
-        /// Select or create a table for the T row from data base.
+        /// Connect to the table for the T type row from data base.
+        /// [Create file and table if not exist]
         /// </summary>
         /// <typeparam name="T">Type of the table row.</typeparam>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
-        public virtual ISqliteTable<T> SelectTable<T>() where T : ISqliteRow, new()
+        public virtual ISqliteTable<T> ConnectTable<T>(string name) where T : ISqliteRow, new()
         {
-            return new SqliteTable<T>(Handler);
+            var table = new SqliteTable<T>(Handler, name);
+            var createIfCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, table.Statement);
+            Handler.ExecuteNonQuery(createIfCmd);
+            return table;
         }
 
         /// <summary>

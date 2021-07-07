@@ -133,14 +133,16 @@ namespace MGS.Internation
 
             foreach (var line in paragraphLines)
             {
-                if (string.IsNullOrEmpty(line.Trim()))
+                if (string.IsNullOrEmpty(line))
                 {
+                    //Ignore empty line.
                     continue;
                 }
 
                 var contents = line.Split(SEPARATOR, 2, System.StringSplitOptions.RemoveEmptyEntries);
                 if (contents.Length < 2)
                 {
+                    //Ignore invalid line.
                     continue;
                 }
                 languages[language].Add(contents[0], contents[1]);

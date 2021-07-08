@@ -28,10 +28,10 @@ namespace MGS.Sqlite
         /// <summary>
         /// Constructor of SqliteHandler.
         /// </summary>
-        /// <param name="file">Data base file.</param>
-        public SqliteHandler(string file)
+        /// <param name="uri">Uri of data source.</param>
+        public SqliteHandler(string uri)
         {
-            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, file);
+            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, uri);
         }
 
         /// <summary>
@@ -69,6 +69,7 @@ namespace MGS.Sqlite
         {
             using (var conn = new SqliteConnection(connectionString))
             {
+                conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = command;
@@ -102,8 +103,9 @@ namespace MGS.Sqlite
                             adapter.InsertCommand = builder.GetInsertCommand();
                             adapter.UpdateCommand = builder.GetUpdateCommand();
                             adapter.DeleteCommand = builder.GetDeleteCommand();
+
+                            return adapter.Update(table);
                         }
-                        return adapter.Update(table);
                     }
                 }
             }

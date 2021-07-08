@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+
 namespace MGS.Sqlite
 {
     /// <summary>
@@ -28,7 +29,8 @@ namespace MGS.Sqlite
         /// <param name="file">Data base file.</param>
         public SqliteDataBase(string file)
         {
-            Handler = new SqliteHandler(file);
+            var uri = string.Format("file:{0}", file);
+            Handler = new SqliteHandler(uri);
         }
 
         /// <summary>

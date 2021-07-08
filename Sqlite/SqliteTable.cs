@@ -65,7 +65,7 @@ namespace MGS.Sqlite
         /// </summary>
         /// <param name="expression">Expression append to select command.</param>
         /// <returns>Selected rows.</returns>
-        public ICollection<T> Select(string expression)
+        public ICollection<T> Select(string expression = null)
         {
             var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
             if (!string.IsNullOrEmpty(expression))
@@ -150,6 +150,7 @@ namespace MGS.Sqlite
         {
             var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
             return handler.ExecuteNonQuery(dataTable, selectCmd);
+            //dataTable.AcceptChanges();
         }
         #endregion
     }

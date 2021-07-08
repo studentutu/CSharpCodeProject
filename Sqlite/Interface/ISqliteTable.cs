@@ -35,7 +35,7 @@ namespace MGS.Sqlite
         /// </summary>
         /// <param name="expression">Expression append to select command.</param>
         /// <returns>Selected rows.</returns>
-        ICollection<T> Select(string expression);
+        ICollection<T> Select(string expression = null);
 
         /// <summary>
         /// Insert row to table.

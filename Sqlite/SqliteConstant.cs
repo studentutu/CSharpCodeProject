@@ -43,7 +43,7 @@ namespace MGS.Sqlite
         /// <summary>
         /// Format of connection string.
         /// </summary>
-        public const string CONNECTION_FORMAT = "VERSION=3,URI=FILE:{0}";
+        public const string CONNECTION_FORMAT = "version=3,uri={0}";
 
         /// <summary>
         /// Format of create table if not exists command.

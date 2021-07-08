@@ -1,89 +1,35 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  SqliteTable.cs
+ *  File         :  GenericTable.cs
  *  Description  :  Generic sqlite table.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
- *  Date         :  7/7/2020
+ *  Date         :  7/9/2020
  *  Description  :  Initial development version.
  *************************************************************************/
-
-using System.Collections.Generic;
-using System.Data;
 
 namespace MGS.Sqlite
 {
     /// <summary>
     /// Generic sqlite table.
     /// </summary>
-    public class SqliteTable<T> : ISqliteTable<T> where T : ISqliteRow, new()
+    /// <typeparam name="T"></typeparam>
+    public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ISqliteRow, new()
     {
-        #region
         /// <summary>
-        /// Statement of table.
+        /// Instance of sqlite table.
         /// </summary>
-        public string Statement { protected set; get; }
+        protected new ISqliteTable source;
 
         /// <summary>
-        /// Name of table.
+        /// Constructor of GenericTable.
         /// </summary>
-        public string Name { protected set; get; }
-
-        /// <summary>
-        /// Avatar instance of type T.
-        /// </summary>
-        protected T avatar = new T();
-
-        /// <summary>
-        /// Instance of sqlite handler.
-        /// </summary>
-        protected ISqliteHandler handler;
-
-        /// <summary>
-        /// DataTable of last selected results.
-        /// </summary>
-        protected DataTable dataTable;
-        #endregion
-
-        #region
-        /// <summary>
-        /// Constructor of SqliteTable.
-        /// </summary>
-        /// <param name="handler">Instance of sqlite handler.</param>
-        /// <param name="name">Name of table.</param>
-        public SqliteTable(ISqliteHandler handler, string name)
+        /// <param name="table">Instance of sqlite table.</param>
+        public GenericTable(ISqliteTable table) : base(table)
         {
-            this.handler = handler;
-            Name = name;
-            Statement = string.Format("{0}{1}", name, avatar.Statement);
-        }
-
-        /// <summary>
-        /// Select rows from table.
-        /// </summary>
-        /// <param name="expression">Expression append to select command.</param>
-        /// <returns>Selected rows.</returns>
-        public ICollection<T> Select(string expression = null)
-        {
-            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
-            if (!string.IsNullOrEmpty(expression))
-            {
-                selectCmd += string.Format(" {0}", expression);
-            }
-
-            dataTable = handler.ExecuteQuery(selectCmd);
-            dataTable.PrimaryKey = new DataColumn[] { dataTable.Columns[avatar.PrimaryKey] };
-
-            var rows = new List<T>();
-            foreach (DataRow dataRow in dataTable.Rows)
-            {
-                var newRow = new T();
-                newRow.FillFrom(dataRow);
-                rows.Add(newRow);
-            }
-            return rows;
+            source = table;
         }
 
         /// <summary>
@@ -148,10 +94,12 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int Commit()
         {
-            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, Name);
-            return handler.ExecuteNonQuery(dataTable, selectCmd);
-            //dataTable.AcceptChanges();
+            var lines = source.Update(dataTable);
+            if (lines > 0)
+            {
+                dataTable.AcceptChanges();
+            }
+            return lines;
         }
-        #endregion
     }
 }

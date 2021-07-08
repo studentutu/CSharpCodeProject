@@ -1,42 +1,23 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ISqliteTable.cs
- *  Description  :  Interface for sqlite table.
+ *  File         :  IGenericTable.cs
+ *  Description  :  Interface for generic sqlite table.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
- *  Date         :  7/5/2020
+ *  Date         :  7/9/2020
  *  Description  :  Initial development version.
  *************************************************************************/
-
-using System.Collections.Generic;
 
 namespace MGS.Sqlite
 {
     /// <summary>
-    /// Interface for sqlite table.
+    /// Interface for generic sqlite table.
     /// </summary>
-    /// <typeparam name="T">Type of the table row.</typeparam>
-    public interface ISqliteTable<T> where T : ISqliteRow, new()
+    /// <typeparam name="T"></typeparam>
+    public interface IGenericTable<T> : IGenericView<T> where T : ISqliteRow, new()
     {
-        /// <summary>
-        /// Statement of table.
-        /// </summary>
-        string Statement { get; }
-
-        /// <summary>
-        /// Name of table.
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
-        /// Select rows from table.
-        /// </summary>
-        /// <param name="expression">Expression append to select command.</param>
-        /// <returns>Selected rows.</returns>
-        ICollection<T> Select(string expression = null);
-
         /// <summary>
         /// Insert row to table.
         /// </summary>

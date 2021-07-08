@@ -17,19 +17,43 @@ namespace MGS.Sqlite
     /// </summary>
     public interface ISqliteDataBase
     {
+        #region
         /// <summary>
-        /// Sqlite handler of this data base.
+        /// 
         /// </summary>
-        ISqliteHandler Handler { get; }
+        /// <param name="statement"></param>
+        /// <returns></returns>
+        int CreateView(string statement);
 
         /// <summary>
-        /// Connect to the table for the T type row from data base.
-        /// [Create file and table if not exist]
+        /// 
         /// </summary>
-        /// <typeparam name="T">Type of the table row.</typeparam>
-        /// <param name="name">Name of table.</param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        ISqliteTable<T> ConnectTable<T>(string name) where T : ISqliteRow, new();
+        ISqliteView SelectView(string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        int DeleteView(string name);
+        #endregion
+
+        #region
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statement"></param>
+        /// <returns></returns>
+        int CreateTable(string statement);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        ISqliteTable SelectTable(string name);
 
         /// <summary>
         /// Delete the table from data base.
@@ -37,5 +61,6 @@ namespace MGS.Sqlite
         /// <param name="name">The name of table.</param>
         /// <returns>Number of rows affected.</returns>
         int DeleteTable(string name);
+        #endregion
     }
 }

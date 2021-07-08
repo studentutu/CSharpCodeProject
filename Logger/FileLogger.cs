@@ -115,7 +115,7 @@ namespace MGS.Logger
         {
             var logTimeStamp = DateTime.Now.ToLongTimeString();
             var formatMsg = string.Format(format, args);
-            return string.Format("{0}-{1}-{2}\r\n", logTimeStamp, tag, formatMsg);
+            return string.Format("{0}-{1}-{2}\r\n\r\n", logTimeStamp, tag, formatMsg);
         }
         #endregion
 

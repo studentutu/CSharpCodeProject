@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
 using System.Collections.Generic;
 
 namespace MGS.Logger
@@ -24,6 +25,21 @@ namespace MGS.Logger
         /// Loggers of utility.
         /// </summary>
         private static ICollection<ILogger> loggers = new List<ILogger>();
+        #endregion
+
+        #region
+        /// <summary>
+        /// Static constructor.
+        /// </summary>
+        static LogUtility()
+        {
+            AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+            {
+                var ex = e.ExceptionObject as Exception;
+                LogError("UnhandledException: Runtime terminating {0}\r\n{1}{2}{3}",
+                    e.IsTerminating, s, ex.Message, ex.StackTrace);
+            };
+        }
         #endregion
 
         #region Public Method
@@ -103,6 +119,15 @@ namespace MGS.Logger
             {
                 logger.LogWarning(format, args);
             }
+        }
+
+        /// <summary>
+        /// Logs a formatted exception message.
+        /// </summary>
+        /// <param name="ex">Instance of exception.</param>
+        public static void LogException(Exception ex)
+        {
+            LogError("{0}\r\n{1}", ex.Message, ex.StackTrace);
         }
         #endregion
     }

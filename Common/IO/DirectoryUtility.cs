@@ -43,7 +43,7 @@ namespace MGS.Common.IO
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Require directory exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
                 return false;
             }
         }

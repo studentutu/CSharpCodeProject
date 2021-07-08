@@ -61,7 +61,7 @@ namespace MGS.Common.Threading
                     }
                     catch (Exception ex)
                     {
-                        LogUtility.LogError("Dispatcher invoke action error: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                        LogUtility.LogException(ex);
                     }
                 }
 

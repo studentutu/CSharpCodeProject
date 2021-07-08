@@ -37,7 +37,7 @@ namespace MGS.Common.Generic
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Error on invoke action: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
             }
         }
 
@@ -60,7 +60,7 @@ namespace MGS.Common.Generic
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Error on invoke action: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
             }
         }
 
@@ -85,7 +85,7 @@ namespace MGS.Common.Generic
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Error on invoke action: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
             }
         }
     }

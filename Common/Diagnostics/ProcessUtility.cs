@@ -37,7 +37,7 @@ namespace MGS.Common.Diagnostics
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Start process exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
                 return false;
             }
         }
@@ -72,7 +72,7 @@ namespace MGS.Common.Diagnostics
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Kill process exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
                 return false;
             }
         }

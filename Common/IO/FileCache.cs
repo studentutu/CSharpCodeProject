@@ -159,7 +159,7 @@ namespace MGS.Common.IO
             }
             catch (Exception ex)
             {
-                LogUtility.LogError("Clear cache file by key {0} exception: {1}\r\n{2}", key, ex.Message, ex.StackTrace);
+                LogUtility.LogException(ex);
             }
         }
 

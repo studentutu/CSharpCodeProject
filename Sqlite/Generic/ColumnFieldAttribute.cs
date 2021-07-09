@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  SqliteFieldAttribute.cs
- *  Description  :  Attribute for sqlite field.
+ *  File         :  ColumnFieldAttribute.cs
+ *  Description  :  Attribute for column field.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -15,15 +15,16 @@ using System;
 namespace MGS.Sqlite
 {
     /// <summary>
-    /// Attribute for sqlite field.
+    /// Attribute for column field.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
-    public class SqliteFieldAttribute : Attribute
+    public class ColumnFieldAttribute : Attribute
     {
         #region
         /// <summary>
         /// The column is primary key?
-        /// [Only one primary key is set for one table]
+        /// [Only one primary key is set for a table;
+        /// Do not modify the value of primary key once it is set]
         /// </summary>
         public bool PrimaryKey { set; get; }
 

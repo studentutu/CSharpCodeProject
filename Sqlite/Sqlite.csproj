@@ -45,10 +45,12 @@
     <Compile Include="Generic\Interface\IGenericDataBase.cs" />
     <Compile Include="Generic\Interface\IGenericTable.cs" />
     <Compile Include="Generic\Interface\IGenericView.cs" />
-    <Compile Include="Generic\SqliteRow.cs" />
+    <Compile Include="Generic\Interface\ITableRow.cs" />
+    <Compile Include="Generic\Interface\IViewRow.cs" />
+    <Compile Include="Generic\TableRow.cs" />
+    <Compile Include="Generic\ViewRow.cs" />
     <Compile Include="Sqlite\Interface\ISqliteDataBase.cs" />
     <Compile Include="Sqlite\Interface\ISqliteHandler.cs" />
-    <Compile Include="Generic\Interface\ISqliteRow.cs" />
     <Compile Include="Sqlite\Interface\ISqliteTable.cs" />
     <Compile Include="Sqlite\Interface\ISqliteView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +60,12 @@
     <Compile Include="Sqlite\SqliteHandler.cs" />
     <Compile Include="Sqlite\SqliteTable.cs" />
     <Compile Include="Sqlite\SqliteView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{E77FBCC0-1D82-41A0-A771-9D356E2D68F6}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

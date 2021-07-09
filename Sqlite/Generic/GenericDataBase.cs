@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.Sqlite.Generic
+namespace MGS.Sqlite
 {
     /// <summary>
     /// Generic sqlite data base.
@@ -18,18 +18,18 @@ namespace MGS.Sqlite.Generic
     public class GenericDataBase : SqliteDataBase, IGenericDataBase
     {
         /// <summary>
-        /// 
+        /// Constructor of GenericDataBase.
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file">Data base file.</param>
         public GenericDataBase(string file) : base(file) { }
 
         /// <summary>
-        /// 
+        /// Select sqlite view from data base as IGenericView.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
+        /// <typeparam name="T">Type of view row.</typeparam>
+        /// <param name="name">Name of view.</param>
         /// <returns></returns>
-        public IGenericView<T> SelectView<T>(string name) where T : ISqliteRow, new()
+        public IGenericView<T> SelectView<T>(string name) where T : IViewRow, new()
         {
             var view = SelectView(name);
             if (view == null)
@@ -41,12 +41,24 @@ namespace MGS.Sqlite.Generic
         }
 
         /// <summary>
-        /// 
+        /// Create sqlite table for the type T row. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
+        /// <typeparam name="T">Type of table row.</typeparam>
+        /// <param name="name">Name of table.</param>
+        /// <returns>Number of rows affected.</returns>
+        public int CreateTable<T>(string name) where T : ITableRow, new()
+        {
+            var statement = string.Format("{0}{1}", name, new T().Statement);
+            return CreateTable(statement);
+        }
+
+        /// <summary>
+        /// Select sqlite table from data base as IGenericTable.
+        /// </summary>
+        /// <typeparam name="T">Type of table row.</typeparam>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
-        public IGenericTable<T> SelectTable<T>(string name) where T : ISqliteRow, new()
+        public IGenericTable<T> SelectTable<T>(string name) where T : ITableRow, new()
         {
             var table = SelectTable(name);
             if (table == null)

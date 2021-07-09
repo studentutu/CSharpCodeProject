@@ -19,7 +19,7 @@ namespace MGS.Sqlite
     /// Generic sqlite view.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericView<T> : IGenericView<T> where T : ISqliteRow, new()
+    public class GenericView<T> : IGenericView<T> where T : IViewRow, new()
     {
         /// <summary>
         /// Instance of sqlite source.
@@ -43,11 +43,11 @@ namespace MGS.Sqlite
         /// <summary>
         /// Select rows from table.
         /// </summary>
-        /// <param name="cmd">Select cmd [Select all if null].</param>
+        /// <param name="command">Select command [Select all if null].</param>
         /// <returns>Selected rows.</returns>
-        public ICollection<T> Select(string cmd = null)
+        public ICollection<T> Select(string command = null)
         {
-            dataTable = source.Select(cmd);
+            dataTable = source.Select(command);
             if (dataTable == null || dataTable.Rows == null || dataTable.Rows.Count == 0)
             {
                 return null;
@@ -56,9 +56,9 @@ namespace MGS.Sqlite
             var rows = new List<T>();
             foreach (DataRow dataRow in dataTable.Rows)
             {
-                var item = new T();
-                item.FillFrom(dataRow);
-                rows.Add(item);
+                var row = new T();
+                row.FillFrom(dataRow);
+                rows.Add(row);
             }
             return rows;
         }

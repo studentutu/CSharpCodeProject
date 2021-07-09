@@ -10,6 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Logger;
+using System;
+using System.IO;
+
 namespace MGS.Sqlite
 {
     /// <summary>
@@ -20,7 +24,7 @@ namespace MGS.Sqlite
         /// <summary>
         /// Sqlite handler of this data base.
         /// </summary>
-        protected ISqliteHandler handler;
+        public ISqliteHandler Handler { protected set; get; }
 
         /// <summary>
         /// Constructor of SqliteDataBase.
@@ -28,76 +32,89 @@ namespace MGS.Sqlite
         /// <param name="file">Data base file.</param>
         public SqliteDataBase(string file)
         {
+            var dir = Path.GetDirectoryName(file);
+            if (!Directory.Exists(dir))
+            {
+                try
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                catch (Exception ex)
+                {
+                    LogUtility.LogException(ex);
+                }
+            }
+
             var uri = string.Format("file:{0}", file);
-            handler = new SqliteHandler(uri);
+            Handler = new SqliteHandler(uri);
         }
 
         #region
         /// <summary>
-        /// 
+        /// Create sqlite view if not exists.
         /// </summary>
-        /// <param name="statement"></param>
-        /// <returns></returns>
+        /// <param name="statement">Statement sql for view.</param>
+        /// <returns>Number of rows affected.</returns>
         public int CreateView(string statement)
         {
-            var createCmd = string.Format("CREATE VIEW IF NOT EXISTS {0}", statement);
-            return handler.ExecuteNonQuery(createCmd);
+            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, "VIEW", statement);
+            return Handler.ExecuteNonQuery(createCmd);
         }
 
         /// <summary>
-        /// 
+        /// Select view from data base.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of view.</param>
         /// <returns></returns>
         public ISqliteView SelectView(string name)
         {
-            var selectCmd = string.Format("Select count(*) from sqlite_master where type='table' and name={0}", name);
-            var count = handler.ExecuteNonQuery(selectCmd);
-            if (count == 0)
+            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "view", name);
+            var result = Handler.ExecuteScalar(selectCmd);
+            if (result == null)
             {
                 return null;
             }
-            return new SqliteView(name, handler);
+            return new SqliteView(name, Handler);
         }
 
         /// <summary>
-        /// 
+        /// Delete view from data base.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">Name of view.</param>
+        /// <returns>Number of rows affected.</returns>
         public int DeleteView(string name)
         {
-            var deleteCmd = string.Format("DELETE VIEW {0}", name);
-            return handler.ExecuteNonQuery(deleteCmd);
+            var deleteCmd = string.Format(SqliteConstant.CMD_DROP_FORMAT, "VIEW", name);
+            return Handler.ExecuteNonQuery(deleteCmd);
         }
         #endregion
 
         #region
         /// <summary>
-        /// 
+        /// Create sqlite table if not exists.
         /// </summary>
-        /// <param name="statement"></param>
-        /// <returns></returns>
+        /// <param name="statement">Statement sql for table.</param>
+        /// <returns>Number of rows affected.</returns>
         public int CreateTable(string statement)
         {
-            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, statement);
-            return handler.ExecuteNonQuery(createCmd);
+            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, "TABLE", statement);
+            return Handler.ExecuteNonQuery(createCmd);
         }
 
         /// <summary>
-        /// 
+        /// Select table from data base.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
         public ISqliteTable SelectTable(string name)
         {
-            var selectCmd = string.Format("Select count(*) from sqlite_master where type='view' and name={0}", name);
-            var count = handler.ExecuteNonQuery(selectCmd);
-            if (count == 0)
+            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "table", name);
+            var result = Handler.ExecuteScalar(selectCmd);
+            if (result == null)
             {
                 return null;
             }
-            return new SqliteTable(name, handler);
+            return new SqliteTable(name, Handler);
         }
 
         /// <summary>
@@ -107,8 +124,8 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int DeleteTable(string name)
         {
-            var deleteCmd = string.Format(SqliteConstant.CMD_DELETE_FORMAT, name);
-            return handler.ExecuteNonQuery(deleteCmd);
+            var deleteCmd = string.Format(SqliteConstant.CMD_DROP_FORMAT, "TABLE", name);
+            return Handler.ExecuteNonQuery(deleteCmd);
         }
         #endregion
     }

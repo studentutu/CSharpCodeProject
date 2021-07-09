@@ -33,6 +33,14 @@ namespace MGS.Sqlite
         /// </summary>
         /// <param name="command"></param>
         /// <param name="args"></param>
+        /// <returns></returns>
+        object ExecuteScalar(string command, params SqliteParameter[] args);
+
+        /// <summary>
+        /// Execute command with args.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
         /// <returns>Number of rows affected.</returns>
         int ExecuteNonQuery(string command, params SqliteParameter[] args);
 

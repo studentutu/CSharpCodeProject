@@ -16,7 +16,7 @@ namespace MGS.Sqlite
     /// Generic sqlite table.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ISqliteRow, new()
+    public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ITableRow, new()
     {
         /// <summary>
         /// Instance of sqlite table.

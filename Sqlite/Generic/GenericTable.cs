@@ -10,16 +10,19 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Collections.Generic;
+using System.Data;
+
 namespace MGS.Sqlite
 {
     /// <summary>
     /// Generic sqlite table.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ISqliteRow, new()
+    public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ITableRow, new()
     {
         /// <summary>
-        /// Instance of sqlite table.
+        /// Instance of sqlite source.
         /// </summary>
         protected new ISqliteTable source;
 
@@ -30,6 +33,26 @@ namespace MGS.Sqlite
         public GenericTable(ISqliteTable table) : base(table)
         {
             source = table;
+        }
+
+        /// <summary>
+        /// Select rows from source.
+        /// </summary>
+        /// <param name="command">Select command [Select all if null].</param>
+        /// <returns>Selected rows.</returns>
+        public override ICollection<T> Select(string command = null)
+        {
+            var rows = base.Select(command);
+            if (rows == null)
+            {
+                return null;
+            }
+
+            //Set the primary key for data table.
+            var column = dataTable.Columns[new T().PrimaryKey];
+            dataTable.PrimaryKey = new DataColumn[] { column };
+
+            return rows;
         }
 
         /// <summary>

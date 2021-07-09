@@ -1,12 +1,12 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ISqliteRow.cs
- *  Description  :  Interface for sqlite table row.
+ *  File         :  ITableRow.cs
+ *  Description  :  Interface for generic sqlite table row.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
- *  Date         :  7/5/2020
+ *  Date         :  7/10/2020
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -15,9 +15,9 @@ using System.Data;
 namespace MGS.Sqlite
 {
     /// <summary>
-    /// Interface for sqlite table row.
+    /// Interface for generic sqlite table row.
     /// </summary>
-    public interface ISqliteRow
+    public interface ITableRow : IViewRow
     {
         /// <summary>
         /// Statement of the columns.
@@ -33,12 +33,6 @@ namespace MGS.Sqlite
         /// Value of primary key.
         /// </summary>
         object PrimaryValue { get; }
-
-        /// <summary>
-        /// Fill this object from data row.
-        /// </summary>
-        /// <param name="row"></param>
-        void FillFrom(DataRow row);
 
         /// <summary>
         /// Fill this object to data row.

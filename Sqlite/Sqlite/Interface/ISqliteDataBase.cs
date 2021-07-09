@@ -17,41 +17,46 @@ namespace MGS.Sqlite
     /// </summary>
     public interface ISqliteDataBase
     {
+        /// <summary>
+        /// Sqlite handler of this data base.
+        /// </summary>
+        ISqliteHandler Handler { get; }
+
         #region
         /// <summary>
-        /// 
+        /// Create sqlite view if not exists.
         /// </summary>
-        /// <param name="statement"></param>
-        /// <returns></returns>
+        /// <param name="statement">Statement sql for view.</param>
+        /// <returns>Number of rows affected.</returns>
         int CreateView(string statement);
 
         /// <summary>
-        /// 
+        /// Select view from data base.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of view.</param>
         /// <returns></returns>
         ISqliteView SelectView(string name);
 
         /// <summary>
-        /// 
+        /// Delete view from data base.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">Name of view.</param>
+        /// <returns>Number of rows affected.</returns>
         int DeleteView(string name);
         #endregion
 
         #region
         /// <summary>
-        /// 
+        /// Create sqlite table if not exists.
         /// </summary>
-        /// <param name="statement"></param>
-        /// <returns></returns>
+        /// <param name="statement">Statement sql for table.</param>
+        /// <returns>Number of rows affected.</returns>
         int CreateTable(string statement);
 
         /// <summary>
-        /// 
+        /// Select table from data base.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
         ISqliteTable SelectTable(string name);
 

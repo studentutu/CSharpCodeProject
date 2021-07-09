@@ -20,10 +20,15 @@ namespace MGS.Sqlite
     public interface ISqliteView
     {
         /// <summary>
+        /// Name of source.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Select rows from source.
         /// </summary>
-        /// <param name="cmd">Select cmd [Select all if null].</param>
+        /// <param name="command">Select command [Select all if null].</param>
         /// <returns></returns>
-        DataTable Select(string cmd = null);
+        DataTable Select(string command = null);
     }
 }

@@ -10,7 +10,9 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Logger;
 using Mono.Data.Sqlite;
+using System;
 using System.Data;
 
 namespace MGS.Sqlite
@@ -31,7 +33,7 @@ namespace MGS.Sqlite
         /// <param name="uri">Uri of data source.</param>
         public SqliteHandler(string uri)
         {
-            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, uri);
+            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, 3, uri);
         }
 
         /// <summary>
@@ -42,20 +44,57 @@ namespace MGS.Sqlite
         /// <returns></returns>
         public virtual DataTable ExecuteQuery(string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectionString))
+            try
             {
-                using (var cmd = conn.CreateCommand())
+                using (var conn = new SqliteConnection(connectionString))
                 {
-                    cmd.CommandText = command;
-                    cmd.Parameters.AddRange(args);
-
-                    using (var adapter = new SqliteDataAdapter(cmd))
+                    using (var cmd = conn.CreateCommand())
                     {
-                        var table = new DataTable();
-                        adapter.Fill(table);
-                        return table;
+                        cmd.CommandText = command;
+                        cmd.Parameters.AddRange(args);
+
+                        using (var adapter = new SqliteDataAdapter(cmd))
+                        {
+                            var table = new DataTable();
+                            adapter.Fill(table);
+                            return table;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Execute command with args.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public virtual object ExecuteScalar(string command, params SqliteParameter[] args)
+        {
+            try
+            {
+                using (var conn = new SqliteConnection(connectionString))
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = command;
+                        cmd.Parameters.AddRange(args);
+
+                        return cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+                return null;
             }
         }
 
@@ -67,16 +106,24 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public virtual int ExecuteNonQuery(string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (var conn = new SqliteConnection(connectionString))
                 {
-                    cmd.CommandText = command;
-                    cmd.Parameters.AddRange(args);
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = command;
+                        cmd.Parameters.AddRange(args);
 
-                    return cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+                return 0;
             }
         }
 
@@ -89,25 +136,33 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public virtual int ExecuteNonQuery(DataTable table, string command, params SqliteParameter[] args)
         {
-            using (var conn = new SqliteConnection(connectionString))
+            try
             {
-                using (var cmd = conn.CreateCommand())
+                using (var conn = new SqliteConnection(connectionString))
                 {
-                    cmd.CommandText = command;
-                    cmd.Parameters.AddRange(args);
-
-                    using (var adapter = new SqliteDataAdapter(cmd))
+                    using (var cmd = conn.CreateCommand())
                     {
-                        using (var builder = new SqliteCommandBuilder(adapter))
-                        {
-                            adapter.InsertCommand = builder.GetInsertCommand();
-                            adapter.UpdateCommand = builder.GetUpdateCommand();
-                            adapter.DeleteCommand = builder.GetDeleteCommand();
+                        cmd.CommandText = command;
+                        cmd.Parameters.AddRange(args);
 
-                            return adapter.Update(table);
+                        using (var adapter = new SqliteDataAdapter(cmd))
+                        {
+                            using (var builder = new SqliteCommandBuilder(adapter))
+                            {
+                                adapter.InsertCommand = builder.GetInsertCommand();
+                                adapter.UpdateCommand = builder.GetUpdateCommand();
+                                adapter.DeleteCommand = builder.GetDeleteCommand();
+
+                                return adapter.Update(table);
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+                return 0;
             }
         }
     }

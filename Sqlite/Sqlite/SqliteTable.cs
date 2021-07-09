@@ -33,7 +33,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int Update(DataTable table)
         {
-            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, name);
+            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, "*", Name);
             var lines = handler.ExecuteNonQuery(table, selectCmd);
             if (lines > 0)
             {

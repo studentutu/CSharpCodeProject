@@ -41,24 +41,36 @@ namespace MGS.Sqlite
 
         #region
         /// <summary>
+        /// sqlite_master.
+        /// </summary>
+        public const string SQLITE_MASTER = "sqlite_master";
+        #endregion
+
+        #region
+        /// <summary>
         /// Format of connection string.
         /// </summary>
-        public const string CONNECTION_FORMAT = "version=3,uri={0}";
+        public const string CONNECTION_FORMAT = "version={0},uri={1}";
 
         /// <summary>
-        /// Format of create table if not exists command.
+        /// Format of create if not exists command.
         /// </summary>
-        public const string CMD_CREATE_IF_FORMAT = "CREATE TABLE IF NOT EXISTS {0}";
+        public const string CMD_CREATE_IF_FORMAT = "CREATE {0} IF NOT EXISTS {1}";
 
         /// <summary>
-        /// Format of select rows command.
+        /// Format of select command.
         /// </summary>
-        public const string CMD_SELECT_FORMAT = "SELECT * FROM {0}";
+        public const string CMD_SELECT_FORMAT = "SELECT {0} FROM {1}";
 
         /// <summary>
-        /// Format of delete table command.
+        /// Format of select sqlite_master by type and name command.
         /// </summary>
-        public const string CMD_DELETE_FORMAT = "DELETE TABLE {0}";
+        public const string CMD_SELECT_MASTER_TYPE_NAME_FORMAT = "select {0} from sqlite_master where type='{1}' and name='{2}'";
+
+        /// <summary>
+        /// Format of delete command.
+        /// </summary>
+        public const string CMD_DROP_FORMAT = "DROP {0} {1}";
         #endregion
     }
 }

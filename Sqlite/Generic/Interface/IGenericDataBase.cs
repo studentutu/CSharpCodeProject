@@ -18,19 +18,27 @@ namespace MGS.Sqlite
     public interface IGenericDataBase : ISqliteDataBase
     {
         /// <summary>
-        /// 
+        /// Select sqlite view from data base as IGenericView.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
+        /// <typeparam name="T">Type of view row.</typeparam>
+        /// <param name="name">Name of view.</param>
         /// <returns></returns>
-        IGenericView<T> SelectView<T>(string name) where T : ISqliteRow, new();
+        IGenericView<T> SelectView<T>(string name) where T : IViewRow, new();
 
         /// <summary>
-        /// 
+        /// Create sqlite table for the type T row. 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
+        /// <typeparam name="T">Type of table row.</typeparam>
+        /// <param name="name">Name of table.</param>
+        /// <returns>Number of rows affected.</returns>
+        int CreateTable<T>(string name) where T : ITableRow, new();
+
+        /// <summary>
+        /// Select sqlite table from data base as IGenericTable.
+        /// </summary>
+        /// <typeparam name="T">Type of table row.</typeparam>
+        /// <param name="name">Name of table.</param>
         /// <returns></returns>
-        IGenericTable<T> SelectTable<T>(string name) where T : ISqliteRow, new();
+        IGenericTable<T> SelectTable<T>(string name) where T : ITableRow, new();
     }
 }

@@ -22,7 +22,7 @@ namespace MGS.Sqlite
         /// <summary>
         /// Name of source.
         /// </summary>
-        protected string name;
+        public string Name { protected set; get; }
 
         /// <summary>
         /// Instance of sqlite handler.
@@ -36,22 +36,22 @@ namespace MGS.Sqlite
         /// <param name="handler">Instance of sqlite handler.</param>
         public SqliteView(string name, ISqliteHandler handler)
         {
-            this.name = name;
+            this.Name = name;
             this.handler = handler;
         }
 
         /// <summary>
         /// Select rows from source.
         /// </summary>
-        /// <param name="cmd">Select cmd [Select all if null].</param>
+        /// <param name="command">Select command [Select all if null].</param>
         /// <returns></returns>
-        public DataTable Select(string cmd = null)
+        public DataTable Select(string command = null)
         {
-            if (string.IsNullOrEmpty(cmd))
+            if (string.IsNullOrEmpty(command))
             {
-                cmd = string.Format(SqliteConstant.CMD_SELECT_FORMAT, name);
+                command = string.Format(SqliteConstant.CMD_SELECT_FORMAT, "*", Name);
             }
-            return handler.ExecuteQuery(cmd);
+            return handler.ExecuteQuery(command);
         }
     }
 }

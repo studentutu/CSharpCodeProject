@@ -16,7 +16,7 @@ namespace MGS.Sqlite
     /// Interface for generic sqlite table.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IGenericTable<T> : IGenericView<T> where T : ISqliteRow, new()
+    public interface IGenericTable<T> : IGenericView<T> where T : ITableRow, new()
     {
         /// <summary>
         /// Insert row to table.

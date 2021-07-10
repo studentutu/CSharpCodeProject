@@ -62,7 +62,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public void Insert(T row)
         {
-            var newRow = dataTable.Rows.Add();
+            var newRow = dataTable.Rows.Add(row.PrimaryValue);
             row.FillTo(newRow);
         }
 

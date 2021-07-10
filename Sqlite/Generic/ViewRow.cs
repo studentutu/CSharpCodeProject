@@ -2,7 +2,7 @@
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  ViewRow.cs
- *  Description  :  Generic sqlite view row.
+ *  Description  :  Generic sqlite view row base on reflection.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -19,7 +19,7 @@ using System.Reflection;
 namespace MGS.Sqlite
 {
     /// <summary>
-    /// Generic sqlite view row.
+    /// Generic sqlite view row base on reflection.
     /// [A better way is implement the interface IViewRow by yourself]
     /// </summary>
     public abstract class ViewRow : IViewRow

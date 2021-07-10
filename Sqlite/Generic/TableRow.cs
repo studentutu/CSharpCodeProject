@@ -2,7 +2,7 @@
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  TableRow.cs
- *  Description  :  Generic sqlite table row.
+ *  Description  :  Generic sqlite table row base on reflection.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -19,7 +19,7 @@ using System.Reflection;
 namespace MGS.Sqlite
 {
     /// <summary>
-    /// Generic sqlite table row.
+    /// Generic sqlite table row base on reflection.
     /// [A better way is implement the interface ITableRow by yourself]
     /// </summary>
     public abstract class TableRow : ViewRow, ITableRow

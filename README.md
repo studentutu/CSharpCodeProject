@@ -64,8 +64,14 @@
 ### Media
 
 - SRT subtitle of video.
-
 - [Detail](./Attachment/README/Media.md)
+
+### Sqlite
+
+- Create data base file, view table runtime.
+- Select rows from view as DataTable and parse to custom data structure.
+- Select, Insert, Update, Delete table rows, use custom data structure.
+- [Detail](./Attachment/README/Sqlite.md)  [Case](https://github.com/mogoson/MGS.Sqlite)
 
 ### WinCommon
 

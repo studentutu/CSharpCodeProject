@@ -38,7 +38,11 @@ namespace MGS.Common.Threading
         /// <summary>
         /// Initialize dispatcher.
         /// </summary>
-        [RuntimeInitializeOnLoadMethod()]
+#if UNITY_5_3_OR_NEWER
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+#else
+        [RuntimeInitializeOnLoadMethod]
+#endif
         static void Initialize()
         {
             var instance = new GameObject("Dispatcher").AddComponent<Dispatcher>();

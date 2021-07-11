@@ -41,6 +41,8 @@
     <Compile Include="ObjectPool\GOPool.cs" />
     <Compile Include="ObjectPool\GOPoolManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Singleton\SingleBehaviour.cs" />
+    <Compile Include="Singleton\SingleComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DesignPattern\DesignPattern.csproj">

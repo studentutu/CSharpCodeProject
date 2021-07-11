@@ -32,17 +32,9 @@ namespace MGS.Sqlite
         /// <param name="file">Data base file.</param>
         public SqliteDataBase(string file)
         {
-            var dir = Path.GetDirectoryName(file);
-            if (!Directory.Exists(dir))
+            if (!File.Exists(file))
             {
-                try
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                catch (Exception ex)
-                {
-                    LogUtility.LogException(ex);
-                }
+                SqliteHandler.CreateFile(file);
             }
 
             var uri = string.Format("file:{0}", file);

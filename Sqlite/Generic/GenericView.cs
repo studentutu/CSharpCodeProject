@@ -27,11 +27,6 @@ namespace MGS.Sqlite
         protected ISqliteView source;
 
         /// <summary>
-        /// DataTable of last selected results.
-        /// </summary>
-        protected DataTable dataTable;
-
-        /// <summary>
         /// Constructor of GenericView.
         /// </summary>
         /// <param name="view">Instance of sqlite view.</param>
@@ -47,7 +42,7 @@ namespace MGS.Sqlite
         /// <returns>Selected rows.</returns>
         public virtual ICollection<T> Select(string command = null)
         {
-            dataTable = source.Select(command);
+            var dataTable = source.Select(command);
             if (dataTable == null || dataTable.Rows == null || dataTable.Rows.Count == 0)
             {
                 return null;

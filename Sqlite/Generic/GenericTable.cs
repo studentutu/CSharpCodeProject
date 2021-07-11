@@ -27,6 +27,11 @@ namespace MGS.Sqlite
         protected new ISqliteTable source;
 
         /// <summary>
+        /// DataTable of last selected results.
+        /// </summary>
+        protected DataTable dataTable;
+
+        /// <summary>
         /// Constructor of GenericTable.
         /// </summary>
         /// <param name="table">Instance of sqlite table.</param>

@@ -14,6 +14,7 @@ using MGS.Logger;
 using Mono.Data.Sqlite;
 using System;
 using System.Data;
+using System.IO;
 
 namespace MGS.Sqlite
 {
@@ -27,6 +28,7 @@ namespace MGS.Sqlite
         /// </summary>
         protected string connectionString;
 
+        #region
         /// <summary>
         /// Constructor of SqliteHandler.
         /// </summary>
@@ -48,6 +50,7 @@ namespace MGS.Sqlite
             {
                 using (var conn = new SqliteConnection(connectionString))
                 {
+                    conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = command;
@@ -140,6 +143,7 @@ namespace MGS.Sqlite
             {
                 using (var conn = new SqliteConnection(connectionString))
                 {
+                    conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = command;
@@ -165,5 +169,30 @@ namespace MGS.Sqlite
                 return 0;
             }
         }
+        #endregion
+
+        #region
+        /// <summary>
+        /// Create data base file.
+        /// </summary>
+        /// <param name="file">Path of data base file.</param>
+        public static void CreateFile(string file)
+        {
+            try
+            {
+                //Check create directory.
+                var dir = Path.GetDirectoryName(file);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                SqliteConnection.CreateFile(file);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+            }
+        }
+        #endregion
     }
 }

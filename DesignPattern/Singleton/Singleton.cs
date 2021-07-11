@@ -22,6 +22,13 @@ namespace MGS.DesignPattern
     /// <typeparam name="T">Specified type.</typeparam>
     public abstract class Singleton<T> where T : class
     {
+        #region Property
+        /// <summary>
+        /// Single instance of the specified type T.
+        /// </summary>
+        public static T Instance { get { return Agent.instance; } }
+        #endregion
+
         #region Nested Class
         /// <summary>
         /// Agent provide the single instance.
@@ -32,7 +39,7 @@ namespace MGS.DesignPattern
             /// <summary>
             /// Single instance of the specified type T created by that type's default constructor.
             /// </summary>
-            internal static readonly T Instance = Activator.CreateInstance(typeof(T), true) as T;
+            internal static readonly T instance = Activator.CreateInstance(typeof(T), true) as T;
             #endregion
 
             #region Static Method
@@ -42,13 +49,6 @@ namespace MGS.DesignPattern
             static Agent() { }
             #endregion
         }
-        #endregion
-
-        #region Property
-        /// <summary>
-        /// Single instance of the specified type T.
-        /// </summary>
-        public static T Instance { get { return Agent.Instance; } }
         #endregion
     }
 }

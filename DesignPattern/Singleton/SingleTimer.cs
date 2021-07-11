@@ -24,7 +24,7 @@ namespace MGS.DesignPattern
     {
         #region Property
         /// <summary>
-        /// Interval of tick update.
+        /// Interval of tick update [ms].
         /// </summary>
         public double Interval
         {

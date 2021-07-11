@@ -33,6 +33,7 @@ namespace MGS.Sqlite
         public GenericTable(ISqliteTable table) : base(table)
         {
             source = table;
+            dataTable = table.Select();
         }
 
         /// <summary>
@@ -62,8 +63,9 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public void Insert(T row)
         {
-            var newRow = dataTable.Rows.Add(row.PrimaryValue);
+            var newRow = dataTable.NewRow();
             row.FillTo(newRow);
+            dataTable.Rows.Add(newRow);
         }
 
         /// <summary>

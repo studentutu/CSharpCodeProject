@@ -168,8 +168,6 @@ namespace MGS.Sqlite.Tests
             var table = dataBase.SelectTable<PersonT>("table_person");
             Assert.IsNotNull(table);
 
-            //Select to init data table.
-            table.Select();
             table.Insert(new PersonT() { id = 0, name = "a" });
             table.Insert(new PersonT() { id = 1, name = "b" });
             table.Insert(new PersonT() { id = 2, name = "c" });

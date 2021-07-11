@@ -13,8 +13,8 @@
 
 - System.dll
 - UnityEngine.dll
-- MGS.DesignPattern.dll
 - MGS.Logger.dll
+- MGS.DesignPattern.dll
 
 ## Demand
 
@@ -35,6 +35,23 @@ public class GOPool : ObjectPool<GameObject>{}
 /// Manager of gameobject pool.
 /// </summary>
 public sealed class GOPoolManager : Singleton<GOPoolManager>
+```
+
+### Singleton
+
+```C#
+/// <summary>
+/// Generic base class for single Component.
+/// Inheritance class should with the sealed access modifier to ensure distinct singleton.
+/// </summary>
+[DisallowMultipleComponent]
+public abstract class SingleComponent<T> : MonoBehaviour where T : Component{}
+
+/// <summary>
+/// Generic single behaviour.
+/// Auto create the generic instance, do not add this component to any GameObject by yourself.
+/// </summary>
+public sealed class SingleBehaviour : SingleComponent<SingleBehaviour>{}
 ```
 
 ## Usage
@@ -65,6 +82,43 @@ public sealed class GOPoolManager : Singleton<GOPoolManager>
    //Recycle the game object of component to pool if we do not need it.
    pool.Recycle(cpnt);
    ```
+
+### Singleton
+
+- SingleComponent
+
+  ```C#
+  //Derived custom single component.
+  //Inheritance class should with the sealed access modifier to ensure distinct singleton.
+  public sealed class UIManager : SingleComponent<UIManager>
+  {
+      private void Start()
+      {
+          //TODO...
+      }
+  
+      public RectTransfrom FindUI(string name)
+      {
+          //TODO...
+      }
+  }
+  
+  //Use Instance to accessing fields, properties and methods. 
+  var ui = UIManager.Instance.FindUI("UI_Help");
+  ```
+
+- SingleBehaviour
+
+  ```C#
+  //Use the properties and methods inherit from MonoBehaviour.
+  SingleBehaviour.Instance.StartCoroutine(routine);
+  
+  //Use the extended events.
+  SingleBehaviour.Instance.OnApplicationQuitEvent += () =>
+  {
+      //TODO...
+  };
+  ```
 
 ------
 

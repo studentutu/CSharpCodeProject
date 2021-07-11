@@ -16,6 +16,7 @@ namespace MGS.DesignPattern
 {
     /// <summary>
     /// Generic base class for single Component.
+    /// Inheritance class should with the sealed access modifier to ensure distinct singleton.
     /// </summary>
     [DisallowMultipleComponent]
     public abstract class SingleComponent<T> : MonoBehaviour where T : Component

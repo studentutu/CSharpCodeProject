@@ -101,6 +101,9 @@ public sealed class TestSingleton : Singleton<TestSingleton>
     //Private parameterless constructor to ensure singleton.
     private TestSingleton() { }
 }
+
+//Use Instance to accessing fields, properties and methods. 
+var testInfo = TestSingleton.Instance.testField;
 ```
 
 ------

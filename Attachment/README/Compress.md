@@ -12,7 +12,6 @@
 
 - System.dll
 - Ionic.Zip.dll
-- MGS.Common.dll
 - MGS.DesignPattern.dll
 
 ## Demand

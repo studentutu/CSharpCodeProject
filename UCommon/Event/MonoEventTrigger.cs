@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,87 +28,87 @@ namespace MGS.Common.Event
         /// <summary>
         /// On pointer enter event.
         /// </summary>
-        public GenericEvent<PointerEventData> onPointerEnter { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnPointerEnterEvent;
 
         /// <summary>
         /// On pointer exit event.
         /// </summary>
-        public GenericEvent<PointerEventData> onPointerExit { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnPointerExitEvent;
 
         /// <summary>
         /// On pointer down event.
         /// </summary>
-        public GenericEvent<PointerEventData> onPointerDown { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnPointerDownEvent;
 
         /// <summary>
         /// On pointer up event.
         /// </summary>
-        public GenericEvent<PointerEventData> onPointerUp { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnPointerUpEvent;
 
         /// <summary>
         /// On pointer click event.
         /// </summary>
-        public GenericEvent<PointerEventData> onPointerClick { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnPointerClickEvent;
 
         /// <summary>
         /// On begin drag event.
         /// </summary>
-        public GenericEvent<PointerEventData> onBeginDrag { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnBeginDragEvent;
 
         /// <summary>
         /// On initialize potential drag event.
         /// </summary>
-        public GenericEvent<PointerEventData> onInitializePotentialDrag { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnInitializePotentialDragEvent;
 
         /// <summary>
         /// On drag event.
         /// </summary>
-        public GenericEvent<PointerEventData> onDrag { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnDragEvent;
 
         /// <summary>
         /// On end drag event.
         /// </summary>
-        public GenericEvent<PointerEventData> onEndDrag { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnEndDragEvent;
 
         /// <summary>
         /// On drop event.
         /// </summary>
-        public GenericEvent<PointerEventData> onDrop { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnDropEvent;
 
         /// <summary>
         /// On scroll event.
         /// </summary>
-        public GenericEvent<PointerEventData> onScroll { get; } = new GenericEvent<PointerEventData>();
+        public event Action<PointerEventData> OnScrollEvent;
 
         /// <summary>
         /// On update selected event.
         /// </summary>
-        public GenericEvent<BaseEventData> onUpdateSelected { get; } = new GenericEvent<BaseEventData>();
+        public event Action<BaseEventData> OnUpdateSelectedEvent;
 
         /// <summary>
         /// On select event.
         /// </summary>
-        public GenericEvent<BaseEventData> onSelect { get; } = new GenericEvent<BaseEventData>();
+        public event Action<BaseEventData> OnSelectEvent;
 
         /// <summary>
         /// On deselect event.
         /// </summary>
-        public GenericEvent<BaseEventData> onDeselect { get; } = new GenericEvent<BaseEventData>();
+        public event Action<BaseEventData> OnDeselectEvent;
 
         /// <summary>
         /// On move event.
         /// </summary>
-        public GenericEvent<AxisEventData> onMove { get; } = new GenericEvent<AxisEventData>();
+        public event Action<AxisEventData> OnMoveEvent;
 
         /// <summary>
         /// On submit event.
         /// </summary>
-        public GenericEvent<BaseEventData> onSubmit { get; } = new GenericEvent<BaseEventData>();
+        public event Action<BaseEventData> OnSubmitEvent;
 
         /// <summary>
         /// On cancel event.
         /// </summary>
-        public GenericEvent<BaseEventData> onCancel { get; } = new GenericEvent<BaseEventData>();
+        public event Action<BaseEventData> OnCancelEvent;
         #endregion
 
         #region Public Method
@@ -118,7 +118,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            onPointerEnter.Invoke(eventData);
+            OnPointerEnterEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            onPointerExit.Invoke(eventData);
+            OnPointerExitEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnPointerDown(PointerEventData eventData)
         {
-            onPointerDown.Invoke(eventData);
+            OnPointerDownEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnPointerUp(PointerEventData eventData)
         {
-            onPointerUp.Invoke(eventData);
+            OnPointerUpEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnPointerClick(PointerEventData eventData)
         {
-            onPointerClick.Invoke(eventData);
+            OnPointerClickEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnBeginDrag(PointerEventData eventData)
         {
-            onBeginDrag.Invoke(eventData);
+            OnBeginDragEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnInitializePotentialDrag(PointerEventData eventData)
         {
-            onInitializePotentialDrag.Invoke(eventData);
+            OnInitializePotentialDragEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnDrag(PointerEventData eventData)
         {
-            onDrag.Invoke(eventData);
+            OnDragEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnEndDrag(PointerEventData eventData)
         {
-            onEndDrag.Invoke(eventData);
+            OnEndDragEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnDrop(PointerEventData eventData)
         {
-            onDrop.Invoke(eventData);
+            OnDropEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnScroll(PointerEventData eventData)
         {
-            onScroll.Invoke(eventData);
+            OnScrollEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnUpdateSelected(BaseEventData eventData)
         {
-            onUpdateSelected.Invoke(eventData);
+            OnUpdateSelectedEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnSelect(BaseEventData eventData)
         {
-            onSelect.Invoke(eventData);
+            OnSelectEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnDeselect(BaseEventData eventData)
         {
-            onDeselect.Invoke(eventData);
+            OnDeselectEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnMove(AxisEventData eventData)
         {
-            onMove.Invoke(eventData);
+            OnMoveEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnSubmit(BaseEventData eventData)
         {
-            onSubmit.Invoke(eventData);
+            OnSubmitEvent?.Invoke(eventData);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace MGS.Common.Event
         /// <param name="eventData">Pointer event data.</param>
         public void OnCancel(BaseEventData eventData)
         {
-            onCancel.Invoke(eventData);
+            OnCancelEvent?.Invoke(eventData);
         }
         #endregion
     }

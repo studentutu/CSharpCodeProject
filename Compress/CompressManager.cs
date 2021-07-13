@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Generic;
 using MGS.DesignPattern;
 using System;
 using System.Collections.Generic;
@@ -228,31 +227,31 @@ namespace MGS.Compress
             if (entries == null)
             {
                 var error = new ArgumentNullException("entries", "The params is invalid.");
-                DelegateUtility.Invoke(finishedCallback, false, error);
+                finishedCallback?.Invoke(false, error);
                 return;
             }
 
             if (string.IsNullOrEmpty(destFile))
             {
                 var error = new ArgumentNullException("destFile", "The params is invalid.");
-                DelegateUtility.Invoke(finishedCallback, false, error);
+                finishedCallback?.Invoke(false, error);
                 return;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                DelegateUtility.Invoke(finishedCallback, false, ex);
+                finishedCallback?.Invoke(false, ex);
                 return;
             }
 
             var task = new AsyncCompressTask(Compressor, entries, destFile, encoding, directoryPathInArchive, clearBefor,
                 progress =>
                 {
-                    DelegateUtility.Invoke(progressCallback, progress);
+                    progressCallback?.Invoke(progress);
                 },
                 (isSucceed, info) =>
                 {
-                    DelegateUtility.Invoke(finishedCallback, isSucceed, info);
+                    finishedCallback?.Invoke(isSucceed, info);
                 });
 
             AddTask(task);
@@ -272,31 +271,31 @@ namespace MGS.Compress
             if (!File.Exists(filePath))
             {
                 var error = new FileNotFoundException("Can not find the file.", filePath);
-                DelegateUtility.Invoke(finishedCallback, false, error);
+                finishedCallback?.Invoke(false, error);
                 return;
             }
 
             if (string.IsNullOrEmpty(destDir))
             {
                 var error = new ArgumentNullException("destDir", "The params is invalid.");
-                DelegateUtility.Invoke(finishedCallback, false, error);
+                finishedCallback?.Invoke(false, error);
                 return;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                DelegateUtility.Invoke(finishedCallback, false, ex);
+                finishedCallback?.Invoke(false, ex);
                 return;
             }
 
             var task = new AsyncDecompressTask(Compressor, filePath, destDir, clearBefor,
                  progress =>
                  {
-                     DelegateUtility.Invoke(progressCallback, progress);
+                     progressCallback?.Invoke(progress);
                  },
                 (isSucceed, info) =>
                 {
-                    DelegateUtility.Invoke(finishedCallback, isSucceed, info);
+                    finishedCallback?.Invoke(isSucceed, info);
                 });
 
             AddTask(task);

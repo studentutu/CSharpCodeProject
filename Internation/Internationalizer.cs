@@ -13,6 +13,7 @@
 using MGS.DesignPattern;
 using MGS.Logger;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -65,6 +66,7 @@ namespace MGS.Internation
         /// </summary>
         private Internationalizer()
         {
+            current = CultureInfo.CurrentCulture.Name;
             languages = new Dictionary<string, Dictionary<string, string>>();
         }
         #endregion

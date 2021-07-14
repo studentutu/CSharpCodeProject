@@ -84,28 +84,71 @@
 
 ## Usage
 
-- Implement interfaces.
+- Implement interfaces base your business logic.
 
   ```C#
+  //Implement ICommandIO.
+  public class CommandIO : ICommandIO
+  {
+      public byte[] ReadBuffer()
+      {
+          //TODO...
+          return null;
+      }
   
+      public void WriteBuffer(byte[] buffer)
+      {
+          //TODO...
+      }
+  }
+  
+  //Implement ICommandParser.
+  public class CommandParser : ICommandParser
+  {
+      public byte[] ToBuffer(Command Command)
+      {
+          //TODO...
+          return null;
+      }
+  
+      public IEnumerable<Command> ToCommands(byte[] buffer)
+      {
+          //TODO...
+          return null;
+      }
+  }
+  
+  //Implement ICommandUnit.
+  public class MyCommandUnit : CommandUnit
+  {
+      public override void Execute(params object[] args)
+      {
+          //TODO...
+      }
+  }
   ```
   
 - Construct command manager.
 
   ```c#
-  
+  var cmdIO = new CommandIO();
+  var cmdParser = new CommandParser();
+  var cmdManager = new CommandManager(cmdIO, cmdParser);
   ```
   
 - Construct command unit manager and Register units.
 
   ```C#
-  
+  var unitManager = new CommandUnitManager();
+  var unit_0 = new MyCommandUnit();
+  unitManager.RegisterUnit(unit_0);
   ```
 
 - Initialize command servo processor.
 
   ```C#
-  
+  //Processor cruise starts after initialized.
+  CommandServoProcessor.Instance.Initialize(cmdManager, unitManager);
   ```
   
 ------

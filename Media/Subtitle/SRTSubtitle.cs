@@ -10,10 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.IO;
 using MGS.Logger;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MGS.Media.Subtitle
@@ -213,8 +213,15 @@ namespace MGS.Media.Subtitle
         /// <param name="encoding">The encoding of file content.</param>
         public SRTSubtitle(string file, Encoding encoding)
         {
-            var lines = FileUtility.ReadAllLines(file, encoding);
-            SetSource(lines);
+            try
+            {
+                var lines = File.ReadAllLines(file, encoding);
+                SetSource(lines);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
+            }
         }
         #endregion
     }

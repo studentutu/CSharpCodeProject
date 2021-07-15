@@ -1,7 +1,9 @@
+[TOC]
+
 # MGS.Common.dll
 
 ## Summary
-- ​
+- Common code for C# project develop.
 
 ## Environment
 - .Net Framework 3.5 or above.
@@ -14,44 +16,37 @@
 
 ### Collection
 
-- Collect progress states and Finished event.
-- [Detail](./Common.Collection.md)
+- EnumeratorUtility.
 
 ### Converter
 
-- Converter of array.
-- Converter of byte array.
-- Converter of structure.
-- [Detail](./Common.Converter.md)
+- ArrayConverter.
+- ByteConverter.
+- StructureConverter.
 
 ### Crypto
 
-- Utility for MD5 crypto service provider.
-- [Detail](./Common.Crypto.md)
+- MD5CryptoUtility.
 
 ### Diagnostics
 
-- Utility for process.
-- [Detail](./Common.Diagnostics.md)
+- ProcessUtility.
 
 ### IO
 
-- Utility for directory.
-- Utility for file.
-- Cache for file.
-- [Detail](./Common.IO.md)
+- DirectoryUtility.
+- FileUtility.
+- FileCache.
 
 ### Reflection
 
--  Reflector for reflection.
-- [Detail](./Common.Reflection.md)
+-  Reflector.
 
 ### Threading
 
-- Utility for mutex.
-- Utility for thread.
-- Bridge for thread.
-- [Detail](./Common.Threading.md)
+- MutexUtility.
+- ThreadBridge.
+- ThreadUtility.
 
 ------
 

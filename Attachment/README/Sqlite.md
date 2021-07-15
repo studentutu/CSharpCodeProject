@@ -1,3 +1,5 @@
+[TOC]
+
 ﻿# MGS.Sqlite.dll
 
 ## Summary

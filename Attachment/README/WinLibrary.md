@@ -1,3 +1,5 @@
+[TOC]
+
 ﻿# MGS.WinLibrary.dll
 
 ## Summary

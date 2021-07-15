@@ -1,3 +1,5 @@
+[TOC]
+
 ﻿# MGS.UDesignPattern.dll
 
 ## Summary

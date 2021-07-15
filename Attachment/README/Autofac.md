@@ -1,3 +1,5 @@
+[TOC]
+
 ﻿# AutofacUtility.dll
 
 ## Summary
@@ -24,7 +26,7 @@
 - Register mark types to Autofac Container.
 - Resolve the instance of target interface.
 
-### Usage
+## Usage
 
 - Define interface.
 

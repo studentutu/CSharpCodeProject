@@ -27,6 +27,24 @@ var logDir = string.Format("{0}/Log/", Environment.CurrentDirectory);
 LogUtility.Register(new FileLogger(logDir));
 ```
 
+- Register logger with custom filter.
+
+  ```C#
+  //Implemente IFilter base your logic.
+  public class Filter : IFilter
+  {
+  	public bool Select(string tag, string format, params object[] args)
+      {
+          //TODO: Decide whether to select this log.
+          return true;
+      }
+  }
+  
+  //Register logger to LogUtility.
+  var logDir = string.Format("{0}/Log/", Environment.CurrentDirectory);
+  LogUtility.Register(new FileLogger(logDir, new Filter()));
+  ```
+
 - Use LogUtility to output log content.
 
 ```C#

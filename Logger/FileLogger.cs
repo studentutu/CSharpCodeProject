@@ -25,74 +25,49 @@ namespace MGS.Logger
         /// Root directory of log files.
         /// </summary>
         public string RootDir { get; }
+
+        /// <summary>
+        /// Filter for log content.
+        /// </summary>
+        public IFilter Filter { set; get; }
         #endregion
 
-        #region Private Method
+        #region Protected Method
         /// <summary>
         /// Logs a formatted message to local file.
         /// </summary>
         /// <param name="tag">Tag of log message.</param>
         /// <param name="format">A composite format string.</param>
         /// <param name="args">Format arguments.</param>
-        private void LogToFile(string tag, string format, params object[] args)
+        protected virtual void LogToFile(string tag, string format, params object[] args)
         {
-            var logFilePath = ResolveLogFile(RootDir);
-            if (RequireDirectory(logFilePath))
+            if (Filter != null && !Filter.Select(tag, format, args))
             {
-                try
+                return;
+            }
+
+            var logFilePath = ResolveLogFile(RootDir);
+            try
+            {
+                var dir = Path.GetDirectoryName(logFilePath);
+                if (!Directory.Exists(dir))
                 {
-                    var logContent = ResolveLogContent(tag, format, args);
-                    File.AppendAllText(logFilePath, logContent);
+                    Directory.CreateDirectory(dir);
                 }
+
+                var logContent = ResolveLogContent(tag, format, args);
+                File.AppendAllText(logFilePath, logContent);
+            }
 #if DEBUG
                 catch (Exception ex)
                 {
                     throw ex;
                 }
 #else
-                catch { }
-#endif
-            }
-        }
-
-        /// <summary>
-        /// Require the directory of path exist.
-        /// </summary>
-        /// <param name="path">Directory or file path.</param>
-        /// <returns>Succeed?</returns>
-        private bool RequireDirectory(string path)
-        {
-            if (string.IsNullOrEmpty(path))
-            {
-                return false;
-            }
-
-            var dir = Path.GetDirectoryName(path);
-            if (Directory.Exists(dir))
-            {
-                return true;
-            }
-
-            try
-            {
-                Directory.CreateDirectory(dir);
-                return true;
-            }
-#if DEBUG
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-#else
-            catch
-            {
-                return false;
-            }
+            catch { }
 #endif
         }
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Resolve the path of log file.
         /// </summary>
@@ -124,12 +99,11 @@ namespace MGS.Logger
         /// Constructor.
         /// </summary>
         /// <param name="rootDir">Root directory of log files.</param>
-        public FileLogger(string rootDir)
+        /// <param name="filter">Filter for log content.</param>
+        public FileLogger(string rootDir, IFilter filter = null)
         {
-            if (RequireDirectory(rootDir))
-            {
-                RootDir = rootDir;
-            }
+            RootDir = rootDir;
+            Filter = filter;
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ LogUtility.Register(new FileLogger(logDir));
   	public bool Select(string tag, string format, params object[] args)
       {
           //TODO: Decide whether to select this log.
-          return true;
+          return tag.Contains(FileLogger.TAG_ERROR);
       }
   }
   

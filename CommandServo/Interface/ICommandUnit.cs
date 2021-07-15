@@ -23,7 +23,7 @@ namespace MGS.CommandServo
         /// <summary>
         /// Command unit code.
         /// </summary>
-        string Code { set; get; }
+        string Code { get; }
 
         /// <summary>
         /// On Command unit respond event.

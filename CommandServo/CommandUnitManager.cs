@@ -108,9 +108,9 @@ namespace MGS.CommandServo
         /// <param name="command">Command to execute.</param>
         public void Execute(Command command)
         {
-            if (units.ContainsKey(command.code))
+            if (units.ContainsKey(command.Code))
             {
-                units[command.code].Execute(command.args);
+                units[command.Code].Execute(command.Args);
             }
         }
         #endregion

@@ -21,12 +21,12 @@ namespace MGS.CommandServo
         /// <summary>
         /// Command unit code.
         /// </summary>
-        public string code;
+        public string Code { get; }
 
         /// <summary>
         /// Command args.
         /// </summary>
-        public object[] args;
+        public object[] Args { get; }
         #endregion
 
         #region Public Method
@@ -37,8 +37,8 @@ namespace MGS.CommandServo
         /// <param name="args">Command args.</param>
         public Command(string code, params object[] args)
         {
-            this.code = code;
-            this.args = args;
+            Code = code;
+            Args = args;
         }
         #endregion
     }

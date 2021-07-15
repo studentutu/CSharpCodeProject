@@ -22,6 +22,21 @@ namespace MGS.Logger
     {
         #region Field and Property
         /// <summary>
+        /// The tag of log message.
+        /// </summary>
+        public const string TAG_LOG = "LOG";
+
+        /// <summary>
+        /// The tag of error message.
+        /// </summary>
+        public const string TAG_ERROR = "ERROR";
+
+        /// <summary>
+        /// The tag of warning message.
+        /// </summary>
+        public const string TAG_WARNING = "WARNING";
+
+        /// <summary>
         /// Root directory of log files.
         /// </summary>
         public string RootDir { get; }
@@ -113,7 +128,7 @@ namespace MGS.Logger
         /// <param name="args">Format arguments.</param>
         public void Log(string format, params object[] args)
         {
-            LogToFile("LOG", format, args);
+            LogToFile(TAG_LOG, format, args);
         }
 
         /// <summary>
@@ -123,7 +138,7 @@ namespace MGS.Logger
         /// <param name="args">Format arguments.</param>
         public void LogError(string format, params object[] args)
         {
-            LogToFile("ERROR", format, args);
+            LogToFile(TAG_ERROR, format, args);
         }
 
         /// <summary>
@@ -133,7 +148,7 @@ namespace MGS.Logger
         /// <param name="args">Format arguments.</param>
         public void LogWarning(string format, params object[] args)
         {
-            LogToFile("WARNING", format, args);
+            LogToFile(TAG_WARNING, format, args);
         }
         #endregion
     }

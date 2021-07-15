@@ -1,3 +1,5 @@
+[TOC]
+
 ﻿# MGS.Logger.dll
 
 ## Summary

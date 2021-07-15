@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileLogger.cs" />
+    <Compile Include="Interface\IFilter.cs" />
     <Compile Include="Interface\ILogger.cs" />
     <Compile Include="LogUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

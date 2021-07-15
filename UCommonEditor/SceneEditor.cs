@@ -116,7 +116,7 @@ namespace MGS.Common
             var position = Handles.PositionHandle(transform.position, GetPivotRotation(transform));
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(transform, "Change Position");
+                Undo.RecordObject(transform, "CHANGE_POSITION_HANDLE");
                 transform.position = position;
                 MarkSceneDirty();
             }
@@ -128,7 +128,7 @@ namespace MGS.Common
             var rotation = Handles.RotationHandle(transform.rotation, transform.position);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(transform, "Change Rotation");
+                Undo.RecordObject(transform, "CHANGE_ROTATION_HANDLE");
                 transform.rotation = rotation;
                 MarkSceneDirty();
             }
@@ -144,7 +144,7 @@ namespace MGS.Common
             var newPosition = Handles.FreeMoveHandle(position, Quaternion.identity, GetHandleSize(position) * size, snap, capFunc);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(target, "Move Handle");
+                Undo.RecordObject(target, "CHANGE_FREE_MOVE_HANDLE");
                 callback?.Invoke(newPosition);
                 MarkSceneDirty();
             }
@@ -159,7 +159,7 @@ namespace MGS.Common
             var scale = GetHandleSize(position);
             if (Handles.Button(position, direction, size * scale, pickSize * scale, capFunc))
             {
-                Undo.RecordObject(target, "Click Button");
+                Undo.RecordObject(target, "CLICK_BUTTON");
                 callback?.Invoke();
                 MarkSceneDirty();
             }

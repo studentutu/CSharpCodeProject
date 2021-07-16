@@ -91,7 +91,7 @@ namespace MGS.Common.IO
             {
                 try
                 {
-                    //子目录
+                    //Sub directory.
                     if (Directory.Exists(entrie))
                     {
                         var dirInfo = new DirectoryInfo(entrie);
@@ -121,7 +121,7 @@ namespace MGS.Common.IO
                             continue;
                         }
                     }
-                    else  //文件
+                    else  //File.
                     {
                         var fileName = Path.GetFileName(entrie);
                         if (!ignoreList.Contains(fileName))
@@ -173,7 +173,7 @@ namespace MGS.Common.IO
             {
                 try
                 {
-                    //子目录
+                    //Sub directory.
                     if (Directory.Exists(entrie))
                     {
                         var dirInfo = new DirectoryInfo(entrie);
@@ -182,7 +182,7 @@ namespace MGS.Common.IO
                             dirInfo.Delete(true);
                         }
                     }
-                    else  //文件
+                    else  //File.
                     {
                         var fileName = Path.GetFileName(entrie);
                         if (!ignoreList.Contains(fileName))

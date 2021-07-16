@@ -19,7 +19,6 @@ namespace MGS.Common.Listener
     /// <summary>
     /// Event Listener for pointer.
     /// </summary>
-    [AddComponentMenu("MGS/Common/MonoPointerListener")]
     public class MonoPointerListener : MonoBehaviour,
         IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
     {

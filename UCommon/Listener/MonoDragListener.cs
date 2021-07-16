@@ -19,7 +19,6 @@ namespace MGS.Common.Listener
     /// <summary>
     ///Event Listener for drag.
     /// </summary>
-    [AddComponentMenu("MGS/Common/MonoDragListener")]
     public class MonoDragListener : MonoBehaviour,
         IInitializePotentialDragHandler, IBeginDragHandler, IDragHandler, IEndDragHandler,
         IDropHandler, IScrollHandler, IMoveHandler

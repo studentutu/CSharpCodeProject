@@ -23,9 +23,13 @@
 
 ## Implemented
 
-- ICompressor: Interface for compressor.
-- ICompressManager: Interface for compress manager.
-- CompressManager: Instance for ICompressManager to manage compress  and decompress tasks.
+```c#
+public interface ICompressor{}
+
+public interface ICompressManager{}
+
+public sealed class CompressManager : SingleTimer<CompressManager>, ICompressManager{}
+```
 
 ## Usage
 ### Native

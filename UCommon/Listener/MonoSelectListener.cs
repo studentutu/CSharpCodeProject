@@ -19,7 +19,6 @@ namespace MGS.Common.Listener
     /// <summary>
     ///Event Listener for select.
     /// </summary>
-    [AddComponentMenu("MGS/Common/MonoSelectListener")]
     public class MonoSelectListener : MonoBehaviour,
         ISelectHandler, IUpdateSelectedHandler, IDeselectHandler,
         ISubmitHandler, ICancelHandler

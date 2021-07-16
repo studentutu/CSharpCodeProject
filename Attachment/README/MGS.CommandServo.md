@@ -27,60 +27,36 @@
 - Interface.
 
   ```C#
-  /// <summary>
-  /// Interface for Command IO.
-  /// </summary>
   public interface ICommandIO{}
   
-  /// <summary>
-  /// Interface for Command parser.
-  /// </summary>
   public interface ICommandParser{}
   
-  /// <summary>
-  /// Interface for Command Unit.
-  /// </summary>
   public interface ICommandUnit{}
   ```
-
+  
 - Command.
 
   ```C#
-  /// <summary>
-  /// Command content.
-  /// </summary>
   public struct Command{}
   ```
   
 - Unit.
 
   ```C#
-  /// <summary>
-  /// Command unit.
-  /// </summary>
   public abstract class CommandUnit : ICommandUnit{}
   ```
   
 - Manager.
 
   ```C#
-  /// <summary>
-  /// Manager of Commands.
-  /// </summary>
   public class CommandManager : ICommandManager{}
   
-  /// <summary>
-  /// Manager of Command units.
-  /// </summary>
   public class CommandUnitManager : ICommandUnitManager{}
   ```
-
+  
 - Processor.
 
   ```C#
-  /// <summary>
-  /// Command servo processor.
-  /// </summary>
   public sealed class CommandServoProcessor : SingleTimer<CommandServoProcessor>, ICommandServoProcessor{}
   ```
 
@@ -94,13 +70,13 @@
   {
       public byte[] ReadBuffer()
       {
-          //TODO...
+          //TODO:
           return null;
       }
   
       public void WriteBuffer(byte[] buffer)
       {
-          //TODO...
+          //TODO:
       }
   }
   
@@ -109,13 +85,13 @@
   {
       public byte[] ToBuffer(Command Command)
       {
-          //TODO...
+          //TODO:
           return null;
       }
   
       public IEnumerable<Command> ToCommands(byte[] buffer)
       {
-          //TODO...
+          //TODO:
           return null;
       }
   }
@@ -125,7 +101,7 @@
   {
       public override void Execute(params object[] args)
       {
-          //TODO...
+          //TODO:
       }
   }
   ```

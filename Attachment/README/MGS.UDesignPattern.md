@@ -96,12 +96,12 @@ public sealed class SingleBehaviour : SingleComponent<SingleBehaviour>{}
   {
       private void Start()
       {
-          //TODO...
+          //TODO:
       }
   
       public RectTransfrom FindUI(string name)
       {
-          //TODO...
+          //TODO:
       }
   }
   
@@ -118,7 +118,7 @@ public sealed class SingleBehaviour : SingleComponent<SingleBehaviour>{}
   //Use the extended events.
   SingleBehaviour.Instance.OnApplicationQuitEvent += () =>
   {
-      //TODO...
+      //TODO:
   };
   ```
 

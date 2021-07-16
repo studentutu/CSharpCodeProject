@@ -42,11 +42,11 @@
       zipFile, Encoding.UTF8, rootDir, true,
       progress =>
       {
-          //Show progress.
+          //TODO: Show progress.
       },
       (isSucceed, info) =>
       {
-          //Show result.
+          //TODO: Show result.
           //if isSucceed==true, the info is the path of zipFile;
           //if isSucceed==false, the info is error message.
       });
@@ -62,11 +62,11 @@
   CompressManager.Instance.DecompressAsync(filePath, unzipDirPath, true,
       progress =>
       {
-          //Show progress.
+          //TODO: Show progress.
       },
       (isSucceed, info) =>
       {
-          //Show result.
+          //TODO: Show result.
           //if isSucceed==true, the info is the path of unzip dir;
           //if isSucceed==false, the info is error message.
       });
@@ -86,7 +86,7 @@
           Action<float> progressCallback = null,
           Action<bool, object> completeCallback = null)
       {
-          //Implemente compress logic.
+          //TODO: Implemente compress logic.
           //Usually completeCallback.Invoke(false, new Exception(msg)) on error.
       }
   
@@ -95,7 +95,7 @@
           Action<float> progressCallback = null,
           Action<bool, object> completeCallback = null)
       {
-          //Implemente decompress logic.
+          //TODO: Implemente decompress logic.
           //Usually completeCallback.Invoke(false, new Exception(msg)) on error.
       }
   }

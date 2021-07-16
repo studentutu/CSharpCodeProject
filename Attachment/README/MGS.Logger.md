@@ -17,8 +17,17 @@
 
 ## Implemented
 
-- LogUtility: provide unified entrance of log output.
-- FileLogger: provide a default logger that you can use to log to local file.
+```C#
+public interface IFilter{}
+
+public interface ILogger{}
+
+public class FileLogger : ILogger{}
+
+public sealed class LogUtility{}
+```
+
+
 
 ## Usage
 

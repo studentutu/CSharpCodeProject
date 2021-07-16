@@ -28,67 +28,30 @@
 - Sqlite.
 
   ```C#
-  /// <summary>
-  /// Constant for sqlite.
-  /// </summary>
   public sealed class SqliteConstant{}
   
-  /// <summary>
-  /// Sqlite data base.
-  /// </summary>
   public class SqliteDataBase : ISqliteDataBase{}
   
-  /// <summary>
-  /// Handler for sqlite data base.
-  /// </summary>
   public class SqliteHandler : ISqliteHandler{}
   
-  /// <summary>
-  /// Sqlite table.
-  /// </summary>
   public class SqliteTable : SqliteView, ISqliteTable{}
   
-  /// <summary>
-  /// Sqlite view.
-  /// </summary>
   public class SqliteView : ISqliteView{}
   ```
 - Generic.
 
   ```C#
-  /// <summary>
-  /// Attribute for column field.
-  /// </summary>
   [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
   public class ColumnFieldAttribute : Attribute{}
   
-  /// <summary>
-  /// Generic sqlite data base.
-  /// </summary>
   public class GenericDataBase : SqliteDataBase, IGenericDataBase{}
   
-  /// <summary>
-  /// Generic sqlite table.
-  /// </summary>
-  /// <typeparam name="T"></typeparam>
   public class GenericTable<T> : GenericView<T>, IGenericTable<T> where T : ITableRow, new(){}
   
-  /// <summary>
-  /// Generic sqlite view.
-  /// </summary>
-  /// <typeparam name="T"></typeparam>
   public class GenericView<T> : IGenericView<T> where T : IViewRow, new(){}
   
-  /// <summary>
-  /// Generic sqlite table row.
-  /// [A better way is implement the interface ITableRow by yourself]
-  /// </summary>
   public abstract class TableRow : ViewRow, ITableRow{}
   
-  /// <summary>
-  /// Generic sqlite view row.
-  /// [A better way is implement the interface IViewRow by yourself]
-  /// </summary>
   public abstract class ViewRow : IViewRow{}
   ```
 

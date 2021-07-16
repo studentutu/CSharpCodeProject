@@ -12,11 +12,11 @@
 - Unity 5.0 or above.
 
 ## Module
-### Autofac
+### AutofacUtility
 
 - Auto register the mark types.
 - Resolve mark type anywhere.
-- [Detail](./Attachment/README/MGS.Autofac.md)  [Case-Unity](https://github.com/mogoson/MGS.Autofac)
+- [Detail](./Attachment/README/MGS.AutofacUtility.md)  [Case-Unity](https://github.com/mogoson/MGS.Autofac)
 
 ### CommandServo
 

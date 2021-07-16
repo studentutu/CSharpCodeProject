@@ -1,6 +1,6 @@
 [TOC]
 
-﻿# AutofacUtility.dll
+﻿# MGS.AutofacUtility.dll
 
 ## Summary
 - Utility for project develop with Autofac. 

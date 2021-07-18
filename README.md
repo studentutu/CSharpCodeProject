@@ -82,13 +82,13 @@
 - Select, Insert, Update, Delete table rows, use custom data structure.
 - [Detail](./Attachment/README/MGS.Sqlite.md)  [Case-Unity](https://github.com/mogoson/MGS.Sqlite)
 
-### WinCommon
+### WinUtility
 
 - Utility for windows network.
 - Utility for Comdlg32.
 - Utility for windows explorer.
 
-- [Detail](./Attachment/README/MGS.WinCommon.md)
+- [Detail](./Attachment/README/MGS.WinUtility.md)
 
 ### WinLibrary
 

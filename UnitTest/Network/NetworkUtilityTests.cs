@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace MGS.WinCommon.Network.Tests
+namespace MGS.WinUtility.Tests
 {
     [TestClass()]
     public class NetworkUtilityTests

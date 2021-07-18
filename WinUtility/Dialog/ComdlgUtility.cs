@@ -13,7 +13,7 @@
 using MGS.WinLibrary;
 using System.Runtime.InteropServices;
 
-namespace MGS.WinCommon.Utility
+namespace MGS.WinUtility
 {
     /// <summary>
     /// Utility for Comdlg32.

@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.WinCommon.Network
+namespace MGS.WinUtility
 {
     /// <summary>
     /// State of network connected state.

@@ -12,7 +12,7 @@
 
 using System.Diagnostics;
 
-namespace MGS.WinCommon.Utility
+namespace MGS.WinUtility
 {
     /// <summary>
     /// Utility for windows explorer.

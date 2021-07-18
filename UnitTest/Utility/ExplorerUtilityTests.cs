@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MGS.WinCommon.Utility.Tests
+namespace MGS.WinUtility.Tests
 {
     [TestClass()]
     public class ExplorerUtilityTests

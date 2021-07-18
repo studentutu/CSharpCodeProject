@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
-namespace MGS.WinCommon.Network
+namespace MGS.WinUtility
 {
     /// <summary>
     /// Utility for windows network.

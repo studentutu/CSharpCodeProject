@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MGS.WinCommon")]
+[assembly: AssemblyTitle("MGS.WinUtility")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MGS.WinCommon")]
+[assembly: AssemblyProduct("MGS.WinUtility")]
 [assembly: AssemblyCopyright("Copyright ©  2019 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

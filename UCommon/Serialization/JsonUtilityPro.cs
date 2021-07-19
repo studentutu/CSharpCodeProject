@@ -21,20 +21,6 @@ namespace MGS.Common.Serialization
     public sealed class JsonUtilityPro
     {
         /// <summary>
-        /// Deserialize List from json.
-        /// </summary>
-        /// <typeparam name="T">Type of List item.
-        /// The T must with SerializableAttribute and public field or private property with SerializeField Attribute if custom type.
-        /// </typeparam>
-        /// <param name="json">Json text of List.</param>
-        /// <returns>List object.</returns>
-        public static List<T> FromJson<T>(string json)
-        {
-            var avatarJson = ToListAvatar(json);
-            return FromAvatarJson<T>(avatarJson);
-        }
-
-        /// <summary>
         /// Deserialize List from avatar json.
         /// </summary>
         /// <typeparam name="T">Type of List item.
@@ -42,7 +28,7 @@ namespace MGS.Common.Serialization
         /// </typeparam>
         /// <param name="json">Json text of ListAvatar.</param>
         /// <returns>List object.</returns>
-        public static List<T> FromAvatarJson<T>(string json)
+        public static List<T> FromJson<T>(string json)
         {
             var avatar = JsonUtility.FromJson<ListAvatar<T>>(json);
             if (avatar == null)
@@ -54,20 +40,6 @@ namespace MGS.Common.Serialization
         }
 
         /// <summary>
-        /// Serialize List to json.
-        /// </summary>
-        /// <typeparam name="T">Type of List item.
-        /// The T must with SerializableAttribute and public field or private property with SerializeField Attribute if custom type.
-        /// </typeparam>
-        /// <param name="list">Source list.</param>
-        /// <returns>Json text of List.</returns>
-        public static string ToJson<T>(List<T> list)
-        {
-            var avatarJson = ToAvatarJson<T>(list);
-            return FromListAvatar(avatarJson);
-        }
-
-        /// <summary>
         /// Serialize List to avatar json.
         /// </summary>
         /// <typeparam name="T">Type of List item.
@@ -75,14 +47,14 @@ namespace MGS.Common.Serialization
         /// </typeparam>
         /// <param name="list">Source list.</param>
         /// <returns>Json text of ListAvatar.</returns>
-        public static string ToAvatarJson<T>(List<T> list)
+        public static string ToJson<T>(List<T> list)
         {
             var avatar = new ListAvatar<T>(list);
             return JsonUtility.ToJson(avatar);
         }
 
         /// <summary>
-        /// Deserialize Dictionary from json.
+        /// Deserialize Dictionary from avatar json.
         /// </summary>
         /// <typeparam name="TKey">Type of Dictionary key.
         /// The T must with SerializableAttribute and public field or private property with SerializeField Attribute if custom type.

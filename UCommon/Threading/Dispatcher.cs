@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -65,7 +64,7 @@ namespace MGS.Common.Threading
                     }
                     catch (Exception ex)
                     {
-                        LogUtility.LogException(ex);
+                        Debug.LogErrorFormat("{0}\r\n{1}", ex.Message, ex.StackTrace);
                     }
                 }
 

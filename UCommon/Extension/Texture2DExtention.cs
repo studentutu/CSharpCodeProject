@@ -11,7 +11,7 @@
  *************************************************************************/
 
 using MGS.Common.Converter;
-using MGS.Logger;
+using System;
 using UnityEngine;
 
 namespace MGS.Common.Extension
@@ -34,8 +34,7 @@ namespace MGS.Common.Extension
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                LogUtility.LogError("Update pixels of Texture2D error: The color array is null or invalid.");
-                return;
+                throw new ArgumentException("The color array is null or invalid.");
             }
 
             texture2D.SetPixels(colorArray, mipLevel);
@@ -54,8 +53,7 @@ namespace MGS.Common.Extension
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                LogUtility.LogError("Update pixels of Texture2D error: The color array is null or invalid.");
-                return;
+                throw new ArgumentException("The color array is null or invalid.");
             }
 
             var colors = ArrayConverter.ToOneDimention(colorArray);
@@ -74,8 +72,7 @@ namespace MGS.Common.Extension
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                LogUtility.LogError("Update pixels of Texture2D error: The color array is null or invalid.");
-                return;
+                throw new ArgumentException("The color array is null or invalid.");
             }
 
             texture2D.SetPixels32(colorArray, mipLevel);
@@ -94,8 +91,7 @@ namespace MGS.Common.Extension
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                LogUtility.LogError("Update pixels of Texture2D error: The color array is null or invalid.");
-                return;
+                throw new ArgumentException("The color array is null or invalid.");
             }
 
             var colors = ArrayConverter.ToOneDimention(colorArray);

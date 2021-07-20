@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
 
@@ -48,14 +47,6 @@ namespace MGS.Media.Subtitle
                 {
                     isInRange = true;
                 }
-                else
-                {
-                    LogUtility.LogWarning("The play time is out of the subtitle range.");
-                }
-            }
-            else
-            {
-                LogUtility.LogWarning("Not any clip in the subtitle.");
             }
             return isInRange;
         }

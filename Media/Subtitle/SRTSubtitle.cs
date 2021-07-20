@@ -10,11 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace MGS.Media.Subtitle
 {
@@ -52,14 +49,12 @@ namespace MGS.Media.Subtitle
 
             if (source == null)
             {
-                LogUtility.LogError("Set source of srt subtitle error: The content of source is null.");
                 return;
             }
 
             var lines = new List<string>(source);
             if (lines.Count < CLIP_LINES)
             {
-                LogUtility.LogError("Set source of srt subtitle error: The content of source is invalid.");
                 return;
             }
 
@@ -96,19 +91,16 @@ namespace MGS.Media.Subtitle
         {
             if (string.IsNullOrEmpty(index) || string.IsNullOrEmpty(timeRange))
             {
-                LogUtility.LogError("Parse text to subtitle clip error: The index or timeRange is null.");
                 return null;
             }
 
             if (!int.TryParse(index, out int clipIndex))
             {
-                LogUtility.LogError("Parse text to subtitle clip error: The index \"{0}\" can not parse to int.", index);
                 return null;
             }
 
             if (!ParseToTimeRange(timeRange, out int startTime, out int endTime))
             {
-                LogUtility.LogError("Parse text to subtitle clip error: The timeRange \"{0}\" can not parse to start and end time.", timeRange);
                 return null;
             }
 
@@ -204,24 +196,6 @@ namespace MGS.Media.Subtitle
         public SRTSubtitle(IEnumerable<string> source)
         {
             SetSource(source);
-        }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="file">The source data file of subtitle.</param>
-        /// <param name="encoding">The encoding of file content.</param>
-        public SRTSubtitle(string file, Encoding encoding)
-        {
-            try
-            {
-                var lines = File.ReadAllLines(file, encoding);
-                SetSource(lines);
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-            }
         }
         #endregion
     }

@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using MGS.Common.Converter;
-using System;
 using UnityEngine;
 
 namespace MGS.Common.Extension
@@ -30,11 +29,12 @@ namespace MGS.Common.Extension
         /// <param name="mipLevel">The mip level of the texture to write to.</param>
         /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
         /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color[] colorArray, int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
+        public static void UpdatePixels(this Texture2D texture2D, Color[] colorArray,
+            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                throw new ArgumentException("The color array is null or invalid.");
+                return;
             }
 
             texture2D.SetPixels(colorArray, mipLevel);
@@ -49,11 +49,12 @@ namespace MGS.Common.Extension
         /// <param name="mipLevel">The mip level of the texture to write to.</param>
         /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
         /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color[,] colorArray, int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
+        public static void UpdatePixels(this Texture2D texture2D, Color[,] colorArray,
+            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                throw new ArgumentException("The color array is null or invalid.");
+                return;
             }
 
             var colors = ArrayConverter.ToOneDimention(colorArray);
@@ -68,11 +69,12 @@ namespace MGS.Common.Extension
         /// <param name="mipLevel">The mip level of the texture to write to.</param>
         /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
         /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color32[] colorArray, int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
+        public static void UpdatePixels(this Texture2D texture2D, Color32[] colorArray,
+            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                throw new ArgumentException("The color array is null or invalid.");
+                return;
             }
 
             texture2D.SetPixels32(colorArray, mipLevel);
@@ -87,11 +89,12 @@ namespace MGS.Common.Extension
         /// <param name="mipLevel">The mip level of the texture to write to.</param>
         /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
         /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color32[,] colorArray, int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
+        public static void UpdatePixels(this Texture2D texture2D, Color32[,] colorArray,
+            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
         {
             if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
             {
-                throw new ArgumentException("The color array is null or invalid.");
+                return;
             }
 
             var colors = ArrayConverter.ToOneDimention(colorArray);

@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,7 +40,7 @@ namespace MGS.DesignPattern
         {
             //Create root for pools.
             poolRoot = new GameObject(GetType().Name).transform;
-            UnityEngine.Object.DontDestroyOnLoad(poolRoot);
+            Object.DontDestroyOnLoad(poolRoot);
         }
         #endregion
 
@@ -57,18 +56,17 @@ namespace MGS.DesignPattern
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("The pool name can not be null or empty.");
+                return null;
             }
 
             if (poolsInfo.ContainsKey(name))
             {
-                var msg = string.Format("The pool that name \"{0}\" already exist in this manager.", name);
-                throw new ArgumentException(msg);
+                return null;
             }
 
             if (prefab == null)
             {
-                throw new ArgumentNullException("The prefab of pool can not be null.");
+                return null;
             }
 
             //Create new gameobject for pool.
@@ -106,7 +104,7 @@ namespace MGS.DesignPattern
                 var pool = poolsInfo[name];
                 pool.Clear();
 
-                UnityEngine.Object.Destroy(pool.Node.gameObject);
+                Object.Destroy(pool.Node.gameObject);
                 poolsInfo.Remove(name);
             }
         }

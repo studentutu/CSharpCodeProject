@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,20 +56,18 @@ namespace MGS.DesignPattern
         {
             if (string.IsNullOrEmpty(name))
             {
-                LogUtility.LogError("Create pool error: The pool name can not be null or empty.");
-                return null;
+                throw new System.ArgumentNullException("The pool name can not be null or empty.");
             }
 
             if (poolsInfo.ContainsKey(name))
             {
-                LogUtility.LogWarning("Create pool cancelled: The pool that name is \"{0}\" already exist in this manager.", name);
-                return poolsInfo[name];
+                var msg = string.Format("The pool that name \"{0}\" already exist in this manager.", name);
+                throw new System.ArgumentException(msg);
             }
 
             if (prefab == null)
             {
-                LogUtility.LogError("Create pool error: The prefab of pool can not be null.");
-                return null;
+                throw new System.ArgumentNullException("The prefab of pool can not be null.");
             }
 
             //Create new gameobject for pool.
@@ -94,11 +91,7 @@ namespace MGS.DesignPattern
             {
                 return poolsInfo[name];
             }
-            else
-            {
-                LogUtility.LogWarning("Find pool error: The pool that name is \"{0}\" does not exist in this manager.", name);
-                return null;
-            }
+            return null;
         }
 
         /// <summary>
@@ -114,10 +107,6 @@ namespace MGS.DesignPattern
 
                 Object.Destroy(pool.Node.gameObject);
                 poolsInfo.Remove(name);
-            }
-            else
-            {
-                LogUtility.LogWarning("Delete pool error: The pool that name is \"{0}\" does not exist in this manager.", name);
             }
         }
         #endregion

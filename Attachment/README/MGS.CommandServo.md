@@ -14,7 +14,6 @@
 
 - System.dll
 - MGS.DesignPattern.dll
-- MGS.Logger.dll
 
 ## Demand
 
@@ -57,7 +56,7 @@
 - Processor.
 
   ```C#
-  public sealed class CommandServoProcessor : SingleTimer<CommandServoProcessor>, ICommandServoProcessor{}
+  public sealed class CommandServoProcessor : SingleUpdater<CommandServoProcessor>, ICommandServoProcessor{}
   ```
 
 ## Usage

@@ -39,7 +39,6 @@
     <Compile Include="Geometry\Line.cs" />
     <Compile Include="Geometry\Relation.cs" />
     <Compile Include="Geometry\Vector.cs" />
-    <Compile Include="Hermite\Hermite.cs" />
     <Compile Include="Hermite\HermiteCurve.cs" />
     <Compile Include="Hermite\KeyFrame.cs" />
     <Compile Include="Maths\Maths.cs" />

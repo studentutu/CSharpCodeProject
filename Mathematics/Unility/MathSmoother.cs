@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
- *  Copyright © 2016-2019 Mogoson. All rights reserved.
+ *  Copyright © 2016-2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  MathSmooth.cs
- *  Description  :  Mathematical method to smooth data.
+ *  File         :  MathSmoother.cs
+ *  Description  :  Math smoother base mathematical methods.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -13,17 +13,17 @@
 namespace MGS.Mathematics
 {
     /// <summary>
-    /// Linear Smooth.
+    /// Math smoother base mathematical methods.
     /// </summary>
-    public sealed class LinearSmooth
+    public sealed class MathSmoother
     {
-        #region Public Method
+        #region Linear
         /// <summary>
         /// Three point linear smooth.
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] ThreePointSmooth(double[] source)
+        public static double[] ThreePointLinear(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -51,7 +51,7 @@ namespace MGS.Mathematics
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointSmooth(double[] source)
+        public static double[] FivePointLinear(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -81,7 +81,7 @@ namespace MGS.Mathematics
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointSmooth(double[] source)
+        public static double[] SevenPointLinear(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -121,20 +121,14 @@ namespace MGS.Mathematics
             return result;
         }
         #endregion
-    }
 
-    /// <summary>
-    /// Quadratic Smooth.
-    /// </summary>
-    public sealed class QuadraticSmooth
-    {
-        #region Public Method
+        #region Quadratic
         /// <summary>
         /// Five point quadratic smooth.
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointSmooth(double[] source)
+        public static double[] FivePointQuadratic(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -165,7 +159,7 @@ namespace MGS.Mathematics
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointSmooth(double[] source)
+        public static double[] SevenPointQuadratic(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -205,20 +199,14 @@ namespace MGS.Mathematics
             return result;
         }
         #endregion
-    }
 
-    /// <summary>
-    /// Cubic Smooth.
-    /// </summary>
-    public sealed class CubicSmooth
-    {
-        #region Public Method
+        #region Cubic
         /// <summary>
         /// Five point cubic smooth.
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointSmooth(double[] source)
+        public static double[] FivePointCubic(double[] source)
         {
             var n = source.Length;
             var result = new double[n];
@@ -257,7 +245,7 @@ namespace MGS.Mathematics
         /// </summary>
         /// <param name="source">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointSmooth(double[] source)
+        public static double[] SevenPointCubic(double[] source)
         {
             var n = source.Length;
             var result = new double[n];

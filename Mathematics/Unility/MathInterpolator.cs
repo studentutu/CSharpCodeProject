@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
- *  Copyright © 2018-2019 Mogoson. All rights reserved.
+ *  Copyright © 2018-2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  Maths.cs
- *  Description  :  Define mathematical concepts and methods.
+ *  File         :  MathInterpolator.cs
+ *  Description  :  Interpolator base mathematical methods.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -13,11 +13,10 @@
 namespace MGS.Mathematics
 {
     /// <summary>
-    /// Mathematical concepts and methods.
+    /// Interpolator base mathematical methods.
     /// </summary>
-    public sealed class Maths
+    public sealed class MathInterpolator
     {
-        #region Interpolation
         /// <summary>
         /// Interpolate between a and b by t.
         /// </summary>
@@ -87,6 +86,5 @@ namespace MGS.Mathematics
 
             return (1 - 2 * q0) * v0 * p0 + (1 + 2 * q1) * v1 * p1 + m0 * d0 * p0 + m1 * d1 * p1;
         }
-        #endregion
     }
 }

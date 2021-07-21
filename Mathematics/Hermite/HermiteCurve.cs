@@ -107,7 +107,7 @@ namespace MGS.Mathematics
         /// <returns>The value of hermite curve at time on the range from start key frame to end key frame.</returns>
         public static double Evaluate(KeyFrame start, KeyFrame end, double t)
         {
-            return Maths.Hermite(start.time, start.value, start.outTangent, end.time, end.value, end.inTangent, t);
+            return MathInterpolator.Hermite(start.time, start.value, start.outTangent, end.time, end.value, end.inTangent, t);
         }
 
         /// <summary>

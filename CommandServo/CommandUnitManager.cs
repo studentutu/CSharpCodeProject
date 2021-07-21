@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
 
@@ -43,7 +42,6 @@ namespace MGS.CommandServo
         {
             if (string.IsNullOrEmpty(code))
             {
-                LogUtility.LogError("Unit respond error: The code is null or empty.");
                 return;
             }
 
@@ -69,7 +67,6 @@ namespace MGS.CommandServo
         {
             if (unit == null || string.IsNullOrEmpty(unit.Code))
             {
-                LogUtility.LogError("Add unit to manager error: The unit or code of unit is null or empty.");
                 return;
             }
 

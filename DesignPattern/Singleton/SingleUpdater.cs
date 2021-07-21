@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021-2022 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  SingleTimer.cs
- *  Description  :  Define base class of single timer.
+ *  File         :  SingleUpdater.cs
+ *  Description  :  Define base class of single updater.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -10,21 +10,22 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
 using System.Timers;
 
 namespace MGS.DesignPattern
 {
     /// <summary>
-    /// Provide a single instance with a timer to tick update for the specified type T;
+    /// Provide a single instance to update for the specified type T;
     /// Inheritance class should with the sealed access modifier
     /// and a private parameterless constructor to ensure singleton.
     /// </summary>
     /// <typeparam name="T">Specified type.</typeparam>
-    public abstract class SingleTimer<T> : Singleton<T> where T : class
+    public abstract class SingleUpdater<T> : Singleton<T> where T : class
     {
         #region Property
         /// <summary>
-        /// Interval of tick update [ms].
+        /// Interval of update [ms].
         /// </summary>
         public double Interval
         {
@@ -33,7 +34,7 @@ namespace MGS.DesignPattern
         }
 
         /// <summary>
-        /// Enabled of tick update.
+        /// Enabled of update.
         /// </summary>
         public bool Enabled
         {
@@ -42,7 +43,7 @@ namespace MGS.DesignPattern
         }
 
         /// <summary>
-        /// The timer to tick update.
+        /// The timer to update.
         /// </summary>
         protected Timer Timer { get; }
         #endregion
@@ -51,22 +52,21 @@ namespace MGS.DesignPattern
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected SingleTimer()
+        protected SingleUpdater()
         {
             Timer = new Timer
             {
                 AutoReset = true
             };
-            Timer.Elapsed += Tick;
+            Timer.Elapsed += (s, e) => Update(e.SignalTime);
             Timer.Start();
         }
 
         /// <summary>
-        /// Timer tick.
+        /// On update event.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        protected abstract void Tick(object sender, ElapsedEventArgs e);
+        /// <param name="signalTime">Signal time.</param>
+        protected abstract void Update(DateTime signalTime);
         #endregion
     }
 }

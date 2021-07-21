@@ -10,8 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
-
 namespace MGS.Common.Converter
 {
     /// <summary>
@@ -30,12 +28,6 @@ namespace MGS.Common.Converter
         /// <returns>Two dimentions array.</returns>
         public static T[,] ToTwoDimention<T>(T[] array, int row, int column)
         {
-            if (array.Length != row * column)
-            {
-                LogUtility.LogError("Convert one dimention array to two dimentions array error: The param is invalid.");
-                return null;
-            }
-
             var twoDArray = new T[row, column];
             var index = 0;
             for (var r = 0; r < row; r++)
@@ -60,12 +52,6 @@ namespace MGS.Common.Converter
         /// <returns>Three dimentions array.</returns>
         public static T[,,] ToThreeDimention<T>(T[] array, int layer, int row, int column)
         {
-            if (array.Length != row * column * layer)
-            {
-                LogUtility.LogError("Convert one dimention array to three dimentions array error: The param is invalid.");
-                return null;
-            }
-
             var threeDArray = new T[layer, row, column];
             var index = 0;
             for (var l = 0; l < layer; l++)

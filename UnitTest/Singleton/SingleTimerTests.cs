@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading;
-using System.Timers;
 
 namespace MGS.DesignPattern.Tests
 {
@@ -28,11 +27,11 @@ namespace MGS.DesignPattern.Tests
             Thread.Sleep(1000);
         }
 
-        public sealed class TestSingleTimer : SingleTimer<TestSingleTimer>
+        public sealed class TestSingleTimer : SingleUpdater<TestSingleTimer>
         {
             private TestSingleTimer() { }
 
-            protected override void Tick(object sender, ElapsedEventArgs e)
+            protected override void Update(DateTime signalTime)
             {
                 Console.WriteLine("TestSingleTimer Tick");
             }

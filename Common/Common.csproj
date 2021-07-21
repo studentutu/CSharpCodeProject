@@ -52,12 +52,6 @@
     <Compile Include="Threading\ThreadBridge.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logger\Logger.csproj">
-      <Project>{E77FBCC0-1D82-41A0-A771-9D356E2D68F6}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\$(ProjectName)\Plugins\"

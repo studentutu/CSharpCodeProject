@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,25 +26,15 @@ namespace MGS.Common.IO
         /// Require the directory of path exist.
         /// </summary>
         /// <param name="path">Directory or file path.</param>
-        /// <returns>Succeed?</returns>
-        public static bool RequireDirectory(string path)
+        public static void RequireDirectory(string path)
         {
-            try
+            var dir = Path.GetDirectoryName(path);
+            if (Directory.Exists(dir))
             {
-                var dir = Path.GetDirectoryName(path);
-                if (Directory.Exists(dir))
-                {
-                    return true;
-                }
+                return;
+            }
 
-                Directory.CreateDirectory(dir);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return false;
-            }
+            Directory.CreateDirectory(dir);
         }
 
         /// <summary>

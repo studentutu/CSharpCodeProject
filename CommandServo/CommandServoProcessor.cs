@@ -11,15 +11,14 @@
  *************************************************************************/
 
 using MGS.DesignPattern;
-using MGS.Logger;
-using System.Timers;
+using System;
 
 namespace MGS.CommandServo
 {
     /// <summary>
     /// Command servo processor.
     /// </summary>
-    public sealed class CommandServoProcessor : SingleTimer<CommandServoProcessor>, ICommandServoProcessor
+    public sealed class CommandServoProcessor : SingleUpdater<CommandServoProcessor>, ICommandServoProcessor
     {
         #region Field and Property
         /// <summary>
@@ -62,8 +61,6 @@ namespace MGS.CommandServo
             {
                 if (CommandManager == null || CommandUnitManager == null)
                 {
-                    LogUtility.LogError("Command servo processor settings error: " +
-                        "The Command manager or Command unit manager does not set an instance.");
                     return false;
                 }
                 return true;
@@ -78,11 +75,10 @@ namespace MGS.CommandServo
         private CommandServoProcessor() { }
 
         /// <summary>
-        /// Timer tick.
+        /// On update event.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        protected override void Tick(object sender, ElapsedEventArgs e)
+        /// <param name="signalTime">Signal time.</param>
+        protected override void Update(DateTime signalTime)
         {
             if (!IsSettingsValid)
             {

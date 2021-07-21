@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.IO;
 using System.Text;
@@ -27,21 +26,13 @@ namespace MGS.Common.IO
         /// Calculate page count of file.
         /// </summary>
         /// <param name="filePath">Path of target file.</param>
-        /// <param name="pageSize">Size of page.</param>
+        /// <param name="pageSize">Size of page (byte).</param>
         /// <returns>Page count of file.</returns>
         public static int CalPageCount(string filePath, int pageSize = 65536)
         {
-            try
+            using (var sm = new FileStream(filePath, FileMode.Open))
             {
-                using (var sm = new FileStream(filePath, FileMode.Open))
-                {
-                    return sm.Length / pageSize + sm.Length % pageSize == 0 ? 0 : 1;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return 0;
+                return sm.Length / pageSize + sm.Length % pageSize == 0 ? 0 : 1;
             }
         }
 
@@ -49,41 +40,33 @@ namespace MGS.Common.IO
         /// Read the index page of file.
         /// </summary>
         /// <param name="filePath">Path of target file.</param>
-        /// <param name="pageSize">Size of page.</param>
+        /// <param name="pageSize">Size of page (byte).</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <returns>Index page bytes.</returns>
         public static byte[] ReadPage(string filePath, int pageSize = 65536, int pageIndex = 0)
         {
-            try
+            using (var sm = new FileStream(filePath, FileMode.Open))
             {
-                using (var sm = new FileStream(filePath, FileMode.Open))
+                var pageCount = sm.Length / pageSize + sm.Length % pageSize == 0 ? 0 : 1;
+                if (pageIndex > pageCount - 1)
                 {
-                    var pageCount = sm.Length / pageSize + sm.Length % pageSize == 0 ? 0 : 1;
-                    if (pageIndex > pageCount - 1)
-                    {
-                        LogUtility.LogError("Read the index page of file error: The pageIndex {0} is out of range.", pageCount);
-                        return null;
-                    }
-
-                    if (!sm.CanSeek || !sm.CanRead)
-                    {
-                        LogUtility.LogError("Read the index page of file error: File stream can not seek or read.");
-                        return null;
-                    }
-
-                    var start = pageSize * pageIndex;
-                    var count = Math.Min(pageSize, sm.Length - start);
-                    var bytesArray = new byte[count];
-
-                    sm.Seek(start, SeekOrigin.Begin);
-                    sm.Read(bytesArray, 0, (int)count);
-                    return bytesArray;
+                    var msg = string.Format("The pageIndex {0} is out of range.", pageCount);
+                    throw new ArgumentOutOfRangeException(msg);
                 }
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return null;
+
+                if (!sm.CanSeek || !sm.CanRead)
+                {
+                    var msg = string.Format("File stream can not seek or read for the file {0}", filePath);
+                    throw new FileLoadException(msg);
+                }
+
+                var start = pageSize * pageIndex;
+                var count = Math.Min(pageSize, sm.Length - start);
+                var bytesArray = new byte[count];
+
+                sm.Seek(start, SeekOrigin.Begin);
+                sm.Read(bytesArray, 0, (int)count);
+                return bytesArray;
             }
         }
 
@@ -95,15 +78,7 @@ namespace MGS.Common.IO
         /// <returns>All lines from file.</returns>
         public static string[] ReadAllLines(string filePath, Encoding encoding)
         {
-            try
-            {
-                return File.ReadAllLines(filePath, encoding);
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return null;
-            }
+            return File.ReadAllLines(filePath, encoding);
         }
         #endregion
     }

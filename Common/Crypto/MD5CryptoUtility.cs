@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -56,19 +55,11 @@ namespace MGS.Common.Crypto
         /// <returns>Hash code.</returns>
         public static string ComputeFileHash(string filePath)
         {
-            try
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
-                using (var stream = new FileStream(filePath, FileMode.Open))
-                {
-                    var md5 = new MD5CryptoServiceProvider();
-                    var hashBytes = md5.ComputeHash(stream);
-                    return BitConverter.ToString(hashBytes);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return null;
+                var md5 = new MD5CryptoServiceProvider();
+                var hashBytes = md5.ComputeHash(stream);
+                return BitConverter.ToString(hashBytes);
             }
         }
     }

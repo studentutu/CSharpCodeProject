@@ -10,11 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 
 namespace MGS.Common.Diagnostics
 {
@@ -27,53 +24,31 @@ namespace MGS.Common.Diagnostics
         /// Start process from file.
         /// </summary>
         /// <param name="fileName">Path of process file.</param>
-        /// <returns>Succeed?</returns>
-        public static bool StartProcess(string fileName)
+        public static void StartProcess(string fileName)
         {
-            try
-            {
-                Process.Start(fileName);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return false;
-            }
+            Process.Start(fileName);
         }
 
         /// <summary>
         /// Kill process by name.
         /// </summary>
         /// <param name="processName">Name of process.</param>
-        /// <returns>Succeed?</returns>
-        public static bool KillProcess(string processName)
+        public static void KillProcess(string processName)
         {
             var processes = Process.GetProcessesByName(processName);
             if (processes == null || processes.Length == 0)
             {
-                LogUtility.LogError("Kill process error: Can not find the process {0}.", processName);
-                return false;
+                return;
             }
 
-            try
+            foreach (var process in processes)
             {
-                foreach (var process in processes)
+                if (process.HasExited)
                 {
-                    if (process.HasExited)
-                    {
-                        continue;
-                    }
-
-                    process.Kill();
+                    continue;
                 }
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-                return false;
+                process.Kill();
             }
         }
 
@@ -81,18 +56,12 @@ namespace MGS.Common.Diagnostics
         /// Kill processes by names.
         /// </summary>
         /// <param name="processNames">Names of processes.</param>
-        /// <returns>Succeed?</returns>
-        public static bool KillProcess(IEnumerable<string> processNames)
+        public static void KillProcess(IEnumerable<string> processNames)
         {
             foreach (var processName in processNames)
             {
-                if (!KillProcess(processName))
-                {
-                    return false;
-                }
+                KillProcess(processName);
             }
-
-            return true;
         }
     }
 }

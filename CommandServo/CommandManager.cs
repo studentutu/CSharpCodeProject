@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System.Collections.Generic;
 
 namespace MGS.CommandServo
@@ -45,8 +44,6 @@ namespace MGS.CommandServo
             {
                 if (CommandIO == null || CommandParser == null)
                 {
-                    LogUtility.LogError("CommandManager settings error: " +
-                        "The Command IO or Command parser does not set an instance.");
                     return false;
                 }
                 return true;

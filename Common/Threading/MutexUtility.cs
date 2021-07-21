@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using MGS.Common.Crypto;
-using MGS.Logger;
 using System;
 using System.IO;
 using System.Threading;
@@ -82,13 +81,10 @@ namespace MGS.Common.Threading
                     isHold = mutex.WaitOne(interval);
                     timer += interval;
                 }
-                catch (AbandonedMutexException abdEx)
-                {
-                    LogUtility.LogWarning("WaitMutex warning: {0}\r\n{1}", abdEx.Message, abdEx.StackTrace);
-                }
+                catch (AbandonedMutexException) { }
                 catch (Exception ex)
                 {
-                    LogUtility.LogException(ex);
+                    throw ex;
                 }
 
                 if (isHold)
@@ -127,8 +123,7 @@ namespace MGS.Common.Threading
             }
             catch (Exception ex)
             {
-                LogUtility.LogException(ex);
-                return false;
+                throw ex;
             }
             finally
             {

@@ -15,14 +15,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Timers;
 
 namespace MGS.Compress
 {
     /// <summary>
     /// Compress manager.
     /// </summary>
-    public sealed class CompressManager : SingleTimer<CompressManager>, ICompressManager
+    public sealed class CompressManager : SingleUpdater<CompressManager>, ICompressManager
     {
         #region Field and Property
         /// <summary>
@@ -68,11 +67,10 @@ namespace MGS.Compress
 
         #region Protected Method
         /// <summary>
-        /// Timer tick.
+        /// On update event.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        protected override void Tick(object sender, ElapsedEventArgs e)
+        /// <param name="signalTime">Signal time.</param>
+        protected override void Update(DateTime signalTime)
         {
             if (taskCache.Count == 0)
             {

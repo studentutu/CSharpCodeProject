@@ -53,10 +53,6 @@
       <Project>{1ac97d40-2405-4fb6-91f3-225e2f036fb6}</Project>
       <Name>DesignPattern</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logger\Logger.csproj">
-      <Project>{e77fbcc0-1d82-41a0-a771-9d356e2d68f6}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System.Runtime.InteropServices;
 
 namespace MGS.Common.Converter
@@ -32,7 +31,6 @@ namespace MGS.Common.Converter
             var size = Marshal.SizeOf(default(T));
             if (size > byteArray.Length)
             {
-                LogUtility.LogError("Convert byte array to structure error: The length of byte array is not match type {0}.", typeof(T).Name);
                 return default(T);
             }
 

@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
 using System.Reflection;
 
 namespace MGS.Common.Reflection
@@ -33,7 +32,6 @@ namespace MGS.Common.Reflection
             var fieldInfo = obj.GetType().GetField(name, bindingAttr);
             if (fieldInfo == null)
             {
-                LogUtility.LogError("Set field error: Can not find the field info of {0}.{1}", obj, name);
                 return;
             }
 
@@ -54,7 +52,6 @@ namespace MGS.Common.Reflection
             var propertyInfo = obj.GetType().GetProperty(name, bindingAttr);
             if (propertyInfo == null)
             {
-                LogUtility.LogError("Set property error: Can not find the property info of {0}.{1}", obj, name);
                 return;
             }
 
@@ -75,7 +72,6 @@ namespace MGS.Common.Reflection
             var methodInfo = obj.GetType().GetMethod(name, bindingAttr);
             if (methodInfo == null)
             {
-                LogUtility.LogError("Invoke method error: Can not find the method info of {0}.{1}()", obj, name);
                 return null;
             }
 

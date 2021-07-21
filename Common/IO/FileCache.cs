@@ -11,8 +11,6 @@
  *************************************************************************/
 
 using MGS.Common.Crypto;
-using MGS.Logger;
-using System;
 using System.IO;
 
 namespace MGS.Common.IO
@@ -91,22 +89,9 @@ namespace MGS.Common.IO
             }
 
             var cacheFile = ResolveFile(key);
-            if (!DirectoryUtility.RequireDirectory(cacheFile))
-            {
-                return null;
-            }
-
-            try
-            {
-                File.Copy(file, cacheFile, true);
-                return key;
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogError("Copy cache file from {0} to {1} for key {2} exception: {3}\r\n{4}",
-                    file, cacheFile, key, ex.Message, ex.StackTrace);
-                return null;
-            }
+            DirectoryUtility.RequireDirectory(cacheFile);
+            File.Copy(file, cacheFile, true);
+            return key;
         }
 
         /// <summary>
@@ -114,31 +99,16 @@ namespace MGS.Common.IO
         /// </summary>
         /// <param name="key">Key for cache file.</param>
         /// <param name="destFile"></param>
-        /// <returns>Is Succeed?</returns>
-        public bool CopyTo(string key, string destFile)
+        public void CopyTo(string key, string destFile)
         {
-            var cacheFile = ResolveFile(key);
             if (string.IsNullOrEmpty(key))
             {
-                return false;
+                return;
             }
 
-            if (!DirectoryUtility.RequireDirectory(destFile))
-            {
-                return false;
-            }
-
-            try
-            {
-                File.Copy(cacheFile, destFile, true);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogError("Copy cache file {0} to {1} by key {2} exception: {3}\r\n{4}",
-                    cacheFile, destFile, key, ex.Message, ex.StackTrace);
-                return false;
-            }
+            DirectoryUtility.RequireDirectory(destFile);
+            var cacheFile = ResolveFile(key);
+            File.Copy(cacheFile, destFile, true);
         }
 
         /// <summary>
@@ -147,20 +117,13 @@ namespace MGS.Common.IO
         /// <param name="key">Key for cache file.</param>
         public void Clear(string key)
         {
-            var cacheFile = ResolveFile(key);
             if (string.IsNullOrEmpty(key))
             {
                 return;
             }
 
-            try
-            {
-                File.Delete(cacheFile);
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogException(ex);
-            }
+            var cacheFile = ResolveFile(key);
+            File.Delete(cacheFile);
         }
 
         /// <summary>
@@ -168,7 +131,8 @@ namespace MGS.Common.IO
         /// </summary>
         public void Clear()
         {
-            DirectoryUtility.DeleteChildrenEntries(cacheDir);
+            Directory.Delete(cacheDir, true);
+            DirectoryUtility.RequireDirectory(cacheDir);
         }
     }
 }

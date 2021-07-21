@@ -12,6 +12,7 @@
 
 using MGS.DesignPattern;
 using MGS.Logger;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -93,14 +94,22 @@ namespace MGS.Internation
                 return false;
             }
 
-            var fileLines = File.ReadAllLines(languageFile, encoding);
-            if (fileLines == null || fileLines.Length == 0)
+            try
             {
-                LogUtility.LogError("Deserialize language error: Can not read any content in the language file at path {0}", languageFile);
+                var fileLines = File.ReadAllLines(languageFile, encoding);
+                if (fileLines == null || fileLines.Length == 0)
+                {
+                    LogUtility.LogError("Deserialize language error: Can not read any content in the language file at path {0}", languageFile);
+                    return false;
+                }
+
+                return Deserialize(language, fileLines);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogException(ex);
                 return false;
             }
-
-            return Deserialize(language, fileLines);
         }
 
         /// <summary>

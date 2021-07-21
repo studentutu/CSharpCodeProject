@@ -13,23 +13,23 @@ namespace MGS.DesignPattern.Tests
             //Compile error
             //var instance = new TestSingleTimer();
 
-            Assert.IsNotNull(TestSingleTimer.Instance);
-            Console.WriteLine("TestSingleTimer.Instance is {0}", TestSingleTimer.Instance);
+            Assert.IsNotNull(TestSingleUpdater.Instance);
+            Console.WriteLine("TestSingleTimer.Instance is {0}", TestSingleUpdater.Instance);
 
             Thread.Sleep(1000);
-            TestSingleTimer.Instance.Enabled = false;
+            TestSingleUpdater.Instance.Enabled = false;
             Console.WriteLine("TestSingleTimer.Instance.Enabled = false");
 
             Thread.Sleep(1000);
-            TestSingleTimer.Instance.Enabled = true;
+            TestSingleUpdater.Instance.Enabled = true;
             Console.WriteLine("TestSingleTimer.Instance.Enabled = true");
 
             Thread.Sleep(1000);
         }
 
-        public sealed class TestSingleTimer : SingleUpdater<TestSingleTimer>
+        public sealed class TestSingleUpdater : SingleUpdater<TestSingleUpdater>
         {
-            private TestSingleTimer() { }
+            private TestSingleUpdater() { }
 
             protected override void Update(DateTime signalTime)
             {

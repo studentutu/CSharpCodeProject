@@ -22,10 +22,10 @@ namespace MGS.Compress.Tests
                 {
                     Console.WriteLine("progress {0}", progress);
                 },
-                (isSucceed, info) =>
+                (isSucceed, info, error) =>
                 {
                     waiting = false;
-                    Console.WriteLine("isSucceed {0}, info {1}", isSucceed, info);
+                    Console.WriteLine("isSucceed {0}, info {1}, error is {2}", isSucceed, info, error);
                     Assert.IsTrue(File.Exists(zipFile));
                 });
 
@@ -47,10 +47,10 @@ namespace MGS.Compress.Tests
                 {
                     Console.WriteLine("progress {0}", progress);
                 },
-                (isSucceed, info) =>
+                (isSucceed, info, error) =>
                 {
                     waiting = false;
-                    Console.WriteLine("isSucceed {0}, info {1}", isSucceed, info);
+                    Console.WriteLine("isSucceed {0}, info {1}, error is {2}", isSucceed, info, error);
                     Assert.IsTrue(File.Exists(zipFile));
                 });
 

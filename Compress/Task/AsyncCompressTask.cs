@@ -48,7 +48,7 @@ namespace MGS.Compress
         public AsyncCompressTask(ICompressor compressor,
             IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null) :
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null) :
             base(compressor, clearBefor, progressCallback, finishedCallback)
         {
             this.entries = entries;

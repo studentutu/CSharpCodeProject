@@ -37,7 +37,7 @@ namespace MGS.Compress
         /// <param name="finishedCallback">Finished callback.</param>
         public virtual void Compress(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null)
         {
             try
             {
@@ -66,11 +66,11 @@ namespace MGS.Compress
                     zipFile.Save();
                 }
 
-                finishedCallback?.Invoke(true, destFile);
+                finishedCallback?.Invoke(true, destFile, null);
             }
             catch (Exception ex)
             {
-                finishedCallback?.Invoke(false, ex);
+                finishedCallback?.Invoke(false, null, ex);
             }
         }
 
@@ -83,7 +83,7 @@ namespace MGS.Compress
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">Finished callback.</param>
         public virtual void Decompress(string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null)
         {
             try
             {
@@ -110,11 +110,11 @@ namespace MGS.Compress
                     zipFile.ExtractAll(destDir, ExtractExistingFileAction.OverwriteSilently);
                 }
 
-                finishedCallback?.Invoke(true, destDir);
+                finishedCallback?.Invoke(true, destDir, null);
             }
             catch (Exception ex)
             {
-                finishedCallback?.Invoke(false, ex);
+                finishedCallback?.Invoke(false, null, ex);
             }
         }
         #endregion

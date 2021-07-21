@@ -42,7 +42,7 @@ namespace MGS.Compress
         /// <param name="finishedCallback"></param>
         public AsyncDecompressTask(ICompressor compressor,
             string filePath, string destDir, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null) :
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null) :
             base(compressor, clearBefor, progressCallback, finishedCallback)
         {
             this.filePath = filePath;

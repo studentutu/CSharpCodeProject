@@ -220,37 +220,30 @@ namespace MGS.Compress
         /// <param name="finishedCallback">Finished callback.</param>
         public void CompressAsync(IEnumerable<string> entries, string destFile,
             Encoding encoding, string directoryPathInArchive = null, bool clearBefor = true,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null)
         {
             if (entries == null)
             {
                 var error = new ArgumentNullException("entries", "The params is invalid.");
-                finishedCallback?.Invoke(false, error);
+                finishedCallback?.Invoke(false, null, error);
                 return;
             }
 
             if (string.IsNullOrEmpty(destFile))
             {
                 var error = new ArgumentNullException("destFile", "The params is invalid.");
-                finishedCallback?.Invoke(false, error);
+                finishedCallback?.Invoke(false, null, error);
                 return;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                finishedCallback?.Invoke(false, ex);
+                finishedCallback?.Invoke(false, null, ex);
                 return;
             }
 
-            var task = new AsyncCompressTask(Compressor, entries, destFile, encoding, directoryPathInArchive, clearBefor,
-                progress =>
-                {
-                    progressCallback?.Invoke(progress);
-                },
-                (isSucceed, info) =>
-                {
-                    finishedCallback?.Invoke(isSucceed, info);
-                });
+            var task = new AsyncCompressTask(Compressor, entries, destFile, encoding,
+                directoryPathInArchive, clearBefor, progressCallback, finishedCallback);
 
             AddTask(task);
         }
@@ -264,37 +257,30 @@ namespace MGS.Compress
         /// <param name="progressCallback">Progress callback.</param>
         /// <param name="finishedCallback">Finished callback.</param>
         public void DecompressAsync(string filePath, string destDir, bool clearBefor = false,
-            Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
+            Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null)
         {
             if (!File.Exists(filePath))
             {
                 var error = new FileNotFoundException("Can not find the file.", filePath);
-                finishedCallback?.Invoke(false, error);
+                finishedCallback?.Invoke(false, null, error);
                 return;
             }
 
             if (string.IsNullOrEmpty(destDir))
             {
                 var error = new ArgumentNullException("destDir", "The params is invalid.");
-                finishedCallback?.Invoke(false, error);
+                finishedCallback?.Invoke(false, null, error);
                 return;
             }
 
             if (!CheckCompressor(Compressor, out Exception ex))
             {
-                finishedCallback?.Invoke(false, ex);
+                finishedCallback?.Invoke(false, null, ex);
                 return;
             }
 
-            var task = new AsyncDecompressTask(Compressor, filePath, destDir, clearBefor,
-                 progress =>
-                 {
-                     progressCallback?.Invoke(progress);
-                 },
-                (isSucceed, info) =>
-                {
-                    finishedCallback?.Invoke(isSucceed, info);
-                });
+            var task = new AsyncDecompressTask(Compressor, filePath, destDir,
+                clearBefor, progressCallback, finishedCallback);
 
             AddTask(task);
         }

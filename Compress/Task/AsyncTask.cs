@@ -34,7 +34,7 @@ namespace MGS.Compress
         protected ICompressor compressor = null;
         protected bool clearBefor = true;
         protected Action<float> progressCallback = null;
-        protected Action<bool, object> finishedCallback = null;
+        protected Action<bool, string, Exception> finishedCallback = null;
         protected Thread thread;
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace MGS.Compress
         /// <param name="progressCallback"></param>
         /// <param name="finishedCallback"></param>
         public AsyncTask(ICompressor compressor, bool clearBefor = true,
-               Action<float> progressCallback = null, Action<bool, object> finishedCallback = null)
+               Action<float> progressCallback = null, Action<bool, string, Exception> finishedCallback = null)
         {
             this.compressor = compressor;
             this.clearBefor = clearBefor;

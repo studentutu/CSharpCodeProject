@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandServo", "CommandServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinUtility", "WinUtility\WinUtility.csproj", "{93887DA2-F638-4CA4-8A7D-7FF06407C8CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCurve", "UCurve\UCurve.csproj", "{1D301377-2284-4FAF-9847-503896CE63DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{93887DA2-F638-4CA4-8A7D-7FF06407C8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93887DA2-F638-4CA4-8A7D-7FF06407C8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93887DA2-F638-4CA4-8A7D-7FF06407C8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D301377-2284-4FAF-9847-503896CE63DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D301377-2284-4FAF-9847-503896CE63DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D301377-2284-4FAF-9847-503896CE63DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D301377-2284-4FAF-9847-503896CE63DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

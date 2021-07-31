@@ -10,7 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Unility
 {
     /// <summary>
     /// Math smoother base mathematical methods.

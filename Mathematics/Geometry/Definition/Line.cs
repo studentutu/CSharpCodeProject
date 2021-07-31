@@ -12,7 +12,7 @@
 
 using System;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Geometry
 {
     /// <summary>
     /// Line in plane rectangular coordinate system.
@@ -74,7 +74,7 @@ namespace MGS.Mathematics
         /// <param name="v1">Vector p1.</param>
         /// <param name="v2">Vector p2.</param>
         /// <returns>The line that pass vector v1 and v2.</returns>
-        public static Line FromPoints(Vector v1, Vector v2)
+        public static Line FromPoints(Vector2 v1, Vector2 v2)
         {
             /*
              *  Ay = kAx + b, By = kBx + b

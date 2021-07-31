@@ -12,7 +12,7 @@
 
 using System;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Curve
 {
     /// <summary>
     /// Key frame base on time and value.

@@ -34,13 +34,13 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Geometry\Circle.cs" />
-    <Compile Include="Geometry\Geometry.cs" />
-    <Compile Include="Geometry\Line.cs" />
-    <Compile Include="Geometry\Relation.cs" />
-    <Compile Include="Geometry\Vector.cs" />
-    <Compile Include="Hermite\HermiteCurve.cs" />
-    <Compile Include="Hermite\KeyFrame.cs" />
+    <Compile Include="Geometry\Definition\Circle.cs" />
+    <Compile Include="Geometry\GeometryUtility.cs" />
+    <Compile Include="Geometry\Definition\Line.cs" />
+    <Compile Include="Geometry\Concept\Relation.cs" />
+    <Compile Include="Geometry\Definition\Vector2.cs" />
+    <Compile Include="Curve\HermiteCurve.cs" />
+    <Compile Include="Curve\KeyFrame.cs" />
     <Compile Include="Unility\MathInterpolator.cs" />
     <Compile Include="Unility\MathSmoother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
  *  Copyright © 2015-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  Geometry.cs
- *  Description  :  Define geometry.
+ *  Description  :  Geometry utility.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -13,12 +13,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Geometry
 {
     /// <summary>
-    /// Geometry.
+    /// Geometry utility.
     /// </summary>
-    public sealed class Geometry
+    public sealed class GeometryUtility
     {
         #region Distance
         /// <summary>
@@ -58,7 +58,7 @@ namespace MGS.Mathematics
         /// <param name="v">Vector.</param>
         /// <param name="L">Line.</param>
         /// <returns>The distance from vector to line.</returns>
-		public static double GetDistance(Vector v, Line L)
+		public static double GetDistance(Vector2 v, Line L)
         {
             /*
              *  y = kx + b <=> kx - y + b = 0
@@ -98,7 +98,7 @@ namespace MGS.Mathematics
         public static Relation GetRelation(Circle c1, Circle c2)
         {
             var re = Relation.Undefined;
-            var cd = Vector.Distance(c1.c, c2.c);
+            var cd = Vector2.Distance(c1.c, c2.c);
             var rd = c1.r + c2.r;
             var rp = Math.Abs(c1.r - c2.r);
 
@@ -167,10 +167,10 @@ namespace MGS.Mathematics
         /// <param name="c">Circle.</param>
         /// <param name="v">Vector.</param>
         /// <returns>Relation of circle and vector.</returns>
-        public static Relation GetRelation(Circle c, Vector v)
+        public static Relation GetRelation(Circle c, Vector2 v)
         {
             var re = Relation.Undefined;
-            var cp = Vector.Distance(c.c, v);
+            var cp = Vector2.Distance(c.c, v);
 
             if (cp > c.r)
             {
@@ -220,7 +220,7 @@ namespace MGS.Mathematics
         /// <param name="L">Line.</param>
         /// <param name="v">Vector.</param>
         /// <returns>Relation of line and vector.</returns>
-        public static Relation GetRelation(Line L, Vector v)
+        public static Relation GetRelation(Line L, Vector2 v)
         {
             var re = Relation.Undefined;
             if (L.k == double.PositiveInfinity)
@@ -251,12 +251,12 @@ namespace MGS.Mathematics
 
         #region Intersection
         /// <summary>
-        /// Get intersection of two lines.
+        /// Get intersections of two lines.
         /// </summary>
         /// <param name="L1">Line L1.</param>
         /// <param name="L2">Line L2.</param>
         /// <returns>Intersection of two lines.</returns>
-        public static List<Vector> GetIntersection(Line L1, Line L2)
+        public static List<Vector2> GetIntersections(Line L1, Line L2)
         {
             /*
              *  y1 = k1x + b1, y2 = k2x + b2
@@ -288,7 +288,7 @@ namespace MGS.Mathematics
                 x = (L1.b - L2.b) / (L2.k - L1.k);
                 y = L1.k * x + L1.b;
             }
-            return new List<Vector> { new Vector(x, y) };
+            return new List<Vector2> { new Vector2(x, y) };
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace MGS.Mathematics
         /// <param name="c1">Circle c1.</param>
         /// <param name="c2">Circle c2.</param>
         /// <returns>Intersections of two circles.</returns>
-        public static List<Vector> GetIntersections(Circle c1, Circle c2)
+        public static List<Vector2> GetIntersections(Circle c1, Circle c2)
         {
             /*
              *               2          2    2          2          2    2
@@ -349,7 +349,7 @@ namespace MGS.Mathematics
         /// <param name="C">Circle.</param>
         /// <param name="L">Line.</param>
         /// <returns>Intersections of circle and line.</returns>
-        public static List<Vector> GetIntersections(Circle C, Line L)
+        public static List<Vector2> GetIntersections(Circle C, Line L)
         {
             /*
              *          2          2   2
@@ -373,19 +373,19 @@ namespace MGS.Mathematics
             var re = GetRelation(C, L);
             if (re == Relation.OutsideTangent || re == Relation.Intersect)
             {
-                var points = new List<Vector>();
+                var points = new List<Vector2>();
                 if (L.k == double.PositiveInfinity)
                 {
                     var x1 = L.b;
                     var dy = Math.Sqrt(Math.Pow(C.r, 2) - Math.Pow(x1 - C.c.x, 2));
                     var y1 = dy + C.c.y;
-                    points.Add(new Vector(x1, y1));
+                    points.Add(new Vector2(x1, y1));
 
                     if (re == Relation.Intersect)
                     {
                         var x2 = x1;
                         var y2 = -dy + C.c.y;
-                        points.Add(new Vector(x2, y2));
+                        points.Add(new Vector2(x2, y2));
                     }
                 }
                 else
@@ -397,13 +397,13 @@ namespace MGS.Mathematics
 
                     var x1 = (-b + Math.Sqrt(delta)) / (2 * a);
                     var y1 = L.k * x1 + L.b;
-                    points.Add(new Vector(x1, y1));
+                    points.Add(new Vector2(x1, y1));
 
                     if (re == Relation.Intersect)
                     {
                         var x2 = (-b - Math.Sqrt(delta)) / (2 * a);
                         var y2 = L.k * x2 + L.b;
-                        points.Add(new Vector(x2, y2));
+                        points.Add(new Vector2(x2, y2));
                     }
                 }
                 return points;

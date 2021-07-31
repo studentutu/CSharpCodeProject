@@ -10,9 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Mathematics.Unility;
 using System.Collections.Generic;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Curve
 {
     /// <summary>
     /// Piecewise three hermite spline curve.

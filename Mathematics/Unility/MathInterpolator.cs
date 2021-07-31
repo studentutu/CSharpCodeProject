@@ -12,7 +12,7 @@
 
 using System;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Unility
 {
     /// <summary>
     /// Interpolator base mathematical methods.

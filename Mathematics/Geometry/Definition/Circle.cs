@@ -12,7 +12,7 @@
 
 using System;
 
-namespace MGS.Mathematics
+namespace MGS.Mathematics.Geometry
 {
     /// <summary>
     /// Circle in plane rectangular coordinate system.
@@ -29,7 +29,7 @@ namespace MGS.Mathematics
         /// <summary>
         /// Center.
         /// </summary>
-        public Vector c;
+        public Vector2 c;
 
         /// <summary>
         /// Radius.
@@ -41,7 +41,7 @@ namespace MGS.Mathematics
         /// </summary>
         public static Circle Unit
         {
-            get { return new Circle(Vector.Zero, 1); }
+            get { return new Circle(Vector2.Zero, 1); }
         }
         #endregion
 
@@ -51,7 +51,7 @@ namespace MGS.Mathematics
         /// </summary>
         /// <param name="c">Center.</param>
         /// <param name="r">Radius.</param>
-        public Circle(Vector c, double r)
+        public Circle(Vector2 c, double r)
         {
             this.c = c;
             this.r = r;

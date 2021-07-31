@@ -53,6 +53,11 @@ namespace MGS.Mathematics
         /// <returns></returns>
         public static double Bezier(double p0, double p1, double t0, double t)
         {
+            /*
+             *      2                  2
+             * (1-t) p1 + 2t(1-t)t0 + t p1
+             */
+
             return Math.Pow(1 - t, 2) * p1 + 2 * t * (1 - t) * t0 + Math.Pow(t, 2) * p1;
         }
 
@@ -67,6 +72,11 @@ namespace MGS.Mathematics
         /// <returns></returns>
         public static double Bezier(double p0, double p1, double t0, double t1, double t)
         {
+            /*
+             *      3            2            2      3
+             * (1-t) p0 + 3t(1-t) t0 + 3(1-t)t t1 + t p1
+             */
+
             return Math.Pow(1 - t, 3) * p0 + 3 * t * Math.Pow(1 - t, 2) * t0 + 3 * (1 - t) * Math.Pow(t, 2) * t1 + Math.Pow(t, 3) * p1;
         }
 

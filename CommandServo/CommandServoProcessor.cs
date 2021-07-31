@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using MGS.DesignPattern;
-using System;
 
 namespace MGS.CommandServo
 {
@@ -77,8 +76,7 @@ namespace MGS.CommandServo
         /// <summary>
         /// On update event.
         /// </summary>
-        /// <param name="signalTime">Signal time.</param>
-        protected override void Update(DateTime signalTime)
+        protected override void Update()
         {
             if (!IsSettingsValid)
             {

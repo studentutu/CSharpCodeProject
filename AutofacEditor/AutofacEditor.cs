@@ -16,7 +16,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Autofac.Editor
+namespace Autofac
 {
     public class AutofacEditor : AssetPostprocessor
     {

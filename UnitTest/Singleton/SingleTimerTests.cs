@@ -31,7 +31,7 @@ namespace MGS.DesignPattern.Tests
         {
             private TestSingleUpdater() { }
 
-            protected override void Update(DateTime signalTime)
+            protected override void Update()
             {
                 Console.WriteLine("TestSingleTimer Tick");
             }

@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
- *  Copyright © 2017-2019 Mogoson. All rights reserved.
+ *  Copyright © 2018-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ICurve.cs
- *  Description  :  Define curve interface.
+ *  File         :  ISkinnedMesh.cs
+ *  Description  :  Define interface of skinned mesh.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -12,32 +12,40 @@
 
 using UnityEngine;
 
-namespace MGS.UCurve
+namespace MGS.SkinnedMesh
 {
     /// <summary>
-    /// Interface of curve.
+    /// Interface of skinned mesh.
     /// </summary>
-    public interface ICurve
+    public interface ISkinnedMesh
     {
         #region Property
         /// <summary>
-        /// Length of curve.
+        /// Skinned mesh renderer of skin.
         /// </summary>
-        float Length { get; }
+        SkinnedMeshRenderer Renderer { get; }
 
         /// <summary>
-        /// Max key of curve.
+        /// Mesh collider of skin.
         /// </summary>
-        float MaxKey { get; }
+        MeshCollider Collider { get; }
         #endregion
 
         #region Method
         /// <summary>
-        /// Get point on curve at key.
+        /// Rebuild the mesh of skin.
         /// </summary>
-        /// <param name="key">Key of curve.</param>
-        /// <returns>The point on curve at key.</returns>
-        Vector3 GetPointAt(float key);
+        void Rebuild();
+
+        /// <summary>
+        /// Attach collider to skin mesh.
+        /// </summary>
+        void AttachCollider();
+
+        /// <summary>
+        /// Remove collider from skin mesh.
+        /// </summary>
+        void RemoveCollider();
         #endregion
     }
 }

@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
- *  Copyright © 2017-2019 Mogoson. All rights reserved.
+ *  Copyright © 2018-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ICurve.cs
- *  Description  :  Define curve interface.
+ *  File         :  ICurveHose.cs
+ *  Description  :  Define interface of curve hose.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -10,34 +10,35 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using UnityEngine;
+using MGS.UCurve;
 
-namespace MGS.UCurve
+namespace MGS.SkinnedMesh
 {
     /// <summary>
-    /// Interface of curve.
+    /// Interface of curve hose.
     /// </summary>
-    public interface ICurve
+    public interface ICurveHose : ICurve, ISkinnedMesh
     {
         #region Property
         /// <summary>
-        /// Length of curve.
+        /// Polygon of hose cross section.
         /// </summary>
-        float Length { get; }
+        int Polygon { set; get; }
 
         /// <summary>
-        /// Max key of curve.
+        /// Segment length of subdivide hose.
         /// </summary>
-        float MaxKey { get; }
-        #endregion
+        float Segment { set; get; }
 
-        #region Method
         /// <summary>
-        /// Get point on curve at key.
+        /// Radius of hose mesh.
         /// </summary>
-        /// <param name="key">Key of curve.</param>
-        /// <returns>The point on curve at key.</returns>
-        Vector3 GetPointAt(float key);
+        float Radius { set; get; }
+
+        /// <summary>
+        /// Is seal at both ends of hose?
+        /// </summary>
+        bool Seal { set; get; }
         #endregion
     }
 }

@@ -69,8 +69,7 @@ namespace MGS.Compress
         /// <summary>
         /// On update event.
         /// </summary>
-        /// <param name="signalTime">Signal time.</param>
-        protected override void Update(DateTime signalTime)
+        protected override void Update()
         {
             if (taskCache.Count == 0)
             {

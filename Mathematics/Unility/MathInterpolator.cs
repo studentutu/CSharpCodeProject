@@ -10,6 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
+
 namespace MGS.Mathematics
 {
     /// <summary>
@@ -18,15 +20,54 @@ namespace MGS.Mathematics
     public sealed class MathInterpolator
     {
         /// <summary>
-        /// Interpolate between a and b by t.
+        /// Interpolate between p0 and p1 by t.
         /// </summary>
-        /// <param name="from">Start value of interpolate value.</param>
-        /// <param name="to">End value of interpolate value.</param>
+        /// <param name="p0">Start value of interpolate value.</param>
+        /// <param name="p1">End value of interpolate value.</param>
         /// <param name="t">t is between 0 and 1.</param>
         /// <returns></returns>
-        public static double Lerp(double from, double to, double t)
+        public static double Lerp(double p0, double p1, double t)
         {
-            return from + (to - from) * t;
+            return p0 + (p1 - p0) * t;
+        }
+
+        /// <summary>
+        /// Linear bezier interpolate from p0 to p1 by t.
+        /// </summary>
+        /// <param name="p0">Start value of interpolate value.</param>
+        /// <param name="p1">End value of interpolate value.</param>
+        /// <param name="t">t is between 0 and 1.</param>
+        /// <returns></returns>
+        public static double Bezier(double p0, double p1, double t)
+        {
+            return (1 - t) * p0 + t * p1;
+        }
+
+        /// <summary>
+        /// Quadratic bezier interpolate from p0 to p1 base t0 by t.
+        /// </summary>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <param name="t0"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static double Bezier(double p0, double p1, double t0, double t)
+        {
+            return Math.Pow(1 - t, 2) * p1 + 2 * t * (1 - t) * t0 + Math.Pow(t, 2) * p1;
+        }
+
+        /// <summary>
+        /// Cubic bezier interpolate from p0 to p1 base t0 and t1 by t.
+        /// </summary>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <param name="t0"></param>
+        /// <param name="t1"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static double Bezier(double p0, double p1, double t0, double t1, double t)
+        {
+            return Math.Pow(1 - t, 3) * p0 + 3 * t * Math.Pow(1 - t, 2) * t0 + 3 * (1 - t) * Math.Pow(t, 2) * t1 + Math.Pow(t, 3) * p1;
         }
 
         /// <summary>

@@ -10,8 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using System;
-using System.Timers;
+using System.Threading;
 
 namespace MGS.DesignPattern
 {
@@ -27,25 +26,17 @@ namespace MGS.DesignPattern
         /// <summary>
         /// Interval of update [ms].
         /// </summary>
-        public double Interval
-        {
-            set { Timer.Interval = value; }
-            get { return Timer.Interval; }
-        }
+        public int Interval { set; get; }
 
         /// <summary>
         /// Enabled of update.
         /// </summary>
-        public bool Enabled
-        {
-            set { Timer.Enabled = value; }
-            get { return Timer.Enabled; }
-        }
+        public bool Enabled { set; get; }
 
         /// <summary>
-        /// The timer to update.
+        /// The thread to update.
         /// </summary>
-        protected Timer Timer { get; }
+        private Thread thread;
         #endregion
 
         #region Method
@@ -54,19 +45,32 @@ namespace MGS.DesignPattern
         /// </summary>
         protected SingleUpdater()
         {
-            Timer = new Timer
-            {
-                AutoReset = true
-            };
-            Timer.Elapsed += (s, e) => Update(e.SignalTime);
-            Timer.Start();
+            Interval = 200;
+            Enabled = true;
+
+            thread = new Thread(Start) { IsBackground = true };
+            thread.Start();
         }
 
         /// <summary>
-        /// On update event.
+        /// On thread start event.
         /// </summary>
-        /// <param name="signalTime">Signal time.</param>
-        protected abstract void Update(DateTime signalTime);
+        private void Start()
+        {
+            while (true)
+            {
+                if (Enabled)
+                {
+                    Update();
+                }
+                Thread.Sleep(Interval);
+            }
+        }
+
+        /// <summary>
+        /// On thread update event.
+        /// </summary>
+        protected abstract void Update();
         #endregion
     }
 }

@@ -21,104 +21,91 @@ namespace MGS.Mathematics
         /// <summary>
         /// Three point linear smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] ThreePointLinear(double[] source)
+        public static double[] ThreePointLinear(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 3)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (5 * source[0] + 2 * source[1] - source[2]) / 6;
+                r[0] = (5 * s[0] + 2 * s[1] - s[2]) / 6;
                 for (int i = 1; i < n - 1; i++)
                 {
-                    result[i] = (source[i - 1] + source[i] + source[i + 1]) / 3;
+                    r[i] = (s[i - 1] + s[i] + s[i + 1]) / 3;
                 }
-                result[n - 1] = (5 * source[n - 1] + 2 * source[n - 2] - source[n - 3]) / 6;
+                r[n - 1] = (5 * s[n - 1] + 2 * s[n - 2] - s[n - 3]) / 6;
             }
-            return result;
+            return r;
         }
 
         /// <summary>
         /// Five point linear smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointLinear(double[] source)
+        public static double[] FivePointLinear(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 5)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (3 * source[0] + 2 * source[1] + source[2] - source[4]) / 5;
-                result[1] = (4 * source[0] + 3 * source[1] + 2 * source[2] + source[3]) / 10;
+                r[0] = (3 * s[0] + 2 * s[1] + s[2] - s[4]) / 5;
+                r[1] = (4 * s[0] + 3 * s[1] + 2 * s[2] + s[3]) / 10;
                 for (int i = 2; i < n - 2; i++)
                 {
-                    result[i] = (source[i - 2] + source[i - 1] + source[i] + source[i + 1] + source[i + 2]) / 5;
+                    r[i] = (s[i - 2] + s[i - 1] + s[i] + s[i + 1] + s[i + 2]) / 5;
                 }
-                result[n - 2] = (4 * source[n - 1] + 3 * source[n - 2] + 2 * source[n - 3] + source[n - 4]) / 10;
-                result[n - 1] = (3 * source[n - 1] + 2 * source[n - 2] + source[n - 3] - source[n - 5]) / 5;
+                r[n - 2] = (4 * s[n - 1] + 3 * s[n - 2] + 2 * s[n - 3] + s[n - 4]) / 10;
+                r[n - 1] = (3 * s[n - 1] + 2 * s[n - 2] + s[n - 3] - s[n - 5]) / 5;
             }
-            return result;
+            return r;
         }
 
         /// <summary>
         /// Seven point linear smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointLinear(double[] source)
+        public static double[] SevenPointLinear(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 7)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (13 * source[0] + 10 * source[1] + 7 * source[2] + 4 * source[3] +
-                    source[4] - 2 * source[5] - 5 * source[6]) / 28;
-
-                result[1] = (5 * source[0] + 4 * source[1] + 3 * source[2] + 2 * source[3] +
-                    source[4] - source[6]) / 14;
-
-                result[2] = (7 * source[0] + 6 * source[1] + 5 * source[2] + 4 * source[3] +
-                    3 * source[4] + 2 * source[5] + source[6]) / 28;
-
+                r[0] = (13 * s[0] + 10 * s[1] + 7 * s[2] + 4 * s[3] + s[4] - 2 * s[5] - 5 * s[6]) / 28;
+                r[1] = (5 * s[0] + 4 * s[1] + 3 * s[2] + 2 * s[3] + s[4] - s[6]) / 14;
+                r[2] = (7 * s[0] + 6 * s[1] + 5 * s[2] + 4 * s[3] + 3 * s[4] + 2 * s[5] + s[6]) / 28;
                 for (int i = 3; i < n - 3; i++)
                 {
-                    result[i] = (source[i - 3] + source[i - 2] + source[i - 1] + source[i] +
-                        source[i + 1] + source[i + 2] + source[i + 3]) / 7;
+                    r[i] = (s[i - 3] + s[i - 2] + s[i - 1] + s[i] + s[i + 1] + s[i + 2] + s[i + 3]) / 7;
                 }
-
-                result[n - 3] = (7 * source[n - 1] + 6 * source[n - 2] + 5 * source[n - 3] +
-                    4 * source[n - 4] + 3 * source[n - 5] + 2 * source[n - 6] + source[n - 7]) / 28;
-
-                result[n - 2] = (5 * source[n - 1] + 4 * source[n - 2] + 3 * source[n - 3] +
-                    2 * source[n - 4] + source[n - 5] - source[n - 7]) / 14;
-
-                result[n - 1] = (13 * source[n - 1] + 10 * source[n - 2] + 7 * source[n - 3] +
-                    4 * source[n - 4] + source[n - 5] - 2 * source[n - 6] - 5 * source[n - 7]) / 28;
+                r[n - 3] = (7 * s[n - 1] + 6 * s[n - 2] + 5 * s[n - 3] + 4 * s[n - 4] + 3 * s[n - 5] + 2 * s[n - 6] + s[n - 7]) / 28;
+                r[n - 2] = (5 * s[n - 1] + 4 * s[n - 2] + 3 * s[n - 3] + 2 * s[n - 4] + s[n - 5] - s[n - 7]) / 14;
+                r[n - 1] = (13 * s[n - 1] + 10 * s[n - 2] + 7 * s[n - 3] + 4 * s[n - 4] + s[n - 5] - 2 * s[n - 6] - 5 * s[n - 7]) / 28;
             }
-            return result;
+            return r;
         }
         #endregion
 
@@ -126,77 +113,64 @@ namespace MGS.Mathematics
         /// <summary>
         /// Five point quadratic smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointQuadratic(double[] source)
+        public static double[] FivePointQuadratic(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 5)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (31 * source[0] + 9 * source[1] - 3 * source[2] - 5 * source[3] + 3 * source[4]) / 35;
-                result[1] = (9 * source[0] + 13 * source[1] + 12 * source[2] + 6 * source[3] - 5 * source[4]) / 35;
+                r[0] = (31 * s[0] + 9 * s[1] - 3 * s[2] - 5 * s[3] + 3 * s[4]) / 35;
+                r[1] = (9 * s[0] + 13 * s[1] + 12 * s[2] + 6 * s[3] - 5 * s[4]) / 35;
                 for (int i = 2; i < n - 2; i++)
                 {
-                    result[i] = (-3 * (source[i - 2] + source[i + 2]) +
-                              12 * (source[i - 1] + source[i + 1]) + 17 * source[i]) / 35;
+                    r[i] = (-3 * (s[i - 2] + s[i + 2]) +
+                              12 * (s[i - 1] + s[i + 1]) + 17 * s[i]) / 35;
                 }
-                result[n - 2] = (9 * source[n - 1] + 13 * source[n - 2] + 12 * source[n - 3] + 6 * source[n - 4] - 5 * source[n - 5]) / 35;
-                result[n - 1] = (31 * source[n - 1] + 9 * source[n - 2] - 3 * source[n - 3] - 5 * source[n - 4] + 3 * source[n - 5]) / 35;
+                r[n - 2] = (9 * s[n - 1] + 13 * s[n - 2] + 12 * s[n - 3] + 6 * s[n - 4] - 5 * s[n - 5]) / 35;
+                r[n - 1] = (31 * s[n - 1] + 9 * s[n - 2] - 3 * s[n - 3] - 5 * s[n - 4] + 3 * s[n - 5]) / 35;
             }
-            return result;
+            return r;
         }
 
         /// <summary>
         /// Seven point quadratic smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointQuadratic(double[] source)
+        public static double[] SevenPointQuadratic(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 7)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (32 * source[0] + 15 * source[1] + 3 * source[2] - 4 * source[3] -
-                    6 * source[4] - 3 * source[5] + 5 * source[6]) / 42;
-
-                result[1] = (5 * source[0] + 4 * source[1] + 3 * source[2] + 2 * source[3] +
-                    source[4] - source[6]) / 14;
-
-                result[2] = (source[0] + 3 * source[1] + 4 * source[2] + 4 * source[3] +
-                    3 * source[4] + source[5] - 2 * source[6]) / 14;
-
+                r[0] = (32 * s[0] + 15 * s[1] + 3 * s[2] - 4 * s[3] - 6 * s[4] - 3 * s[5] + 5 * s[6]) / 42;
+                r[1] = (5 * s[0] + 4 * s[1] + 3 * s[2] + 2 * s[3] + s[4] - s[6]) / 14;
+                r[2] = (s[0] + 3 * s[1] + 4 * s[2] + 4 * s[3] + 3 * s[4] + s[5] - 2 * s[6]) / 14;
                 for (int i = 3; i < n - 3; i++)
                 {
-                    result[i] = (-2 * (source[i - 3] + source[i + 3]) + 3 * (source[i - 2] + source[i + 2]) +
-                        6 * (source[i - 1] + source[i + 1]) + 7 * source[i]) / 21;
+                    r[i] = (-2 * (s[i - 3] + s[i + 3]) + 3 * (s[i - 2] + s[i + 2]) + 6 * (s[i - 1] + s[i + 1]) + 7 * s[i]) / 21;
                 }
-
-                result[n - 3] = (source[n - 1] + 3 * source[n - 2] + 4 * source[n - 3] + 4 * source[n - 4] +
-                    3 * source[n - 5] + source[n - 6] - 2 * source[n - 7]) / 14;
-
-                result[n - 2] = (5 * source[n - 1] + 4 * source[n - 2] + 3 * source[n - 3] + 2 * source[n - 4] +
-                    source[n - 5] - source[n - 7]) / 14;
-
-                result[n - 1] = (32 * source[n - 1] + 15 * source[n - 2] + 3 * source[n - 3] - 4 * source[n - 4] -
-                    6 * source[n - 5] - 3 * source[n - 6] + 5 * source[n - 7]) / 42;
+                r[n - 3] = (s[n - 1] + 3 * s[n - 2] + 4 * s[n - 3] + 4 * s[n - 4] + 3 * s[n - 5] + s[n - 6] - 2 * s[n - 7]) / 14;
+                r[n - 2] = (5 * s[n - 1] + 4 * s[n - 2] + 3 * s[n - 3] + 2 * s[n - 4] + s[n - 5] - s[n - 7]) / 14;
+                r[n - 1] = (32 * s[n - 1] + 15 * s[n - 2] + 3 * s[n - 3] - 4 * s[n - 4] - 6 * s[n - 5] - 3 * s[n - 6] + 5 * s[n - 7]) / 42;
             }
-            return result;
+            return r;
         }
         #endregion
 
@@ -204,85 +178,63 @@ namespace MGS.Mathematics
         /// <summary>
         /// Five point cubic smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] FivePointCubic(double[] source)
+        public static double[] FivePointCubic(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 5)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (69 * source[0] + 4 * source[1] - 6 * source[2] +
-                    4 * source[3] - source[4]) / 70;
-
-                result[1] = (2 * source[0] + 27 * source[1] + 12 * source[2] -
-                    8 * source[3] + 2 * source[4]) / 35;
-
+                r[0] = (69 * s[0] + 4 * s[1] - 6 * s[2] + 4 * s[3] - s[4]) / 70;
+                r[1] = (2 * s[0] + 27 * s[1] + 12 * s[2] - 8 * s[3] + 2 * s[4]) / 35;
                 for (int i = 2; i < n - 2; i++)
                 {
-                    result[i] = (-3 * (source[i - 2] + source[i + 2]) + 12 * (source[i - 1] +
-                        source[i + 1]) + 17 * source[i]) / 35;
+                    r[i] = (-3 * (s[i - 2] + s[i + 2]) + 12 * (s[i - 1] + s[i + 1]) + 17 * s[i]) / 35;
                 }
-
-                result[n - 2] = (2 * source[n - 5] - 8 * source[n - 4] + 12 * source[n - 3] +
-                    27 * source[n - 2] + 2 * source[n - 1]) / 35;
-
-                result[n - 1] = (-source[n - 5] + 4 * source[n - 4] - 6 * source[n - 3] +
-                    4 * source[n - 2] + 69 * source[n - 1]) / 70;
+                r[n - 2] = (2 * s[n - 5] - 8 * s[n - 4] + 12 * s[n - 3] + 27 * s[n - 2] + 2 * s[n - 1]) / 35;
+                r[n - 1] = (-s[n - 5] + 4 * s[n - 4] - 6 * s[n - 3] + 4 * s[n - 2] + 69 * s[n - 1]) / 70;
             }
-            return result;
+            return r;
         }
 
         /// <summary>
         /// Seven point cubic smooth.
         /// </summary>
-        /// <param name="source">Data source.</param>
+        /// <param name="s">Data source.</param>
         /// <returns>Smooth result.</returns>
-        public static double[] SevenPointCubic(double[] source)
+        public static double[] SevenPointCubic(double[] s)
         {
-            var n = source.Length;
-            var result = new double[n];
+            var n = s.Length;
+            var r = new double[n];
             if (n < 7)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[i] = source[i];
+                    r[i] = s[i];
                 }
             }
             else
             {
-                result[0] = (39 * source[0] + 8 * source[1] - 4 * source[2] - 4 * source[3] +
-                    source[4] + 4 * source[5] - 2 * source[6]) / 42;
-
-                result[1] = (8 * source[0] + 19 * source[1] + 16 * source[2] + 6 * source[3] -
-                    4 * source[4] - 7 * source[5] + 4 * source[6]) / 42;
-
-                result[2] = (-4 * source[0] + 16 * source[1] + 19 * source[2] + 12 * source[3] +
-                    2 * source[4] - 4 * source[5] + source[6]) / 42;
-
+                r[0] = (39 * s[0] + 8 * s[1] - 4 * s[2] - 4 * s[3] + s[4] + 4 * s[5] - 2 * s[6]) / 42;
+                r[1] = (8 * s[0] + 19 * s[1] + 16 * s[2] + 6 * s[3] - 4 * s[4] - 7 * s[5] + 4 * s[6]) / 42;
+                r[2] = (-4 * s[0] + 16 * s[1] + 19 * s[2] + 12 * s[3] + 2 * s[4] - 4 * s[5] + s[6]) / 42;
                 for (int i = 3; i <= n - 4; i++)
                 {
-                    result[i] = (-2 * (source[i - 3] + source[i + 3]) + 3 * (source[i - 2] +
-                        source[i + 2]) + 6 * (source[i - 1] + source[i + 1]) + 7 * source[i]) / 21;
+                    r[i] = (-2 * (s[i - 3] + s[i + 3]) + 3 * (s[i - 2] + s[i + 2]) + 6 * (s[i - 1] + s[i + 1]) + 7 * s[i]) / 21;
                 }
-
-                result[n - 3] = (-4 * source[n - 1] + 16 * source[n - 2] + 19 * source[n - 3] +
-                    12 * source[n - 4] + 2 * source[n - 5] - 4 * source[n - 6] + source[n - 7]) / 42;
-
-                result[n - 2] = (8 * source[n - 1] + 19 * source[n - 2] + 16 * source[n - 3] +
-                    6 * source[n - 4] - 4 * source[n - 5] - 7 * source[n - 6] + 4 * source[n - 7]) / 42;
-
-                result[n - 1] = (39 * source[n - 1] + 8 * source[n - 2] - 4 * source[n - 3] -
-                    4 * source[n - 4] + source[n - 5] + 4 * source[n - 6] - 2 * source[n - 7]) / 42;
+                r[n - 3] = (-4 * s[n - 1] + 16 * s[n - 2] + 19 * s[n - 3] + 12 * s[n - 4] + 2 * s[n - 5] - 4 * s[n - 6] + s[n - 7]) / 42;
+                r[n - 2] = (8 * s[n - 1] + 19 * s[n - 2] + 16 * s[n - 3] + 6 * s[n - 4] - 4 * s[n - 5] - 7 * s[n - 6] + 4 * s[n - 7]) / 42;
+                r[n - 1] = (39 * s[n - 1] + 8 * s[n - 2] - 4 * s[n - 3] - 4 * s[n - 4] + s[n - 5] + 4 * s[n - 6] - 2 * s[n - 7]) / 42;
             }
-            return result;
+            return r;
         }
         #endregion
     }

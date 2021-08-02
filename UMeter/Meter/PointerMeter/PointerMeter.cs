@@ -17,10 +17,9 @@ namespace MGS.Meter
     /// <summary>
     /// Meter with pointers.
     /// </summary>
-    [AddComponentMenu("MGS/Meter/PointerMeter")]
     public class PointerMeter : MonoBehaviour, IPointerMeter
     {
-        #region Field and Property 
+        #region Field and Property
         /// <summary>
         /// Pointers of meter.
         /// First is main pointer.

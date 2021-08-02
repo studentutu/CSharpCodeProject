@@ -18,10 +18,9 @@ namespace MGS.Meter
     /// <summary>
     /// Meter with lerp rotate pointers.
     /// </summary>
-    [AddComponentMenu("MGS/Meter/LerpPointerMeter")]
     public class LerpPointerMeter : PointerMeter
     {
-        #region Field and Property 
+        #region Field and Property
         /// <summary>
         /// Meter lerp mode.
         /// </summary>

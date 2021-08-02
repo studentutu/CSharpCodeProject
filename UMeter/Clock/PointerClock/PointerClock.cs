@@ -18,10 +18,9 @@ namespace MGS.Meter
     /// <summary>
     /// Clock with Hour, Minute and Second pointers.
     /// </summary>
-    [AddComponentMenu("MGS/Meter/PointerClock")]
     public class PointerClock : MonoBehaviour, IClock
     {
-        #region Field and Property 
+        #region Field and Property
         /// <summary>
         /// Pointer of clock.
         /// </summary>

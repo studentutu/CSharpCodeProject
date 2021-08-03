@@ -47,17 +47,41 @@ namespace MGS.Meter
         /// <summary>
         /// Event on start lerp.
         /// </summary>
-        public event Action OnLerpStart;
+        public event Action OnLerpStartEvent
+        {
+            add { onLerpStartEvent += value; }
+            remove { onLerpStartEvent -= value; }
+        }
+        /// <summary>
+        /// Event on start lerp.
+        /// </summary>
+        protected Action onLerpStartEvent;
 
         /// <summary>
         /// Event on stay lerp.
         /// </summary>
-        public event Action OnLerpStay;
+        public event Action OnLerpStayEvent
+        {
+            add { onLerpStayEvent += value; }
+            remove { onLerpStayEvent -= value; }
+        }
+        /// <summary>
+        /// Event on stay lerp.
+        /// </summary>
+        protected Action onLerpStayEvent;
 
         /// <summary>
         /// Event on exit lerp.
         /// </summary>
-        public event Action OnLerpExit;
+        public event Action OnLerpExitEvent
+        {
+            add { onLerpExitEvent += value; }
+            remove { onLerpExitEvent -= value; }
+        }
+        /// <summary>
+        /// Event on exit lerp.
+        /// </summary>
+        protected Action onLerpExitEvent;
         #endregion
 
         #region Protected Method
@@ -70,7 +94,7 @@ namespace MGS.Meter
             CheckLerp(mainAngle);
             if (enabled)
             {
-                InvokeOnLerpStartEvent();
+                onLerpStartEvent?.Invoke();
             }
         }
 
@@ -97,11 +121,11 @@ namespace MGS.Meter
 
             SetPointersAngle(LerpAngle);
             CheckLerp(mainPointerAngle);
-            InvokeOnLerpStayEvent();
+            onLerpStayEvent?.Invoke();
 
             if (!enabled)
             {
-                InvokeOnLerpExitEvent();
+                onLerpExitEvent?.Invoke();
             }
         }
 
@@ -112,30 +136,6 @@ namespace MGS.Meter
         protected void CheckLerp(float mainAngle)
         {
             enabled = mainAngle - LerpAngle != 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected void InvokeOnLerpStartEvent()
-        {
-            OnLerpStart?.Invoke();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected void InvokeOnLerpStayEvent()
-        {
-            OnLerpStay?.Invoke();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected void InvokeOnLerpExitEvent()
-        {
-            OnLerpExit?.Invoke();
         }
         #endregion
     }

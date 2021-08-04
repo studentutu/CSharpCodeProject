@@ -141,7 +141,18 @@ namespace MGS.Element
         protected virtual void Awake()
         {
             StartAngles = transform.localEulerAngles;
-            reverter = Revert();
+        }
+
+        /// <summary>
+        /// Down rocker.
+        /// </summary>
+        protected virtual void OnMouseDown()
+        {
+            if (reverter != null)
+            {
+                StopCoroutine(reverter);
+                reverter = null;
+            }
         }
 
         /// <summary>
@@ -154,7 +165,6 @@ namespace MGS.Element
                 return;
             }
 
-            StopCoroutine(reverter);
             var x = Input.GetAxis("Mouse Y");
             var y = Input.GetAxis("Mouse X");
             angles += new Vector3(x, -y) * rotateSpeed * Time.deltaTime;
@@ -178,6 +188,10 @@ namespace MGS.Element
 
             if (revertSpeed > 0)
             {
+                if (reverter == null)
+                {
+                    reverter = Revert();
+                }
                 StartCoroutine(reverter);
             }
             onReleaseEvent?.Invoke();
@@ -194,6 +208,7 @@ namespace MGS.Element
                 Rotate(angles);
                 yield return null;
             }
+            reverter = null;
             onRevertEvent?.Invoke();
         }
 

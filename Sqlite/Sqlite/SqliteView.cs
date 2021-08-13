@@ -20,7 +20,7 @@ namespace MGS.Sqlite
     public class SqliteView : ISqliteView
     {
         /// <summary>
-        /// Name of source.
+        /// Name of source table.
         /// </summary>
         public string Name { protected set; get; }
 
@@ -36,7 +36,7 @@ namespace MGS.Sqlite
         /// <param name="handler">Instance of sqlite handler.</param>
         public SqliteView(string name, ISqliteHandler handler)
         {
-            this.Name = name;
+            Name = name;
             this.handler = handler;
         }
 
@@ -49,7 +49,7 @@ namespace MGS.Sqlite
         {
             if (string.IsNullOrEmpty(command))
             {
-                command = string.Format(SqliteConstant.CMD_SELECT_FORMAT, "*", Name);
+                command = string.Format(SqliteConst.CMD_SELECT_FORMAT, "*", Name);
             }
             return handler.ExecuteQuery(command);
         }

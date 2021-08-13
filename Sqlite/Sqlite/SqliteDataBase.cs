@@ -10,8 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Logger;
-using System;
+using System.Data;
 using System.IO;
 
 namespace MGS.Sqlite
@@ -37,9 +36,21 @@ namespace MGS.Sqlite
                 SqliteHandler.CreateFile(file);
             }
 
-            var uri = string.Format("file:{0}", file);
+            var uri = string.Format(SqliteConst.URI_FILE_FORMAT, file);
             Handler = new SqliteHandler(uri);
         }
+
+        #region
+        /// <summary>
+        /// Select data rows from data base.
+        /// </summary>
+        /// <param name="command">Select command.</param>
+        /// <returns></returns>
+        public DataTable Select(string command)
+        {
+            return Handler.ExecuteQuery(command);
+        }
+        #endregion
 
         #region
         /// <summary>
@@ -49,7 +60,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int CreateView(string statement)
         {
-            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, "VIEW", statement);
+            var createCmd = string.Format(SqliteConst.CMD_CREATE_IF_FORMAT, SqliteConst.VIEW, statement);
             return Handler.ExecuteNonQuery(createCmd);
         }
 
@@ -60,7 +71,7 @@ namespace MGS.Sqlite
         /// <returns></returns>
         public ISqliteView SelectView(string name)
         {
-            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "view", name);
+            var selectCmd = string.Format(SqliteConst.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "view", name);
             var result = Handler.ExecuteScalar(selectCmd);
             if (result == null)
             {
@@ -76,7 +87,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int DeleteView(string name)
         {
-            var deleteCmd = string.Format(SqliteConstant.CMD_DROP_FORMAT, "VIEW", name);
+            var deleteCmd = string.Format(SqliteConst.CMD_DROP_FORMAT, SqliteConst.VIEW, name);
             return Handler.ExecuteNonQuery(deleteCmd);
         }
         #endregion
@@ -89,7 +100,7 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int CreateTable(string statement)
         {
-            var createCmd = string.Format(SqliteConstant.CMD_CREATE_IF_FORMAT, "TABLE", statement);
+            var createCmd = string.Format(SqliteConst.CMD_CREATE_IF_FORMAT, SqliteConst.TABLE, statement);
             return Handler.ExecuteNonQuery(createCmd);
         }
 
@@ -100,7 +111,7 @@ namespace MGS.Sqlite
         /// <returns></returns>
         public ISqliteTable SelectTable(string name)
         {
-            var selectCmd = string.Format(SqliteConstant.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "table", name);
+            var selectCmd = string.Format(SqliteConst.CMD_SELECT_MASTER_TYPE_NAME_FORMAT, "name", "table", name);
             var result = Handler.ExecuteScalar(selectCmd);
             if (result == null)
             {
@@ -116,7 +127,50 @@ namespace MGS.Sqlite
         /// <returns>Number of rows affected.</returns>
         public int DeleteTable(string name)
         {
-            var deleteCmd = string.Format(SqliteConstant.CMD_DROP_FORMAT, "TABLE", name);
+            var deleteCmd = string.Format(SqliteConst.CMD_DROP_FORMAT, SqliteConst.TABLE, name);
+            return Handler.ExecuteNonQuery(deleteCmd);
+        }
+        #endregion
+
+        #region
+        /// <summary>
+        /// Create sqlite trigger if not exists.
+        /// </summary>
+        /// <param name="statement">Statement sql for trigger.</param>
+        /// <returns></returns>
+        public int CreateTrigger(string statement)
+        {
+            var createCmd = string.Format(SqliteConst.CMD_CREATE_IF_FORMAT, SqliteConst.TRIGGER, statement);
+            return Handler.ExecuteNonQuery(createCmd);
+        }
+
+        /// <summary>
+        /// Create sqlite trigger if not exists.
+        /// </summary>
+        /// <param name="name">The name of trigger.</param>
+        /// <param name="when">[BEFORE/AFTER]</param>
+        /// <param name="action">[INSERT/UPDATE/UPDATE OF/DELETE/]</param>
+        /// <param name="table">Name of target table.</param>
+        /// <param name="scope">[null/FOR EACH ROW]</param>
+        /// <param name="where">Condition statement.</param>
+        /// <param name="code">Code of trigger (Without the ending symbol ';').</param>
+        /// <returns>Number of rows affected.</returns>
+        public int CreateTrigger(string name, string when, string action,
+            string table, string scope, string where, string code)
+        {
+            var statement = string.Format(SqliteConst.STMT_TRIGGER_FORMAT, name, when, action, table, scope, where, code);
+            var createCmd = string.Format(SqliteConst.CMD_CREATE_IF_FORMAT, SqliteConst.TRIGGER, statement);
+            return Handler.ExecuteNonQuery(createCmd);
+        }
+
+        /// <summary>
+        /// Delete the trigger from data base.
+        /// </summary>
+        /// <param name="name">The name of trigger.</param>
+        /// <returns>Number of rows affected.</returns>
+        public int DeleteTrigger(string name)
+        {
+            var deleteCmd = string.Format(SqliteConst.CMD_DROP_FORMAT, SqliteConst.TRIGGER, name);
             return Handler.ExecuteNonQuery(deleteCmd);
         }
         #endregion

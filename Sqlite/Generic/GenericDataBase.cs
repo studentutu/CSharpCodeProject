@@ -10,6 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Collections.Generic;
+
 namespace MGS.Sqlite
 {
     /// <summary>
@@ -22,6 +24,17 @@ namespace MGS.Sqlite
         /// </summary>
         /// <param name="file">Data base file.</param>
         public GenericDataBase(string file) : base(file) { }
+
+        /// <summary>
+        /// Select data rows as view rows from data base.
+        /// </summary>
+        /// <typeparam name="T">Type of view row.</typeparam>
+        /// <param name="command">Select command.</param>
+        /// <returns></returns>
+        public ICollection<T> Select<T>(string command) where T : IViewRow, new()
+        {
+            return new GenericView<T>(new SqliteView(null, Handler)).Select(command);
+        }
 
         /// <summary>
         /// Select sqlite view from data base as IGenericView.

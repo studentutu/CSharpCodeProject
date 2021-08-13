@@ -88,19 +88,19 @@ namespace MGS.Sqlite
                 if (atrbt.PrimaryKey)
                 {
                     primaryField = field;
-                    column += string.Format(" {0}", SqliteConstant.PRIMARY_KEY);
+                    column += string.Format(" {0}", SqliteConst.PRIMARY_KEY);
                 }
                 if (atrbt.Unique)
                 {
-                    column += string.Format(" {0}", SqliteConstant.UNIQUE);
+                    column += string.Format(" {0}", SqliteConst.UNIQUE);
                 }
                 if (atrbt.NotNull)
                 {
-                    column += string.Format(" {0}", SqliteConstant.NOT_NULL);
+                    column += string.Format(" {0}", SqliteConst.NOT_NULL);
                 }
                 if (atrbt.Default != null)
                 {
-                    column += string.Format(" {0} {1}", SqliteConstant.DEFAULT, atrbt.Default);
+                    column += string.Format(" {0} {1}", SqliteConst.DEFAULT, atrbt.Default);
                 }
                 columns.Add(column);
             }

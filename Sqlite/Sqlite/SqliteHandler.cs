@@ -35,7 +35,7 @@ namespace MGS.Sqlite
         /// <param name="uri">Uri of data source.</param>
         public SqliteHandler(string uri)
         {
-            connectionString = string.Format(SqliteConstant.CONNECTION_FORMAT, 3, uri);
+            connectionString = string.Format(SqliteConst.CONNECTION_FORMAT, 3, uri);
         }
 
         /// <summary>

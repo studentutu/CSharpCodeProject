@@ -10,6 +10,8 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Data;
+
 namespace MGS.Sqlite
 {
     /// <summary>
@@ -21,6 +23,15 @@ namespace MGS.Sqlite
         /// Sqlite handler of this data base.
         /// </summary>
         ISqliteHandler Handler { get; }
+
+        #region
+        /// <summary>
+        /// Select data rows from data base.
+        /// </summary>
+        /// <param name="command">Select command.</param>
+        /// <returns></returns>
+        DataTable Select(string command);
+        #endregion
 
         #region
         /// <summary>
@@ -66,6 +77,36 @@ namespace MGS.Sqlite
         /// <param name="name">The name of table.</param>
         /// <returns>Number of rows affected.</returns>
         int DeleteTable(string name);
+        #endregion
+
+        #region
+        /// <summary>
+        /// Create sqlite trigger if not exists.
+        /// </summary>
+        /// <param name="statement">Statement sql for trigger.</param>
+        /// <returns></returns>
+        int CreateTrigger(string statement);
+
+        /// <summary>
+        /// Create sqlite trigger if not exists.
+        /// </summary>
+        /// <param name="name">The name of trigger.</param>
+        /// <param name="when">[BEFORE/AFTER]</param>
+        /// <param name="action">[INSERT/UPDATE/UPDATE OF/DELETE/]</param>
+        /// <param name="table">Name of target table.</param>
+        /// <param name="scope">[null/FOR EACH ROW]</param>
+        /// <param name="condition">Condition statement.</param>
+        /// <param name="code">Code of trigger.</param>
+        /// <returns>Number of rows affected.</returns>
+        int CreateTrigger(string name, string when, string action,
+            string table, string scope, string condition, string code);
+
+        /// <summary>
+        /// Delete the trigger from data base.
+        /// </summary>
+        /// <param name="name">The name of trigger.</param>
+        /// <returns>Number of rows affected.</returns>
+        int DeleteTrigger(string name);
         #endregion
     }
 }

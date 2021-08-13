@@ -20,7 +20,7 @@ namespace MGS.Sqlite
     public interface ISqliteView
     {
         /// <summary>
-        /// Name of source.
+        /// Name of source table.
         /// </summary>
         string Name { get; }
 

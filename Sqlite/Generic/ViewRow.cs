@@ -57,7 +57,7 @@ namespace MGS.Sqlite
         }
 
         /// <summary>
-        /// Initialize the sqliteFields.
+        /// Initialize the columnFields.
         /// </summary>
         protected virtual void Initialize()
         {

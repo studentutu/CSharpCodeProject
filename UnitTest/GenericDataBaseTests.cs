@@ -265,5 +265,76 @@ namespace MGS.Sqlite.Tests
             }
         }
         #endregion
+
+        #region
+        class PersonV0 : ViewRow
+        {
+            //Do not need mark PrimaryKey.
+            [ColumnField]
+            public string name = "";
+
+            [ColumnField]
+            public double salary = 0f;
+        }
+
+        [TestMethod()]
+        public void SelectTest()
+        {
+            var cmd = "select name, salary from table_t0 as t0 join table_t1 as t1 where t0.id==t1.id";
+            var dataTable = dataBase.Select(cmd);
+            Assert.IsNotNull(dataTable);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Assert.IsNotNull(row);
+                Console.WriteLine("SelectTest row {0} {1}", row["name"], row["salary"]);
+            }
+        }
+
+        [TestMethod()]
+        public void Select0Test()
+        {
+            var cmd = "select name, salary from table_t0 join table_t1 using(id)";
+            var personV0s = dataBase.Select<PersonV0>(cmd);
+            Assert.IsNotNull(personV0s);
+
+            foreach (var personV0 in personV0s)
+            {
+                Assert.IsNotNull(personV0);
+                Console.WriteLine("Select0Test row {0} {1}", personV0.name, personV0.salary);
+            }
+        }
+        #endregion
+
+        #region
+        [TestMethod()]
+        public void CreateTriggerTest()
+        {
+            var statement = "trigger_t0 AFTER INSERT ON table_t0 BEGIN INSERT INTO table_t1(id, salary)VALUES(new.ID, 0); END";
+            var lines = dataBase.CreateTrigger(statement);
+            Console.WriteLine("CreateTriggerTest lines {0}", lines);
+        }
+
+        [TestMethod()]
+        public void CreateTrigger0Test()
+        {
+            var name = "trigger_t0";
+            var when = SqliteConst.AFTER;
+            var action = SqliteConst.INSERT;
+            var table = "table_t0";
+            string scope = null;//SqliteConst.FOR_EACH_ROW
+            string where = null;//id>=0
+            var code = "INSERT INTO table_t1(id, salary)VALUES(new.ID, 0)";
+            var lines = dataBase.CreateTrigger(name, when, action, table, scope, where, code);
+            Console.WriteLine("CreateTrigger0Test lines {0}", lines);
+        }
+
+        [TestMethod()]
+        public void DeleteTriggerTest()
+        {
+            var lines = dataBase.DeleteTrigger("trigger_t0");
+            Console.WriteLine("DeleteTriggerTest lines {0}", lines);
+        }
+        #endregion
     }
 }

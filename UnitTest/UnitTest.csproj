@@ -52,6 +52,7 @@
     <Compile Include="LogUtilityTests.cs" />
     <Compile Include="Network\NetworkUtilityTests.cs" />
     <Compile Include="ObjectPool\ObjectPoolTests.cs" />
+    <Compile Include="PalindromeCollectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singleton\SingleTimerTests.cs" />
     <Compile Include="Singleton\SingletonTests.cs" />
@@ -59,8 +60,13 @@
     <Compile Include="Threading\ThreadBridgeTests.cs" />
     <Compile Include="Utility\ComdlgUtilityTests.cs" />
     <Compile Include="Utility\ExplorerUtilityTests.cs" />
+    <Compile Include="WaterCollectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Algorithm\Algorithm.csproj">
+      <Project>{ec4e23bf-75d9-4c62-adcd-0e405e45c0e0}</Project>
+      <Name>Algorithm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutofacUtility\AutofacUtility.csproj">
       <Project>{E25E38E5-1DD7-4341-AB1E-5BBBD75A4D62}</Project>
       <Name>AutofacUtility</Name>

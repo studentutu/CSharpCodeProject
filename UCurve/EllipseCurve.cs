@@ -1,4 +1,4 @@
-﻿/*************************************************************************
+/*************************************************************************
  *  Copyright © 2017-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  EllipseCurve.cs
@@ -16,17 +16,78 @@ using UnityEngine;
 namespace MGS.UCurve
 {
     /// <summary>
+    /// Ellipse curve.
+    /// </summary>
+    [Serializable]
+    public class EllipseCurve : IKeyCurve
+    {
+        #region
+        /// <summary>
+        /// Args of curve.
+        /// </summary>
+        public EllipseArgs Args { set; get; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public EllipseCurve()
+        {
+            Args = new EllipseArgs();
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="args">Args of ellipse curve.</param>
+        public EllipseCurve(EllipseArgs args)
+        {
+            Args = args;
+        }
+
+        /// <summary>
+        /// Evaluate the curve at radian.
+        /// </summary>
+        /// <param name="r">Around radian.</param>
+        /// <returns></returns>
+        public virtual Vector3 Evaluate(float r)
+        {
+            return Evaluate(Args, r);
+        }
+        #endregion
+
+        #region
+        /// <summary>
+        /// Evaluate the curve at radian.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="r">Radian.</param>
+        /// <returns></returns>
+        public static Vector2 Evaluate(EllipseArgs args, float r)
+        {
+            return Evaluate(args.semiMinorAxis, args.semiMajorAxis, r);
+        }
+
+        /// <summary>
+        /// Evaluate the curve at radian.
+        /// </summary>
+        /// <param name="mi"></param>
+        /// <param name="ma"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static Vector2 Evaluate(float mi, float ma, float r)
+        {
+            return new Vector2(mi * Mathf.Cos(r), ma * Mathf.Sin(r));
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// Args of ellipse.
     /// </summary>
     [Serializable]
     public struct EllipseArgs
     {
-        #region Field and Property
-        /// <summary>
-        /// Center of ellipse.
-        /// </summary>
-        public Vector3 center;
-
+        #region
         /// <summary>
         /// Semi minor axis of ellipse.
         /// </summary>
@@ -38,91 +99,16 @@ namespace MGS.UCurve
         public float semiMajorAxis;
         #endregion
 
-        #region Public Method
+        #region
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="center">Center of ellipse.</param>
         /// <param name="semiMinorAxis">Semi minor axis of ellipse.</param>
         /// <param name="semiMajorAxis">Semi major axis of ellipse.</param>
-        public EllipseArgs(Vector3 center, float semiMinorAxis, float semiMajorAxis)
+        public EllipseArgs(float semiMinorAxis, float semiMajorAxis)
         {
-            this.center = center;
             this.semiMinorAxis = semiMinorAxis;
             this.semiMajorAxis = semiMajorAxis;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Ellipse curve.
-    /// </summary>
-    public class EllipseCurve : ICurve
-    {
-        #region Field and Property
-        /// <summary>
-        /// Args of ellipse curve.
-        /// </summary>
-        public EllipseArgs args;
-
-        /// <summary>
-        /// Length of curve.
-        /// </summary>
-        public float Length
-        {
-            get
-            {
-                var minor = Mathf.Min(args.semiMinorAxis, args.semiMajorAxis);
-                var major = Mathf.Max(args.semiMinorAxis, args.semiMajorAxis);
-                return 2 * Mathf.PI * minor + 4 * (major - minor);
-            }
-        }
-
-        /// <summary>
-        /// Max around radian of ellipse.
-        /// </summary>
-        public virtual float MaxKey { get { return 2 * Mathf.PI; } }
-        #endregion
-
-        #region Public Method
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public EllipseCurve()
-        {
-            args = new EllipseArgs();
-        }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="args">Args of ellipse curve.</param>
-        public EllipseCurve(EllipseArgs args)
-        {
-            this.args = args;
-        }
-
-        /// <summary>
-        /// Get point on ellipse at around radian.
-        /// </summary>
-        /// <param name="radian">Around radian of ellipse.</param>
-        /// <returns>The point on ellipse at around radian.</returns>
-        public virtual Vector3 GetPointAt(float radian)
-        {
-            return GetPointAt(args, radian);
-        }
-        #endregion
-
-        #region Static Method
-        /// <summary>
-        /// Get point on ellipse at around radian.
-        /// </summary>
-        /// <param name="args">Args of ellipse curve.</param>
-        /// <param name="radian">Around radian of ellipse.</param>
-        /// <returns>The point on ellipse at around radian.</returns>
-        public static Vector3 GetPointAt(EllipseArgs args, float radian)
-        {
-            return args.center + new Vector3(args.semiMinorAxis * Mathf.Cos(radian), 0, args.semiMajorAxis * Mathf.Sin(radian));
         }
         #endregion
     }

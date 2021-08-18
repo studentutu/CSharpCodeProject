@@ -1,4 +1,4 @@
-﻿/*************************************************************************
+/*************************************************************************
  *  Copyright © 2017-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  HelixCurve.cs
@@ -17,95 +17,76 @@ namespace MGS.UCurve
     /// <summary>
     /// Helix curve.
     /// </summary>
-    public class HelixCurve : ICurve
+    public class HelixCurve : IKeyCurve
     {
-        #region Field and Property
+        #region
         /// <summary>
-        /// Coefficient of delta to lerp key.
+        /// Args of curve lerp from.
         /// </summary>
-        protected const float Coefficient = 0.05f;
+        public EllipseArgs Top { set; get; }
 
         /// <summary>
-        /// Top ellipse args of curve.
+        /// Args of curve lerp to.
         /// </summary>
-        public EllipseArgs topEllipse;
+        public EllipseArgs Bottom { set; get; }
 
         /// <summary>
-        /// Bottom ellipse args of curve.
+        /// Altitude from bottom to top.
         /// </summary>
-        public EllipseArgs bottomEllipse;
+        public float Altitude { set; get; }
 
         /// <summary>
-        /// Length of curve.
+        /// Around radian.
         /// </summary>
-        public float Length
-        {
-            get
-            {
-                var length = 0.0f;
-                var delta = MaxKey * Coefficient;
-                for (float key = 0; key < MaxKey; key += delta)
-                {
-                    length += Vector3.Distance(GetPointAt(key), GetPointAt(key + delta));
-                }
-                return length;
-            }
-        }
+        public float Radian { set; get; }
 
-        /// <summary>
-        /// Max around radian of helix.
-        /// </summary>
-        public float MaxKey { set; get; }
-        #endregion
-
-        #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
         public HelixCurve()
         {
-            topEllipse = new EllipseArgs();
-            bottomEllipse = new EllipseArgs();
+            Top = new EllipseArgs();
+            Bottom = new EllipseArgs();
+            Radian = Mathf.PI * 2;
         }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="topEllipse">Top ellipse args of curve.</param>
-        /// <param name="bottomEllipse">Bottom ellipse args of curve.</param>
-        public HelixCurve(EllipseArgs topEllipse, EllipseArgs bottomEllipse)
+        /// <param name="from">Args of curve lerp from.</param>
+        /// <param name="to">Args of curve lerp to.</param>
+        public HelixCurve(EllipseArgs from, EllipseArgs to)
         {
-            this.topEllipse = topEllipse;
-            this.bottomEllipse = bottomEllipse;
+            Top = from;
+            Bottom = to;
         }
 
         /// <summary>
-        /// Get point on helix at around radian.
+        /// Evaluate the curve at k.
         /// </summary>
-        /// <param name="radian">Around radian of helix.</param>
-        /// <returns>The point on helix at around radian.</returns>
-        public Vector3 GetPointAt(float radian)
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public Vector3 Evaluate(float k)
         {
-            return GetPointAt(topEllipse, bottomEllipse, MaxKey, radian);
+            var r = Radian * k;
+            return (Vector3)Evaluate(Top, Bottom, r, k) + Vector3.forward * Altitude * k;
         }
         #endregion
 
-        #region Static Method
+        #region
         /// <summary>
-        /// Get point on helix at around radian.
+        /// Evaluate the curve at radian and k.
         /// </summary>
-        /// <param name="topEllipse">Top ellipse args of curve.</param>
-        /// <param name="bottomEllipse">Bottom ellipse args of curve.</param>
-        /// <param name="maxRadian">Max around radian of helix.</param>
-        /// <param name="radian">Around radian of helix.</param>
-        /// <returns>The point on helix at around radian.</returns>
-        public static Vector3 GetPointAt(EllipseArgs topEllipse, EllipseArgs bottomEllipse, float maxRadian, float radian)
+        /// <param name="fr"></param>
+        /// <param name="to"></param>
+        /// <param name="r"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public static Vector2 Evaluate(EllipseArgs fr, EllipseArgs to, float r, float k)
         {
-            if (maxRadian == 0)
-            {
-                maxRadian = Mathf.Epsilon;
-            }
-            return Vector3.Lerp(EllipseCurve.GetPointAt(bottomEllipse, radian), EllipseCurve.GetPointAt(topEllipse, radian), radian / maxRadian);
+            var p0 = EllipseCurve.Evaluate(fr, r);
+            var p1 = EllipseCurve.Evaluate(to, r);
+            return Vector2.Lerp(p0, p1, k);
         }
         #endregion
     }

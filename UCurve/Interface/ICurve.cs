@@ -10,34 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using UnityEngine;
-
 namespace MGS.UCurve
 {
     /// <summary>
     /// Interface of curve.
     /// </summary>
-    public interface ICurve
-    {
-        #region Property
-        /// <summary>
-        /// Length of curve.
-        /// </summary>
-        float Length { get; }
-
-        /// <summary>
-        /// Max key of curve.
-        /// </summary>
-        float MaxKey { get; }
-        #endregion
-
-        #region Method
-        /// <summary>
-        /// Get point on curve at key.
-        /// </summary>
-        /// <param name="key">Key of curve.</param>
-        /// <returns>The point on curve at key.</returns>
-        Vector3 GetPointAt(float key);
-        #endregion
-    }
+    public interface ICurve { }
 }

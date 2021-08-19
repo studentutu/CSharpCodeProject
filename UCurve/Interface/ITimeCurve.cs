@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  IKeyCurve.cs
- *  Description  :  Define key curve interface.
+ *  File         :  ITimeCurve.cs
+ *  Description  :  Define time curve interface.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -15,15 +15,15 @@ using UnityEngine;
 namespace MGS.UCurve
 {
     /// <summary>
-    /// Interface of key curve.
+    /// Interface of time curve.
     /// </summary>
-    public interface IKeyCurve : ICurve
+    public interface ITimeCurve : ICurve
     {
         /// <summary>
-        /// Evaluate the curve at key.
+        /// Evaluate the curve at time.
         /// </summary>
-        /// <param name="k">The key within the curve you want to evaluate (the horizontal axis in the curve graph).</param>
-        /// <returns>The value of the curve, at the point in key specified.</returns>
-        Vector3 Evaluate(float k);
+        /// <param name="t">The time within the curve you want to evaluate (the horizontal axis in the curve graph).</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        Vector3 Evaluate(float t);
     }
 }

@@ -19,7 +19,7 @@ namespace MGS.UCurve
     ///  Sin curve.
     /// </summary>
     [Serializable]
-    public class SinCurve : IKeyCurve
+    public class SinCurve : ITimeCurve
     {
         #region
         /// <summary>

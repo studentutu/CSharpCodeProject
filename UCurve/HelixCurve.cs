@@ -17,7 +17,7 @@ namespace MGS.UCurve
     /// <summary>
     /// Helix curve.
     /// </summary>
-    public class HelixCurve : IKeyCurve
+    public class HelixCurve : ITimeCurve
     {
         #region
         /// <summary>
@@ -62,31 +62,31 @@ namespace MGS.UCurve
         }
 
         /// <summary>
-        /// Evaluate the curve at k.
+        /// Evaluate the curve at t.
         /// </summary>
-        /// <param name="k"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
-        public Vector3 Evaluate(float k)
+        public Vector3 Evaluate(float t)
         {
-            var r = Radian * k;
-            return (Vector3)Evaluate(Top, Bottom, r, k) + Vector3.forward * Altitude * k;
+            var r = Radian * t;
+            return (Vector3)Evaluate(Top, Bottom, r, t) + Vector3.forward * Altitude * t;
         }
         #endregion
 
         #region
         /// <summary>
-        /// Evaluate the curve at radian and k.
+        /// Evaluate the curve at radian and t.
         /// </summary>
         /// <param name="fr"></param>
         /// <param name="to"></param>
         /// <param name="r"></param>
-        /// <param name="k"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
-        public static Vector2 Evaluate(EllipseArgs fr, EllipseArgs to, float r, float k)
+        public static Vector2 Evaluate(EllipseArgs fr, EllipseArgs to, float r, float t)
         {
             var p0 = EllipseCurve.Evaluate(fr, r);
             var p1 = EllipseCurve.Evaluate(to, r);
-            return Vector2.Lerp(p0, p1, k);
+            return Vector2.Lerp(p0, p1, t);
         }
         #endregion
     }

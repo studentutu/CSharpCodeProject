@@ -18,7 +18,7 @@ namespace MGS.UCurve
     /// <summary>
     /// Cubic bezier curve.
     /// </summary>
-    public class BezierCurve : IKeyCurve
+    public class BezierCurve : ITimeCurve
     {
         #region
         /// <summary>
@@ -46,27 +46,27 @@ namespace MGS.UCurve
         }
 
         /// <summary>
-        /// Evaluate the curve at k.
+        /// Evaluate the curve at t.
         /// </summary>
-        /// <param name="k"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
-        public Vector3 Evaluate(float k)
+        public Vector3 Evaluate(float t)
         {
-            return Evaluate(Anchor, k);
+            return Evaluate(Anchor, t);
         }
         #endregion
 
         #region
         /// <summary>
-        /// Evaluate the curve at anchor and key.
+        /// Evaluate the curve at anchor and time.
         /// </summary>
         /// <param name="anchor"></param>
-        /// <param name="k"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
-        public static Vector3 Evaluate(BezierAnchor anchor, float k)
+        public static Vector3 Evaluate(BezierAnchor anchor, float t)
         {
-            return Mathf.Pow(1 - k, 3) * anchor.from + 3 * k * Mathf.Pow(1 - k, 2) * anchor.inTangent +
-                3 * (1 - k) * Mathf.Pow(k, 2) * anchor.outTangent + Mathf.Pow(k, 3) * anchor.to;
+            return Mathf.Pow(1 - t, 3) * anchor.from + 3 * t * Mathf.Pow(1 - t, 2) * anchor.inTangent +
+                3 * (1 - t) * Mathf.Pow(t, 2) * anchor.outTangent + Mathf.Pow(t, 3) * anchor.to;
         }
         #endregion
     }

@@ -19,7 +19,7 @@ namespace MGS.UCurve
     /// Ellipse curve.
     /// </summary>
     [Serializable]
-    public class EllipseCurve : IKeyCurve
+    public class EllipseCurve : ITimeCurve
     {
         #region
         /// <summary>

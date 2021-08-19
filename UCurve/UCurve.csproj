@@ -43,7 +43,7 @@
     <Compile Include="HelixCurve.cs" />
     <Compile Include="HermiteCurve.cs" />
     <Compile Include="Interface\ICurve.cs" />
-    <Compile Include="Interface\IKeyCurve.cs" />
+    <Compile Include="Interface\ITimeCurve.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinCurve.cs" />
   </ItemGroup>

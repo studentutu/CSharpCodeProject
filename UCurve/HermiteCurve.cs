@@ -1,275 +1,230 @@
 ﻿/*************************************************************************
- *  Copyright © 2017-2019 Mogoson. All rights reserved.
+ *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  HermiteCurve.cs
- *  Description  :  Hermite curve in three dimensional space.
+ *  Description  :  Define hermite curve
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
- *  Date         :  6/21/2017
+ *  Date         :  8/20/2021
  *  Description  :  Initial development version.
- *  
- *  Author       :  Mogoson
- *  Version      :  1.1
- *  Date         :  2/28/2018
- *  Description  :  Add static method FromAnchors.
  *************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MGS.UCurve
 {
     /// <summary>
-    /// Vector keyframe.
+    /// Hermite curve
     /// </summary>
-    [Serializable]
-    public struct VectorKeyFrame
+    public class HermiteCurve : ITimeCurve
     {
-        #region Field and Property
+        #region
         /// <summary>
-        /// Key of keyframe.
+        /// Indexer.
         /// </summary>
-        public float key;
+        /// <param name="index">Index of key frame.</param>
+        /// <returns>The key frame at index.</returns>
+        public KeyFrame this[int index]
+        {
+            get { return frames[index]; }
+        }
 
         /// <summary>
-        /// Value of keyframe.
+        /// Key frames of curve.
         /// </summary>
-        public Vector3 value;
+        protected List<KeyFrame> frames = new List<KeyFrame>();
+
+        /// <summary>
+        /// Count of key frames.
+        /// </summary>
+        public int FramesCount { get { return frames.Count; } }
         #endregion
 
-        #region Public Method
+        #region
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="key">Key of keyframe.</param>
-        /// <param name="value">Value of keyframe.</param>
-        public VectorKeyFrame(float key, Vector3 value)
+        public HermiteCurve() { }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="frames">Key frames of curve.</param>
+        public HermiteCurve(KeyFrame[] frames)
         {
-            this.key = key;
-            this.value = value;
+            this.frames.AddRange(frames);
+        }
+
+        /// <summary>
+        /// Add key frame to curve.
+        /// </summary>
+        /// <param name="frame">Key frame to add.</param>
+        public void AddFrame(KeyFrame frame)
+        {
+            frames.Add(frame);
+        }
+
+        /// <summary>
+        /// Add key frame to curve.
+        /// </summary>
+        /// <param name="time">Key of frame.</param>
+        /// <param name="value">Value of frame.</param>
+        public void AddFrame(double time, Vector3 value)
+        {
+            frames.Add(new KeyFrame(time, value));
+        }
+
+        /// <summary>
+        /// Remove key frame.
+        /// </summary>
+        /// <param name="frame">Key frame to remove.</param>
+        public void RemoveFrame(KeyFrame frame)
+        {
+            frames.Remove(frame);
+        }
+
+        /// <summary>
+        /// Remove key frame at index.
+        /// </summary>
+        /// <param name="index">Index of frame.</param>
+        public void RemoveFrame(int index)
+        {
+            frames.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// Evaluate the curve at t.
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public Vector3 Evaluate(float t)
+        {
+            return Vector3.zero;
+        }
+        #endregion
+
+        #region
+        /// <summary>
+        /// Evaluate the value of hermite curve at time.
+        /// </summary>
+        /// <param name="frames">Key frames of hermite curve.</param>
+        /// <param name="t"></param>
+        /// <returns>The value of hermite curve at time.</returns>
+        public static Vector3 Evaluate(KeyFrame[] frames, double t)
+        {
+            if (frames == null || frames.Length == 0)
+            {
+                return Vector3.zero;
+            }
+
+            var value = Vector3.zero;
+            if (frames.Length == 1)
+            {
+                value = frames[0].value;
+            }
+            else
+            {
+                if (t <= frames[0].time)
+                {
+                    value = frames[0].value;
+                }
+                else if (t >= frames[frames.Length - 1].time)
+                {
+                    value = frames[frames.Length - 1].value;
+                }
+                else
+                {
+                    for (int i = 0; i < frames.Length; i++)
+                    {
+                        if (i == frames[i].time)
+                        {
+                            value = frames[i].value;
+                            break;
+                        }
+
+                        if (t > frames[i].time && t < frames[i + 1].time)
+                        {
+                            value = Evaluate(frames[i], frames[i + 1], t);
+                            break;
+                        }
+                    }
+                }
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Evaluate the value of hermite curve at time on the range from start key frame to end key frame.
+        /// </summary>
+        /// <param name="start">Start Key frame of hermite curve.</param>
+        /// <param name="end">End Key frame of hermite curve.</param>
+        /// <param name="t">Time of curve to evaluate value.</param>
+        /// <returns>The value of hermite curve at time on the range from start key frame to end key frame.</returns>
+        public static Vector3 Evaluate(KeyFrame start, KeyFrame end, double t)
+        {
+            return Vector3.zero;
         }
         #endregion
     }
 
     /// <summary>
-    /// Hermite curve in three dimensional space.
+    /// Key frame base on time and value.
     /// </summary>
-    public class HermiteCurve : ICurve
+    [Serializable]
+    public struct KeyFrame
     {
-        #region Indexer
-        /// <summary>
-        /// Get the index key frame.
-        /// </summary>
-        /// <param name="index">Index of key frame.</param>
-        /// <returns>Key frame at index.</returns>
-        public VectorKeyFrame this[int index]
-        {
-            get
-            {
-                return new VectorKeyFrame(xCurve[index].time, new Vector3(xCurve[index].value, yCurve[index].value, zCurve[index].value));
-            }
-        }
-        #endregion
-
         #region Field and Property
         /// <summary>
-        /// Coefficient of delta to lerp key.
+        /// Time of frame.
         /// </summary>
-        protected const float Coefficient = 0.05f;
+        public double time;
 
         /// <summary>
-        /// Count of Keyframes.
+        /// Value of frame.
         /// </summary>
-        public int KeyframeCount { get { return xCurve.length; } }
+        public Vector3 value;
 
         /// <summary>
-        /// Length of curve.
+        /// In tangent of frame.
         /// </summary>
-        public float Length
-        {
-            get
-            {
-                var length = 0.0f;
-                var delta = MaxKey * Coefficient;
-                for (float key = 0; key < MaxKey; key += delta)
-                {
-                    length += Vector3.Distance(GetPointAt(key), GetPointAt(key + delta));
-                }
-                return length;
-            }
-        }
+        public Vector3 inTangent;
 
         /// <summary>
-        /// Max key of curve.
+        /// Out tangent of frame.
         /// </summary>
-        public float MaxKey
-        {
-            get
-            {
-                if (KeyframeCount == 0)
-                {
-                    return 0;
-                }
-                return xCurve[KeyframeCount - 1].time;
-            }
-        }
-
-        /// <summary>
-        /// The behaviour of the animation after the last keyframe.
-        /// </summary>
-        public WrapMode PostWrapMode
-        {
-            set { xCurve.postWrapMode = yCurve.postWrapMode = zCurve.postWrapMode = value; }
-            get { return xCurve.postWrapMode; }
-        }
-
-        /// <summary>
-        /// The behaviour of the animation before the first keyframe.
-        /// </summary>
-        public WrapMode PreWrapMode
-        {
-            set { xCurve.preWrapMode = yCurve.preWrapMode = zCurve.preWrapMode = value; }
-            get { return xCurve.preWrapMode; }
-        }
-
-        /// <summary>
-        /// Curve for x.
-        /// </summary>
-        protected AnimationCurve xCurve;
-
-        /// <summary>
-        /// Curve for y.
-        /// </summary>
-        protected AnimationCurve yCurve;
-
-        /// <summary>
-        /// Curve for z.
-        /// </summary>
-        protected AnimationCurve zCurve;
+        public Vector3 outTangent;
         #endregion
 
         #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
-        public HermiteCurve()
+        /// <param name="time">Time of frame.</param>
+        /// <param name="value">Value of frame.</param>
+        public KeyFrame(double time, Vector3 value)
         {
-            xCurve = new AnimationCurve();
-            yCurve = new AnimationCurve();
-            zCurve = new AnimationCurve();
+            this.time = time;
+            this.value = value;
+            inTangent = Vector3.zero;
+            outTangent = Vector3.zero;
         }
 
         /// <summary>
-        /// Add a new keyframe to the curve.
+        /// Constructor.
         /// </summary>
-        /// <param name="keyframe">The keyframe to add to the curve.</param>
-        /// <returns>The index of the added keyframe, or -1 if the keyframe could not be added.</returns>
-        public int AddKeyframe(VectorKeyFrame keyframe)
+        /// <param name="time">Time of frame.</param>
+        /// <param name="value">Value of frame.</param>
+        /// <param name="inTangent">In tangent of frame.</param>
+        /// <param name="outTangent">Out tangent of frame.</param>
+        public KeyFrame(double time, Vector3 value, Vector3 inTangent, Vector3 outTangent)
         {
-            xCurve.AddKey(keyframe.key, keyframe.value.x);
-            yCurve.AddKey(keyframe.key, keyframe.value.y);
-            return zCurve.AddKey(keyframe.key, keyframe.value.z);
-        }
-
-        /// <summary>
-        /// Add a new keyframe to the curve.
-        /// </summary>
-        /// <param name="key">The key of the keyframe.</param>
-        /// <param name="value">The value of the keyframe.</param>
-        /// <returns>The index of the added keyframe, or -1 if the keyframe could not be added.</returns>
-        public int AddKeyframe(float key, Vector3 value)
-        {
-            xCurve.AddKey(key, value.x);
-            yCurve.AddKey(key, value.y);
-            return zCurve.AddKey(key, value.z);
-        }
-
-        /// <summary>
-        /// Removes a keyframe.
-        /// </summary>
-        /// <param name="index">The index of the keyframe to remove.</param>
-        public void RemoveKeyframe(int index)
-        {
-            xCurve.RemoveKey(index);
-            yCurve.RemoveKey(index);
-            zCurve.RemoveKey(index);
-        }
-
-        /// <summary>
-        /// Smooth the in and out tangents of the keyframe at index.
-        /// </summary>
-        /// <param name="index">The index of the keyframe.</param>
-        /// <param name="weight">The smoothing weight to apply to the keyframe's tangents.</param>
-        public void SmoothTangents(int index, float weight)
-        {
-            xCurve.SmoothTangents(index, weight);
-            yCurve.SmoothTangents(index, weight);
-            zCurve.SmoothTangents(index, weight);
-        }
-
-        /// <summary>
-        /// Smooth the in and out tangents of keyframes.
-        /// </summary>
-        /// <param name="weight">The smoothing weight to apply to the keyframe's tangents.</param>
-        public void SmoothTangents(float weight)
-        {
-            for (int i = 0; i < KeyframeCount; i++)
-            {
-                SmoothTangents(i, weight);
-            }
-        }
-
-        /// <summary>
-        /// Get point by evaluate the curve at key.
-        /// </summary>
-        /// <param name="key">The key within the curve you want to evaluate.</param>
-        /// <returns>The point on the curve at the key.</returns>
-        public Vector3 GetPointAt(float key)
-        {
-            return new Vector3(xCurve.Evaluate(key), yCurve.Evaluate(key), zCurve.Evaluate(key));
-        }
-        #endregion
-
-        #region Static Method
-        /// <summary>
-        /// Create a curve base on anchors.
-        /// </summary>
-        /// <param name="anchors">Anchor points of curve.</param>
-        /// <param name="close">Curve is close?</param>
-        /// <returns>New curve.</returns>
-        public static HermiteCurve FromAnchors(Vector3[] anchors, bool close = false)
-        {
-            // Creat new curve.
-            var curve = new HermiteCurve();
-
-            //No anchor.
-            if (anchors == null || anchors.Length == 0)
-            {
-                return curve;
-            }
-
-            //Add frame keys to curve.
-            var distance = 0f;
-            for (int i = 0; i < anchors.Length - 1; i++)
-            {
-                curve.AddKeyframe(distance, anchors[i]);
-                distance += Vector3.Distance(anchors[i], anchors[i + 1]);
-            }
-
-            //Add the last key.
-            curve.AddKeyframe(distance, anchors[anchors.Length - 1]);
-
-            if (close)
-            {
-                //Add the close key(the first key).
-                distance += Vector3.Distance(anchors[anchors.Length - 1], anchors[0]);
-                curve.AddKeyframe(distance, anchors[0]);
-            }
-
-            //Smooth curve keys out tangent.
-            curve.SmoothTangents(0);
-            return curve;
+            this.time = time;
+            this.value = value;
+            this.inTangent = inTangent;
+            this.outTangent = outTangent;
         }
         #endregion
     }

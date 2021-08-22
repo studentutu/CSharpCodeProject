@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  TextInputText.cs
+ *  File         :  UITextInputText.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -17,10 +17,16 @@ using UnityEngine.UI;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// Text-Input-Text panel.
+    /// UI Text-Input-Text
     /// </summary>
-    public class TextInputText : UIPanel
+    public class UITextInputText : UIPanel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField]
+        protected Text txt_Tittle;
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,6 +42,15 @@ namespace MGS.UGUI
         /// </summary>
         [SerializeField]
         protected Text txt_Stamp;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Tittle
+        {
+            set { txt_Tittle.text = value; }
+            get { return txt_Tittle.text; }
+        }
 
         /// <summary>
         /// 
@@ -67,6 +82,15 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
+        public int CharacterLimit
+        {
+            set { ipt_Content.characterLimit = value; }
+            get { return ipt_Content.characterLimit; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Stamp
         {
             set { txt_Stamp.text = value; }
@@ -85,6 +109,10 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         protected Action<string> onValueChangedEvent;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected Func<string, string> beforeValueChange;
 
         /// <summary>
         /// 
@@ -98,6 +126,10 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         protected Action<string> onEndEditEvent;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected Func<string, string> beforeEndEdit;
 
         /// <summary>
         /// 
@@ -114,22 +146,41 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="default"></param>
         /// <param name="min"></param>
         /// <param name="max"></param>
-        public void InitForInteger(int min, int max)
+        public void InitForInteger(int @default, int min, int max)
         {
             ContentType = InputField.ContentType.IntegerNumber;
-            onEndEditEvent = null;
-            onEndEditEvent += (value) =>
+            beforeEndEdit = (value) =>
             {
-                if (int.TryParse(value, out int number))
+                var number = 0;
+                if (int.TryParse(value, out number))
                 {
                     if (number < min || number > max)
                     {
                         number = Mathf.Clamp(number, min, max);
-                        Content = number.ToString();
                     }
                 }
+                else
+                {
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        number = @default;
+                    }
+                    else if (value.StartsWith("-"))
+                    {
+                        number = min;
+                    }
+                    else
+                    {
+                        number = max;
+                    }
+                }
+
+                value = number.ToString();
+                Content = value;
+                return value;
             };
         }
 
@@ -154,6 +205,7 @@ namespace MGS.UGUI
         /// <param name="value"></param>
         private void Ipt_Content_OnValueChanged(string value)
         {
+            value = beforeValueChange?.Invoke(value);
             onValueChangedEvent?.Invoke(value);
         }
 
@@ -163,6 +215,7 @@ namespace MGS.UGUI
         /// <param name="value"></param>
         private void Ipt_Content_OnEndEdit(string value)
         {
+            value = beforeEndEdit?.Invoke(value);
             onEndEditEvent?.Invoke(value);
         }
     }

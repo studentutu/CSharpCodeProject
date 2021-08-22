@@ -43,12 +43,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Panel\TextInputText.cs" />
+    <Compile Include="Extension\UIBehaviourExtension.cs" />
+    <Compile Include="Handler\UIDragger.cs" />
+    <Compile Include="Handler\UIFader\UIAlphaFader.cs" />
+    <Compile Include="Handler\UIFader\UIColorFader.cs" />
+    <Compile Include="Handler\UIFader\UIFader.cs" />
+    <Compile Include="Handler\UIFader\UIPositionFader.cs" />
+    <Compile Include="Handler\UIFader\UIScaleFader.cs" />
+    <Compile Include="Handler\UIHandler.cs" />
+    <Compile Include="Handler\UIMirror.cs" />
+    <Compile Include="Handler\UIPositioner.cs" />
+    <Compile Include="Handler\UISizer.cs" />
+    <Compile Include="Listener\UIDragListener.cs" />
+    <Compile Include="Listener\UIListener.cs" />
+    <Compile Include="Listener\UIPointerListener.cs" />
+    <Compile Include="Listener\UISelectListener.cs" />
     <Compile Include="Panel\UIPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trigger\UITrigger.cs" />
     <Compile Include="UIComponent.cs" />
-    <Compile Include="Widget\ButtonCollector.cs" />
-    <Compile Include="Widget\SearchSelector.cs" />
+    <Compile Include="Utility\UICoroutine.cs" />
+    <Compile Include="Widget\UIButtonCollector.cs" />
+    <Compile Include="Widget\UISearchSelector.cs" />
+    <Compile Include="Widget\UITextInputText.cs" />
     <Compile Include="Widget\UIWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

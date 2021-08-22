@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  SearchSelector.cs
+ *  File         :  UISearchSelector.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -13,14 +13,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// Search selector with InputField-Button-Collector.
+    /// UI Search-Selector.
     /// </summary>
-    public class SearchSelector : UIWidget
+    public class UISearchSelector : UIWidget
     {
         /// <summary>
         /// 
@@ -50,7 +51,13 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         [SerializeField]
-        protected bool isNullMatchAll;
+        protected UIButtonCollector coll_Search;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField]
+        protected bool emptyMatchAll;
 
         /// <summary>
         /// 
@@ -65,12 +72,6 @@ namespace MGS.UGUI
         protected Dropdown.OptionData opn_Clear;
 
         /// <summary>
-        /// 
-        /// </summary>
-        [SerializeField]
-        protected ButtonCollector btnCollector;
-
-        /// <summary>
         /// On select event (Index of the select item, value of the select item).
         /// </summary>
         public event Action<int, string> OnSelectEvent
@@ -82,6 +83,15 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         protected Action<int, string> onSelectEvent;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected bool ignoreChange;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected bool ignoreSelect;
 
         /// <summary>
         /// 
@@ -116,10 +126,12 @@ namespace MGS.UGUI
             txt_Caption = ipt_Keyword.GetComponentInChildren<Text>();
             txt_Search = btn_Search.GetComponentInChildren<Text>();
             img_Search = btn_Search.GetComponent<Image>();
+            coll_Search.RequireCanvasRaycasterGroup();
 
             ipt_Keyword.onValueChanged.AddListener(Ipt_Keyword_OnValueChanged);
+            ipt_Keyword.RequireSelectListener().OnSelectEvent += Ipt_Keyword_OnSelectEvent;
             btn_Search.onClick.AddListener(Btn_Search_OnClick);
-            btnCollector.OnItemClickEvent += BtnCollector_OnItemClickEvent;
+            coll_Search.OnItemClickEvent += BtnCollector_OnItemClickEvent;
         }
 
         /// <summary>
@@ -140,9 +152,32 @@ namespace MGS.UGUI
                     keyword = items[select];
                 }
             }
-            Keyword = keyword;
+            Ipt_Keyword_Set(keyword);
             Caption = caption;
-            btnCollector.SetGOActive(false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="ignoreChange"></param>
+        protected void Ipt_Keyword_Set(string content, bool ignoreChange = true)
+        {
+            this.ignoreChange = ignoreChange;
+            Keyword = content; //Ipt_Keyword_OnValueChanged invoke now if Keyword!=content;
+            this.ignoreChange = false;  //Require clear tag, Ipt_Keyword_OnValueChanged do not invoke if Keyword==content;
+            SetSearchBtnOption(content);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ignoreSelect"></param>
+        protected void Ipt_Keyword_Select(bool ignoreSelect = true)
+        {
+            this.ignoreSelect = ignoreSelect;
+            ipt_Keyword.OnSelect(null);
+            //this.ignoreSelect = false; //Ipt_Keyword_OnSelectEvent invoke after this method.
         }
 
         /// <summary>
@@ -151,7 +186,27 @@ namespace MGS.UGUI
         /// <param name="keyword"></param>
         private void Ipt_Keyword_OnValueChanged(string keyword)
         {
+            if (ignoreChange)
+            {
+                ignoreChange = false; //Clear last tag.
+                return;
+            }
             ShowSearchResults(keyword);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        private void Ipt_Keyword_OnSelectEvent(BaseEventData data)
+        {
+            if (ignoreSelect)
+            {
+                ignoreSelect = false; //Clear last tag.
+                return;
+            }
+
+            ShowSearchResults(Keyword);
         }
 
         /// <summary>
@@ -161,23 +216,24 @@ namespace MGS.UGUI
         {
             if (string.IsNullOrEmpty(Keyword))
             {
-                if (isNullMatchAll)
+                if (emptyMatchAll)
                 {
-                    if (btnCollector.IsGOActive)
+                    if (coll_Search.IsGOActive)
                     {
-                        btnCollector.SetGOActive(false);
+                        coll_Search.SetGOActive(false);
                     }
                     else
                     {
-                        ShowSearchResults(null);
+                        ShowSearchResults(Keyword);
                     }
                 }
             }
             else
             {
+                //Ipt_Keyword_OnValueChanged to ShowSearchResults.
                 Keyword = string.Empty;
             }
-            ipt_Keyword.OnSelect(null);
+            Ipt_Keyword_Select();
         }
 
         /// <summary>
@@ -187,8 +243,8 @@ namespace MGS.UGUI
         /// <param name="value"></param>
         private void BtnCollector_OnItemClickEvent(int index, string value)
         {
-            Keyword = value;
-            btnCollector.SetGOActive(false);
+            coll_Search.SetGOActive(false);
+            Ipt_Keyword_Set(value);
             onSelectEvent?.Invoke(index, value);
         }
 
@@ -231,7 +287,7 @@ namespace MGS.UGUI
             var matches = new List<string>();
             if (string.IsNullOrEmpty(keyword))
             {
-                if (isNullMatchAll)
+                if (emptyMatchAll)
                 {
                     matches.AddRange(items);
                 }
@@ -255,8 +311,8 @@ namespace MGS.UGUI
         /// <param name="items"></param>
         protected void RefreshSearchItems(string[] items)
         {
-            btnCollector.Refresh(items);
-            btnCollector.SetGOActive(items.Length > 0);
+            coll_Search.Refresh(items);
+            coll_Search.SetGOActive(items.Length > 0);
         }
     }
 }

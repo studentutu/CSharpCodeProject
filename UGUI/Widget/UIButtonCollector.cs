@@ -17,7 +17,7 @@ using UnityEngine.UI;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// Collector base prefab for button
+    /// UI Button-Collector.
     /// </summary>
     public class UIButtonCollector : UIWidget
     {

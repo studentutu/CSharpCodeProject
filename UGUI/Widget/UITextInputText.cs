@@ -17,7 +17,7 @@ using UnityEngine.UI;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI Text-Input-Text
+    /// UI Text-Input-Text.
     /// </summary>
     public class UITextInputText : UIPanel
     {

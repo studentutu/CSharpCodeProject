@@ -270,10 +270,10 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerator CheckOptionNextFrame()
+        private IEnumerator CheckOptionNextFrame()
         {
             yield return null;
-            if (IsSelectBlankArea())
+            if (!IsSelectUIArea())
             {
                 if (coll_Search.IsGOActive)
                 {
@@ -290,30 +290,30 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         /// <returns></returns>
-        protected virtual bool IsSelectBlankArea()
+        protected virtual bool IsSelectUIArea()
         {
             var select = EventSystem.current.currentSelectedGameObject;
             if (select == null)
             {
-                return true;
+                return false;
             }
 
             if (select.transform.IsChildOf(ipt_Keyword.transform))
             {
-                return false;
+                return true;
             }
 
             if (select.transform.IsChildOf(coll_Search.transform))
             {
-                return false;
+                return true;
             }
 
             if (select.transform.IsChildOf(btn_Search.transform))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>

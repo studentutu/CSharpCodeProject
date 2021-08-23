@@ -11,6 +11,7 @@
  *************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -92,6 +93,10 @@ namespace MGS.UGUI
         /// 
         /// </summary>
         protected bool ignoreSelect;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected string lastSelect;
 
         /// <summary>
         /// 
@@ -128,8 +133,10 @@ namespace MGS.UGUI
             img_Search = btn_Search.GetComponent<Image>();
             coll_Search.RequireCanvasRaycasterGroup();
 
+            var listener = ipt_Keyword.RequireSelectListener();
+            listener.OnSelectEvent += Ipt_Keyword_OnSelectEvent; ;
+            listener.OnDeselectEvent += Ipt_Keyword_OnDeselectEvent;
             ipt_Keyword.onValueChanged.AddListener(Ipt_Keyword_OnValueChanged);
-            ipt_Keyword.RequireSelectListener().OnSelectEvent += Ipt_Keyword_OnSelectEvent;
             btn_Search.onClick.AddListener(Btn_Search_OnClick);
             coll_Search.OnItemClickEvent += BtnCollector_OnItemClickEvent;
         }
@@ -152,6 +159,7 @@ namespace MGS.UGUI
                     keyword = items[select];
                 }
             }
+            lastSelect = keyword;
             Ipt_Keyword_Set(keyword);
             Caption = caption;
         }
@@ -183,20 +191,6 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="keyword"></param>
-        private void Ipt_Keyword_OnValueChanged(string keyword)
-        {
-            if (ignoreChange)
-            {
-                ignoreChange = false; //Clear last tag.
-                return;
-            }
-            ShowSearchResults(keyword);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="data"></param>
         private void Ipt_Keyword_OnSelectEvent(BaseEventData data)
         {
@@ -207,6 +201,29 @@ namespace MGS.UGUI
             }
 
             ShowSearchResults(Keyword);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        private void Ipt_Keyword_OnDeselectEvent(BaseEventData data)
+        {
+            StartCoroutine(CheckOptionNextFrame());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyword"></param>
+        private void Ipt_Keyword_OnValueChanged(string keyword)
+        {
+            if (ignoreChange)
+            {
+                ignoreChange = false; //Clear last tag.
+                return;
+            }
+            ShowSearchResults(keyword);
         }
 
         /// <summary>
@@ -244,8 +261,59 @@ namespace MGS.UGUI
         private void BtnCollector_OnItemClickEvent(int index, string value)
         {
             coll_Search.SetGOActive(false);
+            lastSelect = value;
             Ipt_Keyword_Set(value);
             onSelectEvent?.Invoke(index, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator CheckOptionNextFrame()
+        {
+            yield return null;
+            if (IsSelectBlankArea())
+            {
+                if (coll_Search.IsGOActive)
+                {
+                    coll_Search.SetGOActive(false);
+                }
+                if (Keyword != lastSelect)
+                {
+                    Ipt_Keyword_Set(lastSelect);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool IsSelectBlankArea()
+        {
+            var select = EventSystem.current.currentSelectedGameObject;
+            if (select == null)
+            {
+                return true;
+            }
+
+            if (select.transform.IsChildOf(ipt_Keyword.transform))
+            {
+                return false;
+            }
+
+            if (select.transform.IsChildOf(coll_Search.transform))
+            {
+                return false;
+            }
+
+            if (select.transform.IsChildOf(btn_Search.transform))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

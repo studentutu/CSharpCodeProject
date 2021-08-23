@@ -46,10 +46,8 @@ namespace MGS.UGUI
             while (timer <= duration)
             {
                 tick?.Invoke(timer / duration);
-
-                var deltaTime = Time.deltaTime;
-                yield return new WaitForSeconds(deltaTime);
-                timer += deltaTime;
+                yield return null;
+                timer += Time.deltaTime;
             }
             tick?.Invoke(1.0f);
             elapsed?.Invoke();

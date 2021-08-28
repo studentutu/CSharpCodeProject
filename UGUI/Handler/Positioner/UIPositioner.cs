@@ -22,20 +22,28 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
-        [SerializeField]
         protected Camera uiCamera;
 
         /// <summary>
         /// 
         /// </summary>
-        protected override void Reset()
+        protected override void Awake()
         {
-            base.Reset();
-            var canvas = transform.root.GetComponentInChildren<Canvas>();
+            base.Awake();
+            var canvas = transform.root.GetComponentInChildren<Canvas>(true);
             if (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
                 uiCamera = canvas.worldCamera;
             }
+        }
+
+        /// <summary>
+        /// Set position of RectTransform.
+        /// </summary>
+        /// <param name="screenPoint"></param>
+        public void SetPosition(Vector2 screenPoint)
+        {
+            Rect.SetPosition(uiCamera, screenPoint);
         }
 
         /// <summary>
@@ -55,10 +63,9 @@ namespace MGS.UGUI
         /// <param name="offset"></param>
         /// <param name="anchor"></param>
         /// <param name="keepPivot"></param>
-        public void SetPosition(Vector2 screenPoint, Vector2 offset,
-            TextAnchor anchor = TextAnchor.MiddleCenter, bool keepPivot = false)
+        public void SetPosition(Vector2 screenPoint, Vector2 offset, TextAnchor anchor)
         {
-            Rect.SetPosition(uiCamera, screenPoint, offset, anchor, keepPivot);
+            Rect.SetPosition(uiCamera, screenPoint, offset, anchor);
         }
     }
 }

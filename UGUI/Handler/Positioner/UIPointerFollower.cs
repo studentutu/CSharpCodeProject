@@ -27,19 +27,22 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
-        public bool keepPivot;
+        public Vector2 offset;
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 offset;
-        
+        public RectOffset padding;
+
         /// <summary>
         /// 
         /// </summary>
         protected virtual void Update()
         {
-            SetPosition(Input.mousePosition, offset, anchor, keepPivot);
+            var parent = Rect.parent as RectTransform;
+            var point = Input.mousePosition;
+            SetPosition(point, offset, anchor);
+            Rect.SetPosition(padding);
         }
     }
 }

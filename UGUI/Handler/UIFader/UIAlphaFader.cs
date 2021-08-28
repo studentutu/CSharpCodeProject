@@ -62,7 +62,7 @@ namespace MGS.UGUI
         /// <param name="to"></param>
         /// <param name="duration"></param>
         /// <param name="faded"></param>
-        public void StartFade(float delay, float from, float to, float duration, Action faded = null)
+        public virtual void StartFade(float delay, float from, float to, float duration, Action faded = null)
         {
             this.from = from;
             this.to = to;

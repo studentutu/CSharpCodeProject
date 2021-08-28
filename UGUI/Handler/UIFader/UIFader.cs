@@ -35,12 +35,11 @@ namespace MGS.UGUI
         {
             if (fader == null)
             {
-                fader = UICoroutine.Timer(delay, duration, OnBeginFade, OnFade,
-                 () =>
-                 {
-                     OnEndFade();
-                     faded?.Invoke();
-                 });
+                fader = UICoroutine.Timer(delay, duration, OnBeginFade, OnFade, () =>
+                {
+                    OnEndFade();
+                    faded?.Invoke();
+                });
                 StartCoroutine(fader);
             }
         }

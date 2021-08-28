@@ -43,7 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extension\UIBehaviourExtension.cs" />
+    <Compile Include="Extension\UIComponentExtension.cs" />
+    <Compile Include="Extension\UITransformExtension.cs" />
+    <Compile Include="Handler\Positioner\UIPointerFollower.cs" />
     <Compile Include="Handler\UIDragger.cs" />
     <Compile Include="Handler\UIFader\UIAlphaFader.cs" />
     <Compile Include="Handler\UIFader\UIColorFader.cs" />
@@ -52,7 +54,7 @@
     <Compile Include="Handler\UIFader\UIScaleFader.cs" />
     <Compile Include="Handler\UIHandler.cs" />
     <Compile Include="Handler\UIMirror.cs" />
-    <Compile Include="Handler\UIPositioner.cs" />
+    <Compile Include="Handler\Positioner\UIPositioner.cs" />
     <Compile Include="Handler\UISizer.cs" />
     <Compile Include="Listener\UIDragListener.cs" />
     <Compile Include="Listener\UIListener.cs" />

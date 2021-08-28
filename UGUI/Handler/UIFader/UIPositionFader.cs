@@ -38,7 +38,7 @@ namespace MGS.UGUI
         /// <param name="to"></param>
         /// <param name="duration"></param>
         /// <param name="faded"></param>
-        public void StartFade(float delay, Vector3 from, Vector3 to, float duration, Action faded = null)
+        public virtual void StartFade(float delay, Vector3 from, Vector3 to, float duration, Action faded = null)
         {
             this.from = from;
             this.to = to;
@@ -50,7 +50,7 @@ namespace MGS.UGUI
         /// </summary>
         protected override void OnFade(float progress)
         {
-            RectTrans.anchoredPosition = Evaluate(from, to, progress);
+            Rect.anchoredPosition = Evaluate(from, to, progress);
         }
 
         /// <summary>

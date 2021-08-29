@@ -1,46 +1,45 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIPointerFollower.cs
+ *  File         :  HTextRowData.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  8/21/2021
+ *  Date         :  8/29/2021
  *  Description  :  Initial development version.
  *************************************************************************/
-
-using UnityEngine;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI pointer-follower.
+    /// HText-Row-Data.
     /// </summary>
-    public class UIPointerFollower : UIPositioner
+    public class HTextRowData
     {
         /// <summary>
         /// 
         /// </summary>
-        public TextAnchor anchor;
+        public string tittle;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string content;
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 offset;
+        public HTextRowData() { }
 
         /// <summary>
         /// 
         /// </summary>
-        public RectOffset padding;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected virtual void Update()
+        /// <param name="tittle"></param>
+        /// <param name="content"></param>
+        public HTextRowData(string tittle, string content)
         {
-            var localPoint = GetLocalPosition(Input.mousePosition, offset, anchor);
-            Rect.SetPositionClamp(localPoint, padding);
+            this.tittle = tittle;
+            this.content = content;
         }
     }
 }

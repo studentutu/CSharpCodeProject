@@ -66,6 +66,9 @@
     <Compile Include="UIComponent.cs" />
     <Compile Include="Utility\UICoroutine.cs" />
     <Compile Include="Widget\UIButtonCollector.cs" />
+    <Compile Include="Widget\UIHTextRowFitter\HTextRowData.cs" />
+    <Compile Include="Widget\UIHTextRowFitter\HTextRowItem.cs" />
+    <Compile Include="Widget\UIHTextRowFitter\UIHTextRowFitter.cs" />
     <Compile Include="Widget\UISearchSelector.cs" />
     <Compile Include="Widget\UITextInputText.cs" />
     <Compile Include="Widget\UIWidget.cs" />

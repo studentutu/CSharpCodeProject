@@ -74,7 +74,6 @@ namespace MGS.UGUI
                 items[i].Refresh(datas[i]);
 
                 leftPrdWidth = Mathf.Max(leftPrdWidth, items[i].leftText.preferredWidth);
-                Debug.LogError(items[i].leftText.preferredWidth);
                 rightPrdWidth = Mathf.Max(rightPrdWidth, items[i].rightText.preferredWidth);
             }
 

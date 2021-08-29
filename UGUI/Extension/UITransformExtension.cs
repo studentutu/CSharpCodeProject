@@ -124,8 +124,10 @@ namespace MGS.UGUI
         public static Vector3 GetLocalPositionClamp(this RectTransform rect, Vector3 localPoint, RectOffset padding)
         {
             var parentRect = rect.parent as RectTransform;
-            localPoint.x = Mathf.Clamp(localPoint.x, -parentRect.rect.width * parentRect.pivot.x + rect.rect.width * rect.pivot.x + padding.left, parentRect.rect.width * (1 - parentRect.pivot.x) - rect.rect.width * (1 - rect.pivot.x) - padding.right);
-            localPoint.y = Mathf.Clamp(localPoint.y, -parentRect.rect.height * parentRect.pivot.y + rect.rect.height * rect.pivot.y + padding.bottom, parentRect.rect.height * (1 - parentRect.pivot.y) - rect.rect.height * (1 - rect.pivot.y) - padding.top);
+            localPoint.x = Mathf.Clamp(localPoint.x, -parentRect.rect.width * parentRect.pivot.x + rect.rect.width * rect.pivot.x + padding.left,
+                parentRect.rect.width * (1 - parentRect.pivot.x) - rect.rect.width * (1 - rect.pivot.x) - padding.right);
+            localPoint.y = Mathf.Clamp(localPoint.y, -parentRect.rect.height * parentRect.pivot.y + rect.rect.height * rect.pivot.y + padding.bottom,
+                parentRect.rect.height * (1 - parentRect.pivot.y) - rect.rect.height * (1 - rect.pivot.y) - padding.top);
             return localPoint;
         }
 

@@ -20,9 +20,9 @@ namespace MGS.UGUI
     /// </summary>
     public static class UITransformExtension
     {
-        #region Screen To UI
+        #region Screen To UI Local Position
         /// <summary>
-        /// Get local position of RectTransform.
+        /// Get local position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -36,7 +36,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Get local position of RectTransform.
+        /// Get local position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -49,7 +49,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Get local position of RectTransform.
+        /// Get local position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -66,7 +66,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Set position of RectTransform.
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -77,7 +77,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Set position of RectTransform.
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -89,7 +89,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Set position of RectTransform.
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="uiCamera"></param>
@@ -102,16 +102,27 @@ namespace MGS.UGUI
         }
         #endregion
 
-        #region Clamp In Parent
+        #region Clamp Position In Parent
         /// <summary>
         /// Get local position of RectTransform clamp in paren.
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="padding"></param>
         /// <returns></returns>
-        public static Vector3 GetLocalPosition(this RectTransform rect, RectOffset padding)
+        public static Vector3 GetLocalPositionClamp(this RectTransform rect, RectOffset padding)
         {
-            var localPoint = rect.localPosition;
+            return GetLocalPositionClamp(rect, rect.localPosition, padding);
+        }
+
+        /// <summary>
+        /// Get local position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="localPoint"></param>
+        /// <param name="padding"></param>
+        /// <returns></returns>
+        public static Vector3 GetLocalPositionClamp(this RectTransform rect, Vector3 localPoint, RectOffset padding)
+        {
             var parentRect = rect.parent as RectTransform;
             localPoint.x = Mathf.Clamp(localPoint.x, -parentRect.rect.width * parentRect.pivot.x + rect.rect.width * rect.pivot.x + padding.left, parentRect.rect.width * (1 - parentRect.pivot.x) - rect.rect.width * (1 - rect.pivot.x) - padding.right);
             localPoint.y = Mathf.Clamp(localPoint.y, -parentRect.rect.height * parentRect.pivot.y + rect.rect.height * rect.pivot.y + padding.bottom, parentRect.rect.height * (1 - parentRect.pivot.y) - rect.rect.height * (1 - rect.pivot.y) - padding.top);
@@ -123,9 +134,20 @@ namespace MGS.UGUI
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="padding"></param>
-        public static void SetPosition(this RectTransform rect, RectOffset padding)
+        public static void SetPositionClamp(this RectTransform rect, RectOffset padding)
         {
-            rect.localPosition = GetLocalPosition(rect, padding);
+            rect.localPosition = GetLocalPositionClamp(rect, padding);
+        }
+
+        /// <summary>
+        /// Set position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="localPoint"></param>
+        /// <param name="padding"></param>
+        public static void SetPositionClamp(this RectTransform rect, Vector3 localPoint, RectOffset padding)
+        {
+            rect.localPosition = GetLocalPositionClamp(rect, localPoint, padding);
         }
         #endregion
     }

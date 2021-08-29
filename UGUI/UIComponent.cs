@@ -27,22 +27,5 @@ namespace MGS.UGUI
         {
             get { return transform as RectTransform; }
         }
-
-        /// <summary>
-        /// The local active state of this GameObject. (Read Only)
-        /// </summary>
-        public bool IsGOActive
-        {
-            get { return gameObject.activeSelf; }
-        }
-
-        /// <summary>
-        /// Activates/Deactivates the GameObject.
-        /// </summary>
-        /// <param name="isActive"></param>
-        public virtual void SetGOActive(bool isActive)
-        {
-            gameObject.SetActive(isActive);
-        }
     }
 }

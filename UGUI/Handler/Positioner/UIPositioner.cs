@@ -37,8 +37,41 @@ namespace MGS.UGUI
             }
         }
 
+        #region Screen To UI Local Position
         /// <summary>
-        /// Set position of RectTransform.
+        /// Get local position in parent RectTransform.
+        /// </summary>
+        /// <param name="screenPoint"></param>
+        public Vector2 GetLocalPosition(Vector2 screenPoint)
+        {
+            return Rect.GetLocalPosition(uiCamera, screenPoint);
+        }
+
+        /// <summary>
+        /// Get local position in parent RectTransform.
+        /// </summary>
+        /// <param name="screenPoint"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public Vector2 GetLocalPosition(Vector2 screenPoint, Vector2 offset)
+        {
+            return Rect.GetLocalPosition(uiCamera, screenPoint, offset);
+        }
+
+        /// <summary>
+        /// Get local position in parent RectTransform.
+        /// </summary>
+        /// <param name="screenPoint"></param>
+        /// <param name="offset"></param>
+        /// <param name="anchor"></param>
+        /// <returns></returns>
+        public Vector2 GetLocalPosition(Vector2 screenPoint, Vector2 offset, TextAnchor anchor)
+        {
+            return Rect.GetLocalPosition(uiCamera, screenPoint, offset, anchor);
+        }
+
+        /// <summary>
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="screenPoint"></param>
         public void SetPosition(Vector2 screenPoint)
@@ -47,7 +80,7 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Set position of RectTransform.
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="screenPoint"></param>
         /// <param name="offset"></param>
@@ -57,15 +90,57 @@ namespace MGS.UGUI
         }
 
         /// <summary>
-        /// Set position of RectTransform.
+        /// Set position in parent RectTransform.
         /// </summary>
         /// <param name="screenPoint"></param>
         /// <param name="offset"></param>
         /// <param name="anchor"></param>
-        /// <param name="keepPivot"></param>
         public void SetPosition(Vector2 screenPoint, Vector2 offset, TextAnchor anchor)
         {
             Rect.SetPosition(uiCamera, screenPoint, offset, anchor);
         }
+        #endregion
+
+        #region Clamp Position In Parent
+        /// <summary>
+        /// Get local position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="padding"></param>
+        /// <returns></returns>
+        public Vector3 GetLocalPositionClamp(RectOffset padding)
+        {
+            return Rect.GetLocalPositionClamp(padding);
+        }
+
+        /// <summary>
+        /// Get local position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="localPoint"></param>
+        /// <param name="padding"></param>
+        /// <returns></returns>
+        public Vector3 GetLocalPositionClamp(Vector3 localPoint, RectOffset padding)
+        {
+            return Rect.GetLocalPositionClamp(localPoint, padding);
+        }
+
+        /// <summary>
+        /// Set position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="padding"></param>
+        public void SetPositionClamp(RectOffset padding)
+        {
+            Rect.SetPositionClamp(padding);
+        }
+
+        /// <summary>
+        /// Set position of RectTransform clamp in paren.
+        /// </summary>
+        /// <param name="localPoint"></param>
+        /// <param name="padding"></param>
+        public void SetPositionClamp(Vector3 localPoint, RectOffset padding)
+        {
+            Rect.SetPositionClamp(localPoint, padding);
+        }
+        #endregion
     }
 }

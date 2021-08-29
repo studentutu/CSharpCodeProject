@@ -39,10 +39,8 @@ namespace MGS.UGUI
         /// </summary>
         protected virtual void Update()
         {
-            var parent = Rect.parent as RectTransform;
-            var point = Input.mousePosition;
-            SetPosition(point, offset, anchor);
-            Rect.SetPosition(padding);
+            var localPoint = GetLocalPosition(Input.mousePosition, offset, anchor);
+            Rect.SetPositionClamp(localPoint, padding);
         }
     }
 }

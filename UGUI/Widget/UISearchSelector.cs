@@ -235,9 +235,9 @@ namespace MGS.UGUI
             {
                 if (emptyMatchAll)
                 {
-                    if (coll_Search.IsGOActive)
+                    if (coll_Search.gameObject.activeSelf)
                     {
-                        coll_Search.SetGOActive(false);
+                        coll_Search.gameObject.SetActive(false);
                     }
                     else
                     {
@@ -260,7 +260,7 @@ namespace MGS.UGUI
         /// <param name="value"></param>
         private void BtnCollector_OnItemClickEvent(int index, string value)
         {
-            coll_Search.SetGOActive(false);
+            coll_Search.gameObject.SetActive(false);
             lastSelect = value;
             Ipt_Keyword_Set(value);
             onSelectEvent?.Invoke(index, value);
@@ -275,9 +275,9 @@ namespace MGS.UGUI
             yield return null;
             if (!IsSelectUIArea())
             {
-                if (coll_Search.IsGOActive)
+                if (coll_Search.gameObject.activeSelf)
                 {
-                    coll_Search.SetGOActive(false);
+                    coll_Search.gameObject.SetActive(false);
                 }
                 if (Keyword != lastSelect)
                 {
@@ -380,7 +380,7 @@ namespace MGS.UGUI
         protected void RefreshSearchItems(string[] items)
         {
             coll_Search.Refresh(items);
-            coll_Search.SetGOActive(items.Length > 0);
+            coll_Search.gameObject.SetActive(items.Length > 0);
         }
     }
 }

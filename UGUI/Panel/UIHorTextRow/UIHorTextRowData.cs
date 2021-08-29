@@ -13,7 +13,7 @@
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI HText-Row-Data.
+    /// UI HorText-Row-Data.
     /// </summary>
     public class UIHorTextRowData
     {

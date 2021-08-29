@@ -16,7 +16,7 @@ using UnityEngine;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI HText-Row-Panel.
+    /// UI HorText-Row-Panel.
     /// </summary>
     public class UIHorTextRowPanel : UIPanel
     {

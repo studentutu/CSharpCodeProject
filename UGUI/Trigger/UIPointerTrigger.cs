@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIHorTextRowItem.cs
+ *  File         :  UIPointerTrigger.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -11,51 +11,37 @@
  *************************************************************************/
 
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI HorText-Row-Item.
+    /// UI Pointer-Trigger.
     /// </summary>
-    public class UIHorTextRowItem : UIComponent
+    public class UIPointerTrigger : UITrigger, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>
         /// 
         /// </summary>
-        public LayoutElement leftLayout;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Text leftText;
+        [SerializeField]
+        protected UIPanel panel;
 
         /// <summary>
         /// 
         /// </summary>
-        [Space(5)]
-        public LayoutElement rightLayout;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Text rightText;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ResetLayout()
+        /// <param name="eventData"></param>
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            leftLayout.preferredWidth = -1;
-            rightLayout.preferredWidth = -1;
+            panel.gameObject.SetActive(true);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
-        public void Refresh(UIHorTextRowData data)
+        /// <param name="eventData"></param>
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
-            leftText.text = data.tittle;
-            rightText.text = data.content;
+            panel.gameObject.SetActive(false);
         }
     }
 }

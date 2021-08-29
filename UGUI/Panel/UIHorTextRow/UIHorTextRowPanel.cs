@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIHTextRowFitter.cs
+ *  File         :  UIHorTextRowPanel.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -16,15 +16,15 @@ using UnityEngine;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI HText-Row-Fitter.
+    /// UI HText-Row-Panel.
     /// </summary>
-    public class UIHTextRowFitter : UIWidget
+    public class UIHorTextRowPanel : UIPanel
     {
         /// <summary>
         /// 
         /// </summary>
         [SerializeField]
-        protected HTextRowItem item;
+        protected UIHorTextRowItem item;
         /// <summary>
         /// 
         /// </summary>
@@ -37,13 +37,13 @@ namespace MGS.UGUI
         /// <summary>
         /// 
         /// </summary>
-        protected List<HTextRowItem> items = new List<HTextRowItem>();
+        protected List<UIHorTextRowItem> items = new List<UIHorTextRowItem>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="datas"></param>
-        public void Refresh(HTextRowData[] datas)
+        public void Refresh(UIHorTextRowData[] datas)
         {
             if (datas == null || datas.Length == 0)
             {

@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  HTextRowItem.cs
+ *  File         :  UIHorTextRowData.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -10,52 +10,36 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace MGS.UGUI
 {
     /// <summary>
-    /// HText-Row-Item.
+    /// UI HText-Row-Data.
     /// </summary>
-    public class HTextRowItem : UIComponent
+    public class UIHorTextRowData
     {
         /// <summary>
         /// 
         /// </summary>
-        public LayoutElement leftLayout;
+        public string tittle;
         /// <summary>
         /// 
         /// </summary>
-        public Text leftText;
+        public string content;
 
         /// <summary>
         /// 
         /// </summary>
-        [Space(5)]
-        public LayoutElement rightLayout;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Text rightText;
+        public UIHorTextRowData() { }
 
         /// <summary>
         /// 
         /// </summary>
-        public void ResetLayout()
+        /// <param name="tittle"></param>
+        /// <param name="content"></param>
+        public UIHorTextRowData(string tittle, string content)
         {
-            leftLayout.preferredWidth = -1;
-            rightLayout.preferredWidth = -1;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        public void Refresh(HTextRowData data)
-        {
-            leftText.text = data.tittle;
-            rightText.text = data.content;
+            this.tittle = tittle;
+            this.content = content;
         }
     }
 }

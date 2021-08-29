@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  HTextRowData.cs
+ *  File         :  UIHorTextRowItem.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -10,36 +10,52 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace MGS.UGUI
 {
     /// <summary>
-    /// HText-Row-Data.
+    /// UI HText-Row-Item.
     /// </summary>
-    public class HTextRowData
+    public class UIHorTextRowItem : UIComponent
     {
         /// <summary>
         /// 
         /// </summary>
-        public string tittle;
+        public LayoutElement leftLayout;
         /// <summary>
         /// 
         /// </summary>
-        public string content;
+        public Text leftText;
 
         /// <summary>
         /// 
         /// </summary>
-        public HTextRowData() { }
+        [Space(5)]
+        public LayoutElement rightLayout;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Text rightText;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="tittle"></param>
-        /// <param name="content"></param>
-        public HTextRowData(string tittle, string content)
+        public void ResetLayout()
         {
-            this.tittle = tittle;
-            this.content = content;
+            leftLayout.preferredWidth = -1;
+            rightLayout.preferredWidth = -1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        public void Refresh(UIHorTextRowData data)
+        {
+            leftText.text = data.tittle;
+            rightText.text = data.content;
         }
     }
 }

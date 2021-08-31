@@ -78,6 +78,15 @@ namespace MGS.UCurve
         }
 
         /// <summary>
+        /// Add key frames to curve.
+        /// </summary>
+        /// <param name="frames"></param>
+        public void AddFrames(IEnumerable<KeyFrame> frames)
+        {
+            this.frames.AddRange(frames);
+        }
+
+        /// <summary>
         /// Remove key frame.
         /// </summary>
         /// <param name="frame">Key frame to remove.</param>

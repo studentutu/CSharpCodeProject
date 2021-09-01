@@ -116,7 +116,7 @@ namespace MGS.UCurve
         /// Smooth in and out tangents.
         /// </summary>
         /// <param name="weight"></param>
-        public void SmoothTangents(float weight)
+        public void SmoothTangents(float weight = 0)
         {
             for (int i = 0; i < frames.Count; i++)
             {
@@ -131,55 +131,46 @@ namespace MGS.UCurve
         /// <param name="weight"></param>
         public void SmoothTangents(int index, float weight)
         {
-            //Designed By Mogoson.
-            var pointers = new List<int>();
-            for (int i = -1; i < 2; i++)
-            {
-                var pointer = index + i;
-                if (pointer < 0)
-                {
-                    continue;
-                }
-                else if (pointer >= frames.Count)
-                {
-                    break;
-                }
-                pointers.Add(pointer);
-            }
-
-            if (pointers.Count < 2)
+            if (index < 0 || index > frames.Count - 1 || frames.Count < 3)
             {
                 return;
             }
 
-            if (pointers.Count == 2)
+            //Designed By Mogoson.
+            KeyFrame k0, k1, k2;
+            if (index == 0 || index == frames.Count - 1)
             {
-                int p0 = pointers[0];
-                var p1 = pointers[1];
-                var k0 = frames[p0];
-                var k1 = frames[p1];
+                if (frames[0].value != frames[frames.Count - 1].value)
+                {
+                    return;
+                }
 
-                var t = (k1.value - k0.value) / (k1.time - k0.time);
-                var k = (p0 == index ? k0 : k1);
-                k.inTangent = k.outTangent = t;
-                frames[index] = k;
+                k0 = frames[frames.Count - 2];
+                k1 = frames[index];
+                k2 = frames[1];
+
+                if (index == 0)
+                {
+                    k0.time -= frames[frames.Count - 1].time;
+                }
+                else
+                {
+                    k2.time += frames[frames.Count - 1].time;
+                }
             }
             else
             {
-                var p0 = pointers[0];
-                var p1 = pointers[1];
-                var p2 = pointers[2];
-                var k0 = frames[p0];
-                var k1 = frames[p1];
-                var k2 = frames[p2];
-
-                var weight01 = (1 + weight) / 2;
-                var weight12 = (1 - weight) / 2;
-                var t01 = (k1.value - k0.value) / (k1.time - k0.time);
-                var t12 = (k2.value - k1.value) / (k2.time - k1.time);
-                k1.inTangent = k1.outTangent = t01 * weight01 + t12 * weight12;
-                frames[index] = k1;
+                k0 = frames[index - 1];
+                k1 = frames[index];
+                k2 = frames[index + 1];
             }
+
+            var weight01 = (1 + weight) / 2;
+            var weight12 = (1 - weight) / 2;
+            var t01 = (k1.value - k0.value) / (k1.time - k0.time);
+            var t12 = (k2.value - k1.value) / (k2.time - k1.time);
+            k1.inTangent = k1.outTangent = t01 * weight01 + t12 * weight12;
+            frames[index] = k1;
         }
 
         /// <summary>

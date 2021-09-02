@@ -92,6 +92,16 @@
 - Utility for color blend, EventSystem, mesh, RectTransform, vector.
 - [Detail-Unity](./Attachment/README/MGS.UCommon.md)  [Case-Unity](https://github.com/mogoson/MGS.CommonUtility)
 
+### UCurve
+
+- SinCurve.
+- EllipseCurve.
+- HelixCurve.
+- BezierCurve.
+- HermiteCurve.
+
+- [Detail-Unity](./Attachment/README/MGS.UCurve.md)  [Case-Unity](https://github.com/mogoson/MGS.UCurve)
+
 ### WinUtility
 
 - Utility for windows network.

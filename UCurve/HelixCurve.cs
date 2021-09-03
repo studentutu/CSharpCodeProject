@@ -23,42 +23,37 @@ namespace MGS.UCurve
         /// <summary>
         /// Args of curve lerp from.
         /// </summary>
-        public EllipseArgs Top { set; get; }
+        public EllipseArgs top;
 
         /// <summary>
         /// Args of curve lerp to.
         /// </summary>
-        public EllipseArgs Bottom { set; get; }
+        public EllipseArgs bottom;
 
         /// <summary>
         /// Altitude from bottom to top.
         /// </summary>
-        public float Altitude { set; get; }
+        public float altitude;
 
         /// <summary>
         /// Around radian.
         /// </summary>
-        public float Radian { set; get; }
+        public float radian;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public HelixCurve()
-        {
-            Top = new EllipseArgs();
-            Bottom = new EllipseArgs();
-            Radian = Mathf.PI * 2;
-        }
+        public HelixCurve() { }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="from">Args of curve lerp from.</param>
-        /// <param name="to">Args of curve lerp to.</param>
-        public HelixCurve(EllipseArgs from, EllipseArgs to)
+        /// <param name="top">Args of curve lerp from.</param>
+        /// <param name="bottom">Args of curve lerp to.</param>
+        public HelixCurve(EllipseArgs top, EllipseArgs bottom)
         {
-            Top = from;
-            Bottom = to;
+            this.top = top;
+            this.bottom = bottom;
         }
 
         /// <summary>
@@ -68,8 +63,8 @@ namespace MGS.UCurve
         /// <returns></returns>
         public Vector3 Evaluate(float t)
         {
-            var r = Radian * t;
-            return (Vector3)Evaluate(Top, Bottom, r, t) + Vector3.forward * Altitude * t;
+            var r = radian * t;
+            return (Vector3)Evaluate(top, bottom, r, t) + Vector3.forward * altitude * t;
         }
         #endregion
 

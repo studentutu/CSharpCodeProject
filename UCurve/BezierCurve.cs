@@ -24,17 +24,14 @@ namespace MGS.UCurve
         /// <summary>
         /// Anchor settings of curve.
         /// </summary>
-        public BezierAnchor Anchor { set; get; }
+        public BezierAnchor anchor;
         #endregion
 
         #region
         /// <summary>
         /// Constructor.
         /// </summary>
-        public BezierCurve()
-        {
-            Anchor = new BezierAnchor();
-        }
+        public BezierCurve() { }
 
         /// <summary>
         /// Constructor.
@@ -42,7 +39,7 @@ namespace MGS.UCurve
         /// <param name="anchor">Anchor settings of curve.</param>
         public BezierCurve(BezierAnchor anchor)
         {
-            Anchor = anchor;
+            this.anchor = anchor;
         }
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace MGS.UCurve
         /// <returns></returns>
         public Vector3 Evaluate(float t)
         {
-            return Evaluate(Anchor, t);
+            return Evaluate(anchor, t);
         }
         #endregion
 

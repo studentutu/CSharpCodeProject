@@ -18,22 +18,18 @@ namespace MGS.UCurve
     /// <summary>
     /// Ellipse curve.
     /// </summary>
-    [Serializable]
     public class EllipseCurve : ITimeCurve
     {
         #region
         /// <summary>
         /// Args of curve.
         /// </summary>
-        public EllipseArgs Args { set; get; }
+        public EllipseArgs args;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public EllipseCurve()
-        {
-            Args = new EllipseArgs();
-        }
+        public EllipseCurve() { }
 
         /// <summary>
         /// Constructor.
@@ -41,7 +37,7 @@ namespace MGS.UCurve
         /// <param name="args">Args of ellipse curve.</param>
         public EllipseCurve(EllipseArgs args)
         {
-            Args = args;
+            this.args = args;
         }
 
         /// <summary>
@@ -51,7 +47,7 @@ namespace MGS.UCurve
         /// <returns></returns>
         public virtual Vector3 Evaluate(float r)
         {
-            return Evaluate(Args, r);
+            return Evaluate(args, r);
         }
         #endregion
 

@@ -18,22 +18,18 @@ namespace MGS.UCurve
     /// <summary>
     ///  Sin curve.
     /// </summary>
-    [Serializable]
     public class SinCurve : ITimeCurve
     {
         #region
         /// <summary>
         /// Args of curve.
         /// </summary>
-        public SinArgs Args { set; get; }
+        public SinArgs args;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public SinCurve()
-        {
-            Args = new SinArgs();
-        }
+        public SinCurve() { }
 
         /// <summary>
         /// Constructor.
@@ -41,7 +37,7 @@ namespace MGS.UCurve
         /// <param name="args">Args of curve.</param>
         public SinCurve(SinArgs args)
         {
-            Args = args;
+            this.args = args;
         }
 
         /// <summary>
@@ -51,7 +47,7 @@ namespace MGS.UCurve
         /// <returns></returns>
         public virtual Vector3 Evaluate(float x)
         {
-            return Evaluate(Args, x);
+            return Evaluate(args, x);
         }
         #endregion
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MGS.UCurvePathEditor")]
-[assembly: AssemblyDescription("Custom editor for curve path script")]
+[assembly: AssemblyTitle("MGS.MonoCurve")]
+[assembly: AssemblyDescription("Mono curve for unity project develop")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MGS.UCurvePathEditor")]
+[assembly: AssemblyProduct("MGS.MonoCurve")]
 [assembly: AssemblyCopyright("Copyright ©  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -18,9 +18,10 @@ using System.Runtime.InteropServices;
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
 //请将此类型的 ComVisible 特性设置为 true。
 [assembly: ComVisible(false)]
+[assembly: InternalsVisibleTo("MGS.MonoCurveEditor")]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("0cddbace-7d00-4b92-b16e-f9791f3949b2")]
+[assembly: Guid("b02a86fe-256d-4db9-8617-40635154c3af")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

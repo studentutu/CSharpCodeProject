@@ -22,7 +22,6 @@ namespace MGS.Common
 {
     public class SceneEditor : Editor
     {
-        #region Field and Property
 #if UNITY_5_5_OR_NEWER
         protected readonly Handles.CapFunction CircleCap = Handles.CircleHandleCap;
         protected readonly Handles.CapFunction SphereCap = Handles.SphereHandleCap;
@@ -41,9 +40,7 @@ namespace MGS.Common
 
         protected const float FixedAreaRadius = 0.5f;
         protected const float FixedArrowLength = 0.75f;
-        #endregion
 
-        #region Protected Method
         protected void DrawCircleCap(Vector3 position, Quaternion rotation, float size)
         {
 #if UNITY_5_5_OR_NEWER
@@ -190,6 +187,5 @@ namespace MGS.Common
             EditorApplication.MarkSceneDirty();
 #endif
         }
-        #endregion
     }
 }

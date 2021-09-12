@@ -1,66 +1,74 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  BezierRoute.cs
- *  Description  :  Define route base on cubic bezier curve.
+ *  File         :  MonoHelixCurve.cs
+ *  Description  :  Define mono curve base on helix curve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
- *  Date         :  2/28/2018
+ *  Date         :  7/14/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
 using UnityEngine;
 
-namespace MGS.UCurve.Route
+namespace MGS.Curve
 {
     /// <summary>
-    /// Route base on cubic bezier curve.
+    /// Mono curve base on helix curve.
     /// </summary>
-    public class BezierRoute : MonoCurveRoute
+    public class MonoHelixCurve : MonoCurve
     {
-        #region Field and Property
         /// <summary>
-        /// Anchor points of route curve.
+        /// From ellipse args of curve.
         /// </summary>
-        [SerializeField]
-        [HideInInspector]
-        protected BezierAnchor anchor = new BezierAnchor(
-            new Vector3(1, 1, 1),
-            new Vector3(3, 1, 3),
-            new Vector3(1, 1, 2),
-            new Vector3(3, 1, 2));
+        public EllipseArgs from = new EllipseArgs(1.0f, 1.0f);
 
         /// <summary>
-        /// Length of route.
+        /// To ellipse args of curve.
+        /// </summary>
+        public EllipseArgs to = new EllipseArgs(2.0f, 2.0f);
+
+        /// <summary>
+        /// Altitude from bottom to top.
+        /// </summary>
+        public float altitude = 2;
+
+        /// <summary>
+        /// Around radian.
+        /// </summary>
+        public float radian = Mathf.PI * 4;
+
+        /// <summary>
+        /// Length of mono curve.
         /// </summary>
         public override float Length { get { return length; } }
 
         /// <summary>
-        /// Length of route.
+        /// Length of mono curve.
         /// </summary>
         protected float length;
 
         /// <summary>
-        /// Curve for route.
+        /// Curve for mono curve.
         /// </summary>
         protected override ITimeCurve Curve { get { return curve; } }
 
         /// <summary>
-        /// Curve of route.
+        /// Curve of mono curve.
         /// </summary>
-        protected BezierCurve curve = new BezierCurve();
-        #endregion
+        protected HelixCurve curve = new HelixCurve();
 
-        #region Public Method
         /// <summary>
-        /// Rebuild route.
+        /// Rebuild mono curve.
         /// </summary>
         public override void Rebuild()
         {
-            curve.anchor = anchor;
+            curve.from = from;
+            curve.to = to;
+            curve.altitude = altitude;
+            curve.radian = radian;
             length = EvaluateLength(0.01f);
         }
-        #endregion
     }
 }

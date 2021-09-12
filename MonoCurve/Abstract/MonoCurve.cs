@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  MonoCurveRoute.cs
- *  Description  :  Define route base on curve.
+ *  File         :  MonoCurve.cs
+ *  Description  :  Define mono curve base on curve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -12,20 +12,20 @@
 
 using UnityEngine;
 
-namespace MGS.UCurve.Route
+namespace MGS.Curve
 {
     /// <summary>
-    /// Route base on curve.
+    /// Mono curve base on curve.
     /// </summary>
-    public abstract class MonoCurveRoute : MonoBehaviour, ICurveRoute
+    public abstract class MonoCurve : MonoBehaviour, IMonoCurve
     {
         /// <summary>
-        /// Length of route.
+        /// Length of mono curve.
         /// </summary>
         public abstract float Length { get; }
 
         /// <summary>
-        /// Curve for route.
+        /// Curve for mono curve.
         /// </summary>
         protected abstract ITimeCurve Curve { get; }
 
@@ -46,22 +46,33 @@ namespace MGS.UCurve.Route
         }
 
         /// <summary>
-        /// Rebuild route.
+        /// Rebuild mono curve.
         /// </summary>
         public abstract void Rebuild();
 
         /// <summary>
-        /// Evaluate point on the route at time[0,1].
+        /// Evaluate point on the mono curve at length.
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="len"></param>
         /// <returns></returns>
-        public virtual Vector3 Evaluate(float t)
+        public virtual Vector3 Evaluate(float len)
+        {
+            var t = len / Length;
+            return EvaluateNormalized(t);
+        }
+
+        /// <summary>
+        /// Evaluate the curve at normalized time int the range[0,1].
+        /// </summary>
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        public virtual Vector3 EvaluateNormalized(float t)
         {
             return transform.TransformPoint(Curve.Evaluate(t));
         }
 
         /// <summary>
-        /// Evaluate length of route.
+        /// Evaluate length of mono curve.
         /// </summary>
         /// <param name="differ">Differentiation.</param>
         /// <returns></returns>
@@ -69,11 +80,11 @@ namespace MGS.UCurve.Route
         {
             var length = 0f;
             var t = 0f;
-            var p0 = Evaluate(t);
+            var p0 = EvaluateNormalized(t);
             while (t < 1.0f)
             {
                 t = Mathf.Min(t + differ, 1.0f);
-                var p1 = Evaluate(t);
+                var p1 = EvaluateNormalized(t);
                 length += Vector3.Distance(p0, p1);
                 p0 = p1;
             }

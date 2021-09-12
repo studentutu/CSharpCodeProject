@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
- *  Copyright © 2018-2019 Mogoson. All rights reserved.
+ *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  MonoCurvePathEditor.cs
- *  DeTargetion  :  Editor for MonoCurvePath.
+ *  File         :  MonoCurveEditor.cs
+ *  DeTargetion  :  Editor for MonoCurve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -14,17 +14,13 @@ using MGS.Common;
 using UnityEditor;
 using UnityEngine;
 
-namespace MGS.CurvePath
+namespace MGS.Curve
 {
-    [CustomEditor(typeof(MonoCurvePath), true)]
-    public class MonoCurvePathEditor : SceneEditor
+    [CustomEditor(typeof(MonoCurve), true)]
+    public class MonoCurveEditor : SceneEditor
     {
-        #region Field and Property
-        protected MonoCurvePath Target { get { return target as MonoCurvePath; } }
-        protected const float Delta = 0.05f;
-        #endregion
+        protected MonoCurve Target { get { return target as MonoCurve; } }
 
-        #region Protected Method
         protected virtual void OnEnable()
         {
             if (!Application.isPlaying)
@@ -36,7 +32,7 @@ namespace MGS.CurvePath
 
         protected virtual void OnSceneGUI()
         {
-            DrawPathCenterCurve();
+            DrawCurve();
         }
 
         protected virtual void OnDisable()
@@ -44,26 +40,30 @@ namespace MGS.CurvePath
             Undo.undoRedoPerformed -= Target.Rebuild;
         }
 
-        protected virtual void DrawPathCenterCurve()
+        protected virtual void DrawCurve()
         {
             Handles.color = Blue;
-            for (float t = 0; t < Target.MaxKey; t += Delta)
+            var differ = 0.01f;
+            for (float len = 0; len < Target.Length; len += differ)
             {
-                Handles.DrawLine(Target.GetPointAt(t), Target.GetPointAt(t + Delta));
+                var nlen = Mathf.Min(len + differ, Target.Length);
+                Handles.DrawLine(Target.Evaluate(len), Target.Evaluate(nlen));
             }
         }
-        #endregion
 
-        #region Public Method
         public override void OnInspectorGUI()
         {
             EditorGUI.BeginChangeCheck();
             DrawDefaultInspector();
             if (EditorGUI.EndChangeCheck())
             {
-                Target.Rebuild();
+                OnInspectorChange();
             }
         }
-        #endregion
+
+        protected virtual void OnInspectorChange()
+        {
+            Target.Rebuild();
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  SinRoute.cs
- *  Description  :  Define route base on sin curve.
+ *  File         :  MonoSinCurve.cs
+ *  Description  :  Define mono curve base on sin curve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -12,45 +12,45 @@
 
 using UnityEngine;
 
-namespace MGS.UCurve.Route
+namespace MGS.Curve
 {
     /// <summary>
-    /// Route base on sin curve.
+    /// Mono curve base on sin curve.
     /// </summary>
-    public class SinRoute : MonoCurveRoute
+    public class MonoSinCurve : MonoCurve
     {
         /// <summary>
-        /// Args of sin route.
+        /// Args of sin mono curve.
         /// </summary>
         public SinArgs args = new SinArgs(1, 1, 0);
 
         /// <summary>
-        /// radian of sin route.
+        /// radian of sin mono curve.
         /// </summary>
         public float radian = Mathf.PI * 2;
 
         /// <summary>
-        /// Length of route.
+        /// Length of mono curve.
         /// </summary>
         public override float Length { get { return length; } }
 
         /// <summary>
-        /// Length of route.
+        /// Length of mono curve.
         /// </summary>
         protected float length;
 
         /// <summary>
-        /// Curve for route.
+        /// Curve for mono curve.
         /// </summary>
         protected override ITimeCurve Curve { get { return curve; } }
 
         /// <summary>
-        /// Curve of route.
+        /// Curve of mono curve.
         /// </summary>
         protected SinCurve curve = new SinCurve();
 
         /// <summary>
-        /// Rebuild route.
+        /// Rebuild mono curve.
         /// </summary>
         public override void Rebuild()
         {
@@ -59,17 +59,17 @@ namespace MGS.UCurve.Route
         }
 
         /// <summary>
-        /// Evaluate point on the route at time[0,1].
+        /// Evaluate the curve at normalized time int the range[0,1].
         /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        public override Vector3 Evaluate(float t)
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        public override Vector3 EvaluateNormalized(float t)
         {
-            return base.Evaluate(radian * t);
+            return base.EvaluateNormalized(radian * t);
         }
 
         /// <summary>
-        /// Evaluate length of route.
+        /// Evaluate length of mono curve.
         /// </summary>
         /// <returns></returns>
         protected virtual float EvaluateLength()

@@ -143,6 +143,9 @@ namespace MGS.Curve
             {
                 if (frames[0].point != frames[frames.Count - 1].point)
                 {
+                    var frame = frames[index];
+                    frame.inTangent = frame.outTangent = Vector3.zero;
+                    frames[index] = frame;
                     return;
                 }
 

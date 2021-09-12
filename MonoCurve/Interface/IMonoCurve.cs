@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  ICurveRoute.cs
- *  Description  :  Define interface of route that base on curve.
+ *  File         :  IMonoCurve.cs
+ *  Description  :  Define interface of mono curve that base on curve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -10,21 +10,30 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace MGS.UCurve.Route
+using UnityEngine;
+
+namespace MGS.Curve
 {
     /// <summary>
-    /// Interface of curve route.
+    /// Interface of mono curve.
     /// </summary>
-    public interface ICurveRoute : ITimeCurve
+    public interface IMonoCurve : ITimeCurve
     {
         /// <summary>
-        /// Length of route.
+        /// Length of mono curve.
         /// </summary>
         float Length { get; }
 
         /// <summary>
-        /// Rebuild route.
+        /// Rebuild mono curve.
         /// </summary>
         void Rebuild();
+
+        /// <summary>
+        /// Evaluate the curve at normalized time int the range[0,1].
+        /// </summary>
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        Vector3 EvaluateNormalized(float t);
     }
 }

@@ -22,6 +22,11 @@ namespace MGS.Logger
     {
         #region Field and Property
         /// <summary>
+        /// Extension of log file.
+        /// </summary>
+        public const string FILE_EXTENSION = ".log";
+
+        /// <summary>
         /// The tag of log message.
         /// </summary>
         public const string TAG_LOG = "LOG";
@@ -62,25 +67,8 @@ namespace MGS.Logger
             }
 
             var logFilePath = ResolveLogFile(RootDir);
-            try
-            {
-                var dir = Path.GetDirectoryName(logFilePath);
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-
-                var logContent = ResolveLogContent(tag, format, args);
-                File.AppendAllText(logFilePath, logContent);
-            }
-#if DEBUG
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-#else
-            catch { }
-#endif
+            var logContent = ResolveLogContent(tag, format, args);
+            AppendToFile(logFilePath, logContent);
         }
 
         /// <summary>
@@ -90,8 +78,8 @@ namespace MGS.Logger
         /// <returns>The path of log file.</returns>
         protected virtual string ResolveLogFile(string rootDir)
         {
-            var fileName = DateTime.Now.ToString("MM-dd-yyyy");
-            return string.Format("{0}/{1}.log", rootDir, fileName);
+            var fileName = DateTime.Now.ToString("yyyy-MM-dd");
+            return string.Format("{0}/{1}{2}", rootDir, fileName, FILE_EXTENSION);
         }
 
         /// <summary>
@@ -106,6 +94,49 @@ namespace MGS.Logger
             var logTimeStamp = DateTime.Now.ToLongTimeString();
             var formatMsg = string.Format(format, args);
             return string.Format("{0}-{1}-{2}\r\n\r\n", logTimeStamp, tag, formatMsg);
+        }
+
+        /// <summary>
+        /// Append content to file at path.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="content"></param>
+        protected void AppendToFile(string filePath, string content)
+        {
+            try
+            {
+                var dir = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                File.AppendAllText(filePath, content);
+            }
+#if DEBUG
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+#else
+            catch { }
+#endif
+        }
+
+        /// <summary>
+        /// Delete file at path.
+        /// </summary>
+        /// <param name="filePath"></param>
+        protected void DeleteFile(string filePath)
+        {
+            try { File.Delete(filePath); }
+#if DEBUG
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+#else
+            catch { }
+#endif
         }
         #endregion
 
@@ -149,6 +180,46 @@ namespace MGS.Logger
         public void LogWarning(string format, params object[] args)
         {
             LogToFile(TAG_WARNING, format, args);
+        }
+
+        /// <summary>
+        /// Clear log file reserve recent specific count.
+        /// </summary>
+        /// <param name="reserve"></param>
+        public void ClearLogFile(int reserve)
+        {
+            var searchPattern = string.Format("*{0}", FILE_EXTENSION);
+            var files = Directory.GetFiles(RootDir, searchPattern);
+            if (files.Length <= reserve)
+            {
+                return;
+            }
+
+            var obsoletes = files.Length - reserve;
+            for (int i = 0; i < obsoletes; i++)
+            {
+                DeleteFile(files[i]);
+            }
+        }
+
+        /// <summary>
+        /// Clear log file before specific date time.
+        /// </summary>
+        /// <param name="before"></param>
+        public void ClearLogFile(DateTime before)
+        {
+            var searchPattern = string.Format("*{0}", FILE_EXTENSION);
+            var files = Directory.GetFiles(RootDir, searchPattern);
+            foreach (var file in files)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(file);
+                if (DateTime.TryParse(fileName, out DateTime fileDate) && fileDate >= before)
+                {
+                    continue;
+                }
+
+                DeleteFile(file);
+            }
         }
         #endregion
     }

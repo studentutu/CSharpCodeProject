@@ -43,11 +43,14 @@ namespace MGS.Curve
         protected virtual void DrawCurve()
         {
             Handles.color = Blue;
-            var differ = 0.01f;
-            for (float len = 0; len < Target.Length; len += differ)
+            var len = 0f;
+            var p0 = Target.Evaluate(len);
+            while (len < Target.Length)
             {
-                var nlen = Mathf.Min(len + differ, Target.Length);
-                Handles.DrawLine(Target.Evaluate(len), Target.Evaluate(nlen));
+                len = Mathf.Min(len + 0.01f, Target.Length);
+                var p1 = Target.Evaluate(len);
+                Handles.DrawLine(p0, p1);
+                p0 = p1;
             }
         }
 

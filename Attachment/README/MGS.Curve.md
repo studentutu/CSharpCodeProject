@@ -1,6 +1,6 @@
 [TOC]
 
-# MGS.UCurve.dll
+# MGS.Curve.dll
 
 ## Summary
 
@@ -27,7 +27,13 @@ public class HermiteCurve : ITimeCurve{}
 
 ## Technology
 
-### Hermite Polynomial Structure
+### Bezier Polynomial
+
+```C#
+return Mathf.Pow(1 - t, 3) * anchor.from + 3 * t * Mathf.Pow(1 - t, 2) * anchor.frTangent +3 * (1 - t) * Mathf.Pow(t, 2) * anchor.toTangent + Mathf.Pow(t, 3) * anchor.to;
+```
+
+### Hermite Polynomial
 
 ```C#
 /*  Designed By Mogoson.
@@ -85,6 +91,9 @@ if (index == 0 || index == frames.Count - 1)
 {
     if (frames[0].value != frames[frames.Count - 1].value)
     {
+        var frame = frames[index];
+        frame.inTangent = frame.outTangent = Vector3.zero;
+        frames[index] = frame;
         return;
     }
 
@@ -118,7 +127,7 @@ frames[index] = k1;
 
 ## Usage
 
-- New a Curve and Set Args to it.
+- New a Curve and Set Args.
 
 ```C#
 var curve = new HermiteCurve();
@@ -126,7 +135,7 @@ curve.AddFrames(frames);
 curve.SmoothTangents();//If need SmoothTangents Auto.
 ```
 
-- Use time lapse to Evaluate target Vector3.
+- Evaluate the curve at time.
 
 ```C#
 var p0 = curve.Evaluate(frames[0].time);

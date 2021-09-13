@@ -12,6 +12,18 @@
 - Unity 5.0 or above.
 
 ## Module
+
+### Algorithm
+
+- Palindrome Water
+
+### AutofacEditor
+
+- Auto search the info of type that with the AutofacRegisterAttribute.
+- Auto build type info code to AutofacConfigurator.cs
+
+- [Case-Unity](https://github.com/mogoson/MGS.Autofac)
+
 ### AutofacUtility
 
 - Auto register the mark types.
@@ -42,8 +54,12 @@
 
 - Compress file async.
 - Decompress file async.
-
 - [Detail](./Attachment/README/MGS.Compress.md)  [Case-Unity](https://github.com/mogoson/MGS.Compress)
+
+### Curve
+
+- Define Sin Ellipse Helix Bezier Hermite curve.
+- [Detail-Unity](./Attachment/README/MGS.Curve.md)  [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
 
 ### DesignPattern
 
@@ -75,6 +91,16 @@
 - SRT subtitle of video.
 - [Detail](./Attachment/README/MGS.Media.md)
 
+### MonoCurve
+
+- Define Sin Ellipse Helix Bezier Hermite mono curve.
+- [Detail-Unity](./Attachment/README/MGS.MonoCurve.md)  [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
+
+### MonoCurveEditor
+
+- Draw custom editor for Sin Ellipse Helix Bezier Hermite mono curve.
+- [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
+
 ### Sqlite
 
 - Create data base file, view table runtime.
@@ -91,16 +117,6 @@
 - Dispatcher base main thread.
 - Utility for color blend, EventSystem, mesh, RectTransform, vector.
 - [Detail-Unity](./Attachment/README/MGS.UCommon.md)  [Case-Unity](https://github.com/mogoson/MGS.CommonUtility)
-
-### UCurve
-
-- SinCurve.
-- EllipseCurve.
-- HelixCurve.
-- BezierCurve.
-- HermiteCurve.
-
-- [Detail-Unity](./Attachment/README/MGS.UCurve.md)  [Case-Unity](https://github.com/mogoson/MGS.UCurve)
 
 ### WinUtility
 

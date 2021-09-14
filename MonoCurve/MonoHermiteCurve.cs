@@ -88,19 +88,19 @@ namespace MGS.Curve
                     curve.SmoothTangents();
                 }
             }
-            length = EvaluateLength(0.01f);
+            length = EvaluateLength();
         }
 
         /// <summary>
-        /// Evaluate point on the mono curve at time[0,1].
+        /// Evaluate the curve at normalized time int the range[0,1].
         /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        public override Vector3 Evaluate(float t)
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        public override Vector3 EvaluateNormalized(float t)
         {
             if (curve.FramesCount > 0)
             {
-                return base.Evaluate(curve[curve.FramesCount - 1].time * t);
+                return base.EvaluateNormalized(curve[curve.FramesCount - 1].time * t);
             }
             return Vector3.zero;
         }

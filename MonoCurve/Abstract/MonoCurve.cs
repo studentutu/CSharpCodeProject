@@ -76,7 +76,7 @@ namespace MGS.Curve
         /// </summary>
         /// <param name="differ">Differentiation.</param>
         /// <returns></returns>
-        protected virtual float EvaluateLength(float differ)
+        protected virtual float EvaluateLength(float differ = 0.01f)
         {
             var length = 0f;
             var t = 0f;

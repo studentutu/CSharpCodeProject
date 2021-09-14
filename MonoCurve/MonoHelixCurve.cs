@@ -68,7 +68,7 @@ namespace MGS.Curve
             curve.to = to;
             curve.altitude = altitude;
             curve.radian = radian;
-            length = EvaluateLength(0.01f);
+            length = EvaluateLength();
         }
     }
 }

@@ -19,7 +19,6 @@ namespace MGS.Curve
     /// </summary>
     public class MonoBezierCurve : MonoCurve
     {
-        #region Field and Property
         /// <summary>
         /// Anchor points of mono curve.
         /// </summary>
@@ -68,6 +67,14 @@ namespace MGS.Curve
         }
 
         /// <summary>
+        /// Mono curve is close?
+        /// </summary>
+        public bool IsClose
+        {
+            get { return anchor.from == anchor.to; }
+        }
+
+        /// <summary>
         /// Length of mono curve.
         /// </summary>
         public override float Length { get { return length; } }
@@ -86,9 +93,7 @@ namespace MGS.Curve
         /// Curve of mono curve.
         /// </summary>
         protected BezierCurve curve = new BezierCurve();
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Rebuild mono curve.
         /// </summary>
@@ -97,8 +102,7 @@ namespace MGS.Curve
             curve.anchor = anchor;
             curve.anchor.frTangent = anchor.from + anchor.frTangent;
             curve.anchor.toTangent = anchor.to + anchor.toTangent;
-            length = EvaluateLength(0.01f);
+            length = EvaluateLength();
         }
-        #endregion
     }
 }

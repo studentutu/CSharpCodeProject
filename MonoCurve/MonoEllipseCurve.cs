@@ -74,17 +74,16 @@ namespace MGS.Curve
         /// <returns></returns>
         protected virtual float EvaluateLength()
         {
-            var ratio = Mathf.Abs(radian) / (Mathf.PI * 2);
-            if (args.semiMinorAxis == 0 || args.semiMajorAxis == 0)
-            {
-                return 2 * Mathf.Abs(args.semiMinorAxis + args.semiMajorAxis) * ratio;
-            }
-
+            var circles = Mathf.Abs(radian) / (Mathf.PI * 2);
             var minor = Mathf.Abs(args.semiMinorAxis);
             var major = Mathf.Abs(args.semiMajorAxis);
+            if (minor == 0 || major == 0)
+            {
+                return 2 * (minor + major) * circles;
+            }
             var a = Mathf.Max(minor, major);
             var b = Mathf.Min(minor, major);
-            return (2 * Mathf.PI * b + 4 * (a - b)) * ratio;
+            return (2 * Mathf.PI * b + 4 * (a - b)) * circles;
         }
     }
 }

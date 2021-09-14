@@ -20,6 +20,7 @@ namespace MGS.Curve
     public class MonoHermiteCurveEditor : MonoCurveEditor
     {
         protected readonly Color Gray065 = new Color(0.65f, 0.65f, 0.65f, 1);
+        protected readonly Color Gray075 = new Color(0.75f, 0.75f, 0.75f, 1);
         protected readonly Color Gray085 = new Color(0.85f, 0.85f, 0.85f, 1);
         protected new MonoHermiteCurve Target { get { return target as MonoHermiteCurve; } }
         protected override void OnSceneGUI()
@@ -120,6 +121,10 @@ namespace MGS.Curve
             Handles.color = Color.gray;
             if (index == 0 || index == Target.AnchorsCount - 1)
             {
+                if (Target.IsClose)
+                {
+                    Handles.color = Gray075;
+                }
                 DrawFreeMoveHandle(anchor.point, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
                 {
                     var adjacent = Target.GetAnchor(Target.AnchorsCount - 1 - index);

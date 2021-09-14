@@ -19,6 +19,7 @@ namespace MGS.Curve
     [CustomEditor(typeof(MonoCurve), true)]
     public class MonoCurveEditor : SceneEditor
     {
+        protected const int DETAILS_MAX = 2048;
         protected MonoCurve Target { get { return target as MonoCurve; } }
 
         protected virtual void OnEnable()
@@ -45,9 +46,10 @@ namespace MGS.Curve
             Handles.color = Blue;
             var len = 0f;
             var p0 = Target.Evaluate(len);
+            var differ = Mathf.Max(Target.Length / DETAILS_MAX, GetHandleSize(Target.transform.position) * 0.1f);
             while (len < Target.Length)
             {
-                len = Mathf.Min(len + 0.01f, Target.Length);
+                len = Mathf.Min(len + differ, Target.Length);
                 var p1 = Target.Evaluate(len);
                 Handles.DrawLine(p0, p1);
                 p0 = p1;

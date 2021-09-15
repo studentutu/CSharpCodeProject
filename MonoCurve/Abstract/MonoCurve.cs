@@ -48,7 +48,10 @@ namespace MGS.Curve
         /// <summary>
         /// Rebuild mono curve.
         /// </summary>
-        public abstract void Rebuild();
+        public virtual void Rebuild()
+        {
+            SendMessage("OnMonoCurveRebuild", this, SendMessageOptions.DontRequireReceiver);
+        }
 
         /// <summary>
         /// Evaluate point on the mono curve at length.

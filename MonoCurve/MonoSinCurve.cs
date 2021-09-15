@@ -56,6 +56,7 @@ namespace MGS.Curve
         {
             curve.args = args;
             length = EvaluateLength();
+            base.Rebuild();
         }
 
         /// <summary>

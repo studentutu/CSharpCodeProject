@@ -89,6 +89,7 @@ namespace MGS.Curve
                 }
             }
             length = EvaluateLength();
+            base.Rebuild();
         }
 
         /// <summary>

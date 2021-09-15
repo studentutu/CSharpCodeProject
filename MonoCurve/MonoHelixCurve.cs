@@ -69,6 +69,7 @@ namespace MGS.Curve
             curve.altitude = altitude;
             curve.radian = radian;
             length = EvaluateLength();
+            base.Rebuild();
         }
     }
 }

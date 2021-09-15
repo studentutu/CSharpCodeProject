@@ -103,6 +103,7 @@ namespace MGS.Curve
             curve.anchor.frTangent = anchor.from + anchor.frTangent;
             curve.anchor.toTangent = anchor.to + anchor.toTangent;
             length = EvaluateLength();
+            base.Rebuild();
         }
     }
 }

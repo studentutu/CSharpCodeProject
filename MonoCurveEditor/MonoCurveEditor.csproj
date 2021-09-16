@@ -41,12 +41,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MonoBezierCurveEditor.cs" />
-    <Compile Include="MonoHermiteCurveEditor.cs" />
-    <Compile Include="MonoCurveEditor.cs" />
+    <Compile Include="Curve\MonoBezierCurveEditor.cs" />
+    <Compile Include="Curve\MonoHermiteCurveEditor.cs" />
+    <Compile Include="Curve\MonoCurveEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\MonoCurveRendererEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Curve\Curve.csproj">
+      <Project>{1D301377-2284-4FAF-9847-503896CE63DF}</Project>
+      <Name>Curve</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoCurve\MonoCurve.csproj">
       <Project>{f1d69a8e-1d1c-46e1-9afd-989de797b4f4}</Project>
       <Name>MonoCurve</Name>

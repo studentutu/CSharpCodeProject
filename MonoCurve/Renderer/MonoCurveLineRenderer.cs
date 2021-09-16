@@ -23,6 +23,7 @@ namespace MGS.Curve
         /// <summary>
         /// Renderer component.
         /// </summary>
+        [HideInInspector]
         [SerializeField]
         protected LineRenderer lineRenderer;
 
@@ -34,9 +35,10 @@ namespace MGS.Curve
         /// <summary>
         /// Reset component.
         /// </summary>
-        protected virtual void Reset()
+        protected override void Reset()
         {
             lineRenderer = GetComponent<LineRenderer>();
+            base.Reset();
         }
 
         /// <summary>
@@ -45,7 +47,19 @@ namespace MGS.Curve
         /// <param name="curve"></param>
         public override void Rebuild(IMonoCurve curve)
         {
-            CurveRendererUtility.Rebuild(lineRenderer, curve, detail);
+            if (curve == null)
+            {
+                lineRenderer.SetVertexCount(0);
+                return;
+            }
+
+            var vertexCount = MonoCurveUtility.GetDetailCount(curve, detail, out float differ) + 1;
+            lineRenderer.SetVertexCount(vertexCount);
+            for (int i = 0; i < vertexCount; i++)
+            {
+                var pos = curve.Evaluate(i * differ);
+                lineRenderer.SetPosition(i, pos);
+            }
         }
     }
 }

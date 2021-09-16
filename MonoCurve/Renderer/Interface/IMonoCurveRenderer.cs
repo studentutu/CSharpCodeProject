@@ -27,7 +27,7 @@ namespace MGS.Curve
         /// <summary>
         /// Detail settings of render.
         /// </summary>
-        RenderDetail Detail { set; get; }
+        MonoCurveDetail Detail { set; get; }
 
         /// <summary>
         /// Rebuild renderer base mono curve.

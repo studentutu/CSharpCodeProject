@@ -61,8 +61,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoCurve", "MonoCurve\Mono
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoCurveEditor", "MonoCurveEditor\MonoCurveEditor.csproj", "{EF553A94-8DBE-4386-A891-D07FE500BC25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoCurveRenderer", "MonoCurveRenderer\MonoCurveRenderer.csproj", "{C9F9AC8F-15E7-43F6-BC7E-5FAB0FB459E3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,10 +183,6 @@ Global
 		{EF553A94-8DBE-4386-A891-D07FE500BC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF553A94-8DBE-4386-A891-D07FE500BC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF553A94-8DBE-4386-A891-D07FE500BC25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9F9AC8F-15E7-43F6-BC7E-5FAB0FB459E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9F9AC8F-15E7-43F6-BC7E-5FAB0FB459E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9F9AC8F-15E7-43F6-BC7E-5FAB0FB459E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9F9AC8F-15E7-43F6-BC7E-5FAB0FB459E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

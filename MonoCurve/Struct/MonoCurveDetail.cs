@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright © 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  RenderDetail.cs
- *  Description  :  Detail settings of render.
+ *  File         :  MonoCurveDetail.cs
+ *  Description  :  Detail settings of mono curve.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -15,10 +15,10 @@ using System;
 namespace MGS.Curve
 {
     /// <summary>
-    /// Detail settings of render.
+    /// Detail settings of mono curve.
     /// </summary>
     [Serializable]
-    public struct RenderDetail
+    public struct MonoCurveDetail
     {
         /// <summary>
         /// Min detail.
@@ -26,9 +26,9 @@ namespace MGS.Curve
         public int min;
 
         /// <summary>
-        /// Normal detail.
+        /// Unit detail.
         /// </summary>
-        public int normal;
+        public int unit;
 
         /// <summary>
         /// Max detail.
@@ -41,10 +41,10 @@ namespace MGS.Curve
         /// <param name="min">Min detail.</param>
         /// <param name="normal">Normal detail.</param>
         /// <param name="max">Max detail.</param>
-        public RenderDetail(int min, int normal, int max)
+        public MonoCurveDetail(int min, int normal, int max)
         {
             this.min = min;
-            this.normal = normal;
+            this.unit = normal;
             this.max = max;
         }
     }

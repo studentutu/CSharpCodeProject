@@ -40,14 +40,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MonoBezierCurve.cs" />
-    <Compile Include="MonoEllipseCurve.cs" />
-    <Compile Include="MonoHelixCurve.cs" />
-    <Compile Include="MonoHermiteCurve.cs" />
-    <Compile Include="Interface\IMonoCurve.cs" />
-    <Compile Include="Abstract\MonoCurve.cs" />
+    <Compile Include="Curve\MonoBezierCurve.cs" />
+    <Compile Include="Curve\MonoEllipseCurve.cs" />
+    <Compile Include="Curve\MonoHelixCurve.cs" />
+    <Compile Include="Curve\MonoHermiteCurve.cs" />
+    <Compile Include="Curve\Interface\IMonoCurve.cs" />
+    <Compile Include="Curve\Abstract\MonoCurve.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MonoSinCurve.cs" />
+    <Compile Include="Curve\MonoSinCurve.cs" />
+    <Compile Include="Renderer\Abstract\MonoCurveRenderer.cs" />
+    <Compile Include="Renderer\Interface\IMonoCurveRenderer.cs" />
+    <Compile Include="Renderer\MonoCurveLineRenderer.cs" />
+    <Compile Include="Struct\MonoCurveDetail.cs" />
+    <Compile Include="Utility\MonoCurveUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Curve\Curve.csproj">

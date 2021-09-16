@@ -24,12 +24,12 @@ namespace MGS.Curve
         /// Detail settings of render.
         /// </summary>
         [SerializeField]
-        protected RenderDetail detail = new RenderDetail(8, 12, 512);
+        protected MonoCurveDetail detail = new MonoCurveDetail(1, 2, 512);
 
         /// <summary>
         /// Detail settings of render.
         /// </summary>
-        public RenderDetail Detail
+        public MonoCurveDetail Detail
         {
             set { detail = value; }
             get { return detail; }
@@ -39,6 +39,14 @@ namespace MGS.Curve
         /// Renderer component.
         /// </summary>
         public abstract Renderer Renderer { get; }
+
+        /// <summary>
+        /// Reset component.
+        /// </summary>
+        protected virtual void Reset()
+        {
+            Rebuild(GetComponent<IMonoCurve>());
+        }
 
         /// <summary>
         /// On mono curve rebuild (Message from mono curve).

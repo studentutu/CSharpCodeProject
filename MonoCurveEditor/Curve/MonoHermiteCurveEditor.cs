@@ -16,7 +16,6 @@ using UnityEngine;
 namespace MGS.Curve
 {
     [CustomEditor(typeof(MonoHermiteCurve), true)]
-    [CanEditMultipleObjects]
     public class MonoHermiteCurveEditor : MonoCurveEditor
     {
         protected readonly Color Gray065 = new Color(0.65f, 0.65f, 0.65f, 1);

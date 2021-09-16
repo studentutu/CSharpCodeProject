@@ -38,6 +38,7 @@ namespace MGS.Curve
         protected override void Reset()
         {
             lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.useWorldSpace = false;
             base.Reset();
         }
 
@@ -57,7 +58,7 @@ namespace MGS.Curve
             lineRenderer.SetVertexCount(vertexCount);
             for (int i = 0; i < vertexCount; i++)
             {
-                var pos = curve.Evaluate(i * differ);
+                var pos = transform.InverseTransformPoint(curve.Evaluate(i * differ));
                 lineRenderer.SetPosition(i, pos);
             }
         }

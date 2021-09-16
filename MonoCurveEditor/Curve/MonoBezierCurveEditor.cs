@@ -16,7 +16,6 @@ using UnityEngine;
 namespace MGS.Curve
 {
     [CustomEditor(typeof(MonoBezierCurve), true)]
-    [CanEditMultipleObjects]
     public class MonoBezierCurveEditor : MonoCurveEditor
     {
         protected new MonoBezierCurve Target { get { return target as MonoBezierCurve; } }

@@ -43,7 +43,7 @@ namespace MGS.Curve
 
         protected virtual void DrawCurve()
         {
-            Handles.color = Blue;
+            Handles.color = Color.white;
             var len = 0f;
             var p0 = Target.Evaluate(len);
             var differ = Mathf.Max(Target.Length / DETAILS_MAX, GetHandleSize(Target.transform.position) * 0.1f);
@@ -62,11 +62,11 @@ namespace MGS.Curve
             DrawDefaultInspector();
             if (EditorGUI.EndChangeCheck())
             {
-                OnInspectorChange();
+                OnInspectorChanged();
             }
         }
 
-        protected virtual void OnInspectorChange()
+        protected virtual void OnInspectorChanged()
         {
             Target.Rebuild();
         }

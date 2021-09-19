@@ -18,10 +18,10 @@ namespace MGS.Curve
     [CustomEditor(typeof(MonoHermiteCurve), true)]
     public class MonoHermiteCurveEditor : MonoCurveEditor
     {
-        protected readonly Color Gray065 = new Color(0.65f, 0.65f, 0.65f, 1);
-        protected readonly Color Gray075 = new Color(0.75f, 0.75f, 0.75f, 1);
-        protected readonly Color Gray085 = new Color(0.85f, 0.85f, 0.85f, 1);
         protected new MonoHermiteCurve Target { get { return target as MonoHermiteCurve; } }
+        protected int adsorbent = -1;
+        protected int select = -1;
+
         protected override void OnSceneGUI()
         {
             base.OnSceneGUI();
@@ -31,9 +31,9 @@ namespace MGS.Curve
             }
         }
 
-        protected override void OnInspectorChange()
+        protected override void OnInspectorChanged()
         {
-            base.OnInspectorChange();
+            base.OnInspectorChanged();
             if (Target.autoSmooth)
             {
                 Target.InverseAnchorTangents();
@@ -44,31 +44,93 @@ namespace MGS.Curve
         {
             DrawDefaultEditor();
 
-            for (int i = 0; i < Target.AnchorsCount; i++)
+            var mode = CheckEditMode();
+            if (mode == EditMode.Anchor)
             {
-                var anchor = Target.GetAnchor(i);
-                var mode = CheckEditMode();
-                if (mode == EditMode.InsertAnchor)
+                if (CheckAnchorCtrl() == AnchorCtrl.Insert)
                 {
-                    DrawInsertEditor(i, anchor);
-                }
-                else if (mode == EditMode.RemoveAnchor)
-                {
-                    DrawRemoveEditor(i, anchor);
+                    for (int i = 0; i < Target.AnchorsCount; i++)
+                    {
+                        DrawInsertEditor(i, Target.GetAnchor(i));
+                    }
                 }
                 else
                 {
-                    DrawMoveEditor(i, anchor);
-
-                    if (!Target.autoSmooth)
+                    for (int i = 0; i < Target.AnchorsCount; i++)
                     {
-                        if (mode == EditMode.Tangent)
+                        DrawRemoveEditor(i, Target.GetAnchor(i));
+                    }
+                }
+            }
+            else
+            {
+                if (mode == EditMode.Normal || Target.autoSmooth)
+                {
+                    for (int i = 0; i < Target.AnchorsCount; i++)
+                    {
+                        DrawMoveEditor(i, Target.GetAnchor(i));
+                    }
+                }
+                else
+                {
+                    if (CheckTangentMode() == TangentMode.Single)
+                    {
+                        for (int i = 0; i < Target.AnchorsCount; i++)
                         {
-                            DrawTangentEditor(i, anchor);
+                            if (i == select)
+                            {
+                                DrawMoveEditor(i, Target.GetAnchor(i));
+                            }
+                            else
+                            {
+                                if (i == 0 || i == Target.AnchorsCount - 1)
+                                {
+                                    if ((i + select) == Target.AnchorsCount - 1 && Target.IsClose)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                DrawSelectEditor(i, Target.GetAnchor(i));
+                            }
                         }
-                        else if (mode == EditMode.InOutTangent)
+
+                        if (select >= 0)
                         {
-                            DrawInOutTangentEditor(i, anchor);
+                            if (CheckTangentCtrl() == TangentCtrl.Unify)
+                            {
+                                DrawUnifyTangentEditor(select, Target.GetAnchor(select));
+                                if ((select == 0 || select == Target.AnchorsCount - 1) && Target.IsClose)
+                                {
+                                    DrawUnifyTangentEditor(Target.AnchorsCount - 1 - select, Target.GetAnchor(0));
+                                }
+                            }
+                            else
+                            {
+                                DrawSeparateTangentEditor(select, Target.GetAnchor(select));
+                                if ((select == 0 || select == Target.AnchorsCount - 1) && Target.IsClose)
+                                {
+                                    DrawSeparateTangentEditor(Target.AnchorsCount - 1 - select, Target.GetAnchor(0));
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (CheckTangentCtrl() == TangentCtrl.Unify)
+                        {
+                            for (int i = 0; i < Target.AnchorsCount; i++)
+                            {
+                                DrawMoveEditor(i, Target.GetAnchor(i));
+                                DrawUnifyTangentEditor(i, Target.GetAnchor(i));
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Target.AnchorsCount; i++)
+                            {
+                                DrawMoveEditor(i, Target.GetAnchor(i));
+                                DrawSeparateTangentEditor(i, Target.GetAnchor(i));
+                            }
                         }
                     }
                 }
@@ -110,27 +172,46 @@ namespace MGS.Curve
             Handles.color = Color.red;
             DrawAdaptiveButton(anchor.point, Quaternion.identity, NodeSize, NodeSize, SphereCap, () =>
             {
+                select = -1;
                 Target.RemoveAnchor(index);
                 Target.Rebuild();
             });
         }
 
+        protected virtual void DrawSelectEditor(int index, HermiteAnchor anchor)
+        {
+            Handles.color = Color.cyan;
+            DrawAdaptiveButton(anchor.point, Target.transform.rotation, NodeSize, NodeSize, SphereCap, () => select = index);
+        }
+
         protected virtual void DrawMoveEditor(int index, HermiteAnchor anchor)
         {
-            Handles.color = Color.gray;
+            Handles.color = Color.white;
             if (index == 0 || index == Target.AnchorsCount - 1)
             {
+                var nodeSize = NodeSize;
                 if (Target.IsClose)
                 {
-                    Handles.color = Gray075;
+                    nodeSize = NodeSize * 1.25f;
+                    if (index == Target.AnchorsCount - 1 && adsorbent == 0)
+                    {
+                        return;
+                    }
                 }
-                DrawFreeMoveHandle(anchor.point, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
+
+                DrawFreeMoveHandle(anchor.point, Quaternion.identity, nodeSize, MoveSnap, SphereCap, position =>
                 {
                     var adjacent = Target.GetAnchor(Target.AnchorsCount - 1 - index);
                     if (Vector3.Distance(position, adjacent.point) <= NodeSize * GetHandleSize(position))
                     {
+                        adsorbent = index;
                         position = adjacent.point;
                     }
+                    else
+                    {
+                        adsorbent = -1;
+                    }
+
                     anchor.point = position;
                     Target.SetAnchor(index, anchor);
                     Target.Rebuild();
@@ -147,9 +228,9 @@ namespace MGS.Curve
             }
         }
 
-        protected virtual void DrawTangentEditor(int index, HermiteAnchor anchor)
+        protected virtual void DrawUnifyTangentEditor(int index, HermiteAnchor anchor)
         {
-            Handles.color = Color.gray;
+            Handles.color = Color.cyan;
             if (index > 0)
             {
                 var inTangent = anchor.point - anchor.inTangent;
@@ -187,11 +268,11 @@ namespace MGS.Curve
             }
         }
 
-        protected virtual void DrawInOutTangentEditor(int index, HermiteAnchor anchor)
+        protected virtual void DrawSeparateTangentEditor(int index, HermiteAnchor anchor)
         {
             if (index > 0)
             {
-                Handles.color = Gray065;
+                Handles.color = Color.cyan;
                 var inTangent = anchor.point - anchor.inTangent;
                 Handles.DrawLine(anchor.point, inTangent);
                 DrawFreeMoveHandle(inTangent, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
@@ -204,7 +285,7 @@ namespace MGS.Curve
 
             if (index < Target.AnchorsCount - 1)
             {
-                Handles.color = Gray085;
+                Handles.color = Color.green;
                 var outTangent = anchor.point + anchor.outTangent;
                 Handles.DrawLine(anchor.point, outTangent);
                 DrawFreeMoveHandle(outTangent, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
@@ -218,17 +299,9 @@ namespace MGS.Curve
 
         protected virtual EditMode CheckEditMode()
         {
-            if (Event.current.control && Event.current.shift)
+            if (Event.current.control)
             {
-                return EditMode.RemoveAnchor;
-            }
-            else if (Event.current.control)
-            {
-                return EditMode.InsertAnchor;
-            }
-            else if (Event.current.alt && Event.current.shift)
-            {
-                return EditMode.InOutTangent;
+                return EditMode.Anchor;
             }
             else if (Event.current.alt)
             {
@@ -237,13 +310,56 @@ namespace MGS.Curve
             return EditMode.Normal;
         }
 
+        protected virtual AnchorCtrl CheckAnchorCtrl()
+        {
+            if (Event.current.shift)
+            {
+                return AnchorCtrl.Delete;
+            }
+            return AnchorCtrl.Insert;
+        }
+
+        protected virtual TangentMode CheckTangentMode()
+        {
+            if (Event.current.command)
+            {
+                return TangentMode.Multi;
+            }
+            return TangentMode.Single;
+        }
+
+        protected virtual TangentCtrl CheckTangentCtrl()
+        {
+            if (Event.current.shift)
+            {
+                return TangentCtrl.Separate;
+            }
+            return TangentCtrl.Unify;
+        }
+
         protected enum EditMode
         {
-            InsertAnchor = -2,
-            RemoveAnchor = -1,
+            Anchor = -1,
             Normal = 0,
-            Tangent = 1,
-            InOutTangent = 2
+            Tangent = 1
+        }
+
+        protected enum AnchorCtrl
+        {
+            Insert = 0,
+            Delete = 1
+        }
+
+        protected enum TangentMode
+        {
+            Single = 0,
+            Multi = 1
+        }
+
+        protected enum TangentCtrl
+        {
+            Unify = 0,
+            Separate = 1
         }
     }
 }

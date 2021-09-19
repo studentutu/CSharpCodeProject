@@ -41,7 +41,7 @@ namespace MGS.Curve
 
         protected virtual void DrawMoveEditor()
         {
-            Handles.color = Color.gray;
+            Handles.color = Color.white;
             DrawFreeMoveHandle(Target.From, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
             {
                 if (Vector3.Distance(position, Target.To) <= NodeSize * GetHandleSize(position))
@@ -65,7 +65,7 @@ namespace MGS.Curve
 
         protected virtual void DrawTangentEditor()
         {
-            Handles.color = Color.gray;
+            Handles.color = Color.cyan;
             var frTangent = Target.From + Target.FrTangent;
             Handles.DrawLine(Target.From, frTangent);
             DrawFreeMoveHandle(frTangent, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>

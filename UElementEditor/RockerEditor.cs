@@ -58,7 +58,7 @@ namespace MGS.Element
             var fromAxis = Quaternion.AngleAxis(Target.RadiusAngle, CrossAxis) * ZeroAxis;
             DrawAdaptiveWireArc(Target.transform.position, ZeroAxis, fromAxis, 360, AreaRadius);
 
-            Handles.color = TransparentBlue;
+            Handles.color = TransparentCyan;
             DrawAdaptiveSolidArc(Target.transform.position, ZeroAxis, fromAxis, 360, AreaRadius);
         }
         #endregion

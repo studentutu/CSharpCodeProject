@@ -37,7 +37,7 @@ namespace MGS.Meter
         {
             if (pointer)
             {
-                Handles.color = TransparentBlue;
+                Handles.color = TransparentCyan;
                 DrawAdaptiveSolidDisc(pointer.position, pointer.forward, AreaRadius);
 
                 Handles.color = Blue;

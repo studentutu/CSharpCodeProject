@@ -52,7 +52,7 @@ namespace MGS.Element
             DrawAdaptiveSphereArrow(Target.transform.position, ZeroAxis, ArrowLength, NodeSize, "Zero");
             DrawAdaptiveSphereArrow(Target.transform.position, Target.transform.up, AreaRadius, NodeSize);
 
-            Handles.color = TransparentBlue;
+            Handles.color = TransparentCyan;
             if (Target.RotateLimit)
             {
                 var fromAxis = Quaternion.AngleAxis(Target.AngleRange.min, Target.transform.forward) * ZeroAxis;

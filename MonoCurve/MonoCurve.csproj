@@ -51,7 +51,6 @@
     <Compile Include="Renderer\Abstract\MonoCurveRenderer.cs" />
     <Compile Include="Renderer\Interface\IMonoCurveRenderer.cs" />
     <Compile Include="Renderer\MonoCurveLineRenderer.cs" />
-    <Compile Include="Struct\MonoCurveDetail.cs" />
     <Compile Include="Utility\MonoCurveUtility.cs" />
   </ItemGroup>
   <ItemGroup>

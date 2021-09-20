@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using System;
-using UnityEngine;
 
 namespace MGS.Curve
 {
@@ -27,11 +26,10 @@ namespace MGS.Curve
         /// <param name="detail"></param>
         /// <param name="differ">Differentiation.</param>
         /// <returns>Detail count of mono curve.</returns>
-        public static int GetDetailCount(IMonoCurve curve, MonoCurveDetail detail, out float differ)
+        public static int GetDetailCount(IMonoCurve curve, float detail, out float differ)
         {
             //AwayFromZero means that 12.5 -> 13
-            var units = (int)Math.Round(curve.Length * detail.unit, MidpointRounding.AwayFromZero);
-            var count = Mathf.Clamp(units, detail.min, detail.max);
+            var count = (int)Math.Round(curve.Length / detail, MidpointRounding.AwayFromZero);
             differ = curve.Length / count;
             return count;
         }

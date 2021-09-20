@@ -21,15 +21,15 @@ namespace MGS.Curve
     public abstract class MonoCurveRenderer : MonoBehaviour, IMonoCurveRenderer
     {
         /// <summary>
-        /// Detail settings of render.
+        /// Detail length for renderer.
         /// </summary>
         [SerializeField]
-        protected MonoCurveDetail detail = new MonoCurveDetail(1, 2, 512);
+        protected float detail = 0.25f;
 
         /// <summary>
-        /// Detail settings of render.
+        /// Detail length for renderer.
         /// </summary>
-        public MonoCurveDetail Detail
+        public float Detail
         {
             set { detail = value; }
             get { return detail; }

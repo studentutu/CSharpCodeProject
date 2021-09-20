@@ -5,15 +5,14 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MGS.USkinnedMesh")]
+[assembly: AssemblyTitle("MGS.SkinnedMeshEditor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MGS.USkinnedMesh")]
+[assembly: AssemblyProduct("MGS.SkinnedMeshEditor")]
 [assembly: AssemblyCopyright("Copyright ©  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("MGS.USkinnedMeshEditor")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("ad7e2966-aaea-4a99-8790-b1c4375cb15f")]
+[assembly: Guid("0bb4cb52-8530-4d5f-91c2-c8dfbc550267")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

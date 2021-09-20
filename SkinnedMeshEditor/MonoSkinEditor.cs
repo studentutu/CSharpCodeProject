@@ -19,18 +19,13 @@ namespace MGS.SkinnedMesh
     [CustomEditor(typeof(MonoSkinnedMesh), true)]
     public class MonoSkinEditor : SceneEditor
     {
-        #region Field and Property
         protected MonoSkinnedMesh Target { get { return target as MonoSkinnedMesh; } }
-        #endregion
 
-        #region Protected Method
         protected virtual void OnEnable()
         {
             if (!Application.isPlaying)
             {
-                Target.Initialize();
                 Target.Rebuild();
-
                 Undo.undoRedoPerformed += Target.Rebuild;
             }
         }
@@ -40,18 +35,20 @@ namespace MGS.SkinnedMesh
             EditorUtility.UnloadUnusedAssetsImmediate(false);
             Undo.undoRedoPerformed -= Target.Rebuild;
         }
-        #endregion
 
-        #region Public Method
         public override void OnInspectorGUI()
         {
             EditorGUI.BeginChangeCheck();
             DrawDefaultInspector();
             if (EditorGUI.EndChangeCheck())
             {
-                Target.Rebuild();
+                OnInspectorChange();
             }
         }
-        #endregion
+
+        protected virtual void OnInspectorChange()
+        {
+            Target.Rebuild();
+        }
     }
 }

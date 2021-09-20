@@ -20,26 +20,26 @@ namespace MGS.SkinnedMesh
     [RequireComponent(typeof(SkinnedMeshRenderer))]
     public abstract class MonoSkinnedMesh : MonoBehaviour, ISkinnedMesh
     {
-        #region Field and Property
         /// <summary>
         /// Skinned mesh renderer of skin.
         /// </summary>
+        [HideInInspector]
+        [SerializeField]
         protected SkinnedMeshRenderer meshRenderer;
 
         /// <summary>
         /// Mesh collider of skin.
         /// </summary>
+        [HideInInspector]
+        [SerializeField]
         protected MeshCollider meshCollider;
 
         /// <summary>
         /// Mesh of skin.
         /// </summary>
+        [HideInInspector]
+        [SerializeField]
         protected Mesh mesh;
-
-        /// <summary>
-        /// Skin is initialized?
-        /// </summary>
-        protected bool isInitialized = false;
 
         /// <summary>
         /// Skinned mesh renderer of skin.
@@ -50,58 +50,29 @@ namespace MGS.SkinnedMesh
         /// Mesh collider of skin.
         /// </summary>
         public MeshCollider Collider { get { return meshCollider; } }
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Reset component.
         /// </summary>
         protected virtual void Reset()
         {
-            Rebuild();
-        }
-
-        /// <summary>
-        /// Awake component.
-        /// </summary>
-        protected virtual void Awake()
-        {
-            Rebuild();
-        }
-
-        /// <summary>
-        /// Initialize mono skin.
-        /// </summary>
-        protected internal virtual void Initialize()
-        {
-            //Find components.
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
             meshCollider = GetComponent<MeshCollider>();
-
-            //Create mesh.
             mesh = new Mesh { name = "Skin" };
-            isInitialized = true;
         }
 
         /// <summary>
         /// Rebuild the mesh of skin.
         /// </summary>
         /// <param name="mesh">Mesh of skin.</param>
-        protected abstract void RebuildMesh(Mesh mesh);
-        #endregion
+        protected abstract void Rebuild(Mesh mesh);
 
-        #region Public Method
         /// <summary>
         /// Rebuild the mesh of skin.
         /// </summary>
         public virtual void Rebuild()
         {
-            if (!isInitialized)
-            {
-                Initialize();
-            }
-
-            RebuildMesh(mesh);
+            Rebuild(mesh);
             meshRenderer.sharedMesh = mesh;
             meshRenderer.localBounds = mesh.bounds;
 
@@ -135,6 +106,5 @@ namespace MGS.SkinnedMesh
                 meshCollider = null;
             }
         }
-        #endregion
     }
 }

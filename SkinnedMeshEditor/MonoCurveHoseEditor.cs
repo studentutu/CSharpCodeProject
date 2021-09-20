@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using MGS.Curve;
 using UnityEditor;
 
 namespace MGS.SkinnedMesh
@@ -17,25 +18,15 @@ namespace MGS.SkinnedMesh
     [CustomEditor(typeof(MonoCurveHose), true)]
     public class MonoCurveHoseEditor : MonoSkinEditor
     {
-        #region Field and Property
         protected new MonoCurveHose Target { get { return target as MonoCurveHose; } }
-        protected const float Delta = 0.05f;
-        #endregion
 
-        #region Protected Method
-        protected virtual void OnSceneGUI()
-        {
-            DrawHoseCenterCurve();
-        }
+        protected override void OnEnable() { }
 
-        protected virtual void DrawHoseCenterCurve()
+        protected override void OnDisable() { }
+
+        protected override void OnInspectorChange()
         {
-            Handles.color = Blue;
-            for (float t = 0; t < Target.MaxKey; t += Delta)
-            {
-                Handles.DrawLine(Target.GetPointAt(t), Target.GetPointAt(t + Delta));
-            }
+            Target.Rebuild(Target.GetComponent<IMonoCurve>());
         }
-        #endregion
     }
 }

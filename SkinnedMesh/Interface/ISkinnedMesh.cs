@@ -19,7 +19,6 @@ namespace MGS.SkinnedMesh
     /// </summary>
     public interface ISkinnedMesh
     {
-        #region Property
         /// <summary>
         /// Skinned mesh renderer of skin.
         /// </summary>
@@ -29,9 +28,7 @@ namespace MGS.SkinnedMesh
         /// Mesh collider of skin.
         /// </summary>
         MeshCollider Collider { get; }
-        #endregion
 
-        #region Method
         /// <summary>
         /// Rebuild the mesh of skin.
         /// </summary>
@@ -46,6 +43,5 @@ namespace MGS.SkinnedMesh
         /// Remove collider from skin mesh.
         /// </summary>
         void RemoveCollider();
-        #endregion
     }
 }

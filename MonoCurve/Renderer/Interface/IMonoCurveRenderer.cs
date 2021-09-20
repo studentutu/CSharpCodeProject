@@ -25,9 +25,9 @@ namespace MGS.Curve
         Renderer Renderer { get; }
 
         /// <summary>
-        /// Detail length for renderer.
+        /// Segment length of mono curve.
         /// </summary>
-        float Detail { set; get; }
+        float Segment { set; get; }
 
         /// <summary>
         /// Rebuild renderer base mono curve.

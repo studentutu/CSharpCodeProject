@@ -20,16 +20,16 @@ namespace MGS.Curve
     public sealed class MonoCurveUtility
     {
         /// <summary>
-        /// Get detail count of mono curve.
+        /// Get segment count of mono curve.
         /// </summary>
         /// <param name="curve"></param>
-        /// <param name="detail"></param>
+        /// <param name="segment"></param>
         /// <param name="differ">Differentiation.</param>
         /// <returns>Detail count of mono curve.</returns>
-        public static int GetDetailCount(IMonoCurve curve, float detail, out float differ)
+        public static int GetSegmentCount(IMonoCurve curve, float segment, out float differ)
         {
             //AwayFromZero means that 12.5 -> 13
-            var count = (int)Math.Round(curve.Length / detail, MidpointRounding.AwayFromZero);
+            var count = (int)Math.Round(curve.Length / segment, MidpointRounding.AwayFromZero);
             differ = curve.Length / count;
             return count;
         }

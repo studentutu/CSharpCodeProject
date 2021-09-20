@@ -24,15 +24,15 @@ namespace MGS.Curve
         /// Detail length for renderer.
         /// </summary>
         [SerializeField]
-        protected float detail = 0.25f;
+        protected float segment = 0.25f;
 
         /// <summary>
-        /// Detail length for renderer.
+        /// Segment length of mono curve.
         /// </summary>
-        public float Detail
+        public float Segment
         {
-            set { detail = value; }
-            get { return detail; }
+            set { segment = value; }
+            get { return segment; }
         }
 
         /// <summary>

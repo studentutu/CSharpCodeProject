@@ -141,8 +141,8 @@ namespace MGS.Curve
         {
             if (Target.AnchorsCount == 0)
             {
-                //Considering that it may be used on UI, so use Vector2.one.
-                var point = Target.transform.TransformPoint(Vector2.one).normalized * GetHandleSize(Target.transform.position);
+                //Considering that it may be used on UI, so use Vector3(1, 1, 0).
+                var point = Target.transform.position + new Vector3(1, 1, 0) * GetHandleSize(Target.transform.position);
                 Target.AddAnchor(new HermiteAnchor(point));
             }
         }

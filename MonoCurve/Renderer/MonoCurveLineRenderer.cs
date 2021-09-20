@@ -58,8 +58,7 @@ namespace MGS.Curve
             lineRenderer.SetVertexCount(vertexCount);
             for (int i = 0; i < vertexCount; i++)
             {
-                var pos = transform.InverseTransformPoint(curve.Evaluate(i * differ));
-                lineRenderer.SetPosition(i, pos);
+                lineRenderer.SetPosition(i, curve.LocalEvaluate(i * differ));
             }
         }
     }

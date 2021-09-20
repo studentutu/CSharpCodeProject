@@ -49,7 +49,7 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// On mono curve rebuild (Message from mono curve).
+        /// [MESSAGE] On mono curve rebuild.
         /// </summary>
         /// <param name="curve"></param>
         private void OnMonoCurveRebuild(IMonoCurve curve)

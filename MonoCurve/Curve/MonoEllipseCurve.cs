@@ -60,13 +60,13 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// Evaluate the curve at normalized time int the range[0,1].
+        /// Evaluate local point on mono curve at normalized time int the range[0,1].
         /// </summary>
         /// <param name="t">The normalized time.</param>
         /// <returns>The value of the curve, at the point in time specified.</returns>
-        public override Vector3 EvaluateNormalized(float t)
+        public override Vector3 LocalEvaluateNormalized(float t)
         {
-            return base.EvaluateNormalized(radian * t);
+            return base.LocalEvaluateNormalized(radian * t);
         }
 
         /// <summary>

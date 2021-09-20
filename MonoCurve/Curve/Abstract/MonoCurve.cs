@@ -54,7 +54,7 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// Evaluate point on the mono curve at length.
+        /// Evaluate point on mono curve at length.
         /// </summary>
         /// <param name="len"></param>
         /// <returns></returns>
@@ -65,13 +65,34 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// Evaluate the curve at normalized time int the range[0,1].
+        /// Evaluate point on mono curve at normalized time int the range[0,1].
         /// </summary>
         /// <param name="t">The normalized time.</param>
         /// <returns>The value of the curve, at the point in time specified.</returns>
         public virtual Vector3 EvaluateNormalized(float t)
         {
-            return transform.TransformPoint(Curve.Evaluate(t));
+            return transform.TransformPoint(LocalEvaluateNormalized(t));
+        }
+
+        /// <summary>
+        /// Evaluate local point on mono curve at length.
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public virtual Vector3 LocalEvaluate(float len)
+        {
+            var t = len / Length;
+            return LocalEvaluateNormalized(t);
+        }
+
+        /// <summary>
+        /// Evaluate local point on mono curve at normalized time int the range[0,1].
+        /// </summary>
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        public virtual Vector3 LocalEvaluateNormalized(float t)
+        {
+            return Curve.Evaluate(t);
         }
 
         /// <summary>

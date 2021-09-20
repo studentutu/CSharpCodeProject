@@ -17,7 +17,7 @@ namespace MGS.Curve
     /// <summary>
     /// Interface of mono curve.
     /// </summary>
-    public interface IMonoCurve : ITimeCurve
+    public interface IMonoCurve
     {
         /// <summary>
         /// Length of mono curve.
@@ -30,10 +30,31 @@ namespace MGS.Curve
         void Rebuild();
 
         /// <summary>
-        /// Evaluate the curve at normalized time int the range[0,1].
+        /// Evaluate point on mono curve at length.
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        Vector3 Evaluate(float len);
+
+        /// <summary>
+        /// Evaluate point on mono curve at normalized time int the range[0,1].
         /// </summary>
         /// <param name="t">The normalized time.</param>
         /// <returns>The value of the curve, at the point in time specified.</returns>
         Vector3 EvaluateNormalized(float t);
+
+        /// <summary>
+        /// Evaluate local point on mono curve at length.
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        Vector3 LocalEvaluate(float len);
+
+        /// <summary>
+        /// Evaluate local point on mono curve at normalized time int the range[0,1].
+        /// </summary>
+        /// <param name="t">The normalized time.</param>
+        /// <returns>The value of the curve, at the point in time specified.</returns>
+        Vector3 LocalEvaluateNormalized(float t);
     }
 }

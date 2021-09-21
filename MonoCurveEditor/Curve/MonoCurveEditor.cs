@@ -43,16 +43,19 @@ namespace MGS.Curve
 
         protected virtual void DrawCurve()
         {
-            Handles.color = Color.white;
-            var len = 0f;
-            var p0 = Target.Evaluate(len);
-            var differ = Mathf.Max(Target.Length / DETAILS_MAX, GetHandleSize(Target.transform.position) * 0.1f);
-            while (len < Target.Length)
+            if (Target.Length > 0)
             {
-                len = Mathf.Min(len + differ, Target.Length);
-                var p1 = Target.Evaluate(len);
-                Handles.DrawLine(p0, p1);
-                p0 = p1;
+                Handles.color = Color.white;
+                var len = 0f;
+                var p0 = Target.Evaluate(len);
+                var differ = Mathf.Max(Target.Length / DETAILS_MAX, GetHandleSize(Target.transform.position) * 0.1f);
+                while (len < Target.Length)
+                {
+                    len = Mathf.Min(len + differ, Target.Length);
+                    var p1 = Target.Evaluate(len);
+                    Handles.DrawLine(p0, p1);
+                    p0 = p1;
+                }
             }
         }
 

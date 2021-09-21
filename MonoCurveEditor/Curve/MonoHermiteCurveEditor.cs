@@ -22,6 +22,15 @@ namespace MGS.Curve
         protected int adsorbent = -1;
         protected int select = -1;
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (Target.IsClose)
+            {
+                adsorbent = Target.AnchorsCount - 1;
+            }
+        }
+
         protected override void OnSceneGUI()
         {
             base.OnSceneGUI();
@@ -83,13 +92,6 @@ namespace MGS.Curve
                             }
                             else
                             {
-                                if (i == 0 || i == Target.AnchorsCount - 1)
-                                {
-                                    if ((i + select) == Target.AnchorsCount - 1 && Target.IsClose)
-                                    {
-                                        continue;
-                                    }
-                                }
                                 DrawSelectEditor(i, Target.GetAnchor(i));
                             }
                         }
@@ -101,7 +103,8 @@ namespace MGS.Curve
                                 DrawUnifyTangentEditor(select, Target.GetAnchor(select));
                                 if ((select == 0 || select == Target.AnchorsCount - 1) && Target.IsClose)
                                 {
-                                    DrawUnifyTangentEditor(Target.AnchorsCount - 1 - select, Target.GetAnchor(0));
+                                    var index = Target.AnchorsCount - 1 - select;
+                                    DrawUnifyTangentEditor(index, Target.GetAnchor(index));
                                 }
                             }
                             else
@@ -109,7 +112,8 @@ namespace MGS.Curve
                                 DrawSeparateTangentEditor(select, Target.GetAnchor(select));
                                 if ((select == 0 || select == Target.AnchorsCount - 1) && Target.IsClose)
                                 {
-                                    DrawSeparateTangentEditor(Target.AnchorsCount - 1 - select, Target.GetAnchor(0));
+                                    var index = Target.AnchorsCount - 1 - select;
+                                    DrawSeparateTangentEditor(index, Target.GetAnchor(index));
                                 }
                             }
                         }
@@ -162,6 +166,12 @@ namespace MGS.Curve
                     //Considering that it may be used on UI, so use Vector2.one.
                     offset = Target.transform.TransformPoint(Vector2.one).normalized * GetHandleSize(anchor.point);
                 }
+
+                select = index + 1;
+                if (adsorbent > 0)
+                {
+                    adsorbent++;
+                }
                 Target.InsertAnchor(index + 1, new HermiteAnchor(anchor.point + offset));
                 Target.Rebuild();
             });
@@ -172,7 +182,14 @@ namespace MGS.Curve
             Handles.color = Color.red;
             DrawAdaptiveButton(anchor.point, Quaternion.identity, NodeSize, NodeSize, SphereCap, () =>
             {
-                select = -1;
+                if (select >= index)
+                {
+                    select--;
+                }
+                if (adsorbent > 0)
+                {
+                    adsorbent--;
+                }
                 Target.RemoveAnchor(index);
                 Target.Rebuild();
             });
@@ -180,8 +197,21 @@ namespace MGS.Curve
 
         protected virtual void DrawSelectEditor(int index, HermiteAnchor anchor)
         {
-            Handles.color = Color.cyan;
-            DrawAdaptiveButton(anchor.point, Target.transform.rotation, NodeSize, NodeSize, SphereCap, () => select = index);
+            var nodeSize = NodeSize;
+            if (index == 0 || index == Target.AnchorsCount - 1)
+            {
+                if (Target.IsClose)
+                {
+                    if (index != adsorbent)
+                    {
+                        return;
+                    }
+                    nodeSize = NodeSize * 1.25f;
+                }
+            }
+
+            Handles.color = Color.blue;
+            DrawAdaptiveButton(anchor.point, Target.transform.rotation, nodeSize, nodeSize, SphereCap, () => select = index);
         }
 
         protected virtual void DrawMoveEditor(int index, HermiteAnchor anchor)
@@ -192,11 +222,11 @@ namespace MGS.Curve
                 var nodeSize = NodeSize;
                 if (Target.IsClose)
                 {
-                    nodeSize = NodeSize * 1.25f;
-                    if (index == Target.AnchorsCount - 1 && adsorbent == 0)
+                    if (index != adsorbent && index > 0)
                     {
                         return;
                     }
+                    nodeSize = NodeSize * 1.25f;
                 }
 
                 DrawFreeMoveHandle(anchor.point, Quaternion.identity, nodeSize, MoveSnap, SphereCap, position =>
@@ -211,7 +241,6 @@ namespace MGS.Curve
                     {
                         adsorbent = -1;
                     }
-
                     anchor.point = position;
                     Target.SetAnchor(index, anchor);
                     Target.Rebuild();

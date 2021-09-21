@@ -132,16 +132,8 @@ namespace MGS.Curve
         /// <param name="weight"></param>
         public void SmoothTangents(int index, float weight)
         {
-            if (index < 0 || index > frames.Count - 1)
+            if (index < 0 || index > frames.Count - 1 && frames.Count < 2)
             {
-                return;
-            }
-
-            if (frames.Count < 3)
-            {
-                var frame = frames[index];
-                frame.inTangent = frame.outTangent = Vector3.zero;
-                frames[index] = frame;
                 return;
             }
 

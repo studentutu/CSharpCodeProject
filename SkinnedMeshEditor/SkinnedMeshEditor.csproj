@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AD7E2966-AAEA-4A99-8790-B1C4375CB15F}</ProjectGuid>
+    <ProjectGuid>{0BB4CB52-8530-4D5F-91C2-C8DFBC550267}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MGS.SkinnedMesh</RootNamespace>
-    <AssemblyName>MGS.USkinnedMesh</AssemblyName>
+    <AssemblyName>MGS.SkinnedMeshEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,10 +17,9 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;UNITY_5_OR_NEWER;UNITY_5_3_OR_NEWER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UNITY_5_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MGS.USkinnedMesh.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,40 +28,38 @@
     <DefineConstants>TRACE;UNITY_5_OR_NEWER;UNITY_5_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MGS.USkinnedMesh.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\lib\Unity5.0\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\Unity5.0\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\MonoSkinnedMesh.cs" />
-    <Compile Include="CurveHose\Abstract\MonoCurveHose.cs" />
-    <Compile Include="CurveHose\BezierHose.cs" />
-    <Compile Include="CurveHose\CircleHose.cs" />
-    <Compile Include="CurveHose\EllipseHose.cs" />
-    <Compile Include="CurveHose\HelixHose.cs" />
-    <Compile Include="CurveHose\HermiteHose.cs" />
-    <Compile Include="CurveHose\Interface\ICurveHose.cs" />
-    <Compile Include="CurveHose\SinHose.cs" />
-    <Compile Include="Interface\ISkinnedMesh.cs" />
+    <Compile Include="MonoCurveHoseEditor.cs" />
+    <Compile Include="MonoSkinEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UCommon\UCommon.csproj">
-      <Project>{02F92370-D9A3-4A6B-8B7D-717315A01145}</Project>
-      <Name>UCommon</Name>
+    <ProjectReference Include="..\MonoCurve\MonoCurve.csproj">
+      <Project>{F1D69A8E-1D1C-46E1-9AFD-989DE797B4F4}</Project>
+      <Name>MonoCurve</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UCurve\UCurve.csproj">
-      <Project>{1D301377-2284-4FAF-9847-503896CE63DF}</Project>
-      <Name>UCurve</Name>
+    <ProjectReference Include="..\SkinnedMesh\SkinnedMesh.csproj">
+      <Project>{AD7E2966-AAEA-4A99-8790-B1C4375CB15F}</Project>
+      <Name>SkinnedMesh</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UCommonEditor\UCommonEditor.csproj">
+      <Project>{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}</Project>
+      <Name>UCommonEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\SkinnedMesh\Plugins\"
+    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\SkinnedMesh\Editor\"
 if exist %25targetDir%25\$(TargetFileName) (
     if $(ConfigurationName)==Debug (
         copy "$(TargetName).pdb" %25targetDir%25
@@ -72,7 +69,6 @@ if exist %25targetDir%25\$(TargetFileName) (
          )
     )
     copy "$(TargetFileName)" %25targetDir%25
-    copy "$(TargetName).xml" %25targetDir%25
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

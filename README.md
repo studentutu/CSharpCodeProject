@@ -101,6 +101,16 @@
 - Draw custom editor for Sin Ellipse Helix Bezier Hermite mono curve.
 - [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
 
+### SkinnedMesh
+
+- Define mono skinned mesh.
+- [Detail-Unity](./Attachment/README/MGS.SkinnedMesh.md)  [Case-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+
+### SkinnedMeshEditor
+
+- Draw custom editor for mono skinned mesh.
+- [Case-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+
 ### Sqlite
 
 - Create data base file, view table runtime.

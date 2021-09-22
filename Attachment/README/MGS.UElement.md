@@ -9,15 +9,15 @@
 - .Net Framework 3.5 or above.
 - Unity 5.0 or above.
 
+## Dependence
+- System.dll
+- UnityEngine.dll
+
 ## Demand
 
 - Made Button with LED and support self lock.
 - Made Knob and support adsorbent to config angles.
 - Made Rocker around angle area and support auto revert.
-
-## Dependence
-- System.dll
-- UnityEngine.dll
 
 ## Implemented
 

@@ -59,7 +59,7 @@
 ### Curve
 
 - Define Sin Ellipse Helix Bezier Hermite curve.
-- [Detail-Unity](./Attachment/README/MGS.Curve.md)  [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
+- [Detail-Unity](./Attachment/README/MGS.Curve.md)  [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### DesignPattern
 
@@ -94,12 +94,12 @@
 ### MonoCurve
 
 - Define Sin Ellipse Helix Bezier Hermite mono curve.
-- [Detail-Unity](./Attachment/README/MGS.MonoCurve.md)  [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
+- [Detail-Unity](./Attachment/README/MGS.MonoCurve.md)  [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### MonoCurveEditor
 
 - Draw custom editor for Sin Ellipse Helix Bezier Hermite mono curve.
-- [Case-Unity](https://github.com/mogoson/MGS.MonoCurve)
+- [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### SkinnedMesh
 

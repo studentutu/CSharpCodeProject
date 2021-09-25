@@ -17,7 +17,6 @@ namespace MGS.Curve
     /// <summary>
     /// Capsule collider for mono curve.
     /// </summary>
-    [ExecuteInEditMode]
     public class MonoCurveCapsuleCollider : MonoCurveCollider
     {
         /// <summary>

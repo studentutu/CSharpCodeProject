@@ -31,9 +31,9 @@ namespace MGS.Curve
                 return;
             }
 
-            var segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ);
-            RequireCapsules(segments);
-            SetCapsules(curve, segments, differ);
+            Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ);
+            RequireCapsules(Segments);
+            SetCapsules(curve, Segments, differ);
         }
 
         /// <summary>

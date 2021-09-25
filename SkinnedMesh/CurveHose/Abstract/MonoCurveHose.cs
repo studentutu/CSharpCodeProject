@@ -61,6 +61,11 @@ namespace MGS.SkinnedMesh
         }
 
         /// <summary>
+        /// Segments count of renderer.
+        /// </summary>
+        public virtual int Segments { protected set; get; }
+
+        /// <summary>
         /// Polygon of hose cross section.
         /// </summary>
         public int Polygon

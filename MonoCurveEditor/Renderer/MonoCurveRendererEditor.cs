@@ -22,12 +22,18 @@ namespace MGS.Curve
 
         public override void OnInspectorGUI()
         {
+            DrawCaptionInspector();
             EditorGUI.BeginChangeCheck();
             DrawDefaultInspector();
             if (EditorGUI.EndChangeCheck())
             {
                 OnInspectorChange();
             }
+        }
+
+        protected virtual void DrawCaptionInspector()
+        {
+            EditorGUILayout.HelpBox(string.Format("Segments: {0}", Target.Segments), MessageType.Info);
         }
 
         protected virtual void OnInspectorChange()

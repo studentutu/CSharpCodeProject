@@ -45,12 +45,12 @@ namespace MGS.SkinnedMesh
             mesh.Clear();
             if (curve == null) { return; }
 
-            var segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ) + 1;
+            Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ) + 1;
             var isSeal = seal && polygon > 2;
 
-            mesh.vertices = CreateVertices(curve, segments, differ, isSeal);
-            mesh.triangles = CreateTriangles(segments, isSeal);
-            mesh.uv = CreateUV(segments, isSeal);
+            mesh.vertices = CreateVertices(curve, Segments, differ, isSeal);
+            mesh.triangles = CreateTriangles(Segments, isSeal);
+            mesh.uv = CreateUV(Segments, isSeal);
 
             if (isSeal)
             {
@@ -58,7 +58,7 @@ namespace MGS.SkinnedMesh
                 {
                     mesh.subMeshCount = 2;
                 }
-                mesh.SetTriangles(CreateSideTriangles(segments), 1);
+                mesh.SetTriangles(CreateSideTriangles(Segments), 1);
             }
 
             mesh.RecalculateNormals();

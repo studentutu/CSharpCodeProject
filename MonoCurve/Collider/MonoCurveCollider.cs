@@ -52,7 +52,12 @@ namespace MGS.Curve
             set { segment = value; }
             get { return segment; }
         }
-        
+
+        /// <summary>
+        /// Segments count of collider.
+        /// </summary>
+        public virtual int Segments { protected set; get; }
+
         /// <summary>
         /// Radius of collider.
         /// </summary>

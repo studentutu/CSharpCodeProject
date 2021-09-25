@@ -24,6 +24,11 @@ namespace MGS.SkinnedMesh
 
         protected override void OnDisable() { }
 
+        protected override string CollectCaption()
+        {
+            return string.Format("Segments: {0}\r\n{1}", Target.Segments, base.CollectCaption());
+        }
+
         protected override void OnInspectorChange()
         {
             Target.Rebuild(Target.GetComponent<IMonoCurve>());

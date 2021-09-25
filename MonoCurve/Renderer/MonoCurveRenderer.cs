@@ -36,6 +36,11 @@ namespace MGS.Curve
         }
 
         /// <summary>
+        /// Segments count of renderer.
+        /// </summary>
+        public virtual int Segments { protected set; get; }
+
+        /// <summary>
         /// Renderer component.
         /// </summary>
         public abstract Renderer Renderer { get; }

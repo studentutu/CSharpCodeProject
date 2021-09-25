@@ -55,7 +55,7 @@ namespace MGS.Curve
                 var capsule = node.GetComponent<CapsuleCollider>();
                 capsule.center = Vector3.zero;
                 capsule.direction = 2;
-                capsule.height = segment;
+                capsule.height = differ + radius * 2;
                 capsule.radius = radius;
                 capsule.isTrigger = isTrigger;
                 capsule.material = material;

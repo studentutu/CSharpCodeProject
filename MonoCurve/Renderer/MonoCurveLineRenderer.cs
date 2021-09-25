@@ -54,9 +54,9 @@ namespace MGS.Curve
                 return;
             }
 
-            Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ) + 1;
-            lineRenderer.SetVertexCount(Segments);
-            for (int i = 0; i < Segments; i++)
+            var vertexCount = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ) + 1;
+            lineRenderer.SetVertexCount(vertexCount);
+            for (int i = 0; i < vertexCount; i++)
             {
                 lineRenderer.SetPosition(i, curve.LocalEvaluate(i * differ));
             }

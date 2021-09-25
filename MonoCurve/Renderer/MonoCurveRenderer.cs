@@ -36,11 +36,6 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// Segment count of mono curve.
-        /// </summary>
-        public int Segments { protected set; get; }
-
-        /// <summary>
         /// Renderer component.
         /// </summary>
         public abstract Renderer Renderer { get; }

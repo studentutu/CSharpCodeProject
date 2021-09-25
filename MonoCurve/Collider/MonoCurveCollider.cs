@@ -52,12 +52,7 @@ namespace MGS.Curve
             set { segment = value; }
             get { return segment; }
         }
-
-        /// <summary>
-        /// Segment count of mono curve.
-        /// </summary>
-        public int Segments { protected set; get; }
-
+        
         /// <summary>
         /// Radius of collider.
         /// </summary>

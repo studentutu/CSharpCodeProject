@@ -23,12 +23,7 @@ namespace MGS.Curve
         /// Segment length of mono curve.
         /// </summary>
         float Segment { set; get; }
-
-        /// <summary>
-        /// Segment count of mono curve.
-        /// </summary>
-        int Segments { get; }
-
+        
         /// <summary>
         /// Radius of collider.
         /// </summary>

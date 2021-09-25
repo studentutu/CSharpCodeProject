@@ -31,20 +31,20 @@ namespace MGS.Curve
                 return;
             }
 
-            Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ);
-            RequireCapsules(Segments);
-            SetCapsules(curve, Segments, differ);
+            var segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ);
+            RequireCapsules(segments);
+            SetCapsules(curve, segments, differ);
         }
 
         /// <summary>
         /// Set capsule colliders.
         /// </summary>
         /// <param name="curve"></param>
-        /// <param name="count"></param>
+        /// <param name="segments"></param>
         /// <param name="differ"></param>
-        protected virtual void SetCapsules(IMonoCurve curve, int count, float differ)
+        protected virtual void SetCapsules(IMonoCurve curve, int segments, float differ)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < segments; i++)
             {
                 var node = transform.GetChild(i);
                 node.localPosition = curve.LocalEvaluate((i + 0.5f) * differ);

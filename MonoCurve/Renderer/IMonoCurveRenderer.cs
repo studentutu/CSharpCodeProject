@@ -30,6 +30,11 @@ namespace MGS.Curve
         float Segment { set; get; }
 
         /// <summary>
+        /// Segment count of mono curve.
+        /// </summary>
+        int Segments { get; }
+
+        /// <summary>
         /// Rebuild renderer base mono curve.
         /// </summary>
         /// <param name="curve"></param>

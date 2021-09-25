@@ -41,6 +41,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collider\MonoCurveColliderEditor.cs" />
     <Compile Include="Curve\MonoBezierCurveEditor.cs" />
     <Compile Include="Curve\MonoHermiteCurveEditor.cs" />
     <Compile Include="Curve\MonoCurveEditor.cs" />

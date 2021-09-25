@@ -49,7 +49,7 @@ namespace MGS.Element
         #region Protected Method
         protected virtual void OnSceneGUI()
         {
-            Handles.color = Blue;
+            Handles.color = Color.cyan;
             DrawAdaptiveSphereCap(ZeroPoint, Quaternion.identity, NodeSize);
             DrawAdaptiveSphereCap(Target.transform.position, Quaternion.identity, NodeSize);
             DrawSphereArrow(ZeroPoint, Target.transform.forward, Target.DownOffset, NodeSize);

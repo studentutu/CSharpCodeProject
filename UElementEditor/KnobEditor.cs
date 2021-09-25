@@ -44,7 +44,7 @@ namespace MGS.Element
         #region Protected Method
         protected virtual void OnSceneGUI()
         {
-            Handles.color = Blue;
+            Handles.color = Color.cyan;
             DrawAdaptiveSphereCap(Target.transform.position, Quaternion.identity, NodeSize);
             DrawAdaptiveCircleCap(Target.transform.position, Target.transform.rotation, AreaRadius);
             DrawAdaptiveSphereArrow(Target.transform.position, Target.transform.forward, ArrowLength, NodeSize, "Axis");
@@ -65,7 +65,7 @@ namespace MGS.Element
 
             if (Target.Adsorbent)
             {
-                Handles.color = Blue;
+                Handles.color = Color.cyan;
                 foreach (var adsorbent in Target.AdsorbableAngles)
                 {
                     var adsorbentAxis = Quaternion.AngleAxis(adsorbent, Target.transform.forward) * ZeroAxis;

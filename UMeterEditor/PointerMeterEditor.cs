@@ -40,7 +40,7 @@ namespace MGS.Meter
                 Handles.color = TransparentCyan;
                 DrawAdaptiveSolidDisc(pointer.position, pointer.forward, AreaRadius);
 
-                Handles.color = Blue;
+                Handles.color = Color.cyan;
                 DrawAdaptiveSphereCap(pointer.position, Quaternion.identity, NodeSize);
                 DrawAdaptiveCircleCap(pointer.position, pointer.rotation, AreaRadius);
 

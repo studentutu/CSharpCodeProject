@@ -20,6 +20,11 @@ namespace MGS.Curve
     public class MonoCurveCapsuleCollider : MonoCurveCollider
     {
         /// <summary>
+        /// Component start.
+        /// </summary>
+        protected virtual void Start() { }
+
+        /// <summary>
         /// Rebuild collider base curve.
         /// </summary>
         /// <param name="curve"></param>
@@ -52,6 +57,7 @@ namespace MGS.Curve
                 node.LookAt(node.position + tangent);
 
                 var capsule = node.GetComponent<CapsuleCollider>();
+                capsule.enabled = enabled;
                 capsule.center = Vector3.zero;
                 capsule.direction = 2;
                 capsule.height = differ + radius * 2;

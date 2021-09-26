@@ -87,6 +87,8 @@ public sealed class Logger
         return "[Demo] " + origin;
     }
 }
+
+Logger.Log("Log info is {0}", info);
 ```
 
 ------

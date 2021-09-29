@@ -13,7 +13,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MGS.Curve
+namespace MGS.Curve.UEditor
 {
     [CustomEditor(typeof(MonoBezierCurve), true)]
     public class MonoBezierCurveEditor : MonoCurveEditor

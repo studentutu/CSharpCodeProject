@@ -13,7 +13,7 @@
 using MGS.Common.UEditor;
 using UnityEditor;
 
-namespace MGS.Curve
+namespace MGS.Curve.UEditor
 {
     [CustomEditor(typeof(MonoCurveRenderer), true)]
     public class MonoCurveRendererEditor : SceneEditor

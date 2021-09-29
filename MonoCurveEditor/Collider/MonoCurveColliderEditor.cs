@@ -14,7 +14,7 @@ using MGS.Common.UEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace MGS.Curve
+namespace MGS.Curve.UEditor
 {
     [CustomEditor(typeof(MonoCurveCollider), true)]
     public class MonoCurveColliderEditor : SceneEditor

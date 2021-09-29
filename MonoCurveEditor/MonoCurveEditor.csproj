@@ -7,7 +7,7 @@
     <ProjectGuid>{EF553A94-8DBE-4386-A891-D07FE500BC25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.Curve</RootNamespace>
+    <RootNamespace>MGS.Curve.UEditor</RootNamespace>
     <AssemblyName>MGS.MonoCurveEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

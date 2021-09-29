@@ -7,7 +7,7 @@
     <ProjectGuid>{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.Common</RootNamespace>
+    <RootNamespace>MGS.Common.UEditor</RootNamespace>
     <AssemblyName>MGS.UCommonEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

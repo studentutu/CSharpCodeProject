@@ -10,7 +10,7 @@
  *  DeTargetion  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common;
+using MGS.Common.UEditor;
 using UnityEditor;
 using UnityEngine;
 

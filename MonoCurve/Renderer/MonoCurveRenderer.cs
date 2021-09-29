@@ -17,8 +17,7 @@ namespace MGS.Curve
     /// <summary>
     /// Renderer for mono curve.
     /// </summary>
-    [ExecuteInEditMode]
-    public abstract class MonoCurveRenderer : MonoBehaviour, IMonoCurveRenderer
+    public abstract class MonoCurveRenderer : MonoCurveExtender, IMonoCurveRenderer
     {
         /// <summary>
         /// Detail length for renderer.
@@ -44,28 +43,5 @@ namespace MGS.Curve
         /// Renderer component.
         /// </summary>
         public abstract Renderer Renderer { get; }
-
-        /// <summary>
-        /// Reset component.
-        /// </summary>
-        protected virtual void Reset()
-        {
-            Rebuild(GetComponent<IMonoCurve>());
-        }
-
-        /// <summary>
-        /// [MESSAGE] On mono curve rebuild.
-        /// </summary>
-        /// <param name="curve"></param>
-        private void OnMonoCurveRebuild(IMonoCurve curve)
-        {
-            Rebuild(curve);
-        }
-
-        /// <summary>
-        /// Rebuild renderer base curve.
-        /// </summary>
-        /// <param name="curve"></param>
-        public abstract void Rebuild(IMonoCurve curve);
     }
 }

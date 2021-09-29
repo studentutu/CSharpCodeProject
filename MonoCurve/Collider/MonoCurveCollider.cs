@@ -17,8 +17,7 @@ namespace MGS.Curve
     /// <summary>
     /// Collider for mono curve.
     /// </summary>
-    [ExecuteInEditMode]
-    public abstract class MonoCurveCollider : MonoBehaviour, IMonoCurveCollider
+    public abstract class MonoCurveCollider : MonoCurveExtender, IMonoCurveCollider
     {
         /// <summary>
         /// Detail length for renderer.
@@ -84,29 +83,6 @@ namespace MGS.Curve
             set { material = value; }
             get { return material; }
         }
-
-        /// <summary>
-        /// Reset component.
-        /// </summary>
-        protected virtual void Reset()
-        {
-            Rebuild(GetComponent<IMonoCurve>());
-        }
-
-        /// <summary>
-        /// [MESSAGE] On mono curve rebuild.
-        /// </summary>
-        /// <param name="curve"></param>
-        private void OnMonoCurveRebuild(IMonoCurve curve)
-        {
-            Rebuild(curve);
-        }
-
-        /// <summary>
-        /// Rebuild collider base curve.
-        /// </summary>
-        /// <param name="curve"></param>
-        public abstract void Rebuild(IMonoCurve curve);
 
         /// <summary>
         /// On destroy component.

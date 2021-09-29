@@ -17,7 +17,7 @@ namespace MGS.Curve
     /// <summary>
     /// Interface of collider that base on mono curve.
     /// </summary>
-    public interface IMonoCurveCollider
+    public interface IMonoCurveCollider : IMonoCurveExtender
     {
         /// <summary>
         /// Segment length of mono curve.
@@ -43,11 +43,5 @@ namespace MGS.Curve
         /// PhysicMaterial of collider.
         /// </summary>
         PhysicMaterial Material { set; get; }
-
-        /// <summary>
-        /// Rebuild renderer base mono curve.
-        /// </summary>
-        /// <param name="curve"></param>
-        void Rebuild(IMonoCurve curve);
     }
 }

@@ -17,7 +17,7 @@ namespace MGS.Curve
     /// <summary>
     /// Interface of renderer that base on mono curve.
     /// </summary>
-    public interface IMonoCurveRenderer
+    public interface IMonoCurveRenderer : IMonoCurveExtender
     {
         /// <summary>
         /// Renderer component.
@@ -33,11 +33,5 @@ namespace MGS.Curve
         /// Segments count of renderer.
         /// </summary>
         int Segments { get; }
-
-        /// <summary>
-        /// Rebuild renderer base mono curve.
-        /// </summary>
-        /// <param name="curve"></param>
-        void Rebuild(IMonoCurve curve);
     }
 }

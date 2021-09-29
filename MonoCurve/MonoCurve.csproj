@@ -51,6 +51,8 @@
     <Compile Include="Curve\Abstract\MonoCurve.cs" />
     <Compile Include="Extender\IMonoCurveExtender.cs" />
     <Compile Include="Extender\MonoCurveExtender.cs" />
+    <Compile Include="Parasiter\IMonoCurveParasiter.cs" />
+    <Compile Include="Parasiter\MonoCurveParasiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Curve\MonoSinCurve.cs" />
     <Compile Include="Renderer\MonoCurveRenderer.cs" />
@@ -64,9 +66,7 @@
       <Name>Curve</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Parasite\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\Curve\Plugins\"

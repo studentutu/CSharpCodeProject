@@ -51,8 +51,6 @@
     <Compile Include="Curve\Abstract\MonoCurve.cs" />
     <Compile Include="Extender\IMonoCurveExtender.cs" />
     <Compile Include="Extender\MonoCurveExtender.cs" />
-    <Compile Include="Parasiter\IMonoCurveParasiter.cs" />
-    <Compile Include="Parasiter\MonoCurveParasiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Curve\MonoSinCurve.cs" />
     <Compile Include="Renderer\MonoCurveRenderer.cs" />

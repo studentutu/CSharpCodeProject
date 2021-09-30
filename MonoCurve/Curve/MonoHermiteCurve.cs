@@ -172,6 +172,22 @@ namespace MGS.Curve
         }
 
         /// <summary>
+        /// Inverse anchor tangents from HermiteCurve.
+        /// (Require the anchors is already build to the curve)
+        /// </summary>
+        public void InverseAnchorTangents()
+        {
+            for (int i = 0; i < anchors.Count; i++)
+            {
+                var frame = curve[i];
+                var anchor = anchors[i];
+                anchor.inTangent = frame.inTangent;
+                anchor.outTangent = frame.outTangent;
+                anchors[i] = anchor;
+            }
+        }
+
+        /// <summary>
         /// Inverse transform anchor.
         /// </summary>
         /// <param name="anchor"></param>
@@ -195,22 +211,6 @@ namespace MGS.Curve
             anchor.inTangent = transform.TransformVector(anchor.inTangent);
             anchor.outTangent = transform.TransformVector(anchor.outTangent);
             return anchor;
-        }
-
-        /// <summary>
-        /// Inverse anchor tangents from HermiteCurve.
-        /// (Require the anchors is already build to the curve)
-        /// </summary>
-        protected internal void InverseAnchorTangents()
-        {
-            for (int i = 0; i < anchors.Count; i++)
-            {
-                var frame = curve[i];
-                var anchor = anchors[i];
-                anchor.inTangent = frame.inTangent;
-                anchor.outTangent = frame.outTangent;
-                anchors[i] = anchor;
-            }
         }
     }
 

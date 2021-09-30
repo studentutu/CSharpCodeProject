@@ -42,23 +42,27 @@ namespace MGS.Curve.UEditor
         protected virtual void DrawMoveEditor()
         {
             Handles.color = Color.white;
-            DrawFreeMoveHandle(Target.From, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
+            var from = Target.From;
+            DrawFreeMoveHandle(from.point, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
             {
-                if (Vector3.Distance(position, Target.To) <= NodeSize * GetHandleSize(position))
+                if (Vector3.Distance(position, Target.To.point) <= NodeSize * GetHandleSize(position))
                 {
-                    position = Target.To;
+                    position = Target.To.point;
                 }
-                Target.From = position;
+                from.point = position;
+                Target.From = from;
                 Target.Rebuild();
             });
 
-            DrawFreeMoveHandle(Target.To, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
+            var to = Target.To;
+            DrawFreeMoveHandle(to.point, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
             {
-                if (Vector3.Distance(position, Target.From) <= NodeSize * GetHandleSize(position))
+                if (Vector3.Distance(position, Target.From.point) <= NodeSize * GetHandleSize(position))
                 {
-                    position = Target.From;
+                    position = Target.From.point;
                 }
-                Target.To = position;
+                to.point = position;
+                Target.To = to;
                 Target.Rebuild();
             });
         }
@@ -66,19 +70,23 @@ namespace MGS.Curve.UEditor
         protected virtual void DrawTangentEditor()
         {
             Handles.color = Color.cyan;
-            var frTangent = Target.From + Target.FrTangent;
-            Handles.DrawLine(Target.From, frTangent);
+            var from = Target.From;
+            var frTangent = from.point + from.tangent;
+            Handles.DrawLine(from.point, frTangent);
             DrawFreeMoveHandle(frTangent, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
             {
-                Target.FrTangent = position - Target.From;
+                from.tangent = position - from.point;
+                Target.From = from;
                 Target.Rebuild();
             });
 
-            var toTangent = Target.To + Target.ToTangent;
-            Handles.DrawLine(Target.To, toTangent);
+            var to = Target.To;
+            var toTangent = to.point + to.tangent;
+            Handles.DrawLine(to.point, toTangent);
             DrawFreeMoveHandle(toTangent, Quaternion.identity, NodeSize, MoveSnap, SphereCap, position =>
             {
-                Target.ToTangent = position - Target.To;
+                to.tangent = position - to.point;
+                Target.To = to;
                 Target.Rebuild();
             });
         }

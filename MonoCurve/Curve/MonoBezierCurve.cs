@@ -20,50 +20,35 @@ namespace MGS.Curve
     public class MonoBezierCurve : MonoCurve
     {
         /// <summary>
-        /// Anchor points of mono curve.
+        /// Anchor point of mono curve from.
         /// </summary>
         [SerializeField]
         [HideInInspector]
-        protected BezierAnchor anchor = new BezierAnchor(
-            new Vector3(1, 1),
-            new Vector3(3, 3),
-            new Vector3(0, 1),
-            new Vector3(0, -1));
+        protected BezierAnchor from = new BezierAnchor(new Vector3(1, 1), new Vector3(0, 1));
 
         /// <summary>
-        /// From point of anchor.
+        /// Anchor point of mono curve to.
         /// </summary>
-        public Vector3 From
+        [SerializeField]
+        [HideInInspector]
+        protected BezierAnchor to = new BezierAnchor(new Vector3(3, 3), new Vector3(0, -1));
+
+        /// <summary>
+        /// Anchor point of mono curve from.
+        /// </summary>
+        public BezierAnchor From
         {
-            set { anchor.from = transform.InverseTransformPoint(value); }
-            get { return transform.TransformPoint(anchor.from); }
+            set { from = InverseTransformAnchor(value); }
+            get { return TransformAnchor(from); }
         }
 
         /// <summary>
-        /// To point of anchor.
+        /// Anchor point of mono curve to.
         /// </summary>
-        public Vector3 To
+        public BezierAnchor To
         {
-            set { anchor.to = transform.InverseTransformPoint(value); }
-            get { return transform.TransformPoint(anchor.to); }
-        }
-
-        /// <summary>
-        /// From tangent vector based on point.
-        /// </summary>
-        public Vector3 FrTangent
-        {
-            set { anchor.frTangent = transform.InverseTransformVector(value); }
-            get { return transform.TransformVector(anchor.frTangent); }
-        }
-
-        /// <summary>
-        /// To tangent vector based on point.
-        /// </summary>
-        public Vector3 ToTangent
-        {
-            set { anchor.toTangent = transform.InverseTransformVector(value); }
-            get { return transform.TransformVector(anchor.toTangent); }
+            set { to = InverseTransformAnchor(value); }
+            get { return TransformAnchor(to); }
         }
 
         /// <summary>
@@ -71,7 +56,7 @@ namespace MGS.Curve
         /// </summary>
         public bool IsClose
         {
-            get { return anchor.from == anchor.to; }
+            get { return from.point == to.point; }
         }
 
         /// <summary>
@@ -99,11 +84,34 @@ namespace MGS.Curve
         /// </summary>
         public override void Rebuild()
         {
-            curve.anchor = anchor;
-            curve.anchor.frTangent = anchor.from + anchor.frTangent;
-            curve.anchor.toTangent = anchor.to + anchor.toTangent;
+            curve.from = from;
+            curve.to = to;
             length = EvaluateLength();
             base.Rebuild();
+        }
+
+        /// <summary>
+        /// Inverse transform anchor.
+        /// </summary>
+        /// <param name="anchor"></param>
+        /// <returns></returns>
+        protected BezierAnchor InverseTransformAnchor(BezierAnchor anchor)
+        {
+            anchor.point = transform.InverseTransformPoint(anchor.point);
+            anchor.tangent = transform.InverseTransformVector(anchor.tangent);
+            return anchor;
+        }
+
+        /// <summary>
+        /// Transform anchor.
+        /// </summary>
+        /// <param name="anchor"></param>
+        /// <returns></returns>
+        protected BezierAnchor TransformAnchor(BezierAnchor anchor)
+        {
+            anchor.point = transform.TransformPoint(anchor.point);
+            anchor.tangent = transform.TransformVector(anchor.tangent);
+            return anchor;
         }
     }
 }

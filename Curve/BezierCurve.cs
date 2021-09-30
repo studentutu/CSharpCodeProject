@@ -22,9 +22,14 @@ namespace MGS.Curve
     {
         #region
         /// <summary>
-        /// Anchor settings of curve.
+        /// Anchor point of curve from.
         /// </summary>
-        public BezierAnchor anchor;
+        public BezierAnchor from;
+
+        /// <summary>
+        /// Anchor point of curve to.
+        /// </summary>
+        public BezierAnchor to;
         #endregion
 
         #region
@@ -36,10 +41,12 @@ namespace MGS.Curve
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="anchor">Anchor settings of curve.</param>
-        public BezierCurve(BezierAnchor anchor)
+        /// <param name="from">Anchor point of curve from.</param>
+        /// <param name="to">Anchor point of curve to.</param>
+        public BezierCurve(BezierAnchor from, BezierAnchor to)
         {
-            this.anchor = anchor;
+            this.from = from;
+            this.to = to;
         }
 
         /// <summary>
@@ -49,7 +56,7 @@ namespace MGS.Curve
         /// <returns></returns>
         public Vector3 Evaluate(float t)
         {
-            return Evaluate(anchor, t);
+            return Evaluate(from, to, t);
         }
         #endregion
 
@@ -57,59 +64,46 @@ namespace MGS.Curve
         /// <summary>
         /// Evaluate the curve at anchor and time.
         /// </summary>
-        /// <param name="anchor"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static Vector3 Evaluate(BezierAnchor anchor, float t)
+        public static Vector3 Evaluate(BezierAnchor from, BezierAnchor to, float t)
         {
-            return Mathf.Pow(1 - t, 3) * anchor.from + 3 * t * Mathf.Pow(1 - t, 2) * anchor.frTangent +
-                3 * (1 - t) * Mathf.Pow(t, 2) * anchor.toTangent + Mathf.Pow(t, 3) * anchor.to;
+            return Mathf.Pow(1 - t, 3) * from.point + 3 * t * Mathf.Pow(1 - t, 2) * from.tangent +
+                3 * (1 - t) * Mathf.Pow(t, 2) * to.tangent + Mathf.Pow(t, 3) * to.point;
         }
         #endregion
     }
 
     /// <summary>
-    /// Anchor settings of cubic bezier curve.
+    /// Anchor point of bezier curve.
     /// </summary>
     [Serializable]
     public struct BezierAnchor
     {
         #region
         /// <summary>
-        /// From point of anchor.
+        /// Point of anchor position.
         /// </summary>
-        public Vector3 from;
+        public Vector3 point;
 
         /// <summary>
-        /// To point of anchor.
+        /// Point of anchor tangent.
         /// </summary>
-        public Vector3 to;
-
-        /// <summary>
-        /// From tangent point of anchor.
-        /// </summary>
-        public Vector3 frTangent;
-
-        /// <summary>
-        /// To tangent point of anchor.
-        /// </summary>
-        public Vector3 toTangent;
+        public Vector3 tangent;
         #endregion
 
         #region
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="from">From point of anchor.</param>
-        /// <param name="to">To point of anchor.</param>
-        /// <param name="frTangent">From tangent point of anchor.</param>
-        /// <param name="toTangent">To tangent point of anchor.</param>
-        public BezierAnchor(Vector3 from, Vector3 to, Vector3 frTangent, Vector3 toTangent)
+        /// <param name="point">Point of anchor position.</param>
+        /// <param name="tangent">Point of anchor tangent.</param>
+        public BezierAnchor(Vector3 point, Vector3 tangent)
         {
-            this.from = from;
-            this.to = to;
-            this.frTangent = frTangent;
-            this.toTangent = toTangent;
+            this.point = point;
+            this.tangent = tangent;
         }
         #endregion
     }

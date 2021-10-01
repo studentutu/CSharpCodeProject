@@ -19,8 +19,6 @@ namespace MGS.Curve
     /// <summary>
     /// Cacher for mono curve.
     /// </summary>
-    [ExecuteInEditMode]
-    [RequireComponent(typeof(MonoCurve))]
     public abstract class MonoCurveCacher : MonoBehaviour, IMonoCurveCacher
     {
         /// <summary>
@@ -51,25 +49,6 @@ namespace MGS.Curve
                 return false;
             }
             return DeserializeCurve(contents);
-        }
-
-        /// <summary>
-        /// Delete cache file of mono curve.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        public virtual bool Delete(string file)
-        {
-            try
-            {
-                File.Delete(file);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogErrorFormat("{0}\r\n{1}", ex.Message, ex.StackTrace);
-                return false;
-            }
         }
 
         /// <summary>

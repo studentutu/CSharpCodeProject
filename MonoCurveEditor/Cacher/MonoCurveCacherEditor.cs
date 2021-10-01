@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using MGS.Common.UEditor;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,13 +20,6 @@ namespace MGS.Curve.UEditor
     public class MonoCurveCacherEditor : SceneEditor
     {
         protected MonoCurveCacher Target { get { return target as MonoCurveCacher; } }
-        protected string cacheFile;
-
-        protected virtual void OnEnable()
-        {
-            cacheFile = string.Format("{0}/monocurvecache/{1}",
-                Application.persistentDataPath, Target.GetComponent<MonoCurve>().GetInstanceID());
-        }
 
         public override void OnInspectorGUI()
         {
@@ -39,52 +31,29 @@ namespace MGS.Curve.UEditor
         {
             EditorGUILayout.BeginHorizontal("Box");
 
+            if (GUILayout.Button("Build"))
+            {
+                var cacheFile = EditorUtility.SaveFilePanel("Save Cache File",
+                    Application.streamingAssetsPath, Target.name, "mcc");
+
+                if (!string.IsNullOrEmpty(cacheFile))
+                {
+                    Target.Build(cacheFile);
+                }
+            }
+
             if (GUILayout.Button("Load"))
             {
-                if (!File.Exists(cacheFile))
-                {
-                    Debug.LogWarning("Build the cache first.");
-                    return;
-                }
+                var cacheFile = EditorUtility.OpenFilePanel("Open Cache File",
+                    Application.streamingAssetsPath, "mcc");
 
-                if (Target.Load(cacheFile))
+                if (!string.IsNullOrEmpty(cacheFile))
                 {
-                    SceneView.RepaintAll();
-                    MarkSceneDirty();
-                    Debug.Log("Load cache succeed.");
-                }
-                else
-                {
-                    Debug.LogError("Load cache failed.");
+                    Target.Load(cacheFile);
                 }
             }
 
             GUILayout.FlexibleSpace();
-
-            if (GUILayout.Button("Build"))
-            {
-                if (Target.Build(cacheFile))
-                {
-                    Debug.Log("Build cache succeed.");
-                }
-                else
-                {
-                    Debug.LogError("Build cache failed.");
-                }
-            }
-
-            if (GUILayout.Button("Clear"))
-            {
-                if (Target.Delete(cacheFile))
-                {
-                    Debug.Log("Clear cache succeed.");
-                }
-                else
-                {
-                    Debug.LogError("Clear cache failed.");
-                }
-            }
-
             EditorGUILayout.EndHorizontal();
         }
     }

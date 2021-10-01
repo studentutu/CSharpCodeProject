@@ -30,12 +30,5 @@ namespace MGS.Curve
         /// <param name="file"></param>
         /// <returns></returns>
         bool Load(string file);
-
-        /// <summary>
-        /// Delete cache file of mono curve.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        bool Delete(string file);
     }
 }

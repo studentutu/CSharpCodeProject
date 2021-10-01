@@ -85,25 +85,28 @@ namespace MGS.Curve
         }
 
         /// <summary>
-        /// On destroy component.
+        /// Rebuild collider base curve.
         /// </summary>
-        protected virtual void OnDestroy()
+        /// <param name="curve"></param>
+        public override void Rebuild(IMonoCurve curve)
         {
-            ClearChildren();
+            if (curve == null)
+            {
+                ClearCollider();
+                return;
+            }
+            RebuildCollider(curve);
         }
 
         /// <summary>
-        /// Clear children in this transform.
+        /// Rebuild collider for mono curve.
         /// </summary>
-        protected virtual void ClearChildren()
-        {
-            var childCount = transform.childCount;
-            while (childCount > 0)
-            {
-                Destroy(transform.GetChild(childCount - 1).gameObject);
-                childCount--;
-            }
-        }
+        protected abstract void RebuildCollider(IMonoCurve curve);
+
+        /// <summary>
+        /// Clear collider of mono curve.
+        /// </summary>
+        protected abstract void ClearCollider();
 
         /// <summary>
         /// Destroy object.

@@ -20,6 +20,12 @@ namespace MGS.Curve.UEditor
     public class MonoCurveColliderEditor : SceneEditor
     {
         protected MonoCurveCollider Target { get { return target as MonoCurveCollider; } }
+        protected bool enabled;
+
+        protected virtual void OnEnable()
+        {
+            enabled = Target.enabled;
+        }
 
         public override void OnInspectorGUI()
         {
@@ -30,6 +36,7 @@ namespace MGS.Curve.UEditor
             {
                 OnInspectorChange();
             }
+            ChangeCheckInspector();
         }
 
         protected virtual void DrawCaptionInspector()
@@ -37,10 +44,19 @@ namespace MGS.Curve.UEditor
             EditorGUILayout.HelpBox(string.Format("Segments: {0}", Target.Segments), MessageType.Info);
         }
 
+        protected virtual void ChangeCheckInspector()
+        {
+            if (Target.enabled != enabled)
+            {
+                Target.Rebuild(Target.GetComponent<IMonoCurve>());
+                enabled = Target.enabled;
+            }
+        }
+
         protected virtual void OnInspectorChange()
         {
-            Target.Segment = Mathf.Max(Target.Segment, 0);
-            Target.Radius = Mathf.Max(Target.Radius, 0);
+            Target.Segment = Mathf.Max(Target.Segment, 1E-3F);
+            Target.Radius = Mathf.Max(Target.Radius, 1E-3F);
             Target.Rebuild(Target.GetComponent<IMonoCurve>());
         }
     }

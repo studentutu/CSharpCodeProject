@@ -12,6 +12,7 @@
 
 using MGS.Common.UEditor;
 using UnityEditor;
+using UnityEngine;
 
 namespace MGS.Curve.UEditor
 {
@@ -38,6 +39,7 @@ namespace MGS.Curve.UEditor
 
         protected virtual void OnInspectorChange()
         {
+            Target.Segment = Mathf.Max(Target.Segment, 1E-3F);
             Target.Rebuild(Target.GetComponent<IMonoCurve>());
         }
     }

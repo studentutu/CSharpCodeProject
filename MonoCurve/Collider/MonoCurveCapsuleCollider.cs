@@ -20,25 +20,55 @@ namespace MGS.Curve
     public class MonoCurveCapsuleCollider : MonoCurveCollider
     {
         /// <summary>
+        /// Group root of colliders.
+        /// </summary>
+        [SerializeField]
+        [HideInInspector]
+        protected Transform colliderGroup;
+
+        /// <summary>
+        /// Reset component.
+        /// </summary>
+        protected override void Reset()
+        {
+            var groupName = string.Format("Colliders{0}", GetInstanceID());
+            colliderGroup = transform.FindChild(groupName);
+            if (colliderGroup == null)
+            {
+                colliderGroup = new GameObject(groupName).transform;
+                colliderGroup.parent = transform;
+            }
+            colliderGroup.localPosition = Vector3.zero;
+            colliderGroup.localEulerAngles = Vector3.zero;
+            base.Reset();
+        }
+
+        /// <summary>
         /// Component start.
         /// </summary>
         protected virtual void Start() { }
 
         /// <summary>
-        /// Rebuild collider base curve.
+        /// Rebuild collider for mono curve.
         /// </summary>
-        /// <param name="curve"></param>
-        public override void Rebuild(IMonoCurve curve)
+        protected override void RebuildCollider(IMonoCurve curve)
         {
-            if (curve == null)
-            {
-                ClearChildren();
-                return;
-            }
-
             Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ);
             RequireCapsules(Segments);
             SetCapsules(curve, Segments, differ);
+        }
+
+        /// <summary>
+        /// Clear collider of mono curve.
+        /// </summary>
+        protected override void ClearCollider()
+        {
+            var childCount = colliderGroup.childCount;
+            while (childCount > 0)
+            {
+                Destroy(colliderGroup.GetChild(childCount - 1).gameObject);
+                childCount--;
+            }
         }
 
         /// <summary>
@@ -51,7 +81,7 @@ namespace MGS.Curve
         {
             for (int i = 0; i < segments; i++)
             {
-                var node = transform.GetChild(i);
+                var node = colliderGroup.GetChild(i);
                 node.localPosition = curve.LocalEvaluate((i + 0.5f) * differ);
                 var tangent = (curve.Evaluate((i + 1) * differ) - curve.Evaluate(i * differ));
                 node.LookAt(node.position + tangent);
@@ -73,19 +103,27 @@ namespace MGS.Curve
         /// <param name="count"></param>
         protected virtual void RequireCapsules(int count)
         {
-            var childCount = transform.childCount;
+            var childCount = colliderGroup.childCount;
             while (childCount < count)
             {
                 var name = string.Format("Collider {0}", childCount);
                 var newCollider = new GameObject(name, typeof(CapsuleCollider));
-                newCollider.transform.parent = transform;
+                newCollider.transform.parent = colliderGroup;
                 childCount++;
             }
             while (childCount > count)
             {
-                Destroy(transform.GetChild(childCount - 1).gameObject);
+                Destroy(colliderGroup.GetChild(childCount - 1).gameObject);
                 childCount--;
             }
+        }
+
+        /// <summary>
+        /// On destroy component.
+        /// </summary>
+        protected virtual void OnDestroy()
+        {
+            Destroy(colliderGroup.gameObject);
         }
     }
 }

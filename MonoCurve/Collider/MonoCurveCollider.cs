@@ -100,7 +100,7 @@ namespace MGS.Curve
             var childCount = transform.childCount;
             while (childCount > 0)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                Destroy(transform.GetChild(childCount - 1).gameObject);
                 childCount--;
             }
         }

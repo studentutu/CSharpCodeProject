@@ -35,11 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\lib\Unity5.0\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Unity5.3\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cacher\IMonoCurveCacher.cs" />
+    <Compile Include="Cacher\MonoBezierCurveCacher.cs" />
+    <Compile Include="Cacher\MonoCurveCacher.cs" />
+    <Compile Include="Cacher\MonoHermiteCurveCacher.cs" />
     <Compile Include="Collider\IMonoCurveCollider.cs" />
     <Compile Include="Collider\MonoCurveCapsuleCollider.cs" />
     <Compile Include="Collider\MonoCurveCollider.cs" />
@@ -56,6 +61,7 @@
     <Compile Include="Renderer\MonoCurveRenderer.cs" />
     <Compile Include="Renderer\IMonoCurveRenderer.cs" />
     <Compile Include="Renderer\MonoCurveLineRenderer.cs" />
+    <Compile Include="Utility\ListJsonUtility.cs" />
     <Compile Include="Utility\MonoCurveUtility.cs" />
   </ItemGroup>
   <ItemGroup>

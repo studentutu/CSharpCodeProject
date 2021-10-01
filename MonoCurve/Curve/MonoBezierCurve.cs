@@ -24,14 +24,14 @@ namespace MGS.Curve
         /// </summary>
         [SerializeField]
         [HideInInspector]
-        protected BezierAnchor from = new BezierAnchor(new Vector3(1, 1), new Vector3(0, 1));
+        protected internal BezierAnchor from = new BezierAnchor(new Vector3(1, 1), new Vector3(0, 1));
 
         /// <summary>
         /// Anchor point of mono curve to.
         /// </summary>
         [SerializeField]
         [HideInInspector]
-        protected BezierAnchor to = new BezierAnchor(new Vector3(3, 3), new Vector3(0, -1));
+        protected internal BezierAnchor to = new BezierAnchor(new Vector3(3, 3), new Vector3(0, -1));
 
         /// <summary>
         /// Anchor point of mono curve from.
@@ -84,8 +84,14 @@ namespace MGS.Curve
         /// </summary>
         public override void Rebuild()
         {
-            curve.from = from;
-            curve.to = to;
+            var anchorFr = from;
+            anchorFr.tangent += anchorFr.point;
+            curve.from = anchorFr;
+
+            var anchorTo = to;
+            anchorTo.tangent += anchorTo.point;
+            curve.to = anchorTo;
+
             length = EvaluateLength();
             base.Rebuild();
         }
@@ -98,7 +104,7 @@ namespace MGS.Curve
         protected BezierAnchor InverseTransformAnchor(BezierAnchor anchor)
         {
             anchor.point = transform.InverseTransformPoint(anchor.point);
-            anchor.tangent = transform.InverseTransformVector(anchor.tangent);
+            anchor.tangent = transform.TransformVector(anchor.tangent);
             return anchor;
         }
 

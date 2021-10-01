@@ -31,7 +31,7 @@ namespace MGS.Curve
         /// </summary>
         [SerializeField]
         [HideInInspector]
-        protected List<HermiteAnchor> anchors = new List<HermiteAnchor>();
+        protected internal List<HermiteAnchor> anchors = new List<HermiteAnchor>();
 
         /// <summary>
         /// Count of mono curve anchors.

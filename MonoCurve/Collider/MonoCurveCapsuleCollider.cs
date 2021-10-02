@@ -31,7 +31,7 @@ namespace MGS.Curve
         /// </summary>
         protected override void Reset()
         {
-            var groupName = string.Format("Colliders{0}", GetInstanceID());
+            var groupName = string.Format("Collider{0}", GetInstanceID());
             colliderGroup = transform.FindChild(groupName);
             if (colliderGroup == null)
             {

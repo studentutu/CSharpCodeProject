@@ -5,7 +5,7 @@
  *  Description  :  Runtime configurator for Autofac.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
- *  Version      :  1.0.0
+ *  Version      :  0.0.0.0
  *  Date         :  #CREATEDATE#
  *  Description  :  The codes auto create by AutofacEditor.
  *************************************************************************/

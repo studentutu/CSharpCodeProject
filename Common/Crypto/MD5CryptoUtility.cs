@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2020 Mogoson. All rights reserved.
+ *  Copyright (C) 2020 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MD5CryptoUtility.cs
  *  Description  :  Utility for MD5 crypto service provider.

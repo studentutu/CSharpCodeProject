@@ -1,5 +1,5 @@
 /*************************************************************************
- *  Copyright © 2017-2019 Mogoson. All rights reserved.
+ *  Copyright (C) 2017-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  HelixCurve.cs
  *  Description  :  Define helix curve.

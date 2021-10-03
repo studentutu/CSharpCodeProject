@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MGS.MonoCurve")]
-[assembly: AssemblyCopyright("Copyright ©  2021 Mogoson")]
+[assembly: AssemblyCopyright("Copyright (C)  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

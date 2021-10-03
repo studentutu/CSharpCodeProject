@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  Dispatcher.cs
  *  Description  :  Dispatcher base main thread.

@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MonoCurveExtender.cs
  *  Description  :  Extender that base on mono curve.

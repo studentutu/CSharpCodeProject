@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2021-2022 Mogoson. All rights reserved.
+ *  Copyright (C) 2021-2022 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  SingleUpdater.cs
  *  Description  :  Define base class of single updater.

@@ -1,5 +1,5 @@
 /*************************************************************************
- *  Copyright © 2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  UISelectListener.cs
  *  Description  :  Event Listener for select.

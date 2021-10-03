@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2020 Mogoson. All rights reserved.
+ *  Copyright (C) 2020 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AsyncTask.cs
  *  Description  :  Base async compress task.

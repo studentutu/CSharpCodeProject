@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2018-2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2018-2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MathInterpolator.cs
  *  Description  :  Interpolator base mathematical methods.

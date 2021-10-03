@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2016-2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2016-2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MathSmoother.cs
  *  Description  :  Math smoother base mathematical methods.

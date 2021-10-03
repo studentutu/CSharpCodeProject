@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2021 Mogoson. All rights reserved.
+ *  Copyright (C) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  IMonoCurveRenderer.cs
  *  Description  :  Define interface of renderer that base on mono curve.

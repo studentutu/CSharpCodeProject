@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2017-2019 Mogoson. All rights reserved.
+ *  Copyright (C) 2017-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  Range.cs
  *  Description  :  Define range form min to max.

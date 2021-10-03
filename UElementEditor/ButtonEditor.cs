@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2016-2019 Mogoson. All rights reserved.
+ *  Copyright (C) 2016-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  ButtonEditor.cs
  *  Description  :  Editor for Button element.

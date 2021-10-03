@@ -62,7 +62,7 @@ namespace Autofac.UEditor.Properties {
         
         /// <summary>
         ///   查找类似 /*************************************************************************
-        /// *  Copyright © 2021 Mogoson. All rights reserved.
+        /// *  Copyright (C) 2021 Mogoson. All rights reserved.
         /// *------------------------------------------------------------------------
         /// *  File         :  AutofacConfigurator.cs
         /// *  Description  :  Runtime configurator for Autofac.

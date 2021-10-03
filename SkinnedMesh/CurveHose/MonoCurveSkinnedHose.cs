@@ -1,5 +1,5 @@
 ﻿/*************************************************************************
- *  Copyright © 2018-2019 Mogoson. All rights reserved.
+ *  Copyright (C) 2018-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MonoCurveSkinnedHose.cs
  *  Description  :  Define MonoCurveSkinnedHose to render dynamic hose mesh

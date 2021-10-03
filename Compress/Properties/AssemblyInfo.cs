@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MGS.Compress")]
-[assembly: AssemblyCopyright("Copyright ©  2020 Mogoson")]
+[assembly: AssemblyCopyright("Copyright (C)  2020 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

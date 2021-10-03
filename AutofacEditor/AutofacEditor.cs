@@ -16,11 +16,13 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Autofac
+namespace Autofac.UEditor
 {
     public class AutofacEditor : AssetPostprocessor
     {
         static readonly string CONFIGURATOR_FILE_PATH = string.Format("{0}/MGS.Packages/Autofac/Scripts/AutofacConfigurator.cs", Application.dataPath);
+        const string COPYRIGHT_YEAR = "#COPYRIGHTYEAR#";
+        const string CREATE_DATE = "#CREATEDATE#";
         const string INFO_CODES = "/*INFOCODES*/";
 
         [UnityEditor.Callbacks.DidReloadScripts]
@@ -38,8 +40,10 @@ namespace Autofac
                 infoCodes = BuidInfoCodes(infos);
             }
 
-            var configuratorTempCodes = Properties.Resources.AutofacConfigurator;
-            var configuratorCodes = configuratorTempCodes.Replace(INFO_CODES, infoCodes);
+            var configurator = Properties.Resources.AutofacConfigurator;
+            configurator = configurator.Replace(COPYRIGHT_YEAR, DateTime.Now.Year.ToString());
+            configurator = configurator.Replace(CREATE_DATE, DateTime.Now.ToShortDateString());
+            configurator = configurator.Replace(INFO_CODES, infoCodes);
 
             var configuratorDir = Path.GetDirectoryName(CONFIGURATOR_FILE_PATH);
             if (!Directory.Exists(configuratorDir))
@@ -47,7 +51,7 @@ namespace Autofac
                 Directory.CreateDirectory(configuratorDir);
             }
 
-            File.WriteAllText(CONFIGURATOR_FILE_PATH, configuratorCodes);
+            File.WriteAllText(CONFIGURATOR_FILE_PATH, configurator);
             AssetDatabase.Refresh();
         }
 

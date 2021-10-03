@@ -7,7 +7,7 @@
     <ProjectGuid>{E770C1C5-DE34-4711-95D9-B333D053C951}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Autofac</RootNamespace>
+    <RootNamespace>Autofac.UEditor</RootNamespace>
     <AssemblyName>MGS.AutofacEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

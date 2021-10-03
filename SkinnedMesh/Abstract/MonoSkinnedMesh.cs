@@ -73,6 +73,11 @@ namespace MGS.SkinnedMesh
         public virtual void Rebuild()
         {
             Rebuild(mesh);
+
+#if !UNITY_5_5_OR_NEWER
+            //Mesh.Optimize was removed in version 5.5.2p4.
+            mesh.Optimize();
+#endif
             meshRenderer.sharedMesh = mesh;
             meshRenderer.localBounds = mesh.bounds;
 

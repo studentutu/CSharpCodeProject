@@ -12,6 +12,7 @@
 
 using MGS.Curve;
 using UnityEditor;
+using UnityEngine;
 
 namespace MGS.SkinnedMesh
 {
@@ -31,6 +32,9 @@ namespace MGS.SkinnedMesh
 
         protected override void OnInspectorChange()
         {
+            Target.Segment = Mathf.Max(Target.Segment, 1E-3F);
+            Target.Polygon = Mathf.Max(Target.Polygon, 2);
+            Target.Radius = Mathf.Max(Target.Radius, 1E-3F);
             Target.Rebuild(Target.GetComponent<IMonoCurve>());
         }
     }

@@ -31,7 +31,8 @@ public class HermiteCurve : ITimeCurve{}
 ### Bezier Polynomial
 
 ```C#
-return Mathf.Pow(1 - t, 3) * anchor.from + 3 * t * Mathf.Pow(1 - t, 2) * anchor.frTangent +3 * (1 - t) * Mathf.Pow(t, 2) * anchor.toTangent + Mathf.Pow(t, 3) * anchor.to;
+return Mathf.Pow(1 - t, 3) * from.point + 3 * t * Mathf.Pow(1 - t, 2) * from.tangent +
+    3 * (1 - t) * Mathf.Pow(t, 2) * to.tangent + Mathf.Pow(t, 3) * to.point;
 ```
 
 ### Hermite Polynomial
@@ -90,7 +91,7 @@ return (1 - 2 * q0) * v0 * p0 + (1 + 2 * q1) * v1 * p1 + m0 * d0 * p0 + m1 * d1 
 KeyFrame k0, k1, k2;
 if (index == 0 || index == frames.Count - 1)
 {
-    if (frames[0].value != frames[frames.Count - 1].value)
+    if (frames.Count < 2 || frames[0].point != frames[frames.Count - 1].point)
     {
         var frame = frames[index];
         frame.inTangent = frame.outTangent = Vector3.zero;
@@ -120,8 +121,8 @@ else
 
 var weight01 = (1 + weight) / 2;
 var weight12 = (1 - weight) / 2;
-var t01 = (k1.value - k0.value) / (k1.time - k0.time);
-var t12 = (k2.value - k1.value) / (k2.time - k1.time);
+var t01 = (k1.point - k0.point) / (k1.time - k0.time);
+var t12 = (k2.point - k1.point) / (k2.time - k1.time);
 k1.inTangent = k1.outTangent = t01 * weight01 + t12 * weight12;
 frames[index] = k1;
 ```

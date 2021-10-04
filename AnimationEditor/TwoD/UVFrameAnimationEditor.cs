@@ -29,11 +29,11 @@ namespace MGS.UAnimation.UEditor
         protected virtual void DrawAnimInspector()
         {
             EditorGUILayout.BeginHorizontal("Box");
-            GUILayout.FlexibleSpace();
             if (GUILayout.Button("Apply To UV Map"))
             {
                 ApplyArgsToUVMap();
             }
+            GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
         }
 

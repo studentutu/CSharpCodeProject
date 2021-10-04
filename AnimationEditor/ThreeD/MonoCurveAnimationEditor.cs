@@ -33,12 +33,13 @@ namespace MGS.UAnimation.UEditor
         protected virtual void DrawAnimInspector()
         {
             EditorGUILayout.BeginHorizontal("Box");
-            GUILayout.FlexibleSpace();
             if (GUILayout.Button("Align To Curve"))
             {
+                Target.curve.Rebuild();
                 Target.Rewind();
                 MarkSceneDirty();
             }
+            GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
         }
 

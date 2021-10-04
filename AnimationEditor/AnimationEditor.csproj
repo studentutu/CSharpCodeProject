@@ -50,6 +50,10 @@
       <Project>{ef9eed23-bd47-47d8-9cf7-697e39014f93}</Project>
       <Name>Animation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MonoCurve\MonoCurve.csproj">
+      <Project>{F1D69A8E-1D1C-46E1-9AFD-989DE797B4F4}</Project>
+      <Name>MonoCurve</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -61,6 +61,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedMesh", "SkinnedMesh\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedMeshEditor", "SkinnedMeshEditor\SkinnedMeshEditor.csproj", "{0BB4CB52-8530-4D5F-91C2-C8DFBC550267}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animation", "Animation\Animation.csproj", "{EF9EED23-BD47-47D8-9CF7-697E39014F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationEditor", "AnimationEditor\AnimationEditor.csproj", "{471042E9-6E90-4D5D-BCAC-64478185B580}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +187,14 @@ Global
 		{0BB4CB52-8530-4D5F-91C2-C8DFBC550267}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BB4CB52-8530-4D5F-91C2-C8DFBC550267}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BB4CB52-8530-4D5F-91C2-C8DFBC550267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9EED23-BD47-47D8-9CF7-697E39014F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9EED23-BD47-47D8-9CF7-697E39014F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9EED23-BD47-47D8-9CF7-697E39014F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9EED23-BD47-47D8-9CF7-697E39014F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{471042E9-6E90-4D5D-BCAC-64478185B580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471042E9-6E90-4D5D-BCAC-64478185B580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471042E9-6E90-4D5D-BCAC-64478185B580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471042E9-6E90-4D5D-BCAC-64478185B580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

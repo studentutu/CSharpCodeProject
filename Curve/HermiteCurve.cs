@@ -132,7 +132,7 @@ namespace MGS.Curve
         /// <param name="weight"></param>
         public void SmoothTangents(int index, float weight)
         {
-            if (index < 0 || index > frames.Count - 1 && frames.Count < 2)
+            if (index < 0 || index > frames.Count - 1)
             {
                 return;
             }
@@ -141,7 +141,7 @@ namespace MGS.Curve
             KeyFrame k0, k1, k2;
             if (index == 0 || index == frames.Count - 1)
             {
-                if (frames[0].point != frames[frames.Count - 1].point)
+                if (frames.Count < 2 || frames[0].point != frames[frames.Count - 1].point)
                 {
                     var frame = frames[index];
                     frame.inTangent = frame.outTangent = Vector3.zero;

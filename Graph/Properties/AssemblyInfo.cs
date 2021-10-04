@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("MGS.Graph")]
-[assembly: AssemblyDescription("Graph for unity project develop")]
+[assembly: AssemblyDescription("Graph for C# project develop")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MGS.Graph")]
-[assembly: AssemblyCopyright("Copyright (C)  2019 Mogoson")]
+[assembly: AssemblyCopyright("Copyright (C)  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

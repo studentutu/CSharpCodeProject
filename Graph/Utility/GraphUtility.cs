@@ -29,20 +29,8 @@ namespace MGS.Graph
         /// <returns></returns>
         public static Bitmap[] GetFrames(string file)
         {
-            if (!File.Exists(file))
-            {
-                return null;
-            }
-
-            try
-            {
-                var image = Image.FromFile(file);
-                return GetFrames(image);
-            }
-            catch
-            {
-                return null;
-            }
+            var image = Image.FromFile(file);
+            return GetFrames(image);
         }
 
         /// <summary>
@@ -52,11 +40,6 @@ namespace MGS.Graph
         /// <returns></returns>
         public static Bitmap[] GetFrames(Image image)
         {
-            if (image == null)
-            {
-                return null;
-            }
-
             var dimension = new FrameDimension(image.FrameDimensionsList[0]);
             var framesCount = image.GetFrameCount(dimension);
             var frames = new Bitmap[framesCount];
@@ -80,11 +63,6 @@ namespace MGS.Graph
         /// <returns></returns>
         public static byte[] GetBuffer(Bitmap bitmap, ImageFormat format)
         {
-            if (bitmap == null)
-            {
-                return null;
-            }
-
             using (var stream = new MemoryStream())
             {
                 bitmap.Save(stream, format);

@@ -20,14 +20,11 @@ namespace MGS.UAnimation
     [RequireComponent(typeof(Renderer))]
     public class RendererAnimation : TextureFrameAnimation
     {
-        #region Field and Property
         /// <summary>
         /// Renderer of animation.
         /// </summary>
         protected Renderer mRenderer;
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Awake animation.
         /// </summary>
@@ -44,6 +41,5 @@ namespace MGS.UAnimation
         {
             mRenderer.material.mainTexture = frames[index];
         }
-        #endregion
     }
 }

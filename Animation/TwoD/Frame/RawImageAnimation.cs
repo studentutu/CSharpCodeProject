@@ -21,14 +21,11 @@ namespace MGS.UAnimation
     [RequireComponent(typeof(RawImage))]
     public class RawImageAnimation : TextureFrameAnimation
     {
-        #region Field and Property
         /// <summary>
         /// Renderer of animation.
         /// </summary>
         protected RawImage rawImage;
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Awake animation.
         /// </summary>
@@ -45,6 +42,5 @@ namespace MGS.UAnimation
         {
             rawImage.texture = frames[index];
         }
-        #endregion
     }
 }

@@ -21,14 +21,11 @@ namespace MGS.UAnimation
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteAnimation : SpriteFrameAnimation
     {
-        #region Field and Property
         /// <summary>
         /// SpriteRenderer of animation.
         /// </summary>
         protected SpriteRenderer sRenderer;
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Awake animation.
         /// </summary>
@@ -45,6 +42,5 @@ namespace MGS.UAnimation
         {
             sRenderer.sprite = frames[index];
         }
-        #endregion
     }
 }

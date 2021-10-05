@@ -17,25 +17,31 @@
 
 - Palindrome Water
 
+### Animation
+
+- 3D animation base on mono curves.
+- 2D frame and UV animation.
+- [Detail](./Attachment/README/MGS.Animation.md)  [Case](https://github.com/mogoson/MGS.Animation)
+
 ### AutofacEditor
 
 - Auto search the info of type that with the AutofacRegisterAttribute.
 - Auto build type info code to AutofacConfigurator.cs
 
-- [Case-Unity](https://github.com/mogoson/MGS.Autofac)
+- [Case](https://github.com/mogoson/MGS.Autofac)
 
 ### AutofacUtility
 
 - Auto register the mark types.
 - Resolve mark type anywhere.
-- [Detail](./Attachment/README/MGS.AutofacUtility.md)  [Case-Unity](https://github.com/mogoson/MGS.Autofac)
+- [Detail](./Attachment/README/MGS.AutofacUtility.md)  [Case](https://github.com/mogoson/MGS.Autofac)
 
 ### CommandServo
 
 - Read command buffer from IO.
 - Parse buffer to command.
 - Execute command by unit.
-- [Detail](./Attachment/README/MGS.CommandServo.md)  [Case-Unity](https://github.com/mogoson/MGS.CommandServo)
+- [Detail](./Attachment/README/MGS.CommandServo.md)  [Case](https://github.com/mogoson/MGS.CommandServo)
 
 ### Common
 
@@ -48,35 +54,35 @@
 -  Reflector.
 -  IO utility.
 -  Threading utility.
-- [Detail](./Attachment/README/MGS.Common.md)  [Case-Unity](https://github.com/mogoson/MGS.CommonUtility)
+- [Detail](./Attachment/README/MGS.Common.md)  [Case](https://github.com/mogoson/MGS.CommonUtility)
 
 ### Compress
 
 - Compress file async.
 - Decompress file async.
-- [Detail](./Attachment/README/MGS.Compress.md)  [Case-Unity](https://github.com/mogoson/MGS.Compress)
+- [Detail](./Attachment/README/MGS.Compress.md)  [Case](https://github.com/mogoson/MGS.Compress)
 
 ### Curve
 
 - Define Sin Ellipse Helix Bezier Hermite curve.
-- [Detail-Unity](./Attachment/README/MGS.Curve.md)  [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Detail](./Attachment/README/MGS.Curve.md)  [Case-MonoCurve](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### DesignPattern
 
 - Singleton.
 - Object pool.
-- [Detail](./Attachment/README/MGS.DesignPattern.md)  [Detail-Unity](./Attachment/README/MGS.UDesignPattern.md)  [Case-Unity](https://github.com/mogoson/MGS.ObjectPool)
+- [Detail](./Attachment/README/MGS.DesignPattern.md)  [Detail-Unity](./Attachment/README/MGS.UDesignPattern.md)  [Case](https://github.com/mogoson/MGS.ObjectPool)
 
 ### Internation
 
 - Internationalizer deserialize paragraph lines from file and get a paragraph by key.
 
-- [Detail](./Attachment/README/MGS.Internation.md)  [Case-Unity](https://github.com/mogoson/MGS.Internation)
+- [Detail](./Attachment/README/MGS.Internation.md)  [Case](https://github.com/mogoson/MGS.Internation)
 
 ### Logger
 - Output log to local file.
 - Implement custom logger to output the log that print by LogUtility from other module.
-- [Detail](./Attachment/README/MGS.Logger.md)  [Case-Unity](https://github.com/mogoson/MGS.Logger)
+- [Detail](./Attachment/README/MGS.Logger.md)  [Case](https://github.com/mogoson/MGS.Logger)
 
 ### Mathematics
 
@@ -94,29 +100,29 @@
 ### MonoCurve
 
 - Define Sin Ellipse Helix Bezier Hermite mono curve.
-- [Detail-Unity](./Attachment/README/MGS.MonoCurve.md)  [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Detail](./Attachment/README/MGS.MonoCurve.md)  [Case](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### MonoCurveEditor
 
 - Draw custom editor for Sin Ellipse Helix Bezier Hermite mono curve.
-- [Case0-Unity](https://github.com/mogoson/MGS.MonoCurve)  [Case1-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Case](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### SkinnedMesh
 
 - Define mono skinned mesh.
-- [Detail-Unity](./Attachment/README/MGS.SkinnedMesh.md)  [Case-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Detail](./Attachment/README/MGS.SkinnedMesh.md)  [Case](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### SkinnedMeshEditor
 
 - Draw custom editor for mono skinned mesh.
-- [Case-Unity](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Case](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### Sqlite
 
 - Create data base file, view table runtime.
 - Select rows from view as DataTable and parse to custom data structure.
 - Select, Insert, Update, Delete table rows, use custom data structure.
-- [Detail](./Attachment/README/MGS.Sqlite.md)  [Case-Unity](https://github.com/mogoson/MGS.Sqlite)
+- [Detail](./Attachment/README/MGS.Sqlite.md)  [Case](https://github.com/mogoson/MGS.Sqlite)
 
 ### UCommon
 
@@ -126,7 +132,7 @@
 - JsonUtility Pro.
 - Dispatcher base main thread.
 - Utility for color blend, EventSystem, mesh, RectTransform, vector.
-- [Detail-Unity](./Attachment/README/MGS.UCommon.md)  [Case-Unity](https://github.com/mogoson/MGS.CommonUtility)
+- [Detail](./Attachment/README/MGS.UCommon.md)  [Case](https://github.com/mogoson/MGS.CommonUtility)
 
 ### WinUtility
 

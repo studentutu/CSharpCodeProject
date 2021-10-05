@@ -11,6 +11,7 @@
  *************************************************************************/
 
 using System;
+using UnityEngine;
 
 namespace MGS.Curve
 {
@@ -30,6 +31,7 @@ namespace MGS.Curve
         {
             //AwayFromZero means that 12.5 -> 13
             var count = (int)Math.Round(curve.Length / segment, MidpointRounding.AwayFromZero);
+            count = Mathf.Max(count, 1);
             differ = curve.Length / count;
             return count;
         }

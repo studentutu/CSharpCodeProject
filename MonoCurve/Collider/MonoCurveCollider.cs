@@ -90,8 +90,9 @@ namespace MGS.Curve
         /// <param name="curve"></param>
         public override void Rebuild(IMonoCurve curve)
         {
-            if (curve == null)
+            if (curve == null || curve.Length == 0)
             {
+                Segments = 0;
                 ClearCollider();
                 return;
             }

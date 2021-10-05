@@ -82,7 +82,7 @@ namespace MGS.Curve
             for (int i = 0; i < segments; i++)
             {
                 var node = colliderGroup.GetChild(i);
-                node.localPosition = curve.LocalEvaluate((i + 0.5f) * differ);
+                node.position = curve.Evaluate((i + 0.5f) * differ);
                 var tangent = (curve.Evaluate((i + 1) * differ) - curve.Evaluate(i * differ));
                 node.LookAt(node.position + tangent);
 

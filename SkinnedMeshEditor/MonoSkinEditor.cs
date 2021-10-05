@@ -63,14 +63,9 @@ namespace MGS.SkinnedMesh
                 return null;
             }
 
-            var triangles = 0;
             var mesh = Target.Renderer.sharedMesh;
-            for (int i = 0; i < mesh.subMeshCount; i++)
-            {
-                triangles += mesh.GetTriangles(i).Length;
-            }
             return string.Format("MeshCount: {0}  Vertices: {1}  Triangles: {2}",
-                mesh.subMeshCount, mesh.vertexCount, triangles);
+                mesh.subMeshCount, mesh.vertexCount, mesh.triangles.Length / 3);
         }
 
         protected virtual void OnInspectorChange()

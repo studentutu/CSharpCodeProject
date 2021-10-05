@@ -59,6 +59,7 @@ namespace MGS.SkinnedMesh
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
             meshCollider = GetComponent<MeshCollider>();
             mesh = new Mesh { name = "Skin" };
+            mesh.MarkDynamic();
         }
 
         /// <summary>

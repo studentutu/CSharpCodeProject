@@ -67,16 +67,16 @@ namespace MGS.SkinnedMesh
         /// Create prism triangles index.
         /// </summary>
         /// <param name="polygon">Edge count of prism polygon.</param>
-        /// <param name="segment">Segment count of prism vertices vertical division.</param>
+        /// <param name="segments">Segments count of prism vertices vertical division.</param>
         /// <param name="start">Start index of prism vertice.</param>
         /// <returns>Triangles index base on prism.</returns>
-        public static List<int> CreatePrismTriangles(int polygon, int segment, int start)
+        public static List<int> CreatePrismTriangles(int polygon, int segments, int start)
         {
             var triangles = new List<int>();
             var polygonVs = polygon + 1;
             var currentSegment = 0;
             var nextSegment = 0;
-            for (int s = 0; s < segment - 1; s++)
+            for (int s = 0; s < segments - 1; s++)
             {
                 // Calculate start index.
                 currentSegment = polygonVs * s;
@@ -120,13 +120,13 @@ namespace MGS.SkinnedMesh
         /// Create prism uv.
         /// </summary>
         /// <param name="polygon">Edge count of prism polygon.</param>
-        /// <param name="segment">Segment count of prism vertices vertical division.</param>
+        /// <param name="segments">Segments count of prism vertices vertical division.</param>
         /// <returns>UV base on prism.</returns>
-        public static List<Vector2> CreatePrismUV(int polygon, int segment)
+        public static List<Vector2> CreatePrismUV(int polygon, int segments)
         {
             var uv = new List<Vector2>();
             var polygonVs = polygon + 1;
-            var vertices = polygonVs * segment;
+            var vertices = polygonVs * segments;
             var slice = 1.0f / polygon;
             var u = 0f;
             var v = 0f;

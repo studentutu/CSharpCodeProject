@@ -43,14 +43,19 @@ namespace MGS.SkinnedMesh
         protected override void Rebuild(Mesh mesh)
         {
             mesh.Clear();
-            if (curve == null) { return; }
+            if (curve == null || curve.Length == 0)
+            {
+                Segments = 0;
+                mesh.RecalculateBounds();
+                return;
+            }
 
             Segments = MonoCurveUtility.GetSegmentCount(curve, segment, out float differ) + 1;
             var isSeal = seal && polygon > 2;
 
             mesh.vertices = CreateVertices(curve, Segments, differ, isSeal);
-            mesh.triangles = CreateTriangles(Segments, isSeal);
             mesh.uv = CreateUV(Segments, isSeal);
+            mesh.triangles = CreateTriangles(Segments, isSeal);
 
             if (isSeal)
             {
@@ -62,6 +67,9 @@ namespace MGS.SkinnedMesh
             }
 
             mesh.RecalculateNormals();
+#if UNITY_5_6_OR_NEWER
+            mesh.RecalculateTangents();
+#endif
             mesh.RecalculateBounds();
         }
 

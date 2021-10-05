@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System.Collections;
 using UnityEngine;
 
 namespace MGS.Curve
@@ -42,6 +43,20 @@ namespace MGS.Curve
         /// </summary>
         protected virtual void Awake()
         {
+            StartCoroutine(CheckRebuild());
+        }
+
+        /// <summary>
+        /// Check RectTransform rebuild mono curve.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IEnumerator CheckRebuild()
+        {
+            if (transform is RectTransform)
+            {
+                //Wait one frame to require the RectTransform is initialized (after Awake).
+                yield return null;
+            }
             Rebuild();
         }
 

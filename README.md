@@ -67,6 +67,13 @@
 - Object pool.
 - [Detail](./Attachment/README/MGS.DesignPattern.md)  [Case](https://github.com/mogoson/MGS.ObjectPool)
 
+### Element
+
+- Made Button with LED and support self lock.
+- Made Knob and support adsorbent to config angles.
+- Made Rocker around angle area and support auto revert.
+- [Detail](./Attachment/README/MGS.Element.md)
+
 ### Graph
 
 - ImageUtility.
@@ -96,6 +103,12 @@
 
 - SRT subtitle of video.
 - [Detail](./Attachment/README/MGS.Media.md)
+
+### Meter
+
+- Made Pointer Clock and auto run if turn on.
+- Made Pointer Clock and run by set angle.
+- [Detail](./Attachment/README/MGS.Meter.md)
 
 ### MonoCurve
 

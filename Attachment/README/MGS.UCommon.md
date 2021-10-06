@@ -25,18 +25,6 @@ public static class TerrainExtension{}
 public static class Texture2DExtention{}
 ```
 
-### Generic
-
-```C#
-public enum Axis{}
-public enum ColorBlendMode{}
-public enum LerpMode{}
-public enum MirrorMode{}
-
-public struct PlaneArea{}
-public struct Range{}
-```
-
 ### Listener
 
 ```C#
@@ -54,8 +42,6 @@ public class MonoSelectListener : MonoBehaviour, ISelectHandler, IUpdateSelected
 **Unity 5.3 or above**.
 
 ```C#
-public class ListAvatar<T>{}
-public class DictionaryAvatar<TKey, TValue> : ISerializationCallbackReceiver{}
 public sealed class JsonUtilityPro{}
 ```
 
@@ -70,8 +56,6 @@ public sealed class Dispatcher : MonoBehaviour{}
 ```c#
 public sealed class ColorBlendUtility{}
 public sealed class EventSystemUtility{}
-public sealed class MeshUtility{}
-public sealed class RectUtility{}
 public sealed class VectorUtility{}
 ```
 

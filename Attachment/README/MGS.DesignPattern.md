@@ -5,60 +5,53 @@
 ## Summary
 
 - Design pattern code for C# project develop.
+- Design pattern code for Unity project develop.
 
 ## Environment
 
 - .Net Framework 3.5 or above.
+- Unity 5.0 or above.
 
 ## Dependence
 
 - System.dll
+- UnityEngine.dll
 
 ## Demand
 
 - Provide a single instance of the specified type T.
 - Generic object pool.
+- Provide a single instance of the specified MonoBehaviour.
+- Generic game object pool.
 
 ## Implemented
 
 ### ObjectPool
 
 ```C#
-/// <summary>
-/// Generic object pool.
-/// </summary>
-/// <typeparam name="T">Specified type of object.</typeparam>
 public abstract class ObjectPool<T>{}
+public class GenericPool<T> : ObjectPool<T> where T : IResettable, new(){}
 
-/// <summary>
-/// Generic object pool.
-/// </summary>
-public class GenericPool<T> : ObjectPool<T> where T : IResettable, new()
+public class GOPool : ObjectPool<GameObject>{}
+public sealed class GOPoolManager : Singleton<GOPoolManager>{}
 ```
 
 ### Singleton
 
 ```C#
-/// <summary>
-/// Provide a single instance of the specified type T;
-/// Inheritance class should with the sealed access modifier
-/// and a private parameterless constructor to ensure singleton.
-/// </summary>
-/// <typeparam name="T">Specified type.</typeparam>
 public abstract class Singleton<T> where T : class{}
+public abstract class SingleUpdater<T> : Singleton<T> where T : class{}
 
-/// <summary>
-/// Provide a single instance to update for the specified type T;
-/// Inheritance class should with the sealed access modifier
-/// and a private parameterless constructor to ensure singleton.
-/// </summary>
-/// <typeparam name="T">Specified type.</typeparam>
-public abstract class SingleUpdater<T> : Singleton<T> where T : class
+[DisallowMultipleComponent]
+public abstract class SingleComponent<T> : MonoBehaviour where T : Component{}
+public sealed class SingleBehaviour : SingleComponent<SingleBehaviour>{}
 ```
 
 ## Usage
 
-### ObjectPool
+### Object Pool
+
+- Generic Pool
 
 ```C#
 //Implement custom object.
@@ -92,7 +85,37 @@ public class TestCase
 }
 ```
 
+- GO Pool
+
+  - Create game object pool.
+
+  ```C#
+  //The prefab as template of reusable game object.
+  var pool = GOPoolManager.Instance.CreatePool(poolName, prefab);
+  ```
+
+  - Use pool to Take, Recycle game object.
+
+  ```C#
+  //Use pool name to find the instance of pool from manager if we do not hold it.
+  var pool = GOPoolManager.Instance.FindPool(poolName);
+  
+  //Take a game object same as prefab.
+  var go = pool.Take();
+  
+  //Recycle the game object to pool if we do not need it.
+  pool.Recycle(go);
+  
+  //Take a game object and get or add component.
+  var cpnt = pool.Take<Bullet>();
+  
+  //Recycle the game object of component to pool if we do not need it.
+  pool.Recycle(cpnt);
+  ```
+
 ### Singleton
+
+- Singleton
 
 ```C#
 //Custom classs with a single instance.
@@ -119,6 +142,41 @@ public sealed class TestSingleUpdater : SingleUpdater<TestSingleUpdater>
         //TODO: do something on update.
     }
 }
+```
+
+- Single Component
+
+```C#
+//Derived custom single component.
+//Inheritance class should with the sealed access modifier to ensure distinct singleton.
+public sealed class UIManager : SingleComponent<UIManager>
+{
+    private void Start()
+    {
+        //TODO:
+    }
+
+    public RectTransfrom FindUI(string name)
+    {
+        //TODO:
+    }
+}
+
+//Use Instance to accessing fields, properties and methods. 
+var ui = UIManager.Instance.FindUI("UI_Help");
+```
+
+- Single Behaviour
+
+```C#
+//Use the properties and methods inherit from MonoBehaviour.
+SingleBehaviour.Instance.StartCoroutine(routine);
+
+//Use the extended events.
+SingleBehaviour.Instance.OnApplicationQuitEvent += () =>
+{
+    //TODO:
+};
 ```
 
 ------

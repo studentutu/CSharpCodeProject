@@ -48,7 +48,7 @@ namespace MGS.SkinnedMesh
         /// <param name="edge">Edge count of polygon.</param>
         /// <param name="center">Index of center vertice.</param>
         /// <param name="start">Index of start vertice.</param>
-        /// <param name="clockwise">Triangle indexs is clockwise.</param>
+        /// <param name="clockwise">Triangle indexs is clockwise?</param>
         /// <returns>Triangles base on polygon.</returns>
         public static List<int> CreatePolygonTriangles(int edge, int center, int start, bool clockwise = true)
         {
@@ -101,8 +101,9 @@ namespace MGS.SkinnedMesh
         /// Create polygon uv.
         /// </summary>
         /// <param name="edge">Edge count of polygon.</param>
+        /// <param name="clockwise">UV indexs is clockwise?</param>
         /// <returns>UV base on polygon.</returns>
-        public static List<Vector2> CreatePolygonUV(int edge)
+        public static List<Vector2> CreatePolygonUV(int edge, bool clockwise = true)
         {
             var uv = new List<Vector2>();
             var sector = 2 * Mathf.PI / edge;
@@ -110,7 +111,7 @@ namespace MGS.SkinnedMesh
             var center = Vector2.one * 0.5f;
             for (int i = 0; i <= edge; i++)
             {
-                radian = sector * i;
+                radian = sector * (clockwise ? i : edge - i);
                 uv.Add(center + new Vector2(Mathf.Cos(radian), Mathf.Sin(radian)) * 0.5f);
             }
             return uv;

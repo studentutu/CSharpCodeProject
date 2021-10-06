@@ -150,7 +150,7 @@ namespace MGS.SkinnedMesh
                 for (int i = 0; i < 2; i++)
                 {
                     uv.Add(Vector2.one * 0.5f);
-                    uv.AddRange(MeshUtility.CreatePolygonUV(polygon));
+                    uv.AddRange(MeshUtility.CreatePolygonUV(polygon, i == 0));
                 }
             }
             return uv.ToArray();

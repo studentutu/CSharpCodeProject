@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="PalindromeCollector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CollectionSearcher.cs" />
     <Compile Include="WaterCollector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

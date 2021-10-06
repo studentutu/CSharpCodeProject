@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright (C) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  Searcher.cs
- *  Description  :  Utility for search.
+ *  File         :  CollectionSearcher.cs
+ *  Description  :  Utility for collection search.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -12,12 +12,12 @@
 
 using System;
 
-namespace MGS.Common.Search
+namespace MGS.Algorithm
 {
     /// <summary>
-    /// Utility for search.
+    /// Utility for collection search.
     /// </summary>
-    public sealed class Searcher
+    public sealed class CollectionSearcher
     {
         /// <summary>
         /// Binary search the item from array that match the key.

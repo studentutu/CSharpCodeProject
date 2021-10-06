@@ -11,7 +11,6 @@
 
 ## Dependence
 - System.dll
-- MGS.Common.dll
 - UnityEngine.dll
 - UnityEngine.UI.dll
 

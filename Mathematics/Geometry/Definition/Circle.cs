@@ -25,7 +25,6 @@ namespace MGS.Mathematics.Geometry
          *  Circle is : (x - c.x)  + (y - c.y)  = r
          */
 
-        #region Field and Property
         /// <summary>
         /// Center.
         /// </summary>
@@ -43,9 +42,7 @@ namespace MGS.Mathematics.Geometry
         {
             get { return new Circle(Vector2.Zero, 1); }
         }
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -56,6 +53,5 @@ namespace MGS.Mathematics.Geometry
             this.c = c;
             this.r = r;
         }
-        #endregion
     }
 }

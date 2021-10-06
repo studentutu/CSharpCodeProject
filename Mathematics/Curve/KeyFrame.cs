@@ -20,7 +20,6 @@ namespace MGS.Mathematics.Curve
     [Serializable]
     public struct KeyFrame
     {
-        #region Field and Property
         /// <summary>
         /// Time of key frame.
         /// </summary>
@@ -40,9 +39,7 @@ namespace MGS.Mathematics.Curve
         /// Out tangent of key frame.
         /// </summary>
         public double outTangent;
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -70,6 +67,5 @@ namespace MGS.Mathematics.Curve
             this.inTangent = inTangent;
             this.outTangent = outTangent;
         }
-        #endregion
     }
 }

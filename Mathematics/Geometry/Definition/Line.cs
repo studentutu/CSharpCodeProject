@@ -26,7 +26,6 @@ namespace MGS.Mathematics.Geometry
          *  else line is : y = kx + b
          */
 
-        #region Field and Property
         /// <summary>
         /// Slope of line.
         /// </summary>
@@ -52,9 +51,7 @@ namespace MGS.Mathematics.Geometry
         {
             get { return new Line(double.PositiveInfinity, 0); }
         }
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -65,9 +62,7 @@ namespace MGS.Mathematics.Geometry
             this.k = k;
             this.b = b;
         }
-        #endregion
 
-        #region Static Method
         /// <summary>
         /// Get the line that pass vector v1 and v2.
         /// </summary>
@@ -101,6 +96,5 @@ namespace MGS.Mathematics.Geometry
             }
             return new Line(k, b);
         }
-        #endregion
     }
 }

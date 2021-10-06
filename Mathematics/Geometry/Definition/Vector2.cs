@@ -30,7 +30,6 @@ namespace MGS.Mathematics.Geometry
          *             |
          */
 
-        #region Field and Property
         /// <summary>
         /// X of vector.
         /// </summary>
@@ -56,9 +55,7 @@ namespace MGS.Mathematics.Geometry
         {
             get { return new Vector2(1, 1); }
         }
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -97,9 +94,7 @@ namespace MGS.Mathematics.Geometry
         {
             return string.Format("({0}, {1})", x, y);
         }
-        #endregion
 
-        #region Static Method
         /// <summary>
         /// Center of vector v1 and v2.
         /// </summary>
@@ -205,6 +200,5 @@ namespace MGS.Mathematics.Geometry
         {
             return !(lhs == rhs);
         }
-        #endregion
     }
 }

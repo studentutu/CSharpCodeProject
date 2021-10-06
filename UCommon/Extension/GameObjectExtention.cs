@@ -19,7 +19,6 @@ namespace MGS.Common.Extension
 	/// </summary>
 	public static class GameObjectExtention
     {
-        #region Public Static Method
         /// <summary>
         /// Set layer include it's children.
         /// </summary>
@@ -31,6 +30,5 @@ namespace MGS.Common.Extension
                 BroadcastLayer(trans.gameObject, layer);
             }
         }
-        #endregion
     }
 }

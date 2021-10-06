@@ -24,7 +24,7 @@ namespace MGS.Common.Serialization
     /// <typeparam name="TValue">Type of value.
     /// The T must with SerializableAttribute and public field or private property with SerializeField Attribute if custom type.
     /// </typeparam>
-    public class DictionaryAvatar<TKey, TValue> : ISerializationCallbackReceiver
+    internal class DictionaryAvatar<TKey, TValue> : ISerializationCallbackReceiver
     {
         /// <summary>
         /// List of keys.

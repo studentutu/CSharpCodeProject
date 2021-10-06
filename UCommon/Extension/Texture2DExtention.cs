@@ -10,7 +10,6 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Converter;
 using UnityEngine;
 
 namespace MGS.Common.Extension
@@ -20,7 +19,6 @@ namespace MGS.Common.Extension
     /// </summary>
     public static class Texture2DExtention
     {
-        #region Public Static Method
         /// <summary>
         /// Update the pixels of Texture2D.
         /// </summary>
@@ -49,26 +47,6 @@ namespace MGS.Common.Extension
         /// <param name="mipLevel">The mip level of the texture to write to.</param>
         /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
         /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color[,] colorArray,
-            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
-        {
-            if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
-            {
-                return;
-            }
-
-            var colors = ArrayConverter.ToOneDimention(colorArray);
-            UpdatePixels(texture2D, colors, mipLevel, updateMipmaps, makeNointerReadable);
-        }
-
-        /// <summary>
-        /// Update the pixels of Texture2D.
-        /// </summary>
-        /// <param name="texture2D">Base Texture2D.</param>
-        /// <param name="colorArray">Color array for pixels.</param>
-        /// <param name="mipLevel">The mip level of the texture to write to.</param>
-        /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
-        /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
         public static void UpdatePixels(this Texture2D texture2D, Color32[] colorArray,
             int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
         {
@@ -80,26 +58,5 @@ namespace MGS.Common.Extension
             texture2D.SetPixels32(colorArray, mipLevel);
             texture2D.Apply(updateMipmaps, makeNointerReadable);
         }
-
-        /// <summary>
-        /// Update the pixels of Texture2D.
-        /// </summary>
-        /// <param name="texture2D">Base Texture2D.</param>
-        /// <param name="colorArray">Color array for pixels.</param>
-        /// <param name="mipLevel">The mip level of the texture to write to.</param>
-        /// <param name="updateMipmaps">When set to true, mipmap levels are recalculated.</param>
-        /// <param name="makeNointerReadable">When set to true, system memory copy of a texture is released.</param>
-        public static void UpdatePixels(this Texture2D texture2D, Color32[,] colorArray,
-            int mipLevel = 0, bool updateMipmaps = false, bool makeNointerReadable = false)
-        {
-            if (colorArray == null || colorArray.Length != texture2D.width * texture2D.height)
-            {
-                return;
-            }
-
-            var colors = ArrayConverter.ToOneDimention(colorArray);
-            UpdatePixels(texture2D, colors, mipLevel, updateMipmaps, makeNointerReadable);
-        }
-        #endregion
     }
 }

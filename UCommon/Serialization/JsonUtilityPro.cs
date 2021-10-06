@@ -36,7 +36,7 @@ namespace MGS.Common.Serialization
                 return null;
             }
 
-            return avatar.Source;
+            return avatar.source;
         }
 
         /// <summary>

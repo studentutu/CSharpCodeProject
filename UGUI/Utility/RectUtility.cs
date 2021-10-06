@@ -10,10 +10,9 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using MGS.Common.Generic;
 using UnityEngine;
 
-namespace MGS.Common.Utility
+namespace MGS.UGUI
 {
     /// <summary>
     /// Utility for RectTransform.
@@ -73,5 +72,26 @@ namespace MGS.Common.Utility
             anchorPos = new Vector2(anchorPos.x * h, anchorPos.y * v);
             rect.anchoredPosition = anchorPos;
         }
+    }
+
+    /// <summary>
+    /// Mode of mirror.
+    /// </summary>
+    public enum MirrorMode
+    {
+        /// <summary>
+        /// Horizontal mirror.
+        /// </summary>
+        Horizontal = 0,
+
+        /// <summary>
+        /// Vertical mirror.
+        /// </summary>
+        Vertical = 1,
+
+        /// <summary>
+        /// Both horizontal and vertical mirror.
+        /// </summary>
+        Both = 2
     }
 }

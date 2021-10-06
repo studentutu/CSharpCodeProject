@@ -19,7 +19,6 @@ namespace MGS.Common.Extension
     /// </summary>
     public static class TerrainExtension
     {
-        #region Public Method
         /// <summary>
         /// Normalize position relative to terrain.
         /// </summary>
@@ -43,6 +42,5 @@ namespace MGS.Common.Extension
         {
             return new Vector3(normalizePos.x * mapSize.x, 0, normalizePos.z * mapSize.z);
         }
-        #endregion
     }
 }

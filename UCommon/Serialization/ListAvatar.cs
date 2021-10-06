@@ -11,7 +11,6 @@
  *************************************************************************/
 
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace MGS.Common.Serialization
 {
@@ -21,18 +20,12 @@ namespace MGS.Common.Serialization
     /// <typeparam name="T">Type of list item.
     /// The T must with SerializableAttribute and public field or private property with SerializeField Attribute if custom type.
     /// </typeparam>
-    public class ListAvatar<T>
+    internal class ListAvatar<T>
     {
         /// <summary>
         /// Source list.
         /// </summary>
-        [SerializeField]
-        private List<T> source;
-
-        /// <summary>
-        /// Source list.
-        /// </summary>
-        public List<T> Source { get { return source; } }
+        public List<T> source;
 
         /// <summary>
         /// Constructor.

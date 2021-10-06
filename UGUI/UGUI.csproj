@@ -65,6 +65,7 @@
     <Compile Include="Trigger\UIPointerTrigger.cs" />
     <Compile Include="Trigger\UITrigger.cs" />
     <Compile Include="UIComponent.cs" />
+    <Compile Include="Utility\RectUtility.cs" />
     <Compile Include="Utility\UICoroutine.cs" />
     <Compile Include="Widget\UIButtonCollector.cs" />
     <Compile Include="Panel\UIHorTextRow\UIHorTextRowData.cs" />

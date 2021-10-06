@@ -19,7 +19,6 @@ namespace MGS.Common.Utility
     /// </summary>
     public sealed class VectorUtility
     {
-        #region Public Method
         /// <summary>
         /// Calculate project angle of two vectors in the range(0~360).
         /// </summary>
@@ -53,6 +52,5 @@ namespace MGS.Common.Utility
             }
             return angle;
         }
-        #endregion
     }
 }

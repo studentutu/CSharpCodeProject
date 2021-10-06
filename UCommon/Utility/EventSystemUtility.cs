@@ -21,13 +21,12 @@ namespace MGS.Common.Utility
     /// </summary>
     public sealed class EventSystemUtility
     {
-        #region Public Method
         /// <summary>
         /// Check mouse pointer is over target gameobject?
         /// </summary>
         /// <param name="target">Target gameobject.</param>
         /// <returns>Pointer is over target gameobject?</returns>
-        public static bool CheckPointerOverGameObject(GameObject target)
+        public static bool CheckPointerIsOver(GameObject target)
         {
             if (EventSystem.current == null)
             {
@@ -54,6 +53,5 @@ namespace MGS.Common.Utility
             }
             return false;
         }
-        #endregion
     }
 }

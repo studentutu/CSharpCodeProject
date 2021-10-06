@@ -44,33 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Listener\MonoDragListener.cs" />
-    <Compile Include="Generic\Enum\Axis.cs" />
-    <Compile Include="Generic\Enum\ColorBlendMode.cs" />
-    <Compile Include="Generic\Enum\LerpMode.cs" />
     <Compile Include="Extension\GameObjectExtention.cs" />
     <Compile Include="Extension\TerrainExtension.cs" />
     <Compile Include="Extension\Texture2DExtention.cs" />
-    <Compile Include="Generic\Enum\MirrorMode.cs" />
-    <Compile Include="Generic\Struct\Range.cs" />
     <Compile Include="Listener\MonoPointerListener.cs" />
     <Compile Include="Listener\MonoSelectListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Generic\Struct\PlaneArea.cs" />
     <Compile Include="Serialization\DictionaryAvatar.cs" />
     <Compile Include="Serialization\JsonUtilityPro.cs" />
     <Compile Include="Serialization\ListAvatar.cs" />
     <Compile Include="Threading\Dispatcher.cs" />
     <Compile Include="Utility\ColorBlendUtility.cs" />
     <Compile Include="Utility\EventSystemUtility.cs" />
-    <Compile Include="Utility\MeshUtility.cs" />
-    <Compile Include="Utility\RectUtility.cs" />
     <Compile Include="Utility\VectorUtility.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{55e27c1e-ecfb-4e6f-b5e0-508c882dddab}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

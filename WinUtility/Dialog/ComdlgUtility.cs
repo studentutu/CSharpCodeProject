@@ -20,7 +20,6 @@ namespace MGS.WinUtility
     /// </summary>
     public class ComdlgUtility
     {
-        #region Public Method
         /// <summary>
         /// Displays the "open file" dialog and returns the selected path name.
         /// </summary>
@@ -97,6 +96,5 @@ namespace MGS.WinUtility
             }
             return null;
         }
-        #endregion
     }
 }

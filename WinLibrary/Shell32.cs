@@ -20,7 +20,6 @@ namespace MGS.WinLibrary
     /// </summary>
     public sealed class Shell32
     {
-        #region Method
         /// <summary>
         /// Displays a dialog box that enables the user to select a Shell folder.
         /// </summary>
@@ -40,7 +39,6 @@ namespace MGS.WinLibrary
         /// <returns>Returns TRUE if successful; otherwise, FALSE.</returns>
         [DllImport("shell32.dll", SetLastError = true, ThrowOnUnmappableChar = true, CharSet = CharSet.Auto)]
         public static extern Boolean SHGetPathFromIDList([In] IntPtr pidl, [In, Out] Char[] pszPath);
-        #endregion
     }
 
     /// <summary>

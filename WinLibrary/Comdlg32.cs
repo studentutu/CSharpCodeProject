@@ -28,7 +28,6 @@ namespace MGS.WinLibrary
         /// initialize the dialog box. When GetOpenFileName returns, this structure contains information
         /// about the user's file selection.</param>
         /// <returns>If the user specifies a file name and clicks the OK button, the return value is nonzero.</returns>
-        #region Method
         [DllImport("Comdlg32.dll", SetLastError = true, ThrowOnUnmappableChar = true, CharSet = CharSet.Auto)]
         public static extern Boolean GetOpenFileName([In, Out] OpenFileName ofn);
 
@@ -42,7 +41,6 @@ namespace MGS.WinLibrary
         /// successful, the return value is nonzero.</returns>
         [DllImport("Comdlg32.dll", SetLastError = true, ThrowOnUnmappableChar = true, CharSet = CharSet.Auto)]
         public static extern Boolean GetSaveFileName([In, Out] OpenFileName ofn);
-        #endregion
     }
 
     /// <summary>

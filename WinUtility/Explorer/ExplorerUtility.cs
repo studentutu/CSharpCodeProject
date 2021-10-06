@@ -19,14 +19,11 @@ namespace MGS.WinUtility
     /// </summary>
     public sealed class ExplorerUtility
     {
-        #region Field and Property
         /// <summary>
         /// Explorer process name.
         /// </summary>
         public const string EXPLORER = "explorer";
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Show target path(or file) in explorer.
         /// </summary>
@@ -59,6 +56,5 @@ namespace MGS.WinUtility
             }
             Process.Start(EXPLORER, arguments);
         }
-        #endregion
     }
 }

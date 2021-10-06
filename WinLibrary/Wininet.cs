@@ -20,7 +20,6 @@ namespace MGS.WinLibrary
     /// </summary>
     public sealed class Wininet
     {
-        #region Method
         /// <summary>
         /// Retrieves the connected state of the local system.
         /// </summary>
@@ -31,7 +30,6 @@ namespace MGS.WinLibrary
         /// or if all possible Internet connections are not currently active. </returns>
         [DllImport("wininet.dll")]
         public static extern Boolean InternetGetConnectedState(out UInt32 lpdwFlags, Int32 dwReserved);
-        #endregion
     }
 
     /// <summary>
@@ -39,7 +37,6 @@ namespace MGS.WinLibrary
     /// </summary>
     public sealed class InetFlags
     {
-        #region Field
         /// <summary>
         /// Local system has a valid connection to the Internet, but it might or might not be currently connected. 
         /// </summary>
@@ -74,6 +71,5 @@ namespace MGS.WinLibrary
         /// Local system has RAS installed.
         /// </summary>
         public const UInt32 INTERNET_RAS_INSTALLED = 0x10;
-        #endregion
     }
 }

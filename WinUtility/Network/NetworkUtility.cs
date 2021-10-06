@@ -22,7 +22,6 @@ namespace MGS.WinUtility
     /// </summary>
     public sealed class NetworkUtility
     {
-        #region Public Method
         /// <summary>
         /// Retrieves the connected state of the local system.
         /// </summary>
@@ -70,6 +69,5 @@ namespace MGS.WinUtility
             }
             return macAdress;
         }
-        #endregion
     }
 }

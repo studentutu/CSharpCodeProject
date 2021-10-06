@@ -40,6 +40,11 @@ namespace MGS.Curve.UEditor
             }
         }
 
+        protected override string CollectCaption()
+        {
+            return string.Format("{0}  Anchors: {1}", base.CollectCaption(), Target.AnchorsCount);
+        }
+
         protected override void OnInspectorChanged()
         {
             base.OnInspectorChanged();

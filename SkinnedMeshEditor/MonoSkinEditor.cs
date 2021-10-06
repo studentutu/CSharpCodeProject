@@ -49,10 +49,10 @@ namespace MGS.SkinnedMesh
 
         protected virtual void DrawCaptionInspector()
         {
-            var info = CollectCaption();
-            if (!string.IsNullOrEmpty(info))
+            var caption = CollectCaption();
+            if (!string.IsNullOrEmpty(caption))
             {
-                EditorGUILayout.HelpBox(info, MessageType.Info);
+                EditorGUILayout.HelpBox(caption, MessageType.Info);
             }
         }
 

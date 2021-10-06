@@ -31,14 +31,14 @@ namespace MGS.Curve.UEditor
             }
         }
 
-        protected virtual void OnSceneGUI()
-        {
-            DrawCurve();
-        }
-
         protected virtual void OnDisable()
         {
             Undo.undoRedoPerformed -= Target.Rebuild;
+        }
+
+        protected virtual void OnSceneGUI()
+        {
+            DrawCurve();
         }
 
         protected virtual void DrawCurve()
@@ -61,12 +61,27 @@ namespace MGS.Curve.UEditor
 
         public override void OnInspectorGUI()
         {
+            DrawCaptionInspector();
             EditorGUI.BeginChangeCheck();
             DrawDefaultInspector();
             if (EditorGUI.EndChangeCheck())
             {
                 OnInspectorChanged();
             }
+        }
+
+        protected virtual void DrawCaptionInspector()
+        {
+            var caption = CollectCaption();
+            if (!string.IsNullOrEmpty(caption))
+            {
+                EditorGUILayout.HelpBox(caption, MessageType.Info);
+            }
+        }
+
+        protected virtual string CollectCaption()
+        {
+            return string.Format("Length: {0}", Target.Length.ToString("f2"));
         }
 
         protected virtual void OnInspectorChanged()

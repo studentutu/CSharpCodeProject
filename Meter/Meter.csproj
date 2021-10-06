@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C36011D-BFF8-403D-A7E6-5A9A5B43D0E8}</ProjectGuid>
+    <ProjectGuid>{9EB4EF70-1B1E-42A6-9A9B-DBE9B67625F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MGS.Meter</RootNamespace>
-    <AssemblyName>MGS.UMeterEditor</AssemblyName>
+    <AssemblyName>MGS.UMeter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -22,6 +22,7 @@
     <DefineConstants>TRACE;DEBUG;UNITY_5_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\MGS.UMeter.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,35 +31,28 @@
     <DefineConstants>TRACE;UNITY_5_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\MGS.UMeter.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="UnityEditor">
-      <HintPath>..\lib\Unity5.0\UnityEditor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\Unity5.0\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClockEditor.cs" />
-    <Compile Include="LerpPointerMeterEditor.cs" />
-    <Compile Include="PointerMeterEditor.cs" />
+    <Compile Include="Clock\PointerClock\ClockPointer.cs" />
+    <Compile Include="Clock\PointerClock\PointerClock.cs" />
+    <Compile Include="Clock\Interface\IClock.cs" />
+    <Compile Include="Meter\PointerMeter\Interface\IPointerMeter.cs" />
+    <Compile Include="Enum\LerpMode.cs" />
+    <Compile Include="Meter\PointerMeter\LerpPointerMeter.cs" />
+    <Compile Include="Meter\PointerMeter\PointerMeter.cs" />
+    <Compile Include="Meter\PointerMeter\MeterPointer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UCommonEditor\UCommonEditor.csproj">
-      <Project>{522C0820-E5F6-4BD9-A1E3-FE2E1A1E2CE2}</Project>
-      <Name>UCommonEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UMeter\UMeter.csproj">
-      <Project>{9EB4EF70-1B1E-42A6-9A9B-DBE9B67625F4}</Project>
-      <Name>UMeter</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\Meter\Editor\"
+    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\$(ProjectName)\Plugins\"
 if exist %25targetDir%25\$(TargetFileName) (
     if $(ConfigurationName)==Debug (
         copy "$(TargetName).pdb" %25targetDir%25
@@ -68,6 +62,7 @@ if exist %25targetDir%25\$(TargetFileName) (
          )
     )
     copy "$(TargetFileName)" %25targetDir%25
+    copy "$(TargetName).xml" %25targetDir%25
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

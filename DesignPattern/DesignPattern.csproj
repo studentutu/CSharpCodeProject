@@ -43,7 +43,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\DesignPattern\Plugins\"
+    <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\$(ProjectName)\Plugins\"
 if exist %25targetDir%25\$(TargetFileName) (
     if $(ConfigurationName)==Debug (
         copy "$(TargetName).pdb" %25targetDir%25

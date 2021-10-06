@@ -44,12 +44,6 @@
     <Compile Include="Singleton\SingleBehaviour.cs" />
     <Compile Include="Singleton\SingleComponent.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DesignPattern\DesignPattern.csproj">
-      <Project>{1ac97d40-2405-4fb6-91f3-225e2f036fb6}</Project>
-      <Name>DesignPattern</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\DesignPattern\Plugins\"

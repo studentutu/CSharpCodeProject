@@ -143,7 +143,7 @@
 - Utility for Comdlg32.
 - Utility for windows explorer.
 
-- [Detail](./Attachment/README/MGS.WinUtility.md)
+- [Detail](./Attachment/README/MGS.WinUtility.md)  [Case](https://github.com/mogoson/MGS.WinLibrary)
 
 ### WinLibrary
 
@@ -151,7 +151,7 @@
 - API of Shell32.dll.
 - API of wininet.dll.
 
-- [Detail](./Attachment/README/MGS.WinLibrary.md)
+- [Detail](./Attachment/README/MGS.WinLibrary.md)  [Case](https://github.com/mogoson/MGS.WinLibrary)
 
 ------
 

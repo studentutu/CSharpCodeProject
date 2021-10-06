@@ -15,20 +15,14 @@
 
 ### Algorithm
 
-- Palindrome Water
+- Searcher Palindrome Water
+- [Detail](./Attachment/README/MGS.Algorithm.md)
 
 ### Animation
 
 - 3D animation base on mono curves.
 - 2D frame and UV animation.
 - [Detail](./Attachment/README/MGS.Animation.md)  [Case](https://github.com/mogoson/MGS.Animation)
-
-### AutofacEditor
-
-- Auto search the info of type that with the AutofacRegisterAttribute.
-- Auto build type info code to AutofacConfigurator.cs
-
-- [Case](https://github.com/mogoson/MGS.Autofac)
 
 ### AutofacUtility
 
@@ -65,13 +59,19 @@
 ### Curve
 
 - Define Sin Ellipse Helix Bezier Hermite curve.
-- [Detail](./Attachment/README/MGS.Curve.md)  [Case-MonoCurve](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
+- [Detail](./Attachment/README/MGS.Curve.md)  [Case](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### DesignPattern
 
 - Singleton.
 - Object pool.
-- [Detail](./Attachment/README/MGS.DesignPattern.md)  [Detail-Unity](./Attachment/README/MGS.UDesignPattern.md)  [Case](https://github.com/mogoson/MGS.ObjectPool)
+- [Detail](./Attachment/README/MGS.DesignPattern.md)  [Case](https://github.com/mogoson/MGS.ObjectPool)
+
+### Graph
+
+- ImageUtility.
+- Texture2DUtility.
+- [Detail](./Attachment/README/MGS.Graph.md)
 
 ### Internation
 
@@ -102,20 +102,10 @@
 - Define Sin Ellipse Helix Bezier Hermite mono curve.
 - [Detail](./Attachment/README/MGS.MonoCurve.md)  [Case](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
 
-### MonoCurveEditor
-
-- Draw custom editor for Sin Ellipse Helix Bezier Hermite mono curve.
-- [Case](https://github.com/mogoson/MGS.MonoCurve)  [Case-SkinnedMesh](https://github.com/mogoson/MGS.SkinnedMesh)
-
 ### SkinnedMesh
 
 - Define mono skinned mesh.
 - [Detail](./Attachment/README/MGS.SkinnedMesh.md)  [Case](https://github.com/mogoson/MGS.SkinnedMesh)
-
-### SkinnedMeshEditor
-
-- Draw custom editor for mono skinned mesh.
-- [Case](https://github.com/mogoson/MGS.SkinnedMesh)
 
 ### Sqlite
 

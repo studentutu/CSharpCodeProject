@@ -1,6 +1,6 @@
 [TOC]
 
-﻿# MGS.Media.dll
+﻿# MGS.Graph.dll
 
 ## Summary
 
@@ -13,6 +13,8 @@
 ## Dependence
 
 - System.dll
+- System.Drawing.dll
+- UnityEngine.dll
 
 ## Demand
 
@@ -23,9 +25,8 @@
 - Subtitle
 
 ```C#
-public class SubtitleClip{}
-public abstract class Subtitle : ISubtitle{}
-public class SRTSubtitle : Subtitle{}
+public sealed class ImageUtility{}
+public sealed class Texture2DUtility{}
 ```
 
 ## Usage

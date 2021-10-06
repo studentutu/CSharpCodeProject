@@ -1,10 +1,10 @@
 [TOC]
 
-﻿# MGS.Media.dll
+﻿# MGS.Algorithm.dll
 
 ## Summary
 
-- 
+- Library of general algorithm.
 
 ## Environment
 
@@ -14,21 +14,13 @@
 
 - System.dll
 
-## Demand
-
-- 
-
 ## Implemented
 
-- Subtitle
-
 ```C#
-public class SubtitleClip{}
-public abstract class Subtitle : ISubtitle{}
-public class SRTSubtitle : Subtitle{}
+public sealed class CollectionSearcher{}
+public sealed class PalindromeCollector{}
+public sealed class WaterCollector{}
 ```
-
-## Usage
 
 ------
 

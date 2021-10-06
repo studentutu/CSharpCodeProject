@@ -28,7 +28,7 @@ namespace MGS.Algorithm
         /// <param name="key">Key to match item.</param>
         /// <param name="compare">Func to compare item and key; return 0 if equal, 1 if greater, -1 if less.</param>
         /// <returns>The match item or default of type T if not match.</returns>
-        public T BinarySearch<T, K>(T[] array, K key, Func<T, K, int> compare)
+        public static T BinarySearch<T, K>(T[] array, K key, Func<T, K, int> compare)
         {
             var from = 0;
             var to = array.Length;

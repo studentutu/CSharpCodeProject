@@ -26,20 +26,16 @@ namespace MGS.DesignPattern
         /// </summary>
         public static T Instance { get { return Agent.instance; } }
 
-        #region
         /// <summary>
         /// Agent provide the single instance.
         /// </summary>
         private class Agent
         {
-            #region Property
             /// <summary>
             /// Single instance of the specified Component T.
             /// </summary>
             internal static readonly T instance = new GameObject(typeof(T).Name).AddComponent<T>();
-            #endregion
 
-            #region Static Method
             /// <summary>
             /// Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
             /// </summary>
@@ -47,8 +43,6 @@ namespace MGS.DesignPattern
             {
                 DontDestroyOnLoad(instance);
             }
-            #endregion
         }
-        #endregion
     }
 }

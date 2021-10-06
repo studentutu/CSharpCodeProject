@@ -22,7 +22,6 @@ namespace MGS.DesignPattern
     /// <typeparam name="T">Specified type.</typeparam>
     public abstract class SingleUpdater<T> : Singleton<T> where T : class
     {
-        #region Property
         /// <summary>
         /// Interval of update [ms].
         /// </summary>
@@ -37,9 +36,7 @@ namespace MGS.DesignPattern
         /// The thread to update.
         /// </summary>
         private Thread thread;
-        #endregion
 
-        #region Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -71,6 +68,5 @@ namespace MGS.DesignPattern
         /// On thread update event.
         /// </summary>
         protected abstract void Update();
-        #endregion
     }
 }

@@ -20,7 +20,6 @@ namespace MGS.DesignPattern
     /// <typeparam name="T">Specified type of object.</typeparam>
     public abstract class ObjectPool<T>
     {
-        #region Field and Property
         /// <summary>
         /// Max count limit of objects in pool.
         /// </summary>
@@ -35,9 +34,7 @@ namespace MGS.DesignPattern
         /// Stack store objects.
         /// </summary>
         protected Stack<T> objectStack = new Stack<T>();
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Constructor of ObjectPool.
         /// </summary>
@@ -101,9 +98,7 @@ namespace MGS.DesignPattern
             }
             objectStack.Clear();
         }
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Create a new object.
         /// </summary>
@@ -121,6 +116,5 @@ namespace MGS.DesignPattern
         /// </summary>
         /// <param name="obj"></param>
         protected abstract void Dispose(T obj);
-        #endregion
     }
 }

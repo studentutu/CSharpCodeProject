@@ -33,12 +33,12 @@ namespace MGS.Graph
         public static IEnumerator LoadGifAsync(string file,
             Action<float, Texture2D> progress, Action<List<Texture2D>> finished = null)
         {
-            var frames = GraphUtility.GetFrames(file);
+            var frames = ImageUtility.GetFrames(file);
             var index = 0;
             var textures = new List<Texture2D>();
             foreach (var frame in frames)
             {
-                var buffer = GraphUtility.GetBuffer(frame, ImageFormat.Png);
+                var buffer = ImageUtility.GetBuffer(frame, ImageFormat.Png);
                 var texture = new Texture2D(frame.Width, frame.Height);
                 texture.LoadImage(buffer);
                 textures.Add(texture);

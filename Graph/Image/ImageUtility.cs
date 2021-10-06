@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright (C) 2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  GraphUtility.cs
- *  Description  :  Utility for graph.
+ *  File         :  ImageUtility.cs
+ *  Description  :  Utility for image.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -17,9 +17,9 @@ using System.IO;
 namespace MGS.Graph
 {
     /// <summary>
-    /// Utility for graph.
+    /// Utility for image.
     /// </summary>
-    public sealed class GraphUtility
+    public sealed class ImageUtility
     {
         #region Public Method
         /// <summary>

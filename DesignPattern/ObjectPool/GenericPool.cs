@@ -30,15 +30,12 @@ namespace MGS.DesignPattern
     /// </summary>
     public class GenericPool<T> : ObjectPool<T> where T : IResettable, new()
     {
-        #region Public Method
         /// <summary>
         /// Constructor of GenericPool.
         /// </summary>
         /// <param name="maxCount">Max count limit of objects in pool.</param>
         public GenericPool(int maxCount = 100) : base(maxCount) { }
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Create a new object.
         /// </summary>
@@ -65,6 +62,5 @@ namespace MGS.DesignPattern
         {
             obj.Dispose();
         }
-        #endregion
     }
 }

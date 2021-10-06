@@ -20,7 +20,6 @@ namespace MGS.DesignPattern
     /// </summary>
     public sealed class SingleBehaviour : SingleComponent<SingleBehaviour>
     {
-        #region
         /// <summary>
         /// Event on application focus.
         /// </summary>
@@ -35,9 +34,7 @@ namespace MGS.DesignPattern
         /// Event on application quit.
         /// </summary>
         public event Action OnApplicationQuitEvent;
-        #endregion
 
-        #region
         /// <summary>
         /// On application focus.
         /// </summary>
@@ -63,6 +60,5 @@ namespace MGS.DesignPattern
         {
             OnApplicationQuitEvent?.Invoke();
         }
-        #endregion
     }
 }

@@ -22,33 +22,25 @@ namespace MGS.DesignPattern
     /// <typeparam name="T">Specified type.</typeparam>
     public abstract class Singleton<T> where T : class
     {
-        #region Property
         /// <summary>
         /// Single instance of the specified type T.
         /// </summary>
         public static T Instance { get { return Agent.instance; } }
-        #endregion
 
-        #region Nested Class
         /// <summary>
         /// Agent provide the single instance.
         /// </summary>
         private class Agent
         {
-            #region Property
             /// <summary>
             /// Single instance of the specified type T created by that type's default constructor.
             /// </summary>
             internal static readonly T instance = Activator.CreateInstance(typeof(T), true) as T;
-            #endregion
 
-            #region Static Method
             /// <summary>
             /// Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
             /// </summary>
             static Agent() { }
-            #endregion
         }
-        #endregion
     }
 }

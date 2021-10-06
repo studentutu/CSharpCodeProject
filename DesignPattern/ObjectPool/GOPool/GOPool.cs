@@ -19,7 +19,6 @@ namespace MGS.DesignPattern
     /// </summary>
     public class GOPool : ObjectPool<GameObject>
     {
-        #region Field and Property
         /// <summary>
         /// Parent of gameobjects.
         /// </summary>
@@ -29,9 +28,7 @@ namespace MGS.DesignPattern
         /// Prefab to create clone.
         /// </summary>
         protected GameObject prefab;
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Create and initialize GameObjectPool.
         /// </summary>
@@ -84,9 +81,7 @@ namespace MGS.DesignPattern
 
             Recycle(cpnt.gameObject);
         }
-        #endregion
 
-        #region Protected Method
         /// <summary>
         /// Create new gameobject.
         /// </summary>
@@ -125,6 +120,5 @@ namespace MGS.DesignPattern
         {
             Object.Destroy(obj);
         }
-        #endregion
     }
 }

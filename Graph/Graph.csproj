@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\GraphUtility.cs" />
-    <Compile Include="Utility\Texture2DUtility.cs" />
+    <Compile Include="Image\ImageUtility.cs" />
+    <Compile Include="Texture\Texture2DUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

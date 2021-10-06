@@ -20,7 +20,6 @@ namespace MGS.DesignPattern
     /// </summary>
     public sealed class GOPoolManager : Singleton<GOPoolManager>
     {
-        #region Field and Property
         /// <summary>
         /// Dictionary store pools info(name and pool).
         /// </summary>
@@ -30,9 +29,7 @@ namespace MGS.DesignPattern
         /// Root transform for pools.
         /// </summary>
         private readonly Transform poolRoot;
-        #endregion
 
-        #region Private Method
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -42,9 +39,7 @@ namespace MGS.DesignPattern
             poolRoot = new GameObject(GetType().Name).transform;
             Object.DontDestroyOnLoad(poolRoot);
         }
-        #endregion
 
-        #region Public Method
         /// <summary>
         /// Create a pool in this manager.
         /// </summary>
@@ -108,6 +103,5 @@ namespace MGS.DesignPattern
                 poolsInfo.Remove(name);
             }
         }
-        #endregion
     }
 }

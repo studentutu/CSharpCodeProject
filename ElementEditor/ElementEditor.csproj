@@ -49,7 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Element\Element.csproj">
       <Project>{1ae82a00-f9f4-4e09-9f19-f55a860258a3}</Project>
-      <Name>UElement</Name>
+      <Name>Element</Name>
     </ProjectReference>
     <ProjectReference Include="..\UCommonEditor\UCommonEditor.csproj">
       <Project>{522c0820-e5f6-4bd9-a1e3-fe2e1a1e2ce2}</Project>

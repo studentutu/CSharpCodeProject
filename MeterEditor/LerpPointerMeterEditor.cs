@@ -12,7 +12,7 @@
 
 using UnityEditor;
 
-namespace MGS.Meter
+namespace MGS.Meter.UEditor
 {
     [CustomEditor(typeof(LerpPointerMeter), true)]
     [CanEditMultipleObjects]

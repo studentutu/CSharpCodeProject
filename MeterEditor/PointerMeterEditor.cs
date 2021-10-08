@@ -14,7 +14,7 @@ using MGS.Common.UEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace MGS.Meter
+namespace MGS.Meter.UEditor
 {
     [CustomEditor(typeof(PointerMeter), true)]
     [CanEditMultipleObjects]

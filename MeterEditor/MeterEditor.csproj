@@ -7,8 +7,8 @@
     <ProjectGuid>{0C36011D-BFF8-403D-A7E6-5A9A5B43D0E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.Meter</RootNamespace>
-    <AssemblyName>MGS.UMeterEditor</AssemblyName>
+    <RootNamespace>MGS.Meter.UEditor</RootNamespace>
+    <AssemblyName>MGS.MeterEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>

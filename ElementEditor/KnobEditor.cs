@@ -14,7 +14,7 @@ using MGS.Common.UEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace MGS.Element
+namespace MGS.Element.UEditor
 {
     [CustomEditor(typeof(Knob), true)]
     [CanEditMultipleObjects]

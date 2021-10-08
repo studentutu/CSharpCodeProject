@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MGS.Element</RootNamespace>
-    <AssemblyName>MGS.UElement</AssemblyName>
+    <AssemblyName>MGS.Element</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -22,7 +22,7 @@
     <DefineConstants>TRACE;DEBUG;UNITY_5_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MGS.UElement.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\MGS.Element.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <DefineConstants>TRACE;UNITY_5_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MGS.UElement.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\MGS.Element.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

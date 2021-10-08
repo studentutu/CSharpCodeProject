@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MGS.UElementEditor")]
+[assembly: AssemblyTitle("MGS.ElementEditor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MGS.UElementEditor")]
+[assembly: AssemblyProduct("MGS.ElementEditor")]
 [assembly: AssemblyCopyright("Copyright (C)  2021 Mogoson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

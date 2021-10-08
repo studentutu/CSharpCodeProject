@@ -7,8 +7,8 @@
     <ProjectGuid>{32FE7446-4544-43A6-BACE-387026B0D2F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MGS.Element</RootNamespace>
-    <AssemblyName>MGS.UElementEditor</AssemblyName>
+    <RootNamespace>MGS.Element.UEditor</RootNamespace>
+    <AssemblyName>MGS.ElementEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>

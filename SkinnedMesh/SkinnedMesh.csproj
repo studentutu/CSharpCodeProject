@@ -43,7 +43,7 @@
     <Compile Include="CurveHose\MonoCurveSkinnedHose.cs" />
     <Compile Include="CurveHose\Interface\IMonoCurveHose.cs" />
     <Compile Include="Interface\ISkinnedMesh.cs" />
-    <Compile Include="Utility\MeshUtility.cs" />
+    <Compile Include="Utility\MeshBuildUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿/*************************************************************************
  *  Copyright (C) 2018-2019 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  MeshUtility.cs
- *  Description  :  Utility for skinned mesh.
+ *  File         :  MeshBuildUtility.cs
+ *  Description  :  Utility for build skinned mesh.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  1.0
@@ -16,9 +16,9 @@ using UnityEngine;
 namespace MGS.SkinnedMesh
 {
     /// <summary>
-    /// Utility for mesh.
+    /// Utility for build skinned mesh.
     /// </summary>
-    public sealed class MeshUtility
+    public sealed class MeshBuildUtility
     {
         #region Public Method
         /// <summary>

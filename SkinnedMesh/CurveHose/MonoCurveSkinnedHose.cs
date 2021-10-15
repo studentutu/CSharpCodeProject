@@ -89,11 +89,11 @@ namespace MGS.SkinnedMesh
                 var len = differ * i;
                 var node = curve.LocalEvaluate(len);
                 var tangent = (curve.LocalEvaluate(len + differ) - node);
-                vertices.AddRange(MeshUtility.CreatePolygonVertices(polygon, radius, node, Quaternion.LookRotation(tangent)));
+                vertices.AddRange(MeshBuildUtility.CreatePolygonVertices(polygon, radius, node, Quaternion.LookRotation(tangent)));
             }
             var lastNode = curve.LocalEvaluate(curve.Length);
             var lastTangent = (lastNode - curve.LocalEvaluate(curve.Length - differ));
-            vertices.AddRange(MeshUtility.CreatePolygonVertices(polygon, radius, lastNode, Quaternion.LookRotation(lastTangent)));
+            vertices.AddRange(MeshBuildUtility.CreatePolygonVertices(polygon, radius, lastNode, Quaternion.LookRotation(lastTangent)));
 
             if (isSeal)
             {
@@ -116,7 +116,7 @@ namespace MGS.SkinnedMesh
         /// <returns>Triangles array.</returns>
         protected int[] CreateTriangles(int segments, bool isSeal = false)
         {
-            var triangles = MeshUtility.CreatePrismTriangles(polygon, segments, 0);
+            var triangles = MeshBuildUtility.CreatePrismTriangles(polygon, segments, 0);
             return triangles.ToArray();
         }
 
@@ -129,10 +129,10 @@ namespace MGS.SkinnedMesh
         {
             var polygonVertices = polygon + 1;
             var firstSide = polygonVertices * segments;
-            var triangles = MeshUtility.CreatePolygonTriangles(polygon, firstSide, firstSide + 1, false);
+            var triangles = MeshBuildUtility.CreatePolygonTriangles(polygon, firstSide, firstSide + 1, false);
 
             var lastSide = firstSide + polygonVertices + 1;
-            triangles.AddRange(MeshUtility.CreatePolygonTriangles(polygon, lastSide, lastSide + 1));
+            triangles.AddRange(MeshBuildUtility.CreatePolygonTriangles(polygon, lastSide, lastSide + 1));
             return triangles.ToArray();
         }
 
@@ -144,13 +144,13 @@ namespace MGS.SkinnedMesh
         /// <returns>UV array.</returns>
         protected Vector2[] CreateUV(int segments, bool isSeal = false)
         {
-            var uv = MeshUtility.CreatePrismUV(polygon, segments);
+            var uv = MeshBuildUtility.CreatePrismUV(polygon, segments);
             if (isSeal)
             {
                 for (int i = 0; i < 2; i++)
                 {
                     uv.Add(Vector2.one * 0.5f);
-                    uv.AddRange(MeshUtility.CreatePolygonUV(polygon, i == 0));
+                    uv.AddRange(MeshBuildUtility.CreatePolygonUV(polygon, i == 0));
                 }
             }
             return uv.ToArray();

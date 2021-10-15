@@ -45,6 +45,7 @@
     <Compile Include="Interface\ISkinnedMesh.cs" />
     <Compile Include="Utility\MeshBuildUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\MeshCombineUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Curve\Curve.csproj">

@@ -22,14 +22,14 @@ namespace MGS.SkinnedMesh
     {
         #region Public Method
         /// <summary>
-        /// Create polygon vertices.
+        /// Build polygon vertices.
         /// </summary>
         /// <param name="edge">Edge count of polygon.</param>
         /// <param name="radius">Radius of polygon.</param>
         /// <param name="center">Center of polygon.</param>
         /// <param name="rotation">Rotation of polygon.</param>
         /// <returns>Vertices base on polygon.</returns>
-        public static List<Vector3> CreatePolygonVertices(int edge, float radius, Vector3 center, Quaternion rotation)
+        public static List<Vector3> BuildPolygonVertices(int edge, float radius, Vector3 center, Quaternion rotation)
         {
             var vertices = new List<Vector3>();
             var sector = 2 * Mathf.PI / edge;
@@ -43,14 +43,14 @@ namespace MGS.SkinnedMesh
         }
 
         /// <summary>
-        /// Create polygon triangles index base on center vertice.
+        /// Build polygon triangles index base on center vertice.
         /// </summary>
         /// <param name="edge">Edge count of polygon.</param>
         /// <param name="center">Index of center vertice.</param>
         /// <param name="start">Index of start vertice.</param>
         /// <param name="clockwise">Triangle indexs is clockwise?</param>
         /// <returns>Triangles base on polygon.</returns>
-        public static List<int> CreatePolygonTriangles(int edge, int center, int start, bool clockwise = true)
+        public static List<int> BuildPolygonTriangles(int edge, int center, int start, bool clockwise = true)
         {
             var triangles = new List<int>();
             var offset = clockwise ? 0 : 1;
@@ -64,13 +64,13 @@ namespace MGS.SkinnedMesh
         }
 
         /// <summary>
-        /// Create prism triangles index.
+        /// Build prism triangles index.
         /// </summary>
         /// <param name="polygon">Edge count of prism polygon.</param>
         /// <param name="segments">Segments count of prism vertices vertical division.</param>
         /// <param name="start">Start index of prism vertice.</param>
         /// <returns>Triangles index base on prism.</returns>
-        public static List<int> CreatePrismTriangles(int polygon, int segments, int start)
+        public static List<int> BuildPrismTriangles(int polygon, int segments, int start)
         {
             var triangles = new List<int>();
             var polygonVs = polygon + 1;
@@ -98,12 +98,12 @@ namespace MGS.SkinnedMesh
         }
 
         /// <summary>
-        /// Create polygon uv.
+        /// Build polygon uv.
         /// </summary>
         /// <param name="edge">Edge count of polygon.</param>
         /// <param name="clockwise">UV indexs is clockwise?</param>
         /// <returns>UV base on polygon.</returns>
-        public static List<Vector2> CreatePolygonUV(int edge, bool clockwise = true)
+        public static List<Vector2> BuildPolygonUV(int edge, bool clockwise = true)
         {
             var uv = new List<Vector2>();
             var sector = 2 * Mathf.PI / edge;
@@ -118,12 +118,12 @@ namespace MGS.SkinnedMesh
         }
 
         /// <summary>
-        /// Create prism uv.
+        /// Build prism uv.
         /// </summary>
         /// <param name="polygon">Edge count of prism polygon.</param>
         /// <param name="segments">Segments count of prism vertices vertical division.</param>
         /// <returns>UV base on prism.</returns>
-        public static List<Vector2> CreatePrismUV(int polygon, int segments)
+        public static List<Vector2> BuildPrismUV(int polygon, int segments)
         {
             var uv = new List<Vector2>();
             var polygonVs = polygon + 1;

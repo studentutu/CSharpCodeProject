@@ -143,6 +143,29 @@ if (meshCollider)
 }
 ```
 
+### Combine Mesh
+
+```C#
+var combines = new List<CombineInstance>();
+foreach (var filter in filters)
+{
+    var pos = filter.transform.position - center;
+    var combine = new CombineInstance
+    {
+        mesh = filter.sharedMesh,
+        transform = Matrix4x4.TRS(pos, filter.transform.rotation, filter.transform.lossyScale)
+    };
+    combines.Add(combine);
+}
+var rebornMesh = new Mesh();
+rebornMesh.CombineMeshes(combines.ToArray(), mergeSubMeshes);
+
+#if !UNITY_5_5_OR_NEWER
+    //Mesh.Optimize was removed in version 5.5.2p4.
+    rebornMesh.Optimize();
+#endif
+```
+
 ## Usage
 
 ### Curve Hose

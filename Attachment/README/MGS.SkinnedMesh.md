@@ -24,7 +24,8 @@
 public abstract class MonoSkinnedMesh : MonoBehaviour, ISkinnedMesh{}
 public abstract class MonoCurveHose : MonoSkinnedMesh, IMonoCurveHose{}
 public class MonoCurveSkinnedHose : MonoCurveHose, IMonoCurveHose{}
-public sealed class MeshUtility{}
+public sealed class MeshBuildUtility{}
+public sealed class MeshCombineUtility{}
 ```
 
 ## Technology

@@ -23,7 +23,7 @@ namespace MGS.UGUI
         /// <summary>
         /// RectTransform component.
         /// </summary>
-        public RectTransform Rect
+        public RectTransform RectTrans
         {
             get { return transform as RectTransform; }
         }

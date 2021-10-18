@@ -154,8 +154,7 @@ namespace MGS.UGUI
             ContentType = InputField.ContentType.IntegerNumber;
             beforeEndEdit = (value) =>
             {
-                var number = 0;
-                if (int.TryParse(value, out number))
+                if (int.TryParse(value, out int number))
                 {
                     if (number < min || number > max)
                     {

@@ -121,7 +121,7 @@ namespace MGS.UGUI
                 contentHeight = itemHeight * itemCount + padding;
             }
 
-            Rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rectHeight);
+            RectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rectHeight);
             (content.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, contentHeight);
         }
 

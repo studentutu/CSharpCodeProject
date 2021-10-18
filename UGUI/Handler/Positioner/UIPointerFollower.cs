@@ -40,7 +40,7 @@ namespace MGS.UGUI
         protected virtual void Update()
         {
             var localPoint = GetLocalPosition(Input.mousePosition, offset, anchor);
-            Rect.SetPositionClamp(localPoint, padding);
+            RectTrans.SetPositionClamp(localPoint, padding);
         }
     }
 }

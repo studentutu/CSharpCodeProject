@@ -43,6 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collector\UIButtonCollector.cs" />
+    <Compile Include="Collector\UITextCollector.cs" />
+    <Compile Include="Collector\UIImageCollector.cs" />
     <Compile Include="Extension\UIComponentExtension.cs" />
     <Compile Include="Extension\UITransformExtension.cs" />
     <Compile Include="Handler\Positioner\UIPointerFollower.cs" />
@@ -52,6 +55,7 @@
     <Compile Include="Handler\UIFader\UIFader.cs" />
     <Compile Include="Handler\UIFader\UIPositionFader.cs" />
     <Compile Include="Handler\UIFader\UIScaleFader.cs" />
+    <Compile Include="Collector\UICollector.cs" />
     <Compile Include="Handler\UIHandler.cs" />
     <Compile Include="Handler\UIMirror.cs" />
     <Compile Include="Handler\Positioner\UIPositioner.cs" />

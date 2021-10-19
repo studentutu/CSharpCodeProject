@@ -51,6 +51,7 @@ namespace MGS.UGUI
             foreach (var info in infos)
             {
                 var item = container.GetChild(index).GetComponent<T>();
+                item.gameObject.SetActive(true);
                 RefreshItem(item, info);
                 index++;
             }

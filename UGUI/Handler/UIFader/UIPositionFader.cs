@@ -50,7 +50,7 @@ namespace MGS.UGUI
         /// </summary>
         protected override void OnFade(float progress)
         {
-            RectTrans.anchoredPosition = Evaluate(from, to, progress);
+            (transform as RectTransform).anchoredPosition = Evaluate(from, to, progress);
         }
 
         /// <summary>

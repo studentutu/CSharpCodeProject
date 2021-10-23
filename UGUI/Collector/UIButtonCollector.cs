@@ -26,19 +26,20 @@ namespace MGS.UGUI.Temp
         public event Action<int, string> OnItemClickEvent;
 
         /// <summary>
-        /// Refresh item by options.
+        /// Create a new item from prefab.
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="options"></param>
-        protected override void RefreshItem(Button item, ButtonOptions options)
+        /// <returns></returns>
+        protected override Button CreateItem()
         {
+            var item = base.CreateItem();
+
             //Agreement: the prefab is under the container.
             var index = item.transform.GetSiblingIndex() - 1;
-            void onItemClick() => OnItemClick(index, options.text);
-            item.onClick.RemoveListener(onItemClick);
-            item.onClick.AddListener(onItemClick);
+            var text = item.GetComponentInChildren<Text>();
 
-            item.GetComponentInChildren<Text>().text = options.text;
+            void onItemClick() => OnItemClick(index, text);
+            item.onClick.AddListener(onItemClick);
+            return item;
         }
 
         /// <summary>
@@ -46,15 +47,26 @@ namespace MGS.UGUI.Temp
         /// </summary>
         /// <param name="index"></param>
         /// <param name="text"></param>
-        protected void OnItemClick(int index, string text)
+        protected void OnItemClick(int index, Text text)
         {
-            OnItemClickEvent?.Invoke(index, text);
+            OnItemClickEvent?.Invoke(index, text.text);
+        }
+
+        /// <summary>
+        /// Refresh item by options.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="options"></param>
+        protected override void RefreshItem(Button item, ButtonOptions options)
+        {
+            item.GetComponentInChildren<Text>().text = options.text;
         }
     }
 
     /// <summary>
     /// Options for button.
     /// </summary>
+    [Serializable]
     public struct ButtonOptions
     {
         /// <summary>

@@ -1,46 +1,32 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIPointerFollower.cs
+ *  File         :  IUIRefreshable.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  8/21/2021
+ *  Date         :  10/24/2021
  *  Description  :  Initial development version.
  *************************************************************************/
-
-using UnityEngine;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI pointer-follower.
+    /// Interface for UI refreshable.
     /// </summary>
-    public class UIPointerFollower : UIPositioner
+    /// <typeparam name="T">Type of info to refresh UI.</typeparam>
+    public interface IUIRefreshable<T>
     {
         /// <summary>
-        /// 
+        /// Info of UI.
         /// </summary>
-        public TextAnchor anchor;
+        T Info { get; }
 
         /// <summary>
-        /// 
+        /// Refresh UI.
         /// </summary>
-        public Vector2 offset;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public RectOffset padding;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected virtual void Update()
-        {
-            var localPoint = GetLocalPosition(Input.mousePosition, offset, anchor);
-            (transform as RectTransform).SetPositionClamp(localPoint, padding);
-        }
+        /// <param name="info">Info to refresh UI.</param>
+        void Refresh(T info);
     }
 }

@@ -10,6 +10,7 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace MGS.UGUI
@@ -17,5 +18,11 @@ namespace MGS.UGUI
     /// <summary>
     /// UI component.
     /// </summary>
-    public abstract class UIComponent : UIBehaviour { }
+    public abstract class UIComponent : UIBehaviour
+    {
+        /// <summary>
+        /// The RectTransform attached to this GameObject.
+        /// </summary>
+        public RectTransform RectTransform { get { return transform as RectTransform; } }
+    }
 }

@@ -43,41 +43,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collector\UIButtonCollector.cs" />
-    <Compile Include="Collector\UITextCollector.cs" />
-    <Compile Include="Collector\UIImageCollector.cs" />
+    <Compile Include="Abstract\UIRefreshable.cs" />
+    <Compile Include="Component\Cell\UIButton.cs" />
+    <Compile Include="Component\Cell\UICell.cs" />
+    <Compile Include="Component\Cell\UIImage.cs" />
+    <Compile Include="Component\Cell\UIText.cs" />
+    <Compile Include="Component\Collector\UIButtonCollector.cs" />
+    <Compile Include="Component\Collector\UIImageCollector.cs" />
+    <Compile Include="Component\Collector\UITextCollector.cs" />
+    <Compile Include="Extension\UITextExtension.cs" />
     <Compile Include="Extension\UIComponentExtension.cs" />
     <Compile Include="Extension\UITransformExtension.cs" />
-    <Compile Include="Handler\Positioner\UIPointerFollower.cs" />
-    <Compile Include="Handler\UIDragger.cs" />
-    <Compile Include="Handler\UIFader\UIAlphaFader.cs" />
-    <Compile Include="Handler\UIFader\UIColorFader.cs" />
-    <Compile Include="Handler\UIFader\UIFader.cs" />
-    <Compile Include="Handler\UIFader\UIPositionFader.cs" />
-    <Compile Include="Handler\UIFader\UIScaleFader.cs" />
-    <Compile Include="Collector\UICollector.cs" />
-    <Compile Include="Handler\UIHandler.cs" />
-    <Compile Include="Handler\UIMirror.cs" />
-    <Compile Include="Handler\Positioner\UIPositioner.cs" />
-    <Compile Include="Handler\UISizer.cs" />
-    <Compile Include="Listener\UIDragListener.cs" />
-    <Compile Include="Listener\UIListener.cs" />
-    <Compile Include="Listener\UIPointerListener.cs" />
-    <Compile Include="Listener\UISelectListener.cs" />
-    <Compile Include="Panel\UIPanel.cs" />
+    <Compile Include="Component\Handler\Clipper\UITextClipper.cs" />
+    <Compile Include="Component\Handler\Positioner\UIPointerFollower.cs" />
+    <Compile Include="Component\Handler\UIDragger.cs" />
+    <Compile Include="Component\Handler\UIFader\UIAlphaFader.cs" />
+    <Compile Include="Component\Handler\UIFader\UIColorFader.cs" />
+    <Compile Include="Component\Handler\UIFader\UIFader.cs" />
+    <Compile Include="Component\Handler\UIFader\UIPositionFader.cs" />
+    <Compile Include="Component\Handler\UIFader\UIScaleFader.cs" />
+    <Compile Include="Component\Collector\UICollector.cs" />
+    <Compile Include="Component\Handler\UIHandler.cs" />
+    <Compile Include="Component\Handler\UIMirror.cs" />
+    <Compile Include="Component\Handler\Positioner\UIPositioner.cs" />
+    <Compile Include="Component\Handler\UISizer.cs" />
+    <Compile Include="Interface\IUIRefreshable.cs" />
+    <Compile Include="Component\Listener\UIDragListener.cs" />
+    <Compile Include="Component\Listener\UIListener.cs" />
+    <Compile Include="Component\Listener\UIPointerListener.cs" />
+    <Compile Include="Component\Listener\UISelectListener.cs" />
+    <Compile Include="Component\Panel\UIPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trigger\UIPointerTrigger.cs" />
-    <Compile Include="Trigger\UITrigger.cs" />
+    <Compile Include="Component\Trigger\UIPointerTrigger.cs" />
+    <Compile Include="Component\Trigger\UITrigger.cs" />
     <Compile Include="UIComponent.cs" />
-    <Compile Include="Utility\RectUtility.cs" />
     <Compile Include="Utility\UICoroutine.cs" />
-    <Compile Include="Widget\UIButtonCollector.cs" />
-    <Compile Include="Panel\UIHorTextRow\UIHorTextRowData.cs" />
-    <Compile Include="Panel\UIHorTextRow\UIHorTextRowItem.cs" />
-    <Compile Include="Panel\UIHorTextRow\UIHorTextRowPanel.cs" />
-    <Compile Include="Widget\UISearchSelector.cs" />
-    <Compile Include="Widget\UITextInputText.cs" />
-    <Compile Include="Widget\UIWidget.cs" />
+    <Compile Include="Component\Widget\UIButtonCollector.cs" />
+    <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowData.cs" />
+    <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowItem.cs" />
+    <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowPanel.cs" />
+    <Compile Include="Component\Widget\UISearchSelector.cs" />
+    <Compile Include="Component\Widget\UITextInputText.cs" />
+    <Compile Include="Component\Widget\UIWidget.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Component\Inherit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

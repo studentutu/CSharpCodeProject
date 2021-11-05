@@ -10,23 +10,10 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
-using UnityEngine.UI;
-
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI Text-Collector.
+    /// UI text collector.
     /// </summary>
-    public class UITextCollector : UICollector<Text, string>
-    {
-        /// <summary>
-        /// Refresh item by text.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="text"></param>
-        protected override void RefreshItem(Text item, string text)
-        {
-            item.text = text;
-        }
-    }
+    public class UITextCollector : UICollector<UIText, TextOptions> { }
 }

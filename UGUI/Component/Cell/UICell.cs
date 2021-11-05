@@ -1,33 +1,20 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIImageCollector.cs
+ *  File         :  UICell.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  10/20/2021
+ *  Date         :  10/24/2021
  *  Description  :  Initial development version.
  *************************************************************************/
-
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI Image-Collector.
+    /// UI cell.
     /// </summary>
-    public class UIImageCollector : UICollector<Image, Sprite>
-    {
-        /// <summary>
-        /// Refresh item by sprite.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="sprite"></param>
-        protected override void RefreshItem(Image item, Sprite sprite)
-        {
-            item.sprite = sprite;
-        }
-    }
+    /// <typeparam name="T">Type of info to refresh cell.</typeparam>
+    public abstract class UICell<T> : UIRefreshable<T> { }
 }

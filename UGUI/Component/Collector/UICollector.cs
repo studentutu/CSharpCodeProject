@@ -18,89 +18,93 @@ namespace MGS.UGUI
     /// <summary>
     /// UI collector.
     /// </summary>
-    /// <typeparam name="T">Type of item.</typeparam>
-    /// <typeparam name="K">Type of info for item.</typeparam>
-    public abstract class UICollector<T, K> : UIComponent where T : Component
+    /// <typeparam name="TCell">Type of cell.</typeparam>
+    /// <typeparam name="TInfo">Type of info to refresh cell.</typeparam>
+    public abstract class UICollector<TCell, TInfo> : UIRefreshable<ICollection<TInfo>>
+        where TCell : UIRefreshable<TInfo>
     {
         /// <summary>
-        /// Container of items.
+        /// Container of cells.
         /// </summary>
         public RectTransform container;
 
         /// <summary>
-        /// Prefab of item to clone.
+        /// Prefab of cell to clone.
         /// </summary>
-        public T item;
+        public TCell cell;
 
         /// <summary>
-        /// Refresh items by infos.
+        /// On refresh UI.
         /// </summary>
-        /// <param name="infos">Infos to refresh items.</param>
-        public virtual void Refresh(ICollection<K> infos)
+        /// <param name="infos">Infos to refresh collector.</param>
+        protected override void OnRefresh(ICollection<TInfo> infos)
         {
             if (infos == null || infos.Count == 0)
             {
-                RequireItems(0);
+                RequireCells(0);
                 return;
             }
 
-            RequireItems(infos.Count);
+            RequireCells(infos.Count);
 
             //Agreement: the prefab is under the container.
             var index = 1;
             foreach (var info in infos)
             {
-                var item = container.GetChild(index).GetComponent<T>();
-                item.gameObject.SetActive(true);
-                RefreshItem(item, info);
+                var cell = container.GetChild(index).GetComponent<TCell>();
+                cell.gameObject.SetActive(true);
+                RefreshCell(cell, info);
                 index++;
             }
         }
 
         /// <summary>
-        /// Require the number of items.
+        /// Require the number of cells.
         /// </summary>
         /// <param name="count"></param>
-        protected virtual void RequireItems(int count)
+        protected virtual void RequireCells(int count)
         {
             //Agreement: the prefab is under the container.
             count += 1;
             var childCount = container.childCount;
             while (childCount > count)
             {
-                DisposeItem(container.GetChild(childCount - 1).GetComponent<T>());
+                DisposeCell(container.GetChild(childCount - 1).GetComponent<TCell>());
                 childCount--;
             }
             while (childCount < count)
             {
-                CreateItem();
+                CreateCell();
                 childCount++;
             }
         }
 
         /// <summary>
-        /// Create a new item from prefab.
+        /// Create a new cell from prefab.
         /// </summary>
         /// <returns></returns>
-        protected virtual T CreateItem()
+        protected virtual TCell CreateCell()
         {
-            return Instantiate(item, container);
+            return Instantiate(cell, container);
         }
 
         /// <summary>
-        /// Dispose the item from container.
+        /// Refresh cell by info.
         /// </summary>
-        /// <param name="item">Child index of item.</param>
-        protected virtual void DisposeItem(T item)
-        {
-            item.gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Refresh item by info.
-        /// </summary>
-        /// <param name="item"></param>
+        /// <param name="cell"></param>
         /// <param name="info"></param>
-        protected abstract void RefreshItem(T item, K info);
+        protected virtual void RefreshCell(TCell cell, TInfo info)
+        {
+            cell.Refresh(info);
+        }
+
+        /// <summary>
+        /// Dispose the cell from container.
+        /// </summary>
+        /// <param name="cell">Child index of cell.</param>
+        protected virtual void DisposeCell(TCell cell)
+        {
+            cell.gameObject.SetActive(false);
+        }
     }
 }

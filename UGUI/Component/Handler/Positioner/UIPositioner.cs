@@ -20,9 +20,9 @@ namespace MGS.UGUI
     public class UIPositioner : UIHandler
     {
         /// <summary>
-        /// 
+        /// Camera for UI.
         /// </summary>
-        protected Camera uiCamera;
+        public Camera UICamera { protected set; get; }
 
         /// <summary>
         /// 
@@ -33,18 +33,18 @@ namespace MGS.UGUI
             var canvas = transform.root.GetComponentInChildren<Canvas>(true);
             if (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
-                uiCamera = canvas.worldCamera;
+                UICamera = canvas.worldCamera;
             }
         }
 
-        #region Screen To UI Local Position
+        #region Screen To Local Position
         /// <summary>
         /// Get local position in parent RectTransform.
         /// </summary>
         /// <param name="screenPoint"></param>
         public Vector2 GetLocalPosition(Vector2 screenPoint)
         {
-            return (transform as RectTransform).GetLocalPosition(uiCamera, screenPoint);
+            return RectTransform.GetLocalPosition(UICamera, screenPoint);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace MGS.UGUI
         /// <returns></returns>
         public Vector2 GetLocalPosition(Vector2 screenPoint, Vector2 offset)
         {
-            return (transform as RectTransform).GetLocalPosition(uiCamera, screenPoint, offset);
+            return RectTransform.GetLocalPosition(UICamera, screenPoint, offset);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace MGS.UGUI
         /// <returns></returns>
         public Vector2 GetLocalPosition(Vector2 screenPoint, Vector2 offset, TextAnchor anchor)
         {
-            return (transform as RectTransform).GetLocalPosition(uiCamera, screenPoint, offset, anchor);
+            return RectTransform.GetLocalPosition(UICamera, screenPoint, offset, anchor);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace MGS.UGUI
         /// <param name="screenPoint"></param>
         public void SetPosition(Vector2 screenPoint)
         {
-            (transform as RectTransform).SetPosition(uiCamera, screenPoint);
+            RectTransform.SetPosition(UICamera, screenPoint);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace MGS.UGUI
         /// <param name="offset"></param>
         public void SetPosition(Vector2 screenPoint, Vector2 offset)
         {
-            (transform as RectTransform).SetPosition(uiCamera, screenPoint, offset);
+            RectTransform.SetPosition(UICamera, screenPoint, offset);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace MGS.UGUI
         /// <param name="anchor"></param>
         public void SetPosition(Vector2 screenPoint, Vector2 offset, TextAnchor anchor)
         {
-            (transform as RectTransform).SetPosition(uiCamera, screenPoint, offset, anchor);
+            RectTransform.SetPosition(UICamera, screenPoint, offset, anchor);
         }
         #endregion
 
@@ -107,9 +107,9 @@ namespace MGS.UGUI
         /// </summary>
         /// <param name="padding"></param>
         /// <returns></returns>
-        public Vector3 GetLocalPositionClamp(RectOffset padding)
+        public Vector3 GetLocalPosition(RectOffset padding)
         {
-            return (transform as RectTransform).GetLocalPositionClamp(padding);
+            return RectTransform.GetLocalPosition(padding);
         }
 
         /// <summary>
@@ -118,18 +118,18 @@ namespace MGS.UGUI
         /// <param name="localPoint"></param>
         /// <param name="padding"></param>
         /// <returns></returns>
-        public Vector3 GetLocalPositionClamp(Vector3 localPoint, RectOffset padding)
+        public Vector3 GetLocalPosition(Vector3 localPoint, RectOffset padding)
         {
-            return (transform as RectTransform).GetLocalPositionClamp(localPoint, padding);
+            return RectTransform.GetLocalPosition(localPoint, padding);
         }
 
         /// <summary>
         /// Set position of RectTransform clamp in paren.
         /// </summary>
         /// <param name="padding"></param>
-        public void SetPositionClamp(RectOffset padding)
+        public void SetPosition(RectOffset padding)
         {
-            (transform as RectTransform).SetPositionClamp(padding);
+            RectTransform.SetPosition(padding);
         }
 
         /// <summary>
@@ -137,9 +137,33 @@ namespace MGS.UGUI
         /// </summary>
         /// <param name="localPoint"></param>
         /// <param name="padding"></param>
-        public void SetPositionClamp(Vector3 localPoint, RectOffset padding)
+        public void SetPosition(Vector3 localPoint, RectOffset padding)
         {
-            (transform as RectTransform).SetPositionClamp(localPoint, padding);
+            RectTransform.SetPosition(localPoint, padding);
+        }
+        #endregion
+
+        #region Mirror Anchored Position
+        /// <summary>
+        /// Get anchored position of RectTransform apply mirror.
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="anchorMin"></param>
+        /// <param name="anchorMax"></param>
+        /// <param name="pivot"></param>
+        /// <returns></returns>
+        public Vector2 GetAnchoredPosition(UIMirrorMode mode, out Vector2 anchorMin, out Vector2 anchorMax, out Vector2 pivot)
+        {
+            return RectTransform.GetAnchoredPosition(mode, out anchorMin, out anchorMax, out pivot);
+        }
+
+        /// <summary>
+        /// Set position of RectTransform apply mirror.
+        /// </summary>
+        /// <param name="mode"></param>
+        public void SetPosition(UIMirrorMode mode)
+        {
+            RectTransform.SetPosition(mode);
         }
         #endregion
     }

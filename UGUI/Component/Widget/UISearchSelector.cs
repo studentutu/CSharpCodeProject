@@ -138,7 +138,7 @@ namespace MGS.UGUI
             listener.OnDeselectEvent += Ipt_Keyword_OnDeselectEvent;
             ipt_Keyword.onValueChanged.AddListener(Ipt_Keyword_OnValueChanged);
             btn_Search.onClick.AddListener(Btn_Search_OnClick);
-            coll_Search.OnItemClickEvent += BtnCollector_OnItemClickEvent;
+            //coll_Search.OnItemClickEvent += BtnCollector_OnItemClickEvent;
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace MGS.UGUI
         /// <param name="items"></param>
         protected void RefreshSearchItems(string[] items)
         {
-            coll_Search.Refresh(items);
+            //coll_Search.Refresh(items);
             coll_Search.gameObject.SetActive(items.Length > 0);
         }
     }

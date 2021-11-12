@@ -15,5 +15,5 @@ namespace MGS.UGUI
     /// <summary>
     /// UI text collector.
     /// </summary>
-    public class UITextCollector : UICollector<UIText, TextOptions> { }
+    public class UITextCollector : UICollector<UITextCell, UITextOptions> { }
 }

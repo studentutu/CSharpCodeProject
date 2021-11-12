@@ -44,24 +44,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\UIRefreshable.cs" />
-    <Compile Include="Component\Cell\UIButton.cs" />
+    <Compile Include="Component\Cell\UIButtonCell.cs" />
     <Compile Include="Component\Cell\UICell.cs" />
-    <Compile Include="Component\Cell\UIImage.cs" />
-    <Compile Include="Component\Cell\UIText.cs" />
+    <Compile Include="Component\Cell\UIImageCell.cs" />
+    <Compile Include="Component\Cell\UITextCell.cs" />
     <Compile Include="Component\Collector\UIButtonCollector.cs" />
     <Compile Include="Component\Collector\UIImageCollector.cs" />
     <Compile Include="Component\Collector\UITextCollector.cs" />
+    <Compile Include="Component\Handler\Clipper\UITextClipper.cs" />
     <Compile Include="Extension\UITextExtension.cs" />
     <Compile Include="Extension\UIComponentExtension.cs" />
     <Compile Include="Extension\UITransformExtension.cs" />
-    <Compile Include="Component\Handler\Clipper\UITextClipper.cs" />
+    <Compile Include="Component\Expand\UIText.cs" />
     <Compile Include="Component\Handler\Positioner\UIPointerFollower.cs" />
     <Compile Include="Component\Handler\UIDragger.cs" />
-    <Compile Include="Component\Handler\UIFader\UIAlphaFader.cs" />
-    <Compile Include="Component\Handler\UIFader\UIColorFader.cs" />
-    <Compile Include="Component\Handler\UIFader\UIFader.cs" />
-    <Compile Include="Component\Handler\UIFader\UIPositionFader.cs" />
-    <Compile Include="Component\Handler\UIFader\UIScaleFader.cs" />
+    <Compile Include="Component\Handler\Fader\UIAlphaFader.cs" />
+    <Compile Include="Component\Handler\Fader\UIColorFader.cs" />
+    <Compile Include="Component\Handler\Fader\UIFader.cs" />
+    <Compile Include="Component\Handler\Fader\UIPositionFader.cs" />
+    <Compile Include="Component\Handler\Fader\UIScaleFader.cs" />
     <Compile Include="Component\Collector\UICollector.cs" />
     <Compile Include="Component\Handler\UIHandler.cs" />
     <Compile Include="Component\Handler\UIMirror.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="Component\Trigger\UITrigger.cs" />
     <Compile Include="UIComponent.cs" />
     <Compile Include="Utility\UICoroutine.cs" />
-    <Compile Include="Component\Widget\UIButtonCollector.cs" />
     <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowData.cs" />
     <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowItem.cs" />
     <Compile Include="Component\Panel\UIHorTextRow\UIHorTextRowPanel.cs" />
@@ -86,9 +86,7 @@
     <Compile Include="Component\Widget\UITextInputText.cs" />
     <Compile Include="Component\Widget\UIWidget.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Component\Inherit\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set targetDir="$(SolutionDir)..\UnityProject\Assets\MGS.Packages\$(ProjectName)\Plugins\"

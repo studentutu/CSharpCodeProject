@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIImage.cs
+ *  File         :  UIImageCell.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -11,19 +11,20 @@
  *************************************************************************/
 
 using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI text.
+    /// UI image cell.
     /// </summary>
-    public class UIText : UICell<TextOptions>
+    public class UIImageCell : UICell<UIImageOptions>
     {
         /// <summary>
-        /// Text component.
+        /// Image component.
         /// </summary>
-        public Text text;
+        public Image image;
 
         /// <summary>
         /// Reset component.
@@ -31,28 +32,28 @@ namespace MGS.UGUI
         protected override void Reset()
         {
             base.Reset();
-            text = GetComponentInChildren<Text>(true);
+            image = GetComponentInChildren<Image>(true);
         }
 
         /// <summary>
-        /// On refresh text.
+        /// On refresh image.
         /// </summary>
-        /// <param name="options">Options to refresh text.</param>
-        protected override void OnRefresh(TextOptions options)
+        /// <param name="options">Options to refresh image.</param>
+        protected override void OnRefresh(UIImageOptions options)
         {
-            text.text = options.text;
+            image.sprite = options.sprite;
         }
     }
 
     /// <summary>
-    /// Options for text.
+    /// Options for image.
     /// </summary>
     [Serializable]
-    public struct TextOptions
+    public struct UIImageOptions
     {
         /// <summary>
-        /// Display text.
+        /// Display sprite.
         /// </summary>
-        public string text;
+        public Sprite sprite;
     }
 }

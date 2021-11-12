@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIImage.cs
+ *  File         :  UIButtonCell.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -11,20 +11,24 @@
  *************************************************************************/
 
 using System;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI image.
+    /// UI button cell.
     /// </summary>
-    public class UIImage : UICell<ImageOptions>
+    public class UIButtonCell : UICell<UIButtonOptions>
     {
         /// <summary>
-        /// Image component.
+        /// Button component.
         /// </summary>
-        public Image image;
+        public Button button;
+
+        /// <summary>
+        /// Text component.
+        /// </summary>
+        public Text text;
 
         /// <summary>
         /// Reset component.
@@ -32,28 +36,29 @@ namespace MGS.UGUI
         protected override void Reset()
         {
             base.Reset();
-            image = GetComponentInChildren<Image>(true);
+            button = GetComponentInChildren<Button>(true);
+            text = button?.GetComponentInChildren<Text>(true);
         }
 
         /// <summary>
         /// On refresh image.
         /// </summary>
-        /// <param name="options">Options to refresh image.</param>
-        protected override void OnRefresh(ImageOptions options)
+        /// <param name="options">Options to refresh button.</param>
+        protected override void OnRefresh(UIButtonOptions options)
         {
-            image.sprite = options.sprite;
+            text.text = options.text;
         }
     }
 
     /// <summary>
-    /// Options for image.
+    /// Options for button.
     /// </summary>
     [Serializable]
-    public struct ImageOptions
+    public struct UIButtonOptions
     {
         /// <summary>
-        /// Display sprite.
+        /// Display text.
         /// </summary>
-        public Sprite sprite;
+        public string text;
     }
 }

@@ -12,23 +12,23 @@
 
 using System;
 
-namespace MGS.UGUI.Temp
+namespace MGS.UGUI
 {
     /// <summary>
     /// UI button collector.
     /// </summary>
-    public class UIButtonCollector : UICollector<UIButton, ButtonOptions>
+    public class UIButtonCollector : UICollector<UIButtonCell, UIButtonOptions>
     {
         /// <summary>
         /// On cell click event.
         /// </summary>
-        public event Action<UIButton> OnCellClickEvent;
+        public event Action<UIButtonCell> OnCellClickEvent;
 
         /// <summary>
         /// Create a new cell from prefab.
         /// </summary>
         /// <returns></returns>
-        protected override UIButton CreateCell()
+        protected override UIButtonCell CreateCell()
         {
             var cell = base.CreateCell();
             cell.button.onClick.AddListener(() => OnCellClick(cell));
@@ -39,7 +39,7 @@ namespace MGS.UGUI.Temp
         /// On cell click event.
         /// </summary>
         /// <param name="cell">Button cell.</param>
-        protected void OnCellClick(UIButton cell)
+        protected void OnCellClick(UIButtonCell cell)
         {
             OnCellClickEvent?.Invoke(cell);
         }

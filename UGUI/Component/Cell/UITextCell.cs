@@ -1,7 +1,7 @@
 ﻿/*************************************************************************
  *  Copyright (c) 2021 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
- *  File         :  UIButton.cs
+ *  File         :  UITextCell.cs
  *  Description  :  Null.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
@@ -16,15 +16,10 @@ using UnityEngine.UI;
 namespace MGS.UGUI
 {
     /// <summary>
-    /// UI button.
+    /// UI text cell.
     /// </summary>
-    public class UIButton : UICell<ButtonOptions>
+    public class UITextCell : UICell<UITextOptions>
     {
-        /// <summary>
-        /// Button component.
-        /// </summary>
-        public Button button;
-
         /// <summary>
         /// Text component.
         /// </summary>
@@ -36,25 +31,24 @@ namespace MGS.UGUI
         protected override void Reset()
         {
             base.Reset();
-            button = GetComponentInChildren<Button>(true);
-            text = button?.GetComponentInChildren<Text>(true);
+            text = GetComponentInChildren<Text>(true);
         }
 
         /// <summary>
-        /// On refresh image.
+        /// On refresh text.
         /// </summary>
-        /// <param name="options">Options to refresh button.</param>
-        protected override void OnRefresh(ButtonOptions options)
+        /// <param name="options">Options to refresh text.</param>
+        protected override void OnRefresh(UITextOptions options)
         {
             text.text = options.text;
         }
     }
 
     /// <summary>
-    /// Options for button.
+    /// Options for text.
     /// </summary>
     [Serializable]
-    public struct ButtonOptions
+    public struct UITextOptions
     {
         /// <summary>
         /// Display text.

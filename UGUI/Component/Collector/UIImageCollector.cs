@@ -15,5 +15,5 @@ namespace MGS.UGUI
     /// <summary>
     /// UI image collector.
     /// </summary>
-    public class UIImageCollector : UICollector<UIImage, ImageOptions> { }
+    public class UIImageCollector : UICollector<UIImageCell, UIImageOptions> { }
 }

@@ -21,33 +21,32 @@ namespace MGS.UGUI
     public static class UITextExtension
     {
         /// <summary>
-        /// Set clipping text content.
+        /// Get clipping text content.
         /// </summary>
         /// <param name="text">Text component.</param>
         /// <param name="content">Origin content set to Text.</param>
         /// <param name="stamp">Stamp mark if clipped.</param>
-        public static void SetClippingText(this Text text, string content, string stamp = null)
+        /// <returns>Clipping text content.</returns>
+        public static string GetClippingText(this Text text, string content, string stamp = null)
         {
             if (string.IsNullOrEmpty(content))
             {
-                text.text = string.Empty;
-                return;
+                return string.Empty;
             }
 
             var rectHeight = text.rectTransform.rect.height;
             var firstHeight = text.font.lineHeight + 2.0f;
             if (firstHeight > rectHeight)
             {
-                text.text = stamp;
-                return;
+                return stamp;
             }
 
             var rectWidth = text.rectTransform.rect.width;
+            text.font.RequestCharactersInTexture(content, text.fontSize, text.fontStyle);
             text.font.GetCharacterInfo(content[0], out CharacterInfo info, text.fontSize, text.fontStyle);
             if (info.advance > rectWidth)
             {
-                text.text = stamp;
-                return;
+                return stamp;
             }
 
             var currentWidth = 0f;
@@ -84,7 +83,18 @@ namespace MGS.UGUI
                     }
                 }
             }
-            text.text = content;
+            return content;
+        }
+
+        /// <summary>
+        /// Set clipping text content.
+        /// </summary>
+        /// <param name="text">Text component.</param>
+        /// <param name="content">Origin content set to Text.</param>
+        /// <param name="stamp">Stamp mark if clipped.</param>
+        public static void SetClippingText(this Text text, string content, string stamp = null)
+        {
+            text.text = GetClippingText(text, content, stamp);
         }
     }
 }

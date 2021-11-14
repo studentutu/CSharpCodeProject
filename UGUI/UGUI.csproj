@@ -53,6 +53,7 @@
     <Compile Include="Component\Collector\UITextCollector.cs" />
     <Compile Include="Component\Handler\Clipper\UITextClipper.cs" />
     <Compile Include="Component\Dialog\UIDialog.cs" />
+    <Compile Include="Component\Panel\UITooltip.cs" />
     <Compile Include="Extension\UITextExtension.cs" />
     <Compile Include="Extension\UIComponentExtension.cs" />
     <Compile Include="Extension\UITransformExtension.cs" />
